@@ -9,3 +9,5 @@ CREATE TABLE IF NOT EXISTS User(
     is_admin        BOOLEAN NOT NULL
 );
 
+
+
