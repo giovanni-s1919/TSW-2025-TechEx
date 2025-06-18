@@ -1,4 +1,4 @@
-package com.example.tsw2025techex;
+package controller;
 
 import java.io.*;
 import jakarta.servlet.http.*;
