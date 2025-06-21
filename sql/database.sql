@@ -1,12 +1,36 @@
-CREATE DATABASE IF NOT EXISTS TechEx;
+DROP DATABASE IF EXISTS TechEx;
+
+CREATE DATABASE TechEx;
 USE TechEx;
 
 CREATE TABLE IF NOT EXISTS User(
-    ID              INT AUTO_INCREMENT PRIMARY KEY,
-    Username        VARCHAR(255) NOT NULL ,
-    Email           VARCHAR(255) NOT NULL,
-    Password        VARCHAR(255) NOT NULL,
-    is_admin        BOOLEAN NOT NULL
+    ID                  INT AUTO_INCREMENT PRIMARY KEY,
+    Username            VARCHAR(255) NOT NULL ,
+    Email               VARCHAR(255) UNIQUE NOT NULL,
+    Password            VARCHAR(255) NOT NULL,
+    Role                ENUM ('Customer', 'Admin') DEFAULT 'Customer'
+);
+
+CREATE TABLE IF NOT EXISTS Address(
+    ID                  INT AUTO_INCREMENT PRIMARY KEY,
+    Street              TEXT NOT NULL,
+    AdditionalInfo      TEXT,
+    City                VARCHAR(100) NOT NULL,
+    PostalCode          VARCHAR(20) NOT NULL,
+    Region              VARCHAR(100),
+    Country             VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS UserAddress(
+    AddressID           INT,
+    UserID              INT,
+    AddressType         ENUM('Shipping', 'Billing') NOT NULL,
+    Name                VARCHAR(255) NOT NULL,
+    Surname             VARCHAR(255) NOT NULL,
+    Phone               VARCHAR(20) NOT NULL,
+    FOREIGN KEY (AddressID) REFERENCES Address(ID),
+    FOREIGN KEY (UserID) REFERENCES User(ID),
+    PRIMARY KEY (AddressID, UserID, AddressType)
 );
 
 CREATE TABLE IF NOT EXISTS Product(
