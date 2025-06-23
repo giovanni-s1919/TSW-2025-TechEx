@@ -37,12 +37,9 @@ CREATE TABLE UserAddress(
 CREATE TABLE PaymentMethod(
     ID                  INT AUTO_INCREMENT PRIMARY KEY ,
     UserID              INT NOT NULL,
-    Type                ENUM('Card', 'PayPal', 'Stripe', 'ApplePay') NOT NULL,
-    Number              VARCHAR(19),
-    Expiration          DATE,
-    CardHolder          VARCHAR(255),
-    ProviderEmail       VARCHAR(255),
-    Token               Text,
+    Number              VARCHAR(4) NOT NULL,
+    Expiration          DATE NOT NULL,
+    Name                VARCHAR(255) NOT NULL,
     IsDefault           BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (UserID) REFERENCES User(ID)
 );
