@@ -1,9 +1,7 @@
 package model.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.security.Timestamp;
-import java.sql.Time;
 import java.time.LocalDate;
 
 public class OrderDTO implements Serializable
@@ -14,21 +12,21 @@ public class OrderDTO implements Serializable
     private String orderStatus;
     private LocalDate deliveryDate;
     private float totalAmount;
-    private int shippingAddress;
-    private int billingAddress;
+    private int shippingAddressId;
+    private int billingAddressId;
 
 
     // Constructors
     public OrderDTO(){}
 
-    public OrderDTO(int id, int userID, Timestamp orderDate, String orderStatus, LocalDate deliveryDate, int billingAddress, int shippingAddress, float totalAmount){
+    public OrderDTO(int id, int userID, Timestamp orderDate, String orderStatus, LocalDate deliveryDate, int billingAddressId, int shippingAddressId, float totalAmount){
         this.id = id;
         this.userID = userID;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.deliveryDate = deliveryDate;
-        this.billingAddress = billingAddress;
-        this.shippingAddress = shippingAddress;
+        this.billingAddressId = billingAddressId;
+        this.shippingAddressId = shippingAddressId;
         this.totalAmount = totalAmount;
     }
 
@@ -44,10 +42,10 @@ public class OrderDTO implements Serializable
     public void setOrderStatus(String orderStatus) {this.orderStatus = orderStatus;}
     public LocalDate getDeliveryDate() {return deliveryDate;}
     public void setDeliveryDate(LocalDate deliveryDate) {this.deliveryDate = deliveryDate;}
-    public int getBillingAddress() {return billingAddress;}
-    public void setBillingAddress(int billingAddress) {this.billingAddress = billingAddress;}
-    public int getShippingAddress() {return shippingAddress;}
-    public void setShippingAddress(int shippingAddress) {this.shippingAddress = shippingAddress;}
+    public int getBillingAddressId() {return billingAddressId;}
+    public void setBillingAddressId(int billingAddressId) {this.billingAddressId = billingAddressId;}
+    public int getShippingAddressId() {return shippingAddressId;}
+    public void setShippingAddressId(int shippingAddressId) {this.shippingAddressId = shippingAddressId;}
     public float getTotalAmount() {return totalAmount;}
     public void setTotalAmount(float totalAmount) {this.totalAmount = totalAmount;}
 
@@ -62,8 +60,8 @@ public class OrderDTO implements Serializable
                 && orderDate.equals(orderDTO.orderDate)
                 && orderStatus.equals(orderDTO.orderStatus)
                 && deliveryDate.equals(orderDTO.deliveryDate)
-                && billingAddress == orderDTO.billingAddress
-                && shippingAddress == orderDTO.shippingAddress
+                && billingAddressId == orderDTO.billingAddressId
+                && shippingAddressId == orderDTO.shippingAddressId
                 && totalAmount == orderDTO.totalAmount;
     }
 
@@ -74,7 +72,8 @@ public class OrderDTO implements Serializable
                 ", orderDate: " + orderDate +
                 ", orderStatus: " + orderStatus +
                 ", deliveryDate: " + deliveryDate +
-                ", billingAddress: " + billingAddress +
+                ", billingAddressId: " + billingAddressId +
+                ", shippingAddressId: " + shippingAddressId +
                 ", total: " + totalAmount + " }";
     }
 }

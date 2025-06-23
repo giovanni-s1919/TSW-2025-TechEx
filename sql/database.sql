@@ -62,11 +62,11 @@ CREATE TABLE `Order`(
     OrderStatus         ENUM ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled') DEFAULT 'Pending',
     DeliveryDate        DATE,
     TotalAmount         DECIMAL(10, 2) NOT NULL,
-    ShippingAddress     INT NOT NULL,
-    BillingAddress      INT NOT NULL,
+    ShippingAddressID     INT NOT NULL,
+    BillingAddressID      INT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES User(ID),
-    FOREIGN KEY (ShippingAddress) REFERENCES OrderAddress(ID),
-    FOREIGN KEY (BillingAddress) REFERENCES OrderAddress(ID)
+    FOREIGN KEY (ShippingAddressID) REFERENCES OrderAddress(ID),
+    FOREIGN KEY (BillingAddressID) REFERENCES OrderAddress(ID)
 );
 
 CREATE TABLE OrderItem(

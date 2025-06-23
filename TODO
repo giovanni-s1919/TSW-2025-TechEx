@@ -1,7 +1,3 @@
 * Database
     - Gestire le categorie di prodotti con una tabella apposita.
     - Gestire metodi di pagamento diverso.
-    - Specificare dove gli ID sono riferimenti esterni (guarda la tabella Order)
-
-* DTO
-    - Specificare dove gli ID sono dei riferimenti esterni.
