@@ -102,7 +102,7 @@ CREATE TABLE Review(
     ProductID           INT NOT NULL,
     Title               VARCHAR(255) NOT NULL,
     Description         TEXT,
-    Rating       TINYINT NOT NULL CHECK (Rating BETWEEN 1 AND 5),
+    Rating              TINYINT NOT NULL CHECK (Rating BETWEEN 1 AND 5),
     FOREIGN KEY (UserID) REFERENCES User(ID),
     FOREIGN KEY (ProductID) REFERENCES Product(ID)
 );
@@ -132,7 +132,6 @@ CREATE TABLE WishlistItem(
     ID                  INT AUTO_INCREMENT PRIMARY KEY,
     WishlistID          INT NOT NULL,
     ProductID           INT NOT NULL,
-    Quantity            INT NOT NULL CHECK ( Quantity > 0 ),
     FOREIGN KEY (WishlistID) REFERENCES Wishlist(ID),
     FOREIGN KEY (ProductID) REFERENCES Product(ID)
 );
