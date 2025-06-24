@@ -3,10 +3,8 @@ package model.dao;
 import jakarta.servlet.ServletContext;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.UserDTO;
@@ -60,17 +58,47 @@ public class UserDAO implements GenericDAO<UserDTO, Integer> {
     }
 
     @Override
-    public void delete(UserDTO entity) throws SQLException {
-
+    public boolean delete(Integer id) throws SQLException {
+        String sql = "DELETE FROM User WHERE ID = ?";
+        try (Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        }
     }
 
     @Override
     public UserDTO findById(Integer id) throws SQLException {
+        String sql = "SELECT * FROM User WHERE ID = ?";
+        try (Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return extractUser(rs);
+                }
+            }
+        }
         return null;
     }
 
     @Override
-    public List findAll() throws SQLException {
-        return null;
+    public List findAll(String order) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+
+        // TO DO
+
+        return list;
+    }
+
+    private UserDTO extractUser(ResultSet rs) throws SQLException {
+        UserDTO user = new UserDTO();
+        user.setId(rs.getInt("ID"));
+        user.setUsername(rs.getString("Username"));
+        user.setEmail(rs.getString("Email"));
+        user.setPasswordHash(rs.getString("PasswordHash"));
+        user.setRole(UserDTO.Role.valueOf(rs.getString("Role")));
+
+        return user;
     }
 }
