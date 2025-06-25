@@ -29,6 +29,7 @@ public class HelloServlet extends HttpServlet {
             list = userDAO.findAll("ID");
         } catch(SQLException e){
             e.printStackTrace();
+            System.out.println("errore.");
         }
 
         System.out.println("DataSource in servlet: " + getServletContext().getAttribute("datasource"));

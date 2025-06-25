@@ -33,6 +33,8 @@ public class UserDAO implements GenericDAO<UserDTO, Integer> {
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPasswordHash());
             ps.setString(4, user.getRole().name());
+
+            ps.executeUpdate();
         }
     }
 
@@ -73,6 +75,20 @@ public class UserDAO implements GenericDAO<UserDTO, Integer> {
         try (Connection connection = dataSource.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return extractUser(rs);
+                }
+            }
+        }
+        return null;
+    }
+
+    public UserDTO findByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM User WHERE Email = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 if(rs.next()){
                     return extractUser(rs);

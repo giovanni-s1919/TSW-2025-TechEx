@@ -21,6 +21,14 @@ public class UserDTO implements Serializable
         this.role = role;
     }
 
+    public UserDTO(String username, String email, String passwordHash, Role role){
+        this.id = 0;
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
     // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
@@ -58,7 +66,6 @@ public class UserDTO implements Serializable
                 ", passwordHash: " + passwordHash +
                 ", role: " + role + " }";
     }
-
 
     public enum Role {
         Customer,
