@@ -83,12 +83,28 @@ public class UserDAO implements GenericDAO<UserDTO, Integer> {
     }
 
     @Override
-    public List findAll(String order) throws SQLException {
+    public List<UserDTO> findAll(String order) throws SQLException {
+        if(!getAllowedOrderColumns().contains(order)){
+            order = "ID";
+        }
+
         List<UserDTO> list = new ArrayList<>();
 
-        // TO DO
+        String sql = "SELECT * FROM User ORDER BY " + order;
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(extractUser(rs));
+            }
+        }
 
         return list;
+    }
+
+    @Override
+    public List<String> getAllowedOrderColumns() {
+        return List.of("ID", "Username", "Email", "PasswordHash", "Role");
     }
 
     private UserDTO extractUser(ResultSet rs) throws SQLException {

@@ -3,4 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <resource-ref>
+        <description>JNDI references to DataSource</description>
+        <res-ref-name>jdbc/TechEx</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+    <listener>
+        <listener-class>model.MainContext</listener-class>
+    </listener>
 </web-app>

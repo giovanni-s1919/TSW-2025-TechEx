@@ -51,13 +51,12 @@ public class UserDTO implements Serializable
     }
 
     @Override
-    public String toString()
-    {
-        return "User { id: " + id
-                + "username: " + username +
-                " email: " + email +
-                " passwordHash: " + passwordHash +
-                " role: " + role + " }";
+    public String toString() {
+        return "User { id: " + id +
+                ", username: " + username +
+                ", email: " + email +
+                ", passwordHash: " + passwordHash +
+                ", role: " + role + " }";
     }
 
 

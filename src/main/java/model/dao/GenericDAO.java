@@ -9,4 +9,5 @@ public interface GenericDAO<T, ID> {
     boolean delete(ID id) throws SQLException;
     T findById(ID id) throws SQLException;
     List<T> findAll(String order) throws SQLException;
+    List<String> getAllowedOrderColumns();
 }
