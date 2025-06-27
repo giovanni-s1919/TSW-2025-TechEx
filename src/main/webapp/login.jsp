@@ -22,5 +22,6 @@
     </fieldset>
 </form>
 <p>Non hai un account? <a href="register.jsp">Registrati</a></p>
+<p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
 </body>
 </html>

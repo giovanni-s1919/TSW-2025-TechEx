@@ -20,6 +20,8 @@
         <input type="email" id="email" name="email"><br>
         <label for="password">Password: </label>
         <input type="password" id="password" name="password"><br>
+        <label for="confirm">Verifia Password: </label>
+        <input type="password" id="confirm" name="confirm"><br>
         <button type="submit">Registrati</button>
     </fieldset>
 </form>

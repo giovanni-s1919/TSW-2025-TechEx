@@ -12,8 +12,9 @@ import model.dto.UserDTO;
 public class UserDAO implements GenericDAO<UserDTO, Integer> {
     private final DataSource dataSource;
 
-    public UserDAO(ServletContext sc) {
-        this.dataSource = (DataSource) sc.getAttribute("datasource");
+    public UserDAO(DataSource ds) {
+        if(ds == null) throw new IllegalArgumentException("Il datasource non può essere null.");
+        this.dataSource = ds;
     }
 
 
