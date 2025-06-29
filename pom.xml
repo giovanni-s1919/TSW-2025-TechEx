@@ -36,11 +36,19 @@
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
+      <!-- Dipendenza per jbcrypt-->
       <dependency>
           <groupId>org.mindrot</groupId>
           <artifactId>jbcrypt</artifactId>
           <version>0.4</version>
-      </dependency></dependencies>
+      </dependency>
+      <!-- Dipendenza Driver jdbc per mariadb-->
+      <dependency>
+          <groupId>org.mariadb.jdbc</groupId>
+          <artifactId>mariadb-java-client</artifactId>
+          <version>3.3.3</version>
+      </dependency>
+  </dependencies>
 
   <build>
     <plugins>
