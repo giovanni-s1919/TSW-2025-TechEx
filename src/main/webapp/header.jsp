@@ -13,7 +13,10 @@
     </nav>
   </div>
   <div class="top-right">
-    <input type="text" id="searchbar" placeholder="Cerca...">
+    <div class="search">
+      <input type="text" id="searchbar" placeholder="Cerca...">
+      <i class="fas fa-search lente"></i>
+    </div>
     <a href="preferiti.jsp">
       <img class="header_icons" src="images/preferiti.svg" alt="PREFERITI">
     </a>

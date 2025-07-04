@@ -41,13 +41,28 @@ header {
     align-items: center;
 }
 
+.search {
+    position: relative;
+    display: inline-block;
+}
+
 #searchbar {
     width: 400px;
     height: 30px;
     margin-right: 25px;
     border: 2px solid #003459;
     border-radius: 12px;
-    padding: 5px;
+    padding: 5px 30px 5px 30px;
+}
+
+.lente {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #003459;
+    pointer-events: none;
 }
 
 .header_icons {
