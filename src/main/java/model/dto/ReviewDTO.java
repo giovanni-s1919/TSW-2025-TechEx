@@ -1,6 +1,7 @@
 package model.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ReviewDTO implements Serializable {
     private int id;
@@ -37,4 +38,29 @@ public class ReviewDTO implements Serializable {
     public void setDescription(String description) {this.description = description;}
     public int getRating() {return rating;}
     public void setRating(int rating) {this.rating = rating;}
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReviewDTO that)) return false;
+        return id == that.id &&
+                userID == that.userID &&
+                productID == that.productID &&
+                rating == that.rating &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public String toString() {
+        return "Review { " +
+                "id: " + id + ", " +
+                "userID: " + userID + ", " +
+                "productID: " + productID + ", " +
+                "title: '" + title + "', " +
+                "description: '" + description + "', " +
+                "rating: " + rating +
+                " }";
+    }
 }

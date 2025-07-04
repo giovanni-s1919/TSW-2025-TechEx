@@ -48,8 +48,7 @@ public class AddressDTO implements Serializable
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AddressDTO addressDTO = (AddressDTO) o;
+        if (!(o instanceof AddressDTO addressDTO)) return false;
         return id == addressDTO.id &&
                 street.equals(addressDTO.street) &&
                 additionalInfo.equals(addressDTO.additionalInfo) &&

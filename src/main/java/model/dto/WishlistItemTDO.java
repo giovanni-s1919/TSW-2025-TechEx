@@ -25,4 +25,22 @@ public class WishlistItemTDO implements Serializable {
     public void setWishlistID(int id){this.wishlistID = id;}
     public int getProductID(){return productID;}
     public void setProductID(int id){this.productID = id;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WishlistItemTDO that)) return false;
+        return id == that.id &&
+                wishlistID == that.wishlistID &&
+                productID == that.productID;
+    }
+
+    @Override
+    public String toString() {
+        return "WishlistItemDTO { " +
+                "id: " + id + ", " +
+                "wishlistID: " + wishlistID + ", " +
+                "productID: " + productID +
+                " }";
+    }
 }

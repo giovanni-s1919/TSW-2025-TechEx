@@ -72,4 +72,20 @@ public class OrderItemTDO implements Serializable {
                 && itemQuantity == that.itemQuantity
                 && Objects.equals(itemVAT, that.itemVAT);
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem { " +
+                "id: " + id + ", " +
+                "orderID: " + orderID + ", " +
+                "itemName: '" + itemName + "', " +
+                "itemDescription: '" + itemDescription + "', " +
+                "itemBrand: '" + itemBrand + "', " +
+                "itemPrice: " + itemPrice + ", " +
+                "itemCategory: '" + itemCategory + "', " +
+                "itemSeller: '" + itemSeller + "', " +
+                "itemQuantity: " + itemQuantity + ", " +
+                "itemVAT: " + itemVAT +
+                " }";
+    }
 }
