@@ -2,15 +2,15 @@ package model.dto;
 
 import java.io.Serializable;
 
-public class WishlistTDO implements Serializable {
+public class WishlistDTO implements Serializable {
     private int id;
     private int userID;
 
 
     // Constructors
-    public WishlistTDO(){}
+    public WishlistDTO(){}
 
-    public WishlistTDO(int id, int userID) {
+    public WishlistDTO(int id, int userID) {
         this.id = id;
         this.userID = userID;
     }
@@ -26,7 +26,7 @@ public class WishlistTDO implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WishlistTDO that)) return false;
+        if (!(o instanceof WishlistDTO that)) return false;
         return id == that.id && userID == that.userID;
     }
 
