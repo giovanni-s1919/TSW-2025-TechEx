@@ -45,12 +45,8 @@ public class UserDTO implements Serializable
     @Override
     public boolean equals(Object o)
     {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        UserDTO userDTO = (UserDTO) o;
+        if (this == o) return true;
+        if (!(o instanceof UserDTO userDTO)) return false;
         return id == userDTO.id &&
                 username.equals(userDTO.username) &&
                 email.equals(userDTO.email) &&

@@ -1,6 +1,7 @@
 package model.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class UserAddressDTO implements Serializable
 {
@@ -41,34 +42,34 @@ public class UserAddressDTO implements Serializable
     public void setSurname(String surname){this.surname = surname;}
     public String getPhone(){return this.phone;}
     public void setPhone(String phone){this.phone = phone;}
-    public boolean getIsDefault(){return this.isDefault;}
-    public void setIsDefault(boolean isDefault){this.isDefault = isDefault;}
+    public boolean isDefault() { return this.isDefault; }
+    public void setDefault(boolean isDefault) { this.isDefault = isDefault; }
 
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAddressDTO userAddressDTO = (UserAddressDTO) o;
-        return addressId == userAddressDTO.addressId &&
-                userId == userAddressDTO.userId &&
-                addressType == userAddressDTO.addressType &&
-                name.equals(userAddressDTO.name) &&
-                surname.equals(userAddressDTO.surname) &&
-                phone.equals(userAddressDTO.phone) &&
-                isDefault == userAddressDTO.isDefault;
+        if (!(o instanceof UserAddressDTO that)) return false;
+        return addressId == that.addressId &&
+                userId == that.userId &&
+                isDefault == that.isDefault &&
+                addressType == that.addressType &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(phone, that.phone);
     }
 
     @Override
-    public String toString()
-    {
-        return "UserAddress { address id: " + addressId +
-                " user id: " + userId +
-                " name: " + name +
-                " surname: " + surname +
-                " phone: " + phone +
-                " is default: " + isDefault + " }";
+    public String toString() {
+        return "UserAddress { " +
+                "addressId: " + addressId + ", " +
+                "userId: " + userId + ", " +
+                "addressType: " + addressType + ", " +
+                "name: '" + name + "', " +
+                "surname: '" + surname + "', " +
+                "phone: '" + phone + "', " +
+                "isDefault: " + isDefault +
+                " }";
     }
 
 

@@ -29,4 +29,25 @@ public class CartItemDTO implements Serializable {
     public void setProductID(int productID) {this.productID = productID;}
     public int getQuantity() {return quantity;}
     public void setQuantity(int quantity) {this.quantity = quantity;}
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CartItemDTO cartItemDTO)) return false;
+        return id == cartItemDTO.id &&
+                cartID == cartItemDTO.cartID &&
+                productID == cartItemDTO.productID &&
+                quantity == cartItemDTO.quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem { " +
+                "id: " + id + ", " +
+                "cartID: " + cartID + ", " +
+                "productID: " + productID + ", " +
+                "quantity: " + quantity +
+                " }";
+    }
 }
