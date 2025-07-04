@@ -2,16 +2,16 @@ package model.dto;
 
 import java.io.Serializable;
 
-public class WishlistItemTDO implements Serializable {
+public class WishlistItemDTO implements Serializable {
     private int id;
     private int wishlistID;
     private int productID;
 
 
     // Constructors
-    public WishlistItemTDO(){}
+    public WishlistItemDTO(){}
 
-    public WishlistItemTDO(int id, int wishlistID, int productID) {
+    public WishlistItemDTO(int id, int wishlistID, int productID) {
         this.id = id;
         this.wishlistID = wishlistID;
         this.productID = productID;
@@ -29,7 +29,7 @@ public class WishlistItemTDO implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WishlistItemTDO that)) return false;
+        if (!(o instanceof WishlistItemDTO that)) return false;
         return id == that.id &&
                 wishlistID == that.wishlistID &&
                 productID == that.productID;
