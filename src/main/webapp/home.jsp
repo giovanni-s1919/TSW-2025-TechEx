@@ -2,11 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Home</title>
+  <title>TechEx - Pezzi di ricambio per smartphone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 <body>
-<h1>Home</h1>
-<br/>
-<a href="login.jsp">Login</a>
+<%@ include file="header.jsp" %>
+<div class="main">
+  <p>RITA(RDATA) FRANCESE</p>
+</div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
