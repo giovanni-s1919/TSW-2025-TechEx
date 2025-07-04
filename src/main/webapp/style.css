@@ -41,6 +41,11 @@ header {
     align-items: center;
 }
 
+.top-right {
+    justify-content: center;
+    gap: 20px;
+}
+
 .search {
     position: relative;
     display: inline-block;
@@ -49,7 +54,6 @@ header {
 #searchbar {
     width: 400px;
     height: 30px;
-    margin-right: 25px;
     border: 2px solid #003459;
     border-radius: 12px;
     padding: 5px 30px 5px 30px;
@@ -68,7 +72,6 @@ header {
 .header_icons {
     width: 35px;
     height: 35px;
-    margin-left: 10px;
 }
 
 #logo {
