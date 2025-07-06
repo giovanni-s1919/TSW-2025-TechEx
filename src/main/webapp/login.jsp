@@ -19,11 +19,11 @@
             <h2>Login</h2>
            <!-- <legend><img src="images/logo.png" id="toplogo"></legend>-->
             <div class="divauth">
-                <label for="email">Email: </label>
+                <!--<label for="email">Email: </label>-->
                 <input type="email" id="email" name="email" required class="auth" placeholder="Email"><br>
             </div>
             <div class="divauth">
-                <label for="password">Password: </label>
+                <!--<label for="password">Password: </label>-->
                 <input type="password" id="password" name="password" required class="auth" placeholder="Password"><br>
             </div>
             <div id="loginbutton">
@@ -33,8 +33,8 @@
         </fieldset>
     </form>
 </div>
-<div id="registrati">
-    <p>Non hai un account? <a href="register.jsp">Registrati</a></p>
+<div id="register">
+    <p>Non hai un account? <a href="register.jsp" id="regref">Registrati</a></p>
 </div>
 <p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
 </body>
