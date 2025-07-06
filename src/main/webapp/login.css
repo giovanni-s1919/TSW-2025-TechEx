@@ -30,13 +30,13 @@ fieldset{
     font-size: 40px;
     border-style: hidden;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #003459;
 }
 
 
 fieldset h2{
     align-content: center;
-    color: #00171f;
+    color: #ffffff;
 }
 
 .divauth{
@@ -48,16 +48,14 @@ fieldset h2{
     font-weight: bold;
     height: 125px;
     width: 400px;
-    background-color: rgba(0,0,0,0.2);
     color: white;
     transition-property: background-color;
     transition-duration: 0.2s;
-    margin-top: 40px;
     border-radius: 10px;
 }
 
 .divauth:hover{
-background-color: rgba(0,0,0,0.3);
+background-color: rgba(255,255,255, 0.1);
 }
 
 .auth{
@@ -71,19 +69,18 @@ background-color: rgba(0,0,0,0.3);
 }
 
 #loginbutt{
-    margin-top: 20px;
     height: 30px;
     width: 200px;
     border-style: hidden;
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: #ffffff;
     transition-property: background-color;
     transition-duration: 0.2s;
     cursor: pointer;
 }
 
 #loginbutt:hover{
-    background-color: rgba(0,0,0,0.25);;
+    background-color: rgba(255,255,255,0.8);;
 }
 
 #logo{

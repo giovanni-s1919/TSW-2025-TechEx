@@ -29,7 +29,7 @@
             <div id="loginbutton">
                 <button type="submit" id="loginbutt">Login</button>
             </div>
-            <img src="images/logo.png" id="logo" alt="TechEx">
+            <img src="images/logowhite.png" id="logo" alt="TechEx">
         </fieldset>
     </form>
 </div>
