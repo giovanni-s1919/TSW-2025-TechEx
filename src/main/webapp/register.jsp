@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: matt
-  Date: 6/25/25
-  Time: 11:22 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>Registrazione</title>
+    <title>TechEx - Registrazione</title>
+    <link rel="stylesheet" href="login&register.css">
 </head>
 <body>
 <form method="post" action="register">
@@ -20,7 +14,7 @@
         <input type="email" id="email" name="email"><br>
         <label for="password">Password: </label>
         <input type="password" id="password" name="password"><br>
-        <label for="confirm">Verifia Password: </label>
+        <label for="confirm">Verifica Password: </label>
         <input type="password" id="confirm" name="confirm"><br>
         <button type="submit">Registrati</button>
     </fieldset>
