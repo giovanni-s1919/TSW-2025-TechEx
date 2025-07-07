@@ -1,16 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: matt
-  Date: 6/25/25
-  Time: 11:15 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
 <head>
-    <title>Tech-Ex Login</title>
-    <link rel="stylesheet" href="login.css">
+    <title>TechEx - Login</title>
+    <link rel="stylesheet" href="login&register.css">
 </head>
 <body>
 <div>
