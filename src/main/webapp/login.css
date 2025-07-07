@@ -48,13 +48,17 @@ fieldset h2{
     height: 125px;
     width: 400px;
     color: white;
-    transition-property: background-color;
+    transition-property: background-color, scale;
     transition-duration: 0.2s;
     border-radius: 10px;
 }
 
 .divauth:hover{
     background-color: rgba(255,255,255, 0.1);
+}
+
+.divauth:active{
+    scale: 0.95;
 }
 
 .auth{
@@ -86,20 +90,39 @@ fieldset h2{
 }
 
 #logo{
-    height: 75%;
+    height: 100%;
+    width: 100%;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+}
+
+#logo:hover{
+    background-color: rgba(255,255,255,0.1);
+}
+
+#ref{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 75%;
 }
 
 #register{
+    margin-top: 0.5%;
+    padding: 10px;
+
     font-size: 20px;
     font-weight: bold;
+    border-radius: 10px;
     color: white;
-    transition-property: font-size;
+    transition-property: background-color;
     transition-duration: 0.2s;
 }
 
 #register:hover{
-    font-size: 30px;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #regref{
