@@ -9,25 +9,24 @@
 <div>
     <form method="post" action="login">
         <fieldset>
-            <h2>Login</h2>
-           <!-- <legend><img src="images/logo.png" id="toplogo"></legend>-->
+            <h2 style="font-size: 100%;">Login</h2>
             <div class="divauth">
-                <!--<label for="email">Email: </label>-->
-                <input type="email" id="email" name="email" required class="auth" placeholder="Email"><br>
+                <label for="loginemail" class="hiddenlabel">Email: </label>
+                <input type="email" id="loginemail" name="email" required class="auth" placeholder="Email"><br>
             </div>
             <div class="divauth">
-                <!--<label for="password">Password: </label>-->
-                <input type="password" id="password" name="password" required class="auth" placeholder="Password"><br>
+                <label for="loginpassword" class="hiddenlabel">Password: </label>
+                <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password"><br>
             </div>
-            <div id="loginbutton">
-                <button type="submit" id="loginbutt">Login</button>
+            <div>
+                <button type="submit" class="databutt">Login</button>
             </div>
-            <a href="home.jsp" id="ref"><img src="images/logowhite.png" id="logo" alt="TechEx"></a>
+            <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
         </fieldset>
     </form>
 </div>
-<div id="register">
-    <p>Non hai un account? <a href="register.jsp" id="regref">Registrati</a></p>
+<div class="suggestion">
+    <p>Non hai un account? <a href="register.jsp" class="logregswitch">Registrati</a></p>
 </div>
 <p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
 </body>
