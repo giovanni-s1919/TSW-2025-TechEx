@@ -1,7 +1,7 @@
 package model.dto;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class OrderDTO implements Serializable

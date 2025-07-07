@@ -4,19 +4,18 @@ import model.dto.CartDTO;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CartDAO implements GenericDAO<CartDTO, Integer>{
-    private final DataSource dataSource;
+public class CartDAO extends AbstractDAO<CartDTO, Integer>{
 
     public CartDAO(DataSource ds) {
-        if(ds == null) throw new IllegalArgumentException("DataSource cannot be null.");
-        this.dataSource = ds;
+        super(ds);
     }
 
     @Override
     public void save(CartDTO cart) throws SQLException {
-        validateCart(cart);
+        validate(cart);
 
         String sql = "INSERT INTO Cart (UserID) VALUES (?)";
         try (Connection connection = dataSource.getConnection();
@@ -34,41 +33,84 @@ public class CartDAO implements GenericDAO<CartDTO, Integer>{
     }
 
     @Override
-    public void update(CartDTO entity) throws SQLException {
-        //TODO
+    public void update(CartDTO cart) throws SQLException {
+        validate(cart);
+        if(cart.getId() < 1) throw new IllegalArgumentException("Cart ID must be positive for update operations.");
+
+        String sql = "UPDATE Cart SET UserID = ? WHERE ID = ?";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, cart.getUserID());
+            ps.setInt(2, cart.getId());
+
+            ps.executeUpdate();
+        }
     }
 
     @Override
-    public boolean delete(Integer integer) throws SQLException {
-        //TODO
-        return false;
+    public boolean delete(Integer id) throws SQLException {
+        if(id == null || id < 1)  throw new IllegalArgumentException("AddressID must be a positive integer.");
+
+        String sql = "DELETE FROM Cart WHERE ID = ?";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        }
     }
 
     @Override
-    public CartDTO findById(Integer integer) throws SQLException {
-        //TODO
+    public CartDTO findById(Integer id) throws SQLException {
+        if(id == null || id < 1)  throw new IllegalArgumentException("ID must be a positive integer.");
+
+        String sql = "SELECT * FROM Cart WHERE ID = ?";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return extract(rs);
+                }
+            }
+        }
+
         return null;
     }
 
     @Override
     public List<CartDTO> findAll(String order) throws SQLException {
-        //TODO
-        return List.of();
+        if (!getAllowedOrderColumns().contains(order)) {
+            order = "ID";
+        }
+
+        List<CartDTO> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM Cart ORDER BY " + order;
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                list.add(extract(rs));
+            }
+        }
+
+        return list;
     }
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        //TODO
         return List.of("ID", "UserID");
     }
 
 
-    private void validateCart(CartDTO cart)  {
+    @Override
+    protected void validate(CartDTO cart)  {
         if (cart == null || cart.getUserID() < 1)
             throw new IllegalArgumentException("Cart or UserID is invalid.");
     }
 
-    private CartDTO extractCart(ResultSet rs) throws SQLException {
+    @Override
+    protected CartDTO extract(ResultSet rs) throws SQLException {
         CartDTO cart = new CartDTO();
         cart.setId(rs.getInt("ID"));
         cart.setUserID(rs.getInt("UserID"));

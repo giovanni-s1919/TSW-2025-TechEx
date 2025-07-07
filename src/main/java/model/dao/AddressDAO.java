@@ -7,17 +7,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
-    private final DataSource dataSource;
+public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
 
     public AddressDAO(DataSource ds) {
-        if(ds == null) throw new IllegalArgumentException("DataSource cannot be null.");
-        this.dataSource = ds;
+        super(ds);
     }
+
 
     @Override
     public void save(AddressDTO address) throws SQLException {
-        validateAddress(address);
+        validate(address);
 
         String sql = "INSERT INTO Address (Street, AdditionalInfo, City, PostalCode, Region, Country) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -42,11 +41,11 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
 
     @Override
     public void update(AddressDTO address) throws SQLException {
-        validateAddress(address);
+        validate(address);
+        if(address.getId() < 1) throw new IllegalArgumentException("Address ID must be positive for update operations.");
 
         String sql = "UPDATE Address SET Street = ?, AdditionalInfo = ?, City = ?, PostalCode = ?, Region = ?, Country = ? " +
                 "WHERE ID = ?";
-
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -64,7 +63,7 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
 
     @Override
     public boolean delete(Integer id) throws SQLException {
-        if(id == null || id < 1)  throw new IllegalArgumentException("AddressID must be a positive integer.");
+        if(id == null || id < 1)  throw new IllegalArgumentException("ID must be a positive integer.");
 
         String sql = "DELETE FROM Address WHERE ID = ?";
 
@@ -78,17 +77,16 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
 
     @Override
     public AddressDTO findById(Integer id) throws SQLException {
-        if(id == null || id < 1)  throw new IllegalArgumentException("AddressID must be a positive integer.");
+        if(id == null || id < 1)  throw new IllegalArgumentException("ID must be a positive integer.");
 
         String sql = "SELECT * FROM Address WHERE ID = ?";
-
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return extractAddress(rs);
+                    return extract(rs);
                 }
             }
         }
@@ -109,7 +107,7 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery()){
             while(rs.next()){
-                list.add(extractAddress(rs));
+                list.add(extract(rs));
             }
         }
 
@@ -122,7 +120,8 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
     }
 
 
-    private AddressDTO extractAddress(ResultSet rs) throws SQLException {
+    @Override
+    protected AddressDTO extract(ResultSet rs) throws SQLException {
         AddressDTO address = new AddressDTO();
         address.setId(rs.getInt("ID"));
         address.setStreet(rs.getString("Street"));
@@ -134,7 +133,8 @@ public class AddressDAO implements GenericDAO<AddressDTO, Integer>{
         return address;
     }
 
-    private void validateAddress(AddressDTO address) {
+    @Override
+    protected void validate(AddressDTO address) {
         if (address == null ||
                 address.getStreet() == null || address.getStreet().trim().isEmpty() ||
                 address.getCity() == null || address.getCity().trim().isEmpty() ||
