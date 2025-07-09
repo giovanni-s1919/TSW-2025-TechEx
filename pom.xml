@@ -44,9 +44,9 @@
       </dependency>
       <!-- Dipendenza Driver jdbc per mariadb-->
       <dependency>
-          <groupId>org.mariadb.jdbc</groupId>
-          <artifactId>mariadb-java-client</artifactId>
-          <version>3.3.3</version>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>8.0.33</version> <!-- Puoi usare la versione più recente disponibile -->
       </dependency>
   </dependencies>
 
