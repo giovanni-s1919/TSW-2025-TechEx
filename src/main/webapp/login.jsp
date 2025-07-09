@@ -18,7 +18,7 @@
                 <label for="loginpassword" class="hiddenlabel">Password: </label>
                 <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password"><br>
             </div>
-            <div>
+            <div id="porcamadonna">
                 <button type="submit" class="databutt">Login</button>
             </div>
             <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
@@ -28,6 +28,6 @@
 <div class="suggestion">
     <p>Non hai un account? <a href="register.jsp" class="logregswitch">Registrati</a></p>
 </div>
-<p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
+    <p style="color:red;" id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
 </body>
 </html>
