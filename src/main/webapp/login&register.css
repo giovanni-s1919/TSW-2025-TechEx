@@ -33,13 +33,10 @@ fieldset{
     background-color: #003459;
 }
 
-
 fieldset h2{
     align-content: center;
     color: #ffffff;
 }
-
-
 
 .divauth{
     display: flex;
@@ -58,6 +55,7 @@ fieldset h2{
 
 .divauth:hover{
     background-color: rgba(255,255,255, 0.1);
+    scale: 0.98;
 }
 
 .divauth:active{
@@ -83,25 +81,27 @@ fieldset h2{
     border-style: hidden;
     border-radius: 10px;
     background-color: #ffffff;
-    transition-property: background-color;
-    transition-duration: 0.2s;
+    transition-property: background-color, scale;
+    transition-duration: 0.2s, 0.1s;
     cursor: pointer;
 }
 
 .databutt:hover{
     background-color: rgba(255,255,255,0.8);
+    scale: 0.98;
 }
 
 .logo{
     height: 100%;
     width: 100%;
-    transition-property: background-color;
-    transition-duration: 0.2s;
+    transition-property: background-color, scale;
+    transition-duration: 0.2s, 0.1s;
     border-radius: 10px;
 }
 
 .logo:hover{
     background-color: rgba(255,255,255,0.1);
+    scale: 0.98;
 }
 
 .ref{
@@ -119,12 +119,13 @@ fieldset h2{
     font-weight: bold;
     border-radius: 10px;
     color: white;
-    transition-property: background-color;
-    transition-duration: 0.2s;
+    transition-property: background-color, scale;
+    transition-duration: 0.2s, 0.1s;
 }
 
 .suggestion:hover{
     background-color: rgba(0,0,0,0.1);
+    scale: 0.98;
 }
 
 .logregswitch{
@@ -134,8 +135,8 @@ fieldset h2{
     border-radius: 10px;
     color: #003459;
     text-decoration: none;
-    transition-property: background-color;
-    transition-duration: 0.2s;
+    transition-property: background-color, scale;
+    transition-duration: 0.2s, 0.1s;
 }
 
 .logregswitch:hover{

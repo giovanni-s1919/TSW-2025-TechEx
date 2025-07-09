@@ -4,6 +4,7 @@
 <head>
     <title>TechEx - Registrazione</title>
     <link rel="stylesheet" href="login&register.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div>
@@ -37,5 +38,6 @@
     <p>Hai già un account? <a href="login.jsp" class="logregswitch">Login</a></p>
 </div>
 <p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

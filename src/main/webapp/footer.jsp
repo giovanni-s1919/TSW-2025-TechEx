@@ -37,14 +37,14 @@
                 <img src="images/ups.png" class="footer_icons" alt="UPS">
                 <img src="images/sda.png" class="footer_icons" alt="SDA">
                 <img src="images/brt.jpg" class="footer_icons" alt="BRT">
-            </li><br>
+            </li>
             <li class="list-voices">Social</li>
             <li class="socials">
                 <img src="images/facebook.png" class="socials_icons" alt="FACEBOOK">
                 <img src="images/instagram.png" class="socials_icons" alt="INSTAGRAM">
                 <img src="images/twitter.png" class="socials_icons" alt="TWITTER">
                 <img src="images/tiktok.png" class="socials_icons" alt="TIKTOK">
-                <img src="images/youtube.png" class="socials_icons" alt="YOUTUBE">
+                <a href="https://www.youtube.com/watch?v=0DVj2iskQFs"><img src="images/youtube.png" class="socials_icons" alt="YOUTUBE"></a>
             </li>
         </ul>
     </div>
