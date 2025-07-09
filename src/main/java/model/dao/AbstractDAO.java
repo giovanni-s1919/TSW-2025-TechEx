@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class AbstractDAO<T, ID> implements GenericDAO<T, ID> {
+
     protected final DataSource dataSource; // Made protected to be accessible by subclasses
 
     public AbstractDAO(DataSource ds) {
