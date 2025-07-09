@@ -3,7 +3,7 @@ package model.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class OrderItemTDO implements Serializable {
+public class OrderItemDTO implements Serializable {
     private int id;
     private int orderID;
     private String itemName;
@@ -17,9 +17,9 @@ public class OrderItemTDO implements Serializable {
 
 
     // Constructors
-    public OrderItemTDO(){}
+    public OrderItemDTO(){}
 
-    public OrderItemTDO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, String itemCategory, String itemSeller, int itemQuantity, float itemVAT) {
+    public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, String itemCategory, String itemSeller, int itemQuantity, float itemVAT) {
         this.id = id;
         this.orderID = orderID;
         this.itemName = itemName;
@@ -60,7 +60,7 @@ public class OrderItemTDO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderItemTDO that = (OrderItemTDO) o;
+        OrderItemDTO that = (OrderItemDTO) o;
         return id == that.id
                 && orderID == that.orderID
                 && Float.compare(that.itemPrice, itemPrice) == 0

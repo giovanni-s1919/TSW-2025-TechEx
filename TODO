@@ -1,3 +1,6 @@
 * Database
     - Gestire le categorie di prodotti con una tabella apposita.
     - Gestire metodi di pagamento diverso.
+    - Trovare una implementazione migliore per le funzioni findAll
+    - Aggiungere dati di creazione di determinate tabelle
+    - Migliorare le funzioni di validate
