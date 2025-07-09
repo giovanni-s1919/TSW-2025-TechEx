@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Utility;
+import util.Utility;
 import model.dao.UserDAO;
 import model.dto.UserDTO;
 
@@ -25,6 +25,15 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // TODO
+        // For example, checking if a user is already logged in
+
+        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -33,17 +42,17 @@ public class LoginServlet extends HttpServlet {
             UserDTO user = userDAO.findByEmail(email);
             if(user == null || !Utility.checkPassword(password, user.getPasswordHash())){
                 request.setAttribute("errorMessage", "Email o Password non validi.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/login").forward(request, response);
                 return;
             }
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("/home");
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login").forward(request, response);
         }
     }
 }

@@ -1,10 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<!doctype html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %><!doctype html>
 <html>
 <head>
     <title>TechEx - Registrazione</title>
-    <link rel="stylesheet" href="login&register.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login&register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <div>
@@ -30,14 +29,14 @@
             <div>
                 <button type="submit" class="databutt">Registrati</button>
             </div>
-            <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
+            <a href="home.jsp" class="ref"><img src="../../images/logowhite.png" class="logo" alt="TechEx"></a>
         </fieldset>
     </form>
 </div>
 <div class="suggestion">
-    <p>Hai già un account? <a href="login.jsp" class="logregswitch">Login</a></p>
+    <p>Hai già un account? <a href="${pageContext.request.contextPath}/login" class="logregswitch">Login</a></p>
 </div>
 <p style="color:red;"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
-<%@ include file="footer.jsp" %>
+<%@ include file="fragments/footer.jsp" %>
 </body>
 </html>

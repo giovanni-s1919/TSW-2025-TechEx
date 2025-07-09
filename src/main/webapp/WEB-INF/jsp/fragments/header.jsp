@@ -1,7 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <header>
   <div class="top-left">
-    <a href="home.jsp">
-      <img id="logo" src="images/logo.png" alt="TECHEX">
+    <a href="${pageContext.request.contextPath}/home">
+      <img id="logo" src="${pageContext.request.contextPath}/images/logo.png" alt="TECHEX">
     </a>
     <nav class="menu">
       <ul>
@@ -46,13 +47,13 @@
       <i class="fas fa-search lens"></i>
     </div>
     <a href="preferiti.jsp">
-      <img class="header_icons" src="images/preferiti.svg" alt="PREFERITI">
+      <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
     </a>
     <a href="carrello.jsp">
-      <img class="header_icons" src="images/carrello.svg" alt="CARRELLO">
+      <img class="header_icons" src="${pageContext.request.contextPath}images/carrello.svg" alt="CARRELLO">
     </a>
-    <a href="login.jsp">
-      <img class="header_icons" src="images/utente.svg" alt="AREA PERSONALE">
+    <a href="${pageContext.request.contextPath}/login">
+      <img class="header_icons" src="${pageContext.request.contextPath}/images/utente.svg" alt="AREA PERSONALE">
     </a>
   </div>
 </header>
