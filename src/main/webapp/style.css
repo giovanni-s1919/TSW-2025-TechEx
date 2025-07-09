@@ -178,10 +178,11 @@ footer {
     margin: 0;
     text-align: center;
     box-sizing: border-box;
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
 }
 
 .bottom {
