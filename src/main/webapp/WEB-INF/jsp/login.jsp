@@ -21,7 +21,7 @@
                     <div id="porcamadonna">
                         <button type="submit" class="databutt">Login</button>
                     </div>
-                    <a href="home.jsp" class="ref"><img src="../../images/logowhite.png" class="logo" alt="TechEx"></a>
+                    <a href="${pageContext.request.contextPath}/home" class="ref"><img src="../../images/logowhite.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
         </div>

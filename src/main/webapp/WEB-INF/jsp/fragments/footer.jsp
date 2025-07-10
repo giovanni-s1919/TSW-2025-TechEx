@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <footer>
     <div class="bottom">
-        <img id="bottomlogo" src="../../../images/logowhite.png" alt="TECHEX">
+        <img id="bottomlogo" src="${pageContext.request.contextPath}/images/logowhite.png" alt="TECHEX">
         <ul class="footer_ul">
             <li class="list-voices">Chi siamo?</li>
             <li>La storia di TechEx</li>
@@ -19,33 +19,33 @@
         <ul class="footer_ul">
             <li class="list-voices">Metodi di pagamento</li>
             <li class="payments">
-                <img src="../../../images/visa.png" class="footer_icons" alt="VISA">
-                <img src="../../../images/mastercard.jpg" class="footer_icons" alt="MASTERCARD">
-                <img src="../../../images/americanexpress.jpg" class="footer_icons" alt="AMERICAN EXPRESS">
-                <img src="../../../images/paypal.jpg" class="footer_icons" alt="PAYPAL">
+                <img src="${pageContext.request.contextPath}/images/visa.png" class="footer_icons" alt="VISA">
+                <img src="${pageContext.request.contextPath}/images/mastercard.jpg" class="footer_icons" alt="MASTERCARD">
+                <img src="${pageContext.request.contextPath}/images/americanexpress.jpg" class="footer_icons" alt="AMERICAN EXPRESS">
+                <img src="${pageContext.request.contextPath}/images/paypal.jpg" class="footer_icons" alt="PAYPAL">
             </li>
             <li class="payments">
-                <img src="../../../images/postepay.jpg" class="footer_icons" alt="POSTEPAY">
-                <img src="../../../images/klarna.jpg" class="footer_icons" alt="KLARNA">
-                <img src="../../../images/gpay.jpg" class="footer_icons" alt="GOOGLE PAY">
-                <img src="../../../images/applepay.jpg" class="footer_icons" alt="APPLE PAY">
+                <img src="${pageContext.request.contextPath}/images/postepay.jpg" class="footer_icons" alt="POSTEPAY">
+                <img src="${pageContext.request.contextPath}/images/klarna.jpg" class="footer_icons" alt="KLARNA">
+                <img src="${pageContext.request.contextPath}/images/gpay.jpg" class="footer_icons" alt="GOOGLE PAY">
+                <img src="${pageContext.request.contextPath}/images/applepay.jpg" class="footer_icons" alt="APPLE PAY">
             </li>
         </ul>
         <ul class="footer_ul">
             <li class="list-voices">Spedizioni</li>
             <li class="shipping">
-                <img src="../../../images/dhl.jpg" class="footer_icons" alt="DHL">
-                <img src="../../../images/ups.png" class="footer_icons" alt="UPS">
-                <img src="../../../images/sda.png" class="footer_icons" alt="SDA">
-                <img src="../../../images/brt.jpg" class="footer_icons" alt="BRT">
+                <img src="${pageContext.request.contextPath}/images/dhl.jpg" class="footer_icons" alt="DHL">
+                <img src="${pageContext.request.contextPath}/images/ups.png" class="footer_icons" alt="UPS">
+                <img src="${pageContext.request.contextPath}/images/sda.png" class="footer_icons" alt="SDA">
+                <img src="${pageContext.request.contextPath}/images/brt.jpg" class="footer_icons" alt="BRT">
             </li>
             <li class="list-voices">Social</li>
             <li class="socials">
-                <img src="../../../images/facebook.png" class="socials_icons" alt="FACEBOOK">
-                <img src="../../../images/instagram.png" class="socials_icons" alt="INSTAGRAM">
-                <img src="../../../images/twitter.png" class="socials_icons" alt="TWITTER">
-                <img src="../../../images/tiktok.png" class="socials_icons" alt="TIKTOK">
-                <a href="https://www.youtube.com/watch?v=0DVj2iskQFs"><img src="../../../images/youtube.png" class="socials_icons" alt="YOUTUBE"></a>
+                <img src="${pageContext.request.contextPath}/images/facebook.png" class="socials_icons" alt="FACEBOOK">
+                <img src="${pageContext.request.contextPath}/images/instagram.png" class="socials_icons" alt="INSTAGRAM">
+                <img src="${pageContext.request.contextPath}/images/twitter.png" class="socials_icons" alt="TWITTER">
+                <img src="${pageContext.request.contextPath}/images/tiktok.png" class="socials_icons" alt="TIKTOK">
+                <a href="https://www.youtube.com/watch?v=0DVj2iskQFs"><img src="${pageContext.request.contextPath}/images/youtube.png" class="socials_icons" alt="YOUTUBE"></a>
             </li>
         </ul>
     </div>
