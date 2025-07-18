@@ -36,17 +36,23 @@
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
-      <!-- Dipendenza per jbcrypt-->
+      <!--jbcrypt-->
       <dependency>
           <groupId>org.mindrot</groupId>
           <artifactId>jbcrypt</artifactId>
           <version>0.4</version>
       </dependency>
-      <!-- Dipendenza Driver jdbc per mariadb-->
+      <!--Driver jdbc-->
       <dependency>
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
           <version>8.0.33</version> <!-- Puoi usare la versione più recente disponibile -->
+      </dependency>
+        <!--jstl-->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
       </dependency>
   </dependencies>
 

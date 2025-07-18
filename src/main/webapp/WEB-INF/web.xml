@@ -12,10 +12,10 @@
     </resource-ref>
 
     <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
 
     <listener>
-        <listener-class>model.MainContext</listener-class>
+        <listener-class>Storage.MainContext</listener-class>
     </listener>
 </web-app>
