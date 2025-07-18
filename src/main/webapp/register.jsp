@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="login&register.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="logregbody">
 <div>
     <form method="post" action="register">
         <fieldset>
@@ -30,7 +30,7 @@
             <div>
                 <button type="submit" class="databutt">Registrati</button>
             </div>
-            <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
+            <a href="home.jsp" class="ref"><img src="images/logo.png" class="logo" alt="TechEx"></a>
         </fieldset>
     </form>
 </div>

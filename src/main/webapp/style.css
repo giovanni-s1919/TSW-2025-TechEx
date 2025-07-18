@@ -124,6 +124,7 @@ header {
     left: 0;
     background: #fff;
     border: 2px solid #003459;
+    /*box-shadow: 2px 2px 15px 1px #003459;*/
     border-radius: 8px;
     padding: 8px 0;
     list-style: none;

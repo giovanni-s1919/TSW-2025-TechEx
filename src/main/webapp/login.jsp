@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="login&register.css">
     <link rel="stylesheet" href="style.css">
 </head>
-    <body>
+    <body class="logregbody">
         <div>
             <form method="post" action="login">
                 <fieldset>
@@ -19,10 +19,10 @@
                         <label for="loginpassword" class="hiddenlabel">Password: </label>
                         <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password"><br>
                     </div>
-                    <div id="porcamadonna">
+                    <div>
                         <button type="submit" class="databutt">Login</button>
                     </div>
-                    <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
+                    <a href="home.jsp" class="ref"><img src="images/logo.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
         </div>
