@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>TechEx - Login</title>
-    <link rel="stylesheet" href="login&register.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login&register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
     <body>
         <div>
@@ -22,7 +22,7 @@
                     <div id="porcamadonna">
                         <button type="submit" class="databutt">Login</button>
                     </div>
-                    <a href="home.jsp" class="ref"><img src="images/logowhite.png" class="logo" alt="TechEx"></a>
+                    <a href="home.jsp" class="ref"><img src="${pageContext.request.contextPath}/images/logowhite.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
         </div>
@@ -30,6 +30,6 @@
             <p>Non hai un account? <a href="register.jsp" class="logregswitch">Registrati</a></p>
         </div>
             <p style="color:red;" id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
-        <%@ include file="footer.jsp" %>
+        <%@ include file="fragments/footer.jsp" %>
     </body>
 </html>

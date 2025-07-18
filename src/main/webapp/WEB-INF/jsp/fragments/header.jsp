@@ -49,10 +49,10 @@
         <a href="preferiti.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
         </a>
-        <a href="carrello.jsp">
+        <a href="${pageContext.request.contextPath}/carrello.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/carrello.svg" alt="CARRELLO">
         </a>
-        <a href="${pageContext.request.contextPath}/login">
+        <a href="${pageContext.request.contextPath}/login.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/utente.svg" alt="AREA PERSONALE">
         </a>
     </div>
