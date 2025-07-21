@@ -1,12 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
 <head>
     <title>TechEx - Login</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login&register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login-register.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-    <body>
+    <body class="loginregister">
         <div>
             <form method="post" action="login">
                 <fieldset>
@@ -22,12 +22,12 @@
                     <div id="porcamadonna">
                         <button type="submit" class="databutt">Login</button>
                     </div>
-                    <a href="home.jsp" class="ref"><img src="${pageContext.request.contextPath}/images/logowhite.png" class="logo" alt="TechEx"></a>
+                    <a href="${pageContext.request.contextPath}/home" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
         </div>
         <div class="suggestion">
-            <p>Non hai un account? <a href="register.jsp" class="logregswitch">Registrati</a></p>
+            <p>Non hai un account? <a href="${pageContext.request.contextPath}/register" class="logregswitch">Registrati</a></p>
         </div>
             <p style="color:red;" id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
         <%@ include file="fragments/footer.jsp" %>
