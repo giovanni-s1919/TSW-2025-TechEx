@@ -19,7 +19,7 @@
                         <label for="loginpassword" class="hiddenlabel">Password: </label>
                         <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password"><br>
                     </div>
-                    <div id="porcamadonna">
+                    <div>
                         <button type="submit" class="databutt">Login</button>
                     </div>
                     <a href="${pageContext.request.contextPath}/home" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>

@@ -18,7 +18,7 @@
     <listener>
         <listener-class>Storage.MainContext</listener-class>
     </listener>
-
+    <!--
     <servlet>
         <servlet-name>LoginPage</servlet-name>
         <jsp-file>/WEB-INF/jsp/login.jsp</jsp-file>
@@ -37,14 +37,13 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>HomePage</servlet-name>
         <jsp-file>/WEB-INF/jsp/home.jsp</jsp-file>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    -->
 </web-app>
