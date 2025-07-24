@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // maps the servlet to the root URL ("/") and "/home"
-@WebServlet(name = "HomeServlet",  value = {"", "/home"})
+@WebServlet(name = "HomeServlet",  value = {"", "home"})
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

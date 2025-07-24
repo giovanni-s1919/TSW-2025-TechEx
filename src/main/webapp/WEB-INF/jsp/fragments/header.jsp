@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <header>
     <div class="top-left">
-        <a href="${pageContext.request.contextPath}/home">
+        <a href="${pageContext.request.contextPath}">
             <img id="logo" src="${pageContext.request.contextPath}/images/logo.png" alt="TECHEX">
         </a>
         <nav class="menu">
@@ -42,7 +42,7 @@
         </nav>
     </div>
     <div class="top-right">
-        <div class="search">"
+        <div class="search">
             <input type="text" id="searchbar" placeholder="Cerca...">
             <i class="fas fa-search lens"></i>
         </div>
