@@ -18,7 +18,12 @@
                 $("#hlog").fadeOut(150).promise().done(function(){
                     $("#hreg").fadeIn(150);
                 });
-                $(".databutt").text("Registrati");
+                //$(".databutt").text("Registrati");
+                $(".databutt").fadeOut(150).promise().done(function(){
+                    $(".databutt").text("Registrati").promise().done(function(){
+                        $(".databutt").fadeIn(150);
+                    });
+                });
             });
 
             $("#plog").on("click", function(e){
@@ -31,7 +36,12 @@
                $("#hreg").fadeOut(150).promise().done(function(){
                    $("#hlog").fadeIn(150);
                });
-               $(".databutt").text("Login")
+               //$(".databutt").text("Login")
+                $(".databutt").fadeOut(250).promise().done(function(){
+                    $(".databutt").text("Login").promise().done(function(){
+                        $(".databutt").fadeIn(250);
+                    });
+                });
             });
         });
     </script>
