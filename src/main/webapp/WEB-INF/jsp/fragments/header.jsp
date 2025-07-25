@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <header>
     <div class="top-left">
-        <a href="${pageContext.request.contextPath}">
+        <a href="${pageContext.request.contextPath}/home">
             <img id="logo" src="${pageContext.request.contextPath}/images/logo.png" alt="TECHEX">
         </a>
         <nav class="menu">
