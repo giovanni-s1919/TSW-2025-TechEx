@@ -49,9 +49,9 @@ fieldset h2{
     height: 100px;
     width: 375px;
     color: white;
-    transition-property: background-color, scale;
-    transition-duration: 0.2s, 0.1s;
-    transition-timing-function: ease-in-out, ease-out;
+    transition-property: scale;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in;
     border-radius: 10px;
 }
 
@@ -62,6 +62,25 @@ fieldset h2{
 
 .divauth:active{
     scale: 0.95;
+}
+
+.reg{
+    max-height: 0;
+    scale: 80%;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in, opacity 0.3s ease-in, scale 0.3s ease-in;
+}
+
+.reg.open{
+    max-height: 200px;
+    opacity: 1;
+    scale: 100%;
+    transition-timing-function: ease-in;
+}
+
+.reg.open:hover{
+    scale: 98%;
 }
 
 .auth{
@@ -150,19 +169,7 @@ fieldset h2{
     background-color: rgba(255,255,255,0.9);
 }
 
-.reg{
-    max-height: 0;
-    scale: 80%;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in, opacity 0.3s ease-in, scale 0.3s ease-in;
-}
 
-.reg.open{
-    max-height: 200px;
-    opacity: 1;
-    scale: 100%;
-}
 
 /*
 .reg{

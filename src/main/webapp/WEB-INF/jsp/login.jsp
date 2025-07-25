@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function (){
+            //Si preme registrati
             $("#preg").on("click", function(e){
                 e.preventDefault();
                 $("form").attr("action", "${pageContext.request.contextPath}/register");
@@ -15,17 +16,21 @@
                 $("#preg").fadeOut(150).promise().done(function(){
                     $("#plog").fadeIn(150);
                 });
-                $("#hlog").fadeOut(150).promise().done(function(){
-                    $("#hreg").fadeIn(150);
+                $("#ftitle").fadeOut(150).promise().done(function(){
+                    $("#ftitle").text("Registrati").promise().done(function(){
+                        $("#ftitle").fadeIn(150);
+                    });
                 });
-                //$(".databutt").text("Registrati");
                 $(".databutt").fadeOut(150).promise().done(function(){
                     $(".databutt").text("Registrati").promise().done(function(){
                         $(".databutt").fadeIn(150);
                     });
                 });
+                $("#username").attr("required", true);
+                $("#registerpassword").attr("required", true);
             });
 
+            //Si preme accedi
             $("#plog").on("click", function(e){
                e.preventDefault();
                $("form").attr("action", "${pageContext.request.contextPath}/login");
@@ -33,15 +38,20 @@
                $("#plog").fadeOut(150).promise().done(function(){
                    $("#preg").fadeIn(150);
                });
-               $("#hreg").fadeOut(150).promise().done(function(){
-                   $("#hlog").fadeIn(150);
+
+               $("#ftitle").fadeOut(250).promise().done(function(){
+                   $("#ftitle").text("Login").promise().done(function(){
+                       $("#ftitle").fadeIn(250);
+                   })
                });
-               //$(".databutt").text("Login")
+
                 $(".databutt").fadeOut(250).promise().done(function(){
                     $(".databutt").text("Login").promise().done(function(){
                         $(".databutt").fadeIn(250);
                     });
                 });
+                $("#username").attr("required", false);
+                $("#registerpassword").attr("required", false);
             });
         });
     </script>
@@ -50,12 +60,11 @@
         <div>
             <form method="post" action="login">
                 <fieldset>
-                    <h2 id="hlog" style="font-size: 100%;">Login</h2>
-                    <h2 hidden id="hreg" style="font-size: 100%;">Registrazione</h2>
+                    <h2 id="ftitle" style="font-size: 100%;">Login</h2>
 
                     <div class="divauth reg">
                         <label for="username" class="hiddenlabel" hidden>Username: </label>
-                        <input type="text" id="username" required class="auth" name="username" placeholder="Username">
+                        <input type="text" id="username" class="auth" name="username" placeholder="Username">
                     </div>
                     <div class="divauth">
                         <label for="loginemail" class="hiddenlabel" hidden>Email: </label>
@@ -67,7 +76,7 @@
                     </div>
                     <div class="divauth reg">
                         <label for="registerpassword" class="hiddenlabel" hidden></label>
-                        <input type="password" id="registerpassword" name="confirm" required class="auth" placeholder="Confirm Password">
+                        <input type="password" id="registerpassword" name="confirm" class="auth" placeholder="Confirm Password">
                     </div>
                     <div>
                         <button type="submit" class="databutt">Login</button>
