@@ -12,10 +12,26 @@
 <div class="main">
   <div id="welcome-img">
     <div class="welcome-text">
-      <h1>Dona nuova vita al tuo smartphone con TechEx</h1>
+      <h1>Dona nuova vita al tuo smartphone con TechEx!</h1>
       <p>Pezzi di ricambio su misura. Qualità garantita.</p>
     </div>
   </div>
+  <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
+  <p class="waitingfordatabase">
+    porcodio<br>
+    diocane<br>
+    luis dici dio cane<br>
+    mannaggia la madonna<br>
+    ma grazie al cazzo?<br>
+    è ripartito, PORCODDIO, DIO TARTUFO<br>
+    (si sto scrivendo queste stronzate per simulare lo spazio che verrà occupato dalle schede dei prodotti)<br>
+    ubriaco di merda mettila in mezzo<br>
+    the game<br>
+    ah certo, m'ha spostato Ramos asoaskasewui<br>
+    meow<br>
+    rita francese vai a fare i bocchini<br>
+  </p>
+
 </div>
 <%@ include file="fragments/footer.jsp" %>
 </body>
