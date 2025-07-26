@@ -24,10 +24,6 @@ form{
     transition: 0.2s ease-out;
 }
 
-form:hover{
-    scale: 102.5%;
-}
-
 fieldset{
     display: flex;
     flex-direction: column;
