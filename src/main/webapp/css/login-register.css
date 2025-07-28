@@ -57,11 +57,6 @@ fieldset {
     z-index: 1;
 }
 
-fieldset:hover {
-    scale: 110%;
-    box-shadow: 45px 45px 50px 10px #000000;
-}
-
 fieldset h2 {
     align-content: center;
     color: #003459;

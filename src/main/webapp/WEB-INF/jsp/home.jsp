@@ -26,7 +26,7 @@
     è ripartito, PORCODDIO, DIO TARTUFO<br>
     (si sto scrivendo queste stronzate per simulare lo spazio che verrà occupato dalle schede dei prodotti)<br>
     ubriaco di merda mettila in mezzo<br>
-    the game<br>
+    <s>the game</s> Porcodio ti deve venire la malaria<br>
     ah certo, m'ha spostato Ramos asoaskasewui<br>
     meow<br>
     meow<br>

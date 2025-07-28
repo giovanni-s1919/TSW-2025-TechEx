@@ -30,6 +30,9 @@ public class LoginServlet extends HttpServlet {
         // TODO
         // For example, checking if a user is already logged in
 
+        //String action = request.getParameter("action");
+        //boolean islogin = (action == null) || action.equalsIgnoreCase("login");
+        //request.setAttribute("islogin", islogin);
         request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 

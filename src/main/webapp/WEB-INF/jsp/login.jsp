@@ -7,51 +7,54 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        let islogin = true;
         $(document).ready(function (){
-            //Si preme registrati
-            $("#preg").on("click", function(e){
+            $(".logregswitch").on("click", function(e){
                 e.preventDefault();
-                $("form").attr("action", "${pageContext.request.contextPath}/register");
-                $(".reg").addClass("open");
-                $("#preg").fadeOut(150).promise().done(function(){
-                    $("#plog").fadeIn(150);
-                });
-                $("#ftitle").fadeOut(150).promise().done(function(){
-                    $("#ftitle").text("Registrati").promise().done(function(){
-                        $("#ftitle").fadeIn(150);
+                if(islogin === true){
+                    //Si preme registrati
+                    islogin = false;
+                    $("form").attr("action", "${pageContext.request.contextPath}/register");
+                    $(".reg").addClass("open");
+                    $("#preg").fadeOut(150).promise().done(function(){
+                        $("#plog").fadeIn(150);
                     });
-                });
-                $(".databutt").fadeOut(150).promise().done(function(){
-                    $(".databutt").text("Registrati").promise().done(function(){
-                        $(".databutt").fadeIn(150);
+                    $("#ftitle").fadeOut(150).promise().done(function(){
+                        $("#ftitle").text("Registrati").promise().done(function(){
+                            $("#ftitle").fadeIn(150);
+                        });
                     });
-                });
-                $("#username").attr("required", true);
-                $("#registerpassword").attr("required", true);
-            });
-
-            //Si preme accedi
-            $("#plog").on("click", function(e){
-               e.preventDefault();
-               $("form").attr("action", "${pageContext.request.contextPath}/login");
-               $(".reg").removeClass("open");
-               $("#plog").fadeOut(150).promise().done(function(){
-                   $("#preg").fadeIn(150);
-               });
-
-               $("#ftitle").fadeOut(250).promise().done(function(){
-                   $("#ftitle").text("Login").promise().done(function(){
-                       $("#ftitle").fadeIn(250);
-                   })
-               });
-
-                $(".databutt").fadeOut(250).promise().done(function(){
-                    $(".databutt").text("Login").promise().done(function(){
-                        $(".databutt").fadeIn(250);
+                    $(".databutt").fadeOut(150).promise().done(function(){
+                        $(".databutt").text("Registrati").promise().done(function(){
+                            $(".databutt").fadeIn(150);
+                        });
                     });
-                });
-                $("#username").attr("required", false);
-                $("#registerpassword").attr("required", false);
+                    $("#username").attr("required", true);
+                    $("#registerpassword").attr("required", true);
+                }
+                else{
+                    //Si preme accedi
+                    islogin = true;
+                    $("form").attr("action", "${pageContext.request.contextPath}/login");
+                    $(".reg").removeClass("open");
+                    $("#plog").fadeOut(150).promise().done(function(){
+                        $("#preg").fadeIn(150);
+                    });
+
+                    $("#ftitle").fadeOut(250).promise().done(function(){
+                        $("#ftitle").text("Login").promise().done(function(){
+                            $("#ftitle").fadeIn(250);
+                        })
+                    });
+
+                    $(".databutt").fadeOut(250).promise().done(function(){
+                        $(".databutt").text("Login").promise().done(function(){
+                            $(".databutt").fadeIn(250);
+                        });
+                    });
+                    $("#username").attr("required", false);
+                    $("#registerpassword").attr("required", false);
+                }
             });
         });
     </script>
@@ -91,5 +94,16 @@
         </div>
             <p style="color:red;" id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
         <%@ include file="fragments/footer.jsp" %>
+        <script>
+            if(islogin === false){
+            $("form").attr("action", "${pageContext.request.contextPath}/register");
+            $(".reg").addClass("open");
+            $("#preg").hide();
+            $("#plog").show();
+            $("#ftitle").text("Registrati");
+            $(".databutt").text("Registrati");
+            $("#username").attr("required", true);
+            $("#registerpassword").attr("required", true);
+        }</script>
     </body>
 </html>
