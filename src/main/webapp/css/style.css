@@ -192,12 +192,54 @@ header {
 }
 
 .products {
-    margin-left: 0.8rem;
+    padding-top: 2.4rem;
+    margin-left:  4.8rem;
     color: #00A8E8;
 }
 
 .waitingfordatabase {
-    margin-left: 0.8rem;
+    margin-left: 5.6rem;
+}
+
+.presentation {
+    margin-top: 5.6rem;
+    margin-left: 12rem;
+}
+
+.presentation_menu {
+    font-weight: bold;
+    color: #00171F;
+}
+
+.presentation_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.presentation_content p {
+    margin: 0;
+    text-align: justify;
+}
+
+.presentation_ul {
+    list-style: none;
+}
+
+.presentation_ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
+}
+
+.presentation_ul .icon {
+    font-size: 1.5rem;
+    color: #00171F;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    width: 1.5rem;
+    text-align: center;
 }
 
 footer {
