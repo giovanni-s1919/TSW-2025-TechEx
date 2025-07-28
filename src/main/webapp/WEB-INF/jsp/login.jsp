@@ -81,12 +81,11 @@
                     <div>
                         <button type="submit" class="databutt">Login</button>
                     </div>
-                    <a href="${pageContext.request.contextPath}/home" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>
+                    <a href="${pageContext.request.contextPath}/" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
         </div>
         <div class="suggestion">
-            <!--<p>Non hai un account? <a href="${pageContext.request.contextPath}/register" class="logregswitch">Registrati</a></p>-->
             <p id="preg">Non hai un account? <button class="logregswitch">Registrati</button></p>
             <p hidden id="plog">Hai già un account?<button class="logregswitch">Accedi</button></p>
         </div>

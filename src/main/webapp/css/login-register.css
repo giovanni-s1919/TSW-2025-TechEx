@@ -4,21 +4,24 @@ html{
 }
 
 body.loginregister{
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-tserif;
     font-size: 24px;
     background-color: #00406d;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
+    min-height: 100vh;
 }
 
 form{
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20%;
+    transition: 0.2s ease-out;
 }
 
 fieldset{
@@ -32,8 +35,9 @@ fieldset{
     border-style: hidden;
     border-radius: 10px;
     background-color: #ffffff;
-    /*box-shadow: 0 0 10000px 0 #000000;*/
+    box-shadow: 20px 20px 50px 10px #000000;
 }
+
 
 fieldset h2{
     align-content: center;
@@ -66,7 +70,7 @@ fieldset h2{
 
 .reg{
     max-height: 0;
-    scale: 80%;
+    /*scale: 80%;*/
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-in, opacity 0.3s ease-in, scale 0.3s ease-in;
@@ -81,6 +85,9 @@ fieldset h2{
 
 .reg.open:hover{
     scale: 98%;
+}
+.reg.open:active{
+    scale: 0.95;
 }
 
 .auth{
