@@ -6,7 +6,7 @@ html {
 body.loginregister {
     font-family: Arial, sans-tserif;
     font-size: 24px;
-    background-color: #00406d;
+    background-color: #007EA7;
     display: flex;
     flex-direction: column;
     /*justify-content: center;*/
