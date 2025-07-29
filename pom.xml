@@ -43,10 +43,15 @@
           <version>0.4</version>
       </dependency>
       <!--Driver jdbc-->
-      <dependency>
+      <!--<dependency>
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
-          <version>8.0.33</version> <!-- Puoi usare la versione più recente disponibile -->
+          <version>8.0.33</version>  Puoi usare la versione più recente disponibile
+      </dependency> -->
+      <dependency>
+          <groupId>org.mariadb.jdbc</groupId>
+          <artifactId>mariadb-java-client</artifactId>
+          <version>3.0.7</version>
       </dependency>
         <!--jstl-->
       <dependency>
@@ -58,10 +63,11 @@
 
   <build>
     <plugins>
-<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.4.0</version>
-      </plugin>    </plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.4.0</version>
+        </plugin>
+    </plugins>
   </build>
 </project>

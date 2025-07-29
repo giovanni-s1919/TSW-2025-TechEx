@@ -42,19 +42,19 @@ public class RegisterServlet extends HttpServlet {
         try {
             if(userDAO.findByEmail(email) != null){
                 request.setAttribute("errorMessage", "Email già registrata.");
-                request.getRequestDispatcher("/register").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
                 return;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("/register").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }
 
         if(!password.equals(confirm)){
             request.setAttribute("errorMessage", "Le password non corrispondono.");
-            request.getRequestDispatcher("/register").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }
 
@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("/register").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }
 

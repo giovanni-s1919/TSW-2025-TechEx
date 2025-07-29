@@ -1,4 +1,3 @@
-
 USE TechEx;
 
 CREATE TABLE IF NOT EXISTS `User`(

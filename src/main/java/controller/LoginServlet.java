@@ -45,17 +45,21 @@ public class LoginServlet extends HttpServlet {
             UserDTO user = userDAO.findByEmail(email);
             if(user == null || !Utility.checkPassword(password, user.getPasswordHash())){
                 request.setAttribute("errorMessage", "Email o Password non validi.");
-                request.getRequestDispatcher("/login").forward(request, response);
+
+                // FIX HERE: Forward to the JSP page, not the servlet's URL
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
                 return;
             }
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
-            response.sendRedirect("/home");
+            response.sendRedirect(request.getContextPath() + "/home"); // Added contextPath for robustness
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("/login").forward(request, response);
+
+            // Also fix it here for the catch block
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         }
     }
 }
