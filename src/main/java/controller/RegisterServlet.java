@@ -28,8 +28,8 @@ public class RegisterServlet extends HttpServlet {
 
         // TODO
         // For example, checking if a user is already logged in
-
-        request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+        request.setAttribute("islogin", false);
+        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
     @Override
@@ -38,23 +38,27 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
+        String role = request.getParameter("role");
 
         try {
             if(userDAO.findByEmail(email) != null){
-                request.setAttribute("errorMessage", "Email già registrata.");
-                request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+                request.setAttribute("errorMessage", "Email già registrata");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
                 return;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Errore interno del server");
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
             return;
         }
 
         if(!password.equals(confirm)){
-            request.setAttribute("errorMessage", "Le password non corrispondono.");
-            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Le password non corrispondono");
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
             return;
         }
 
@@ -65,8 +69,9 @@ public class RegisterServlet extends HttpServlet {
             userDAO.save(user);
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Errore interno del server.");
-            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Errore interno del server");
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
             return;
         }
 

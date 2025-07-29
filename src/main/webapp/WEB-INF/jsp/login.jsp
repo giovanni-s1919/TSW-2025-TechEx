@@ -60,7 +60,7 @@
     </script>
 </head>
     <body class="loginregister">
-        <div>
+        <div id="content">
             <form method="post" action="login">
                 <fieldset>
                     <h2 id="ftitle" style="font-size: 100%;">Login</h2>
@@ -81,20 +81,27 @@
                         <label for="registerpassword" class="hiddenlabel" hidden></label>
                         <input type="password" id="registerpassword" name="confirm" class="auth" placeholder="Confirm Password">
                     </div>
+                    <div class="divauth reg" id="roleselection">
+                        <label for="roleuser" class="rolevalues">Utente</label>
+                        <input type="radio" name="role" id="roleuser" value="user" checked>
+                        <label for="roleadmin" class="rolevalues">Amministratore</label>
+                        <input type="radio" name="role" id="roleadmin" value="admin">
+                    </div>
                     <div>
                         <button type="submit" class="databutt">Login</button>
                     </div>
                     <a href="${pageContext.request.contextPath}/" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
+            <div class="suggestion">
+                <p id="preg">Non hai un account? <button class="logregswitch">Registrati</button></p>
+                <p hidden id="plog">Hai già un account?<button class="logregswitch">Accedi</button></p>
+            </div>
         </div>
-        <div class="suggestion">
-            <p id="preg">Non hai un account? <button class="logregswitch">Registrati</button></p>
-            <p hidden id="plog">Hai già un account?<button class="logregswitch">Accedi</button></p>
-        </div>
-            <p style="color:red;" id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
+            <p id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
         <%@ include file="fragments/footer.jsp" %>
         <script>
+            $("#error").attr("hidden", true);
             if(islogin === false){
             $("form").attr("action", "${pageContext.request.contextPath}/register");
             $(".reg").addClass("open");

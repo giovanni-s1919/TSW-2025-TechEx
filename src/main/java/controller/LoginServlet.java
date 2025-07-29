@@ -59,6 +59,9 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Errore interno del server.");
 
             // Also fix it here for the catch block
+            String action = request.getParameter("action");
+            boolean islogin = (action == null) || action.equalsIgnoreCase("login");
+            request.setAttribute("islogin", islogin);
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         }
     }
