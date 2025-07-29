@@ -257,6 +257,17 @@ header {
     object-fit: cover;
 }
 
+.top_articles {
+    color: #FFED00;
+    text-align: center;
+    margin-top: 8rem;
+}
+
+.the_best {
+    color: #00A8E8;
+    text-align: center;
+}
+
 footer {
     background-color: #003459;
     color: white;
