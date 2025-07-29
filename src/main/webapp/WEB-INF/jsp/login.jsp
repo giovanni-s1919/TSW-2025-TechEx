@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let islogin = true;
+        let islogin = <%= request.getAttribute("islogin")%>;
         $(document).ready(function (){
             $(".logregswitch").on("click", function(e){
                 e.preventDefault();

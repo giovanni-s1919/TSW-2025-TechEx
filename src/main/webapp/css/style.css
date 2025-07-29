@@ -121,9 +121,10 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
-    background: #fff;
-    border: 2px solid #003459;
-    /*box-shadow: 2px 2px 15px 1px #003459;*/
+    background: #ffffff;
+    /*border: 2px solid #003459;*/
+    border-width: 0;
+    box-shadow: 0 0 5px 1px #000000;
     border-radius: 8px;
     padding: 8px 0;
     list-style: none;
@@ -139,6 +140,10 @@ header {
     display: block;
     opacity: 100%;
     scale: 100%;
+}
+
+.menu > ul > li .submenu.flip {
+    left: -250%;
 }
 
 .menu .submenu li {

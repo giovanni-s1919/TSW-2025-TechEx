@@ -184,7 +184,6 @@ fieldset h2 {
     color: #003459;
     scale: 137.5%;
     font-weight: bold;
-    text-decoration: none;
     transition-property: background-color, scale;
     transition-duration: 0.2s, 0.1s;
 }
