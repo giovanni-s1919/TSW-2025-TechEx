@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 <header>
     <div class="top-left">
         <a href="${pageContext.request.contextPath}/home">
@@ -52,21 +55,37 @@
         <a href="${pageContext.request.contextPath}/jsp/carrello.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/carrello.svg" alt="CARRELLO">
         </a>
-        <nav class="menu" id="topright">
+        <nav class="menu topright">
             <ul>
                 <li>
                     <a href="${pageContext.request.contextPath}/login?action=login">
                         <img class="header_icons" src="${pageContext.request.contextPath}/images/utente.svg" alt="AREA PERSONALE">
                     </a>
-                    <ul class="submenu">
+                    <ul id="forguest" hidden>
                         <a href="${pageContext.request.contextPath}/login?action=login" style="text-decoration: none; color: #003459;"><li>Accedi</li></a>
                         <a href="${pageContext.request.contextPath}/login?action=register" style="text-decoration: none; color: #003459;"><li>Registrati</li></a>
+                    </ul>
+                    <ul id="forcustomer" hidden>
+                        <li>Area Personale</li>
+                        <li>Esci</li>
+                    </ul>
+                    <ul id="foradmin" hidden>
+                        <li>Centro di controllo</li>
+                        <li>Esci</li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
     <script>
+        let userole = "<%= request.getAttribute("role")%>";
+        if(userole === "Customer"){
+            $("#forcustomer").addClass("submenu");
+        }else if(userole === "Guest"){
+            $("#forguest").addClass("submenu");
+        }else if(userole === "Admin"){
+            $("#foradmin").addClass("submenu");
+        }
         /*in base alla distanza di un elemento di classe "submenu" dal bordo destro, viene aggiunta o meno la classe "flip"
         * che in css è fornita di proprietà che capovolge l'aggancio laterale dell'elemento in questione*/
         document.querySelectorAll('.menu > ul > li').forEach(li => {
