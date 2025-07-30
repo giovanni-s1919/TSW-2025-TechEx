@@ -39,30 +39,53 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        try {
-            UserDTO user = userDAO.findByEmail(email);
-            if(user == null || !Utility.checkPassword(password, user.getPasswordHash())){
-                request.setAttribute("errorMessage", "Email o Password non validi.");
+        if(email != null && !email.trim().isEmpty()) {
+            try {
+                UserDTO user = userDAO.findByEmail(email);
+                if (user == null || !Utility.checkPassword(password, user.getPasswordHash())) {
+                    request.setAttribute("errorMessage", "Email o Password non validi");
+                    request.setAttribute("islogin", true);
 
-                // FIX HERE: Forward to the JSP page, not the servlet's URL
+                    // FIX HERE: Forward to the JSP page, not the servlet's URL
+                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                    return;
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+
+                response.sendRedirect(request.getContextPath() + "/home"); // Added contextPath for robustness
+            } catch (SQLException e) {
+                e.printStackTrace();
+                request.setAttribute("errorMessage", "Errore interno del server");
+                // Also fix it here for the catch block
+                String action = request.getParameter("action");
+                request.setAttribute("islogin", true);
                 request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-                return;
             }
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+        }
+        else{
+            try{
+                UserDTO user = userDAO.findByUsername(username);
+                if(user == null || !Utility.checkPassword(password, user.getPasswordHash())){
+                    request.setAttribute("errorMessage", "Username o Password non validi");
+                    request.setAttribute("islogin", true);
+                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
 
-            response.sendRedirect(request.getContextPath() + "/home"); // Added contextPath for robustness
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "Errore interno del server.");
+                response.sendRedirect(request.getContextPath() + "/home");
+            } catch(SQLException e){
+                e.printStackTrace();
+                request.setAttribute("errorMessage", "Errore interno del server");
 
-            // Also fix it here for the catch block
-            String action = request.getParameter("action");
-            boolean islogin = (action == null) || action.equalsIgnoreCase("login");
-            request.setAttribute("islogin", islogin);
-            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                String action = request.getParameter("action");
+                request.setAttribute("islogin", true);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            }
         }
     }
 }

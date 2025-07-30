@@ -9,6 +9,8 @@
     <script>
         let islogin = <%= request.getAttribute("islogin")%>;
         let usermail = true;
+        let mailvalue;
+        let usernamevalue;
         $(document).ready(function (){
             $(".logregswitch").on("click", function(e){
                 e.preventDefault();
@@ -34,7 +36,7 @@
                             $(".databutt").fadeIn(150);
                         });
                     });
-                    if(usermail == true){
+                    if(usermail){
                         $("#username").attr("required", true);
                     }
                     $("#registerpassword").attr("required", true);
@@ -49,6 +51,7 @@
                     else{
                         $("#pwdcnf").removeClass("open");
                         $("#divemail").removeClass("open");
+                        $("#roleselection").removeClass("open");
                     }
                     $("#usermailswitch").addClass("open");
                     $("#plog").fadeOut(150).promise().done(function(){
@@ -73,7 +76,7 @@
 
             $("#usermailswitch").on("click", function(e){
                 e.preventDefault();
-               if(usermail){
+               if(usermail){    //Si sceglie di accedere con Username
                    usermail = false;
                    $("#usermailswitch").fadeOut(250).promise().done(function(){
                        $("#usermailswitch").text("Accedi con Email").promise().done(function(){
@@ -84,8 +87,13 @@
                    $("#divusername").addClass("open");
                    $("#loginemail").attr("required", false);
                    $("#username").attr("required", true);
+
+                   mailvalue = $("#loginemail").val();
+                   $("#loginemail").val(null);
+                   $("#username").val(usernamevalue);
+
                }
-               else{
+               else{        //Si sceglie di accedere con Email
                    usermail = true;
                    $("#usermailswitch").fadeOut(250).promise().done(function(){
                        $("#usermailswitch").text("Accedi con Username").promise().done(function(){
@@ -96,6 +104,10 @@
                    $("#divemail").addClass("open");
                    $("#username").attr("required", false);
                    $("#loginemail").attr("required", true);
+
+                   usernamevalue = $("#username").val();
+                   $("#username").val(null);
+                   $("#loginemail").val(mailvalue)
                }
             });
         });
