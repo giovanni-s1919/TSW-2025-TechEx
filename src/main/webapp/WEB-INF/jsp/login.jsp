@@ -137,9 +137,9 @@
                     </div>
                     <div class="divauth reg" id="roleselection">
                         <label for="roleuser" class="rolevalues">Utente</label>
-                        <input type="radio" name="role" id="roleuser" value="user" checked>
+                        <input type="radio" name="role" id="roleuser" value="Customer" checked>
                         <label for="roleadmin" class="rolevalues">Amministratore</label>
-                        <input type="radio" name="role" id="roleadmin" value="admin">
+                        <input type="radio" name="role" id="roleadmin" value="Admin">
                     </div>
                     <div>
                         <button type="submit" class="databutt">Login</button>

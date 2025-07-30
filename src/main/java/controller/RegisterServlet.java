@@ -110,7 +110,7 @@ public class RegisterServlet extends HttpServlet {
 
         String passwordHash = Utility.hashPassword(password);
 
-        UserDTO user = new UserDTO(username, email, passwordHash, UserDTO.Role.valueOf("Customer"));
+        UserDTO user = new UserDTO(username, email, passwordHash, UserDTO.Role.valueOf(role));
         try {
             userDAO.save(user);
         } catch (SQLException e) {
