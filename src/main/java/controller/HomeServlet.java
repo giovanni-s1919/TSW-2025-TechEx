@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.dto.UserDTO;
 
 import java.io.IOException;
 
@@ -16,7 +18,19 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //TODO
-
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserDTO  user = (UserDTO)session.getAttribute("user");
+            if(user != null){
+                request.setAttribute("role", user.getRole());
+            }
+            else{
+                request.setAttribute("role", "Guest");
+            }
+        }
+        else{
+            request.setAttribute("role", "Guest");
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
         dispatcher.forward(request, response);
     }

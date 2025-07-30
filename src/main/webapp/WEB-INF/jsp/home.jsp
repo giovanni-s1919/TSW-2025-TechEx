@@ -35,6 +35,8 @@
     meow<br>
     sybau<br>
     Nikolas<br>
+    La prossima è una stampa utile, lasciala<br>
+    <%=request.getAttribute("role")%>
   </p>
   <div class="presentation">
     <p class="presentation_menu">Il futuro della riparazione è qui!</p>
