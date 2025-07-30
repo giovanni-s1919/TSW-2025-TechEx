@@ -39,6 +39,38 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
         String role = request.getParameter("role");
+        //boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+        /*try{
+            if(userDAO.findByEmail(email) != null){
+                if(isAjax){
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Email già registrata");
+                    response.getWriter().write(json);
+                    return;
+                } else {
+                    request.setAttribute("errorMessage", "Email già registrata");
+                    request.setAttribute("islogin", false);
+                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                    return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if(isAjax) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Errore interno del server");
+                response.getWriter().write(json);
+                return;
+            } else {
+                request.setAttribute("errorMessage", "Errore interno del server");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+        }*/
 
         try {
             if(userDAO.findByEmail(email) != null){
@@ -48,6 +80,20 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Errore interno del server");
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            return;
+        }
+        try {
+            if(userDAO.findByUsername(username) != null){
+                request.setAttribute("errorMessage", "Questo username è già stato scelto");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+        } catch(SQLException e){
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore interno del server");
             request.setAttribute("islogin", false);
@@ -74,7 +120,6 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
             return;
         }
-
-        response.sendRedirect("login");
+        response.sendRedirect("login?action=login");
     }
 }

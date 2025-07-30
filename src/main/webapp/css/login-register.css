@@ -75,7 +75,7 @@ fieldset h2 {
     font-weight: bold;
     height: 100px;
     width: 375px;
-    color: white;
+    color: #003459;
     transition-property: scale;
     transition-duration: 0.1s;
     transition-timing-function: ease-in;
@@ -98,10 +98,42 @@ fieldset h2 {
     transition: max-height 0.5s ease, opacity 0.4s ease;
 }
 
-.reg.open {
+#divemail {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.4s ease;
+}
+
+#divemail.open {
+    max-height: 200px;
+    opacity: 1;
+    transition: scale 0.2s, max-height 0.5s ease-in-out, opacity
+}
+
+#divusername {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.4s ease;
+}
+
+#divusername.open{
+    max-height: 200px;
+    opacity: 1;
+    transition: scale 0.2s, max-height 0.5s ease-in-out, opacity
+}
+
+.open, #usermailswitch.open{
     max-height: 200px;
     opacity: 1;
     transition: scale 0.2s, max-height 0.5s ease-in, opacity 0.3s ease;
+}
+
+#usermailswitch {
+    max-height: 0;
+    opacity: 0;
+    transition: scale 0.2s, max-height 0.5s ease, opacity 0.4s ease;
 }
 
 .reg.open:hover {
@@ -214,9 +246,6 @@ fieldset h2 {
 #error {
     background-color: #003459;
     color: white;
-    font-weight: bold;
-    padding: 10px;
+    font-weight: bold;;
     border-radius: 8px;
-
-
 }

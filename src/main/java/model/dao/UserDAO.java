@@ -97,6 +97,21 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
         }
         return null;
     }
+    public UserDTO findByUsername(String username) throws SQLException {
+        if(username == null || username.trim().isEmpty()) throw new IllegalArgumentException("Username cannot be null or empty.");
+
+        String sql = "SELECT * FROM User WHERE Username = ?";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, username);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return extract(rs);
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public List<UserDTO> findAll(String order) throws SQLException {

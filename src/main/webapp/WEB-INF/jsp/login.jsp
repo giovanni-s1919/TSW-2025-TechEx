@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let islogin = <%= request.getAttribute("islogin")%>;
+        let usermail = true;
         $(document).ready(function (){
             $(".logregswitch").on("click", function(e){
                 e.preventDefault();
@@ -16,6 +17,10 @@
                     islogin = false;
                     $("form").attr("action", "${pageContext.request.contextPath}/register");
                     $(".reg").addClass("open");
+                    if(!usermail){
+                        $("#divemail").addClass("open");
+                    }
+                    $("#usermailswitch").removeClass("open");
                     $("#preg").fadeOut(150).promise().done(function(){
                         $("#plog").fadeIn(150);
                     });
@@ -29,14 +34,23 @@
                             $(".databutt").fadeIn(150);
                         });
                     });
-                    $("#username").attr("required", true);
+                    if(usermail == true){
+                        $("#username").attr("required", true);
+                    }
                     $("#registerpassword").attr("required", true);
                 }
                 else{
                     //Si preme accedi
                     islogin = true;
                     $("form").attr("action", "${pageContext.request.contextPath}/login");
-                    $(".reg").removeClass("open");
+                    if(usermail){
+                        $(".reg").removeClass("open");
+                    }
+                    else{
+                        $("#pwdcnf").removeClass("open");
+                        $("#divemail").removeClass("open");
+                    }
+                    $("#usermailswitch").addClass("open");
                     $("#plog").fadeOut(150).promise().done(function(){
                         $("#preg").fadeIn(150);
                     });
@@ -56,20 +70,48 @@
                     $("#registerpassword").attr("required", false);
                 }
             });
+
+            $("#usermailswitch").on("click", function(e){
+                e.preventDefault();
+               if(usermail){
+                   usermail = false;
+                   $("#usermailswitch").fadeOut(250).promise().done(function(){
+                       $("#usermailswitch").text("Accedi con Email").promise().done(function(){
+                           $("#usermailswitch").fadeIn(250);
+                       });
+                   });
+                   $("#divemail").removeClass("open");
+                   $("#divusername").addClass("open");
+                   $("#loginemail").attr("required", false);
+                   $("#username").attr("required", true);
+               }
+               else{
+                   usermail = true;
+                   $("#usermailswitch").fadeOut(250).promise().done(function(){
+                       $("#usermailswitch").text("Accedi con Username").promise().done(function(){
+                           $("#usermailswitch").fadeIn(250);
+                       });
+                   });
+                   $("#divusername").removeClass("open");
+                   $("#divemail").addClass("open");
+                   $("#username").attr("required", false);
+                   $("#loginemail").attr("required", true);
+               }
+            });
         });
     </script>
 </head>
     <body class="loginregister">
         <div id="content">
-            <form method="post" action="login">
+            <form method="post" action="login" id="signin">
                 <fieldset>
                     <h2 id="ftitle" style="font-size: 100%;">Login</h2>
 
-                    <div class="divauth reg">
+                    <div class="divauth reg" id="divusername">
                         <label for="username" class="hiddenlabel" hidden>Username: </label>
                         <input type="text" id="username" class="auth" name="username" placeholder="Username">
                     </div>
-                    <div class="divauth">
+                    <div class="divauth open" id="divemail">
                         <label for="loginemail" class="hiddenlabel" hidden>Email: </label>
                         <input type="email" id="loginemail" name="email" required class="auth" placeholder="Email">
                     </div>
@@ -77,7 +119,7 @@
                         <label for="loginpassword" class="hiddenlabel" hidden>Password: </label>
                         <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password">
                     </div>
-                    <div class="divauth reg">
+                    <div class="divauth reg" id="pwdcnf">
                         <label for="registerpassword" class="hiddenlabel" hidden></label>
                         <input type="password" id="registerpassword" name="confirm" class="auth" placeholder="Confirm Password">
                     </div>
@@ -90,6 +132,9 @@
                     <div>
                         <button type="submit" class="databutt">Login</button>
                     </div>
+                    <div id="usermailswitch" class="divauth open">
+                        Accedi con Username
+                    </div>
                     <a href="${pageContext.request.contextPath}/" class="ref"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo" alt="TechEx"></a>
                 </fieldset>
             </form>
@@ -98,19 +143,20 @@
                 <p hidden id="plog">Hai già un account?<button class="logregswitch">Accedi</button></p>
             </div>
         </div>
-            <p id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
+        <p id="error"><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %>
         <%@ include file="fragments/footer.jsp" %>
         <script>
-            $("#error").attr("hidden", true);
             if(islogin === false){
             $("form").attr("action", "${pageContext.request.contextPath}/register");
             $(".reg").addClass("open");
+            $("#usermailswitch").removeClass("open");
             $("#preg").hide();
             $("#plog").show();
             $("#ftitle").text("Registrati");
             $(".databutt").text("Registrati");
             $("#username").attr("required", true);
             $("#registerpassword").attr("required", true);
-        }</script>
+        }
+        </script>
     </body>
 </html>

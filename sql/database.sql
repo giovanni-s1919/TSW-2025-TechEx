@@ -2,7 +2,7 @@ USE TechEx;
 
 CREATE TABLE IF NOT EXISTS `User`(
     ID                  INT AUTO_INCREMENT PRIMARY KEY,
-    Username            VARCHAR(255) NOT NULL ,
+    Username            VARCHAR(255) UNIQUE NOT NULL ,
     Email               VARCHAR(255) UNIQUE NOT NULL,
     PasswordHash        VARCHAR(255) NOT NULL,
     Role                ENUM ('Customer', 'Admin') DEFAULT 'Customer'

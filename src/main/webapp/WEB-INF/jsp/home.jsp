@@ -34,6 +34,7 @@
     meow<br>
     meow<br>
     sybau<br>
+    Nikolas<br>
   </p>
   <div class="presentation">
     <p class="presentation_menu">Il futuro della riparazione è qui!</p>
@@ -69,27 +70,54 @@
         </div>
       </li>
     </ul>
-    <img class="presentation_img" src="../images/homeimage.png" alt="HOMEIMAGE">
+    <img class="presentation_img" src="${pageContext.request.contextPath}/images/homeimage.png" alt="HOMEIMAGE">
   </div>
   <h1 class="top_articles">IL TOP DEL TOP</h1>
   <p class="the_best">I migliori articoli presenti nel nostro catalogo.<br>Qualità ultra per i clienti più esigenti.</p><br>
   <p class="waitingfordatabase">
-    dobbiamo muoverci a fa sto cazzo di database<br>
-    mi sono rotto il cazzo di usare ste cagate temporanee<br>
-    procratalamasion<br>
-    gne gne gne E VABBENE HO SCRITTO CIAO, PAUSA PRANZO?!<br>
-    MA COME HA FATTO?!<br>
-    chiedilo all'arciduca Ferdinando<br>
-    TU MI HAI BARATTATO PER UN NICHELINO?????!!!!!<br>
-    come, che cosa vuol dire girare una levet-MANNAGGIA QUEL MORTO DE OIIIIIIIDDDDDD<br>
-    denis 3 metri sotto terra<br>
-    è in vantaggio Desailly<br>
-    ALLORA LA PROSSIMA VOLTA TI CONDISCO QUEL RISO CON IL-<br>
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA NON LO POSSO DIREH<br>
-    inflazione<br>
-    cremona capitale<br>
-    tuo padre in realtà è il duce<br>
-    meow<br>
+    <b>Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+      Il sushi è meglio della pizza<br>
+
+    </b>
   </p>
 </div>
 <%@ include file="fragments/footer.jsp" %>
