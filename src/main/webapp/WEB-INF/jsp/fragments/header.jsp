@@ -52,7 +52,7 @@
         <a href="${pageContext.request.contextPath}/jsp/carrello.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/carrello.svg" alt="CARRELLO">
         </a>
-        <nav class="menu">
+        <nav class="menu" id="topright">
             <ul>
                 <li>
                     <a href="${pageContext.request.contextPath}/login?action=login">

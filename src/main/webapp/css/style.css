@@ -90,6 +90,10 @@ header {
     padding: 0;
 }
 
+#topright {
+    margin-right: -20px;
+}
+
 .menu > ul > li {
     position: relative;
     margin-right: 20px;
@@ -143,7 +147,7 @@ header {
 }
 
 .menu > ul > li .submenu.flip {
-    left: -250%;
+    left: -300%;
 }
 
 .menu .submenu li {
