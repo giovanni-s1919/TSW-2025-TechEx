@@ -147,7 +147,7 @@ header {
 }
 
 .menu > ul > li .submenu.flip {
-    left: -300%;
+    transform: translate(-75%, 0);
 }
 
 .menu .submenu li {
