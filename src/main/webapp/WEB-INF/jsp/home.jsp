@@ -17,27 +17,29 @@
       <p>Pezzi di ricambio su misura. Qualità garantita.</p>
     </div>
   </div>
-  <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
-  <p class="waitingfordatabase">
-    porcodio<br>
-    diocane<br>
-    luis dici dio cane<br>
-    mannaggia la madonna<br>
-    ma grazie al cazzo?<br>
-    è ripartito, PORCODDIO, DIO TARTUFO<br>
-    (si sto scrivendo queste stronzate per simulare lo spazio che verrà occupato dalle schede dei prodotti)<br>
-    ubriaco di merda mettila in mezzo<br>
-    the game<br>
-    ah certo, m'ha spostato Ramos asoaskasewui<br>
-    meow<br>
-    meow<br>
-    meow<br>
-    meow<br>
-    sybau<br>
-    Nikolas<br>
-    La prossima è una stampa utile, lasciala<br>
-    <%=request.getAttribute("role")%>
-  </p>
+  <div class="catalog">
+    <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
+    <p class="waitingfordatabase">
+      porcodio<br>
+      diocane<br>
+      luis dici dio cane<br>
+      mannaggia la madonna<br>
+      ma grazie al cazzo?<br>
+      è ripartito, PORCODDIO, DIO TARTUFO<br>
+      (si sto scrivendo queste stronzate per simulare lo spazio che verrà occupato dalle schede dei prodotti)<br>
+      ubriaco di merda mettila in mezzo<br>
+      the game<br>
+      ah certo, m'ha spostato Ramos asoaskasewui<br>
+      meow<br>
+      meow<br>
+      meow<br>
+      meow<br>
+      sybau<br>
+      Nikolas<br>
+      La prossima è una stampa utile, lasciala<br>
+      <%=request.getAttribute("role")%>
+    </p>
+  </div>
   <div class="presentation">
     <p class="presentation_menu">Il futuro della riparazione è qui!</p>
     <ul class="presentation_ul">
@@ -74,27 +76,29 @@
     </ul>
     <img class="presentation_img" src="${pageContext.request.contextPath}/images/homeimage.png" alt="HOMEIMAGE">
   </div>
-  <h1 class="top_articles">IL TOP DEL TOP</h1>
-  <p class="the_best">I migliori articoli presenti nel nostro catalogo.<br>Qualità ultra per i clienti più esigenti.</p><br>
-  <p class="waitingfordatabase">
-    dobbiamo muoverci a fa sto cazzo di database<br>
-    mi sono rotto il cazzo di usare ste cagate temporanee<br>
-    procratalamasion<br>
-    gne gne gne E VABBENE HO SCRITTO CIAO, PAUSA PRANZO?!<br>
-    MA COME HA FATTO?!<br>
-    chiedilo all'arciduca Ferdinando<br>
-    TU MI HAI BARATTATO PER UN NICHELINO?????!!!!!<br>
-    come, che cosa vuol dire girare una levet-MANNAGGIA QUEL MORTO DE OIIIIIIIDDDDDD<br>
-    denis 3 metri sotto terra<br>
-    è in vantaggio Desailly<br>
-    ALLORA LA PROSSIMA VOLTA TI CONDISCO QUEL RISO CON IL-<br>
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA NON LO POSSO DIREH<br>
-    inflazione<br>
-    cremona capitale<br>
-    tuo padre in realtà è il duce<br>
-    meow<br>
-    <b>scrivi dinuovo quella cagata sul sushi e ti esplode casa</b>
-  </p>
+  <div class="top_articles">
+    <h1 class="top_h1">IL TOP DEL TOP</h1>
+    <p class="the_best">I migliori articoli presenti nel nostro catalogo.<br>Qualità ultra per i clienti più esigenti.</p><br>
+    <p class="waiting">
+      dobbiamo muoverci a fa sto cazzo di database<br>
+      mi sono rotto il cazzo di usare ste cagate temporanee<br>
+      procratalamasion<br>
+      gne gne gne E VABBENE HO SCRITTO CIAO, PAUSA PRANZO?!<br>
+      MA COME HA FATTO?!<br>
+      chiedilo all'arciduca Ferdinando<br>
+      TU MI HAI BARATTATO PER UN NICHELINO?????!!!!!<br>
+      come, che cosa vuol dire girare una levet-MANNAGGIA QUEL MORTO DE OIIIIIIIDDDDDD<br>
+      denis 3 metri sotto terra<br>
+      è in vantaggio Desailly<br>
+      ALLORA LA PROSSIMA VOLTA TI CONDISCO QUEL RISO CON IL-<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA NON LO POSSO DIREH<br>
+      inflazione<br>
+      cremona capitale<br>
+      tuo padre in realtà è il duce<br>
+      meow<br>
+      <b>scrivi dinuovo quella cagata sul sushi e ti esplode casa</b>
+    </p>
+  </div>
   <div class="guides">
     <div class="guides_box">
     <h1 id="help">Mai arrendersi di fronte a un "è guasto".</h1>
@@ -109,8 +113,9 @@
     </ul>
     </div>
   </div>
-  <h1 id="mvp" class="most_sales">I PIÙ VENDUTI</h1>
-  <p class="most_sales">I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
+  <div class="most_sales">
+  <h1 id="mvp">I PIÙ VENDUTI</h1>
+  <p>I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
   <p class="waitingfordatabase">
     <b>scrivi dinuovo quella cagata sul sushi e ti ammazzo la famiglia davanti ai tuoi occhi</b><br>
     ti è piaciuto fare il coglione col sushi? bene, ora subisci<br>
@@ -130,7 +135,27 @@
     never gonna give you up, never gonna let you down<br>
     66<br>
   </p>
+  </div>
+  <div class="reviews">
+    <div class="reviews_left">
+      <p class="reviews_p">
+        <b>Recensioni dei nostri utenti</b><br><br>
+        TechEx è in testa alle classifiche<br>dei siti di pezzi di ricambio per smartphone in Italia.<br>
+        Solo ricambi di qualità assoluta per riparazioni top!<br>
+      </p>
+      <p class="reviews_value">
+        TechEx è valutata<br>
+        <b>Eccellente</b><br>
+        <span class="reviews_note">Basata su 4324 recensioni<br>
+        <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
+        <button class="reviews_button">Scopri tutte le recensioni</button>
+        </span>
+      </p>
+    </div>
+    <div class="reviews_right" id="reviewsContainer"></div>
+  </div>
 </div>
+<script src="${pageContext.request.contextPath}/js/reviews.js" defer></script>
 <%@ include file="fragments/footer.jsp" %>
 </body>
 </html>
