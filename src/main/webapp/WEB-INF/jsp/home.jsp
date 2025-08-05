@@ -148,14 +148,36 @@
         <b>Eccellente</b><br>
         <span class="reviews_note">Basata su 4324 recensioni<br>
         <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
-        <button class="reviews_button">Scopri tutte le recensioni</button>
+        <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Scopri tutte le recensioni</button></a>
         </span>
       </p>
     </div>
     <div class="reviews_right" id="reviewsContainer"></div>
   </div>
+  <div class="faq">
+    <h1 class="faq_title">FAQ - Domande frequenti</h1>
+    <div class="faq_item">
+      <button class="faq_question">Come posso trovare il pezzo giusto per il mio smartphone?</button>
+      <div class="faq_answer">
+        Puoi utilizzare il nostro motore di ricerca interno inserendo marca, modello e tipo di componente. Ogni scheda prodotto è corredata da immagini e compatibilità.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">I pezzi di ricambio sono originali?</button>
+      <div class="faq_answer">
+        Offriamo sia componenti originali che compatibili di alta qualità. Ogni prodotto è chiaramente etichettato nella descrizione.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
+      <div class="faq_answer">
+        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
+      </div>
+    </div>
+  </div>
 </div>
 <script src="${pageContext.request.contextPath}/js/reviews.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/faq.js" defer></script>
 <%@ include file="fragments/footer.jsp" %>
 </body>
 </html>
