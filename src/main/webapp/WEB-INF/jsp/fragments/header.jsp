@@ -52,7 +52,7 @@
         <a href="preferiti.jsp">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
         </a>
-        <a href="${pageContext.request.contextPath}/jsp/carrello.jsp">
+        <a href="${pageContext.request.contextPath}/cart">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/carrello.svg" alt="CARRELLO">
         </a>
         <nav class="menu topright">

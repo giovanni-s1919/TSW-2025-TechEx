@@ -17,6 +17,7 @@
                 if(islogin === true){
                     //Si preme registrati
                     islogin = false;
+                    $("title").text("TechEx - Sign in");
                     $("form").attr("action", "${pageContext.request.contextPath}/register");
                     $(".reg").addClass("open");
                     if(!usermail){
@@ -44,6 +45,7 @@
                 else{
                     //Si preme accedi
                     islogin = true;
+                    $("title").text("TechEx - Login");
                     $("form").attr("action", "${pageContext.request.contextPath}/login");
                     if(usermail){
                         $(".reg").removeClass("open");
@@ -164,16 +166,17 @@
         <%@ include file="fragments/footer.jsp" %>
         <script>
             if(islogin === false){
-            $("form").attr("action", "${pageContext.request.contextPath}/register");
-            $(".reg").addClass("open");
-            $("#usermailswitch").removeClass("open");
-            $("#preg").hide();
-            $("#plog").show();
-            $("#ftitle").text("Registrati");
-            $(".databutt").text("Registrati");
-            $("#username").attr("required", true);
-            $("#registerpassword").attr("required", true);
-        }
+                $("title").text("TechEx - Sign in");
+                $("form").attr("action", "${pageContext.request.contextPath}/register");
+                $(".reg").addClass("open");
+                $("#usermailswitch").removeClass("open");
+                $("#preg").hide();
+                $("#plog").show();
+                $("#ftitle").text("Registrati");
+                $(".databutt").text("Registrati");
+                $("#username").attr("required", true);
+                $("#registerpassword").attr("required", true);
+            }
         </script>
     </body>
 </html>

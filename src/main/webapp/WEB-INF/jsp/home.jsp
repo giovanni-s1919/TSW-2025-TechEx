@@ -96,7 +96,49 @@
       cremona capitale<br>
       tuo padre in realtà è il duce<br>
       meow<br>
-      <b>scrivi dinuovo quella cagata sul sushi e ti esplode casa</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
+      <b>Il sushi è meglio della pizza</b>
     </p>
   </div>
   <div class="guides">
