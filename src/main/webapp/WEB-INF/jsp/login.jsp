@@ -52,6 +52,7 @@
                         $("#pwdcnf").removeClass("open");
                         $("#divemail").removeClass("open");
                         $("#role-table").removeClass("open");
+                        $(".roleselection").removeClass("open");
                     }
                     $("#usermailswitch").addClass("open");
                     $("#plog").fadeOut(150).promise().done(function(){
@@ -135,7 +136,7 @@
                         <label for="registerpassword" class="hiddenlabel" hidden></label>
                         <input type="password" id="registerpassword" name="confirm" class="auth" placeholder="Confirm Password">
                     </div>
-                    <div  id="role-table" class="reg">
+                    <div id="role-table" class="reg">
                         <div class="roleselection reg">
                             <label for="roleuser" class="rolevalues">Utente</label>
                             <input type="radio" name="role" id="roleuser" value="Customer" checked>
