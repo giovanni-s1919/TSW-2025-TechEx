@@ -10,15 +10,20 @@ body {
     background-color: white;
 }
 
-#cart-box {
+#main {
     display: flex;
     flex-direction: row;
-    position: relative;
-    top: 20%;
+    justify-content: center;
+}
+
+#cart-box {
+    display: flex;
+    flex-direction: column;
     justify-self: center;
     align-self: center;
-    height: auto;
-    width: 80%;
+    width: 70%;
+    margin-top: 10%;
+    margin-bottom: 5%;
     padding: 50px;
     background-color: rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -27,16 +32,19 @@ body {
 .cart-element {
     display: flex;
     flex-direction: row;
-    background-color: rgba(0,0,0,0.1);
+    align-self: center;
     height: 100%;
     width: 100%;
+    background-color: white;
     border-radius: 10px;
+    border-width: 2px;
+    border-color: #003459;
+    border-style: solid;
     margin-top: 10px;
     font-weight: normal;
 }
 
 .cart-product-image {
-    background-color: rgba(0,0,0,0.1);
     max-height: 200px;
     max-width: 200px;
     border-radius: 10px;
@@ -57,7 +65,6 @@ body {
     margin-top: 0;
     line-height: 40px;
     width: 50%;
-    background-color: rgba(0,0,0,0.1);
     color: #003459;
     font-size: 40px;
     margin-bottom: 20px;
@@ -68,25 +75,32 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin-top: auto;
-    background-color: rgba(0,0,0,0.1);
-    width: 50%;
+    width: 25%;
 }
 
 .cart-product-value {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #cart-confirm {
-    display: flex;
-    flex-direction: row;;
-    height: 100%;
-    width: 100px;
+    height: 400px;
+    width: 250px;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 5%;
     background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
-
+.cart-total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    background-color: rgba(0,0,0,0.1);
+}
 
 
 

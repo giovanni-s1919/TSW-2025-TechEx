@@ -11,33 +11,83 @@
 <body>
 <%@ include file="fragments/header.jsp" %>
 
-
-<div id="cart-box">
-    <div class="cart-element">
-        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
-        <div class="cart-product-details">
-            <div class="cart-product-name">iPhone 11 Pro Display</div>
-            <div class="cart-product-fieldvalue">
-                <div class="cart-product-field">Brand: </div>
-                <div class="cart-product-value">Yodoit</div>
+<div id="main">
+    <div id="cart-box">
+        <div class="cart-element">
+            <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+            <div class="cart-product-details">
+                <div class="cart-product-name">iPhone 11 Pro Display</div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Brand: </div>
+                    <div class="cart-product-value">Yodoit</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Categoria: </div>
+                    <div class="cart-product-value">Schermi</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Quantità: </div>
+                    <div class="cart-product-value">5</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Price: </div>
+                    <div class="cart-product-value">€29,99</div>
+                </div>
             </div>
-            <div class="cart-product-fieldvalue">
-                <div class="cart-product-field">Categoria: </div>
-                <div class="cart-product-value">Schermi</div>
+        </div>
+        <div class="cart-element">
+            <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+            <div class="cart-product-details">
+                <div class="cart-product-name">iPhone 11 Pro Display</div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Brand: </div>
+                    <div class="cart-product-value">Yodoit</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Categoria: </div>
+                    <div class="cart-product-value">Schermi</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Quantità: </div>
+                    <div class="cart-product-value">5</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Price: </div>
+                    <div class="cart-product-value">€29,99</div>
+                </div>
             </div>
-            <div class="cart-product-fieldvalue">
-                <div class="cart-product-field">Quantità: </div>
-                <div class="cart-product-value">5</div>
+        </div>
+        <div class="cart-element">
+            <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+            <div class="cart-product-details">
+                <div class="cart-product-name">iPhone 11 Pro Display</div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Brand: </div>
+                    <div class="cart-product-value">Yodoit</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Categoria: </div>
+                    <div class="cart-product-value">Schermi</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Quantità: </div>
+                    <div class="cart-product-value">5</div>
+                </div>
+                <div class="cart-product-fieldvalue">
+                    <div class="cart-product-field">Prezzo: </div>
+                    <div class="cart-product-value">€29,99</div>
+                </div>
             </div>
-            <div class="cart-product-fieldvalue">
-                <div class="cart-product-field">Price: </div>
-                <div class="cart-product-value">€29,99</div>
-            </div>
-    </div>
+        </div>
     </div>
     <div id="cart-confirm">
+        <div class="cart-total">
+            <div class="cart-total-field">Totale: </div>
+            <div class="cart-total-value">€89,97</div>
+        </div>
     </div>
 </div>
+
 <%@ include file="fragments/footer.jsp" %>
 </body>
 </html>
