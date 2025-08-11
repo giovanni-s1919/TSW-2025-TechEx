@@ -1,7 +1,7 @@
 package model.dao;
 
 import model.dto.CartDTO;
-
+import model.dto.CartItemDTO;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class CartDAO extends AbstractDAO<CartDTO, Integer>{
 
     @Override
     public boolean delete(Integer id) throws SQLException {
-        if(id == null || id < 1)  throw new IllegalArgumentException("AddressID must be a positive integer.");
+        if (id == null || id < 1) throw new IllegalArgumentException("ID must be a positive integer.");
 
         String sql = "DELETE FROM Cart WHERE ID = ?";
         try(Connection connection = dataSource.getConnection();
