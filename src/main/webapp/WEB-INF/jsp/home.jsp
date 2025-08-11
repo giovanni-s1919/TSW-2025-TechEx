@@ -96,49 +96,6 @@
       cremona capitale<br>
       tuo padre in realtà è il duce<br>
       meow<br>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
-      <b>Il sushi è meglio della pizza</b>
     </p>
   </div>
   <div class="guides">
@@ -196,6 +153,39 @@
     </div>
     <div class="reviews_right" id="reviewsContainer"></div>
   </div>
+  <div class="certifications">
+    <h1 id="certifications_top-text" class="certifications_intro">TechEx: un nome, una garanzia.</h1>
+    <p class="certifications_intro">Collaboriamo con i migliori brand e operiamo secondo standard internazionali di qualità.</p>
+    <div class="brand_column">
+      <h1>BRAND</h1>
+      <div class="brand_logos">
+        <img src="${pageContext.request.contextPath}/images/apple.png" alt="APPLE">
+        <img src="${pageContext.request.contextPath}/images/samsung.png" alt="SAMSUNG">
+        <img src="${pageContext.request.contextPath}/images/xiaomi.jpg" alt="XIAOMI">
+        <img src="${pageContext.request.contextPath}/images/huawei.png" alt="HUAWEI"><br>
+        <img src="${pageContext.request.contextPath}/images/realme.jpg" alt="REALME">
+        <img src="${pageContext.request.contextPath}/images/googlepixel.jpg" alt="GOOGLE">
+        <img src="${pageContext.request.contextPath}/images/oppo.jpg" alt="OPPO">
+        <img src="${pageContext.request.contextPath}/images/oneplus.png" alt="ONEPLUS">
+      </div>
+    </div>
+    <div class="certifications_column">
+      <h1>CERTIFICAZIONI</h1>
+      <div class="certifications_badges">
+        <img src="${pageContext.request.contextPath}/images/ce.jpg" alt="CE">
+        <img src="${pageContext.request.contextPath}/images/iso9001.jpg" alt="ISO 9001">
+        <img src="${pageContext.request.contextPath}/images/rohs.jpg" alt="RoHS">
+        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION"><br>
+        <img src="${pageContext.request.contextPath}/images/gdpr.jpg" alt="GDPR CERTIFICATION">
+        <img src="${pageContext.request.contextPath}/images/iso27001.jpg" alt="ISO 27001">
+        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION">
+        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION">
+      </div>
+    </div>
+    <div class="discover_button">
+      <a href="" class="discover">Scopri di più</a>
+    </div>
+  </div>
   <div class="newsletter">
     <div class="newsletter_left">
       <h1 class="newsletter_h1">Iscriviti alla newsletter di TechEx!</h1>
@@ -223,6 +213,9 @@
     <div class="newsletter_right">
 
     </div>
+  </div>
+  <div class="partners">
+
   </div>
   <div class="faq">
     <h1 class="faq_title">FAQ - Domande frequenti</h1>

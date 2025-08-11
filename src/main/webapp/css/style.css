@@ -262,6 +262,72 @@ header {
     object-fit: cover;
 }
 
+.certifications {
+    background-color: #f2f9fc;
+    padding: 2rem;
+    border-top: 2px solid #d1e7ee;
+    margin-top: 6rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.certifications_intro {
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #00171F;
+    margin-top: 0;
+}
+
+#certifications_top-text {
+    font-size: 2.5rem;
+    color: #003459;
+    margin-bottom: 0.5rem;
+}
+
+.brand_column, .certifications_column {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.brand_logos img, .certifications_badges img {
+    width: 80px;
+    margin: 0.5rem;
+    object-fit: contain;
+}
+
+.certifications h1 {
+    color: #003459;
+}
+
+.discover_button {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.discover {
+    background-color: #003459;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.discover:hover {
+    background-color: #005b8f;
+}
+
 .top_articles {
     margin-top: 13rem;
 }
@@ -331,6 +397,11 @@ header {
     /*border-radius: 8px;*/
     height: 2rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reviews_button:hover {
+    background-color: #005b8f;
 }
 
 .reviews_right {
@@ -438,11 +509,16 @@ header {
     width: 300px;
     height: 40px;
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1.4rem;
     border-radius: 8px;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter_submit:hover {
+    background-color: #005b8f;
 }
 
 .faq {
