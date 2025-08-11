@@ -27,6 +27,7 @@
                         <li>Xiaomi</li>
                         <li>Huawei</li>
                         <li>Realme</li>
+                        <li>Google</li>
                         <li>Oppo</li>
                         <li>Oneplus</li>
                     </ul>
