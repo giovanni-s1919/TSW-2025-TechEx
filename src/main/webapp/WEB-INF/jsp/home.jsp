@@ -196,6 +196,34 @@
     </div>
     <div class="reviews_right" id="reviewsContainer"></div>
   </div>
+  <div class="newsletter">
+    <div class="newsletter_left">
+      <h1 class="newsletter_h1">Iscriviti alla newsletter di TechEx!</h1>
+      <p class="newsletter_p">Ottieni un buono di 5€ e tanti altri vantaggi iscrivendoti alla newsletter.</p>
+      <form id="newsletter_form">
+        <input type="email" id="newsletter_email" name="email" placeholder=" * E-mail">
+        <p class="newsletter_p">I miei interessi: (facoltativo)</p>
+        <input type="checkbox" name="categories" class="newsletter_categories"> Display & Touchscreen<br>
+        <input type="checkbox" name="categories" class="newsletter_categories"> Fotocamere<br>
+        <input type="checkbox" name="categories" class="newsletter_categories"> Batterie<br>
+        <input type="checkbox" name="categories" class="newsletter_categories"> Microfoni & Speakers<br>
+        <input type="checkbox" name="categories" class="newsletter_categories"> Scocche <br>
+        <label class="newsletter_consent">
+          <input type="checkbox" name="categories" class="newsletter_categories">
+          <p class="newsletter_consent_text">
+            In futuro, vorrei essere informato da TechEx su disponibilità, vantaggi<br>
+            e promo sui pezzi di ricambio e sulle collaborazioni esclusive con i partner.<br>
+            Il consenso può essere revocato in qualsiasi momento cliccando<br>
+            sul link di cancellazione presente in ogni email o messaggio ai recapiti indicati nelle note legali. *
+          </p>
+        </label>
+        <button type="submit" class="newsletter_submit">ISCRIVITI ALLA NEWSLETTER</button>
+      </form>
+    </div>
+    <div class="newsletter_right">
+
+    </div>
+  </div>
   <div class="faq">
     <h1 class="faq_title">FAQ - Domande frequenti</h1>
     <div class="faq_item">
