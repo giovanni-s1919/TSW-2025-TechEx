@@ -1,0 +1,146 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.938rem;
+    background-color: #FFFFFF;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 1000;
+    border-bottom: 1px solid #E1E8ED;
+}
+
+.top-left, .top-right {
+    display: flex;
+    align-items: center;
+}
+
+.top-right {
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.search {
+    position: relative;
+    display: inline-block;
+}
+
+#searchbar{
+    width: 25rem;
+    height: 2.5rem;
+    border: 2px solid #003459;
+    border-radius: 12px;
+    padding: 0.313rem 1.875rem 0.313rem 1.875rem;
+}
+
+.lens {
+    position: absolute;
+    top: 50%;
+    left: 0.625rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #003459;
+    pointer-events: none;
+}
+
+.header_icons {
+    width: 2.188rem;
+    height: 2.188rem;
+}
+
+#logo {
+    width: 12.5rem;
+    height: 4.188rem;
+    margin-left: 0.313rem;
+    margin-right: 1.875rem;
+}
+
+.menu > ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.topright {
+    margin-right: -1.25rem;
+}
+
+.menu > ul > li {
+    position: relative;
+    margin-right: 1.25rem;
+    padding: 0.625rem 0;
+    font-weight: bold;
+    color: #003459;
+    cursor: pointer;
+}
+
+.menu > ul > li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0.188rem;
+    width: 100%;
+    background-color: #003459;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 10px;
+}
+
+.menu > ul > li:hover::after {
+    opacity: 1;
+}
+.menu .submenu {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #FFFFFF;
+    /*border: 2px solid #003459;*/
+    border-width: 0;
+    box-shadow: 0 0 5px 1px #000000;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    list-style: none;
+    min-width: 9.375rem;
+    z-index: 500;
+    scale: 97%;
+    transition-property: scale, opacity;
+    transition-duration: 0.2s;
+}
+
+
+.menu > ul > li:hover > .submenu {
+    display: block;
+    opacity: 100%;
+    scale: 100%;
+}
+
+.menu > ul > li .submenu.flip {
+    transform: translate(-75%, 0);
+}
+
+.menu .submenu li {
+    padding: 0.313rem 0.938rem;
+    white-space: nowrap;
+    color: #003459;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+}
+
+.menu .submenu li:hover {
+    background-color: rgba(0,0,0,0.1);
+    scale: 95%;
+}
+
+#promo {
+    color: #FF0000;
+}
+
+#promo::after {
+    background-color: #FF0000;
+}
