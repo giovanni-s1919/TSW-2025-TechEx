@@ -38,15 +38,16 @@ body {
     background-color: white;
     border-radius: 10px;
     border-width: 2px;
-    border-color: #003459;
     border-style: solid;
-    margin-top: 10px;
+    border-color: grey;
+    margin-top: 20px;
     font-weight: normal;
-    transition: scale 0.2s ease-out, background-color 0.2s ease-out;
+    transition: scale 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease;
 }
 .cart-element:hover{
     scale: 0.99;
     background-color: rgba(250,250,250);
+    border-color: #003459;
 }
 
 .cart-product-image {
@@ -55,11 +56,12 @@ body {
     border-radius: 10px;
 }
 
-.cart-product-details {
+.cart-product-details{
     display: flex;
     flex-direction: column;
     align-self: center;
     padding: 5px;
+    margin-left: 15px;
     height: 90%;
     width: 100%;
     font-size: 20px;
@@ -99,7 +101,7 @@ body {
     margin-top: 10%;
     margin-bottom: 5%;
     margin-left: 5%;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(240,240,240,1);
     border-radius: 10px;
 }
 
