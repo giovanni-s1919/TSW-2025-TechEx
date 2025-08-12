@@ -138,7 +138,7 @@
   <div class="reviews">
     <div class="reviews_left">
       <p class="reviews_p">
-        <b>Recensioni dei nostri utenti</b><br><br>
+        <b>Recensioni dei nostri utenti</b><br>
         TechEx è in testa alle classifiche<br>dei siti di pezzi di ricambio per smartphone in Italia.<br>
         Solo ricambi di qualità assoluta per riparazioni top!<br>
       </p>
@@ -147,7 +147,7 @@
         <b>Eccellente</b><br>
         <span class="reviews_note">Basata su 4324 recensioni<br>
         <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
-        <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Scopri tutte le recensioni</button></a>
+        <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Lista completa recensioni</button></a>
         </span>
       </p>
     </div>
@@ -189,7 +189,7 @@
   <div class="newsletter">
     <div class="newsletter_left">
       <h1 class="newsletter_h1">Iscriviti alla newsletter di TechEx!</h1>
-      <p class="newsletter_p">Ottieni un buono di 5€ e tanti altri vantaggi iscrivendoti alla newsletter.</p>
+      <p class="newsletter_p">Ottieni un buono di 5€, promo esclusive, news e tanto altro iscrivendoti alla newsletter.</p>
       <form id="newsletter_form">
         <input type="email" id="newsletter_email" name="email" placeholder=" * E-mail">
         <p class="newsletter_p">I miei interessi: (facoltativo)</p>
@@ -203,8 +203,8 @@
           <p class="newsletter_consent_text">
             In futuro, vorrei essere informato da TechEx su disponibilità, vantaggi<br>
             e promo sui pezzi di ricambio e sulle collaborazioni esclusive con i partner.<br>
-            Il consenso può essere revocato in qualsiasi momento cliccando<br>
-            sul link di cancellazione presente in ogni email o messaggio ai recapiti indicati nelle note legali. *
+            Il consenso può essere revocato in qualsiasi momento cliccando sul link di cancellazione<br>
+            presente in ogni email o messaggio ai recapiti indicati nelle note legali. *
           </p>
         </label>
         <button type="submit" class="newsletter_submit">ISCRIVITI ALLA NEWSLETTER</button>
