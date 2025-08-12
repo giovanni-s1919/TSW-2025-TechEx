@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+</head>
 <footer>
     <div class="bottom">
         <img id="bottomlogo" src="${pageContext.request.contextPath}/images/logowhite.png" alt="TECHEX">

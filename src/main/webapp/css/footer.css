@@ -1,0 +1,64 @@
+footer {
+    background-color: #003459;
+    color: white;
+    padding: 0.938rem;
+    margin-top: auto;
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 2rem 0 3px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+#bottomlogo {
+    width: 18.75rem;
+    height: 6.25rem;
+}
+
+.footer_ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    gap: 1rem;
+}
+
+.footer_ul li:not(.list-voices):not(.payments):not(.shipping):not(.socials):hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.list-voices {
+    cursor: default;
+    font-weight: bold;
+}
+
+.footer_icons {
+    width: 2.688rem;
+    height: 1.513rem;
+    border-radius: 7px;
+}
+
+.socials_icons {
+    width: 2.625rem;
+    height: 2.625rem;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+#copyright {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 3.75rem;
+}
