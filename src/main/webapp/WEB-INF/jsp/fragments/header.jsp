@@ -18,6 +18,8 @@
                         <li>Batterie</li>
                         <li>Microfoni & Speaker</li>
                         <li>Scocche</li>
+                        <li>Jack cuffie</li>
+                        <li>Porte di ricarica</li>
                     </ul>
                 </li>
                 <li>
