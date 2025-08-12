@@ -207,6 +207,15 @@
             presente in ogni email o messaggio ai recapiti indicati nelle note legali. *
           </p>
         </label>
+        <div id="newsletter_success">Ora sei iscritto alla newsletter!</div>
+        <script>
+          $(document).ready(function(){
+            $(".newsletter_submit").on("click", function (e){
+              e.preventDefault();
+              $("#newsletter_success").fadeIn();
+            });
+          });
+        </script>
         <button type="submit" class="newsletter_submit">ISCRIVITI ALLA NEWSLETTER</button>
       </form>
     </div>
