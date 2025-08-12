@@ -2,6 +2,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Arial, sans-serif;
     padding: 0.938rem;
     background-color: #FFFFFF;
     left: 0;
