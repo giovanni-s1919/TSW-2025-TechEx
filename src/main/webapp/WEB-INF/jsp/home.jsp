@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>TechEx - Pezzi di ricambio per smartphone</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -153,14 +153,14 @@
     </div>
     <div class="reviews_right" id="reviewsContainer"></div>
   </div>
-  <div class="certifications">
-    <h1 id="certifications_top-text" class="certifications_intro">TechEx: un nome, una garanzia.</h1>
-    <p class="certifications_intro">Collaboriamo con i migliori brand e operiamo secondo standard internazionali di qualità.</p>
+  <div class="collabs">
+    <h1 id="collabs_top-text" class="collabs_intro">TechEx: un nome, una garanzia.</h1>
+    <p class="collabs_intro">Collaboriamo con i migliori brand e operiamo secondo standard internazionali di qualità.</p>
     <div class="brand_column">
       <h1>BRAND</h1>
       <div class="brand_logos">
         <img src="${pageContext.request.contextPath}/images/apple.png" alt="APPLE">
-        <img src="${pageContext.request.contextPath}/images/samsung.png" alt="SAMSUNG">
+        <img src="${pageContext.request.contextPath}/images/samsung.jpg" alt="SAMSUNG">
         <img src="${pageContext.request.contextPath}/images/xiaomi.jpg" alt="XIAOMI">
         <img src="${pageContext.request.contextPath}/images/huawei.png" alt="HUAWEI"><br>
         <img src="${pageContext.request.contextPath}/images/realme.jpg" alt="REALME">
@@ -176,10 +176,10 @@
         <img src="${pageContext.request.contextPath}/images/iso9001.jpg" alt="ISO 9001">
         <img src="${pageContext.request.contextPath}/images/rohs.jpg" alt="RoHS">
         <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION"><br>
+        <img src="${pageContext.request.contextPath}/images/reach.jpg" alt="REACH">
         <img src="${pageContext.request.contextPath}/images/gdpr.jpg" alt="GDPR CERTIFICATION">
+        <img src="${pageContext.request.contextPath}/images/pci-dss.jpg" alt="PSI DSS">
         <img src="${pageContext.request.contextPath}/images/iso27001.jpg" alt="ISO 27001">
-        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION">
-        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION">
       </div>
     </div>
     <div class="discover_button">
@@ -213,9 +213,6 @@
     <div class="newsletter_right">
 
     </div>
-  </div>
-  <div class="partners">
-
   </div>
   <div class="faq">
     <h1 class="faq_title">FAQ - Domande frequenti</h1>

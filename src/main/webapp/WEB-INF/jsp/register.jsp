@@ -4,7 +4,7 @@
     <head>
         <title>TechEx - Registrazione</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login-register.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     </head>
     <body class="loginregister">
     <div>

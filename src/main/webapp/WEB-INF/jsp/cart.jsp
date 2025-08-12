@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>TechEx - Carrello</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css">
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">

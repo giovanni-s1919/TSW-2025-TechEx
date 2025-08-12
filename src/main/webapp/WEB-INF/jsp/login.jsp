@@ -4,7 +4,7 @@
 <head>
     <title>TechEx - Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login-register.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let islogin = <%= request.getAttribute("islogin")%>;
