@@ -61,7 +61,7 @@ body {
 
 .presentation {
     position: relative;
-    margin-top: 13rem;
+    margin-top: 3rem;
     margin-left: 12rem;
 }
 
@@ -113,7 +113,7 @@ body {
 }
 
 .top_articles {
-    margin-top: 13rem;
+    margin-top: 3rem;
 }
 
 .top_h1 {
@@ -134,7 +134,7 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 13rem;
+    margin-top: 3rem;
     padding: 3.4rem 3.4rem 3.4rem 0;
     color: #00171F;
     box-sizing: border-box;
@@ -166,7 +166,7 @@ body {
 }
 
 .most_sales {
-    margin-top: 13rem;
+    margin-top: 3rem;
     margin-left:  4.8rem;
     color: #00A8E8;
 }
@@ -465,7 +465,7 @@ body {
 .faq_title {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #00171F;
+    color: #003459;
     text-align: center;
 }
 
