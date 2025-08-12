@@ -216,15 +216,41 @@
   <div class="faq">
     <h1 class="faq_title">FAQ - Domande frequenti</h1>
     <div class="faq_item">
-      <button class="faq_question">Come posso trovare il pezzo giusto per il mio smartphone?</button>
+      <button class="faq_question">Quali tipi di pezzi di ricambio posso acquistare?</button>
       <div class="faq_answer">
-        Puoi utilizzare il nostro motore di ricerca interno inserendo marca, modello e tipo di componente. Ogni scheda prodotto è corredata da immagini e compatibilità.
+        All'interno del nostro sito troverai ogni tipo di pezzi di ricambio per il tuo cellulare:<br>
+        display, touchscreen, fotocamere, batterie, microfoni, speaker, scocche, jack cuffie e porte di ricarica.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">A quali brand sono destinati i pezzi di ricambio in vendita?</button>
+      <div class="faq_answer">
+        TechEx è rivenditore autorizzato di pezzi di ricambio per brand top di gamma come Apple e Samsung,<br>
+        brand media-alta gamma come Xiaomi, Huawei, Realme, e Google ed anche brand di gamma medio-bassa come Oppo e Oneplus.
       </div>
     </div>
     <div class="faq_item">
       <button class="faq_question">I pezzi di ricambio sono originali?</button>
       <div class="faq_answer">
         Offriamo sia componenti originali che compatibili di alta qualità. Ogni prodotto è chiaramente etichettato nella descrizione.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
+      <div class="faq_answer">
+        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
+      <div class="faq_answer">
+        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
+      </div>
+    </div>
+    <div class="faq_item">
+      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
+      <div class="faq_answer">
+        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
       </div>
     </div>
     <div class="faq_item">
