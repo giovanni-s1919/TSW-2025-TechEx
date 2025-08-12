@@ -214,13 +214,13 @@ body {
 .reviews_button {
     color: #FFFFFF;
     background-color: #003459;
-    border: 1px solid #003459;
+    border: none;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     height: 2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .reviews_button:hover {
@@ -357,7 +357,7 @@ body {
     font-weight: bold;
     font-size: 1rem;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .discover:hover {
@@ -377,7 +377,9 @@ body {
 }
 
 .newsletter_left {
-    padding: 2rem 0 3.4rem 2.5rem;
+    /*padding: 2rem 0 3.4rem 2.5rem;*/
+    padding-left: 2rem;
+    padding-bottom: 3.4rem;
     justify-content: left;
 }
 
@@ -449,7 +451,7 @@ body {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .newsletter_submit:hover {
@@ -458,7 +460,7 @@ body {
 
 .faq {
     padding: 1.5rem;
-    background-color: #F7FBFD;
+    background-color: rgba(0, 126, 167, 0.1);
 }
 
 .faq_title {

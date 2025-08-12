@@ -7,7 +7,7 @@ html, body {
 
 body.loginregister {
     font-family: Arial, sans-serif;
-    font-size: 24px;
+    font-size: 1.5rem;
     background-color: #007EA7;
     display: flex;
     flex-direction: column;
@@ -45,13 +45,13 @@ fieldset {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
+    width: 25rem;
     height: 100%;
-    font-size: 40px;
+    font-size: 2.5rem;
     border-style: hidden;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 20px 20px 50px 10px #000000;
+    border-radius: 0.625rem;
+    background-color: #FFFFFF;
+    box-shadow: 1.25rem 1.25rem 3.125rem 0.625rem #000000;
     transition: scale 0.2s ease, box-shadow 0.2s ease;
     z-index: 1;
 }
@@ -65,15 +65,15 @@ fieldset h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
-    height: 100px;
-    width: 375px;
+    height: 6.25rem;
+    width: 23.438rem;
     color: #003459;
     transition-property: scale;
     transition-duration: 0.1s;
     transition-timing-function: ease-in;
-    border-radius: 10px;
+    border-radius: 0.625rem;
 }
 
 .divauth:hover {
@@ -99,7 +99,7 @@ fieldset h2 {
 }
 
 #divemail.open {
-    max-height: 200px;
+    max-height: 12.5rem;
     opacity: 1;
     transition: scale 0.2s, max-height 0.5s ease-in-out, opacity
 }
@@ -112,31 +112,31 @@ fieldset h2 {
 }
 
 #divusername.open{
-    max-height: 200px;
+    max-height: 12.5rem;
     opacity: 1;
     transition: scale 0.2s, max-height 0.5s ease-in-out, opacity
 }
 
 .open{
-    max-height: 200px;
+    max-height: 12.5rem;
     opacity: 1;
     transition: scale 0.2s, max-height 0.5s ease-in, opacity 0.3s ease;
 }
 
 #usermailswitch {
     max-height: 0;
-    max-width: 200px;
+    max-width: 12.5rem;
     opacity: 0;
-    color: black;
-    font-size: 14px;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 10px;
+    color: #000000;
+    font-size: 0.875rem;
+    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
+    border-radius: 0.625rem;
     transition: scale 0.2s, max-height 0.5s ease, opacity 0.4s ease, margin-top 0.5s ease;
 }
 
 #usermailswitch.open{
-    max-height: 40px;
-    margin-top: 20px;
+    max-height: 2.5rem;
+    margin-top: 1.25rem;
     opacity: 1;
     transition: scale 0.2s, max-height 0.5s ease-in, opacity 0.3s ease, margin-top 0.5s ease;
 }
@@ -150,16 +150,16 @@ fieldset h2 {
 }
 
 .auth {
-    background-color: #e8e8e8;
-    height: 45px;
-    width: 300px;
-    font-size: 15px;
+    background-color: #E8E8E8;
+    height: 2.813rem;
+    width: 18.75rem;
+    font-size: 0.938rem;
     font-weight: bold;
     border-style: hidden;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     outline: none;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
 }
 
 #role-table {
@@ -167,24 +167,24 @@ fieldset h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-radius: 10px;
-    width: 160px;
+    border-radius: 0.625rem;
+    width: 10rem;
     padding: 0;
     margin-bottom: 0;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
     scale: 1;
     transition: scale 0.2s ease, background-color 0.1s ease, max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease, margin-bottom 0.5s ease;
 }
 
 #role-table.open{
     max-height: 100%;
-    padding: 20px;
-    margin-bottom: 10px;
+    padding: 1.25rem;
+    margin-bottom: 0.625rem;
     transition: scale 0.2s ease, background-color 0.1s ease, max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease, margin-bottom 0.5s ease;
 }
 
 #role-table:hover{
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2); /* #000000 (black) */
     scale: 0.98;
 }
 
@@ -196,15 +196,15 @@ fieldset h2 {
     max-height: 0;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     cursor: pointer;
     transition: scale 0.2s, max-height 0.5s ease, opacity 0.4s ease, margin-top 0.5s ease, margin-bottom 0.5s ease;
 }
 .roleselection.open{
-    max-height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    max-height: 2.5rem;
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
     transition: scale 0.2s, max-height 0.5s ease, opacity 0.4s ease, margin-top 0.5s ease, margin-bottom 0.5s ease;
 }
 
@@ -215,19 +215,19 @@ fieldset h2 {
 }
 
 .databutt {
-    height: 40px;
-    width: 200px;
+    height: 2.5rem;
+    width: 12.5rem;
     font-weight: bold;
     border-style: hidden;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,0.1);
+    border-radius: 0.625rem;
+    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
     transition-property: background-color, scale;
     transition-duration: 0.2s, 0.1s;
     cursor: pointer;
 }
 
 .databutt:hover {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2); /* #000000 (black) */
     scale: 0.98;
 }
 
@@ -236,11 +236,11 @@ fieldset h2 {
     width: 100%;
     transition-property: background-color, scale;
     transition-duration: 0.2s, 0.1s;
-    border-radius: 10px;
+    border-radius: 0.625rem;
 }
 
 .logo:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.1); /* #FFFFFF (white) */
     scale: 0.98;
 }
 
@@ -255,11 +255,11 @@ fieldset h2 {
 .suggestion {
     margin-top: 10%;
     text-align: center;
-    padding: 20px;
-    font-size: 20px;
+    padding: 1.25rem;
+    font-size: 1.25rem;
     font-weight: bold;
-    border-radius: 10px;
-    color: white;
+    border-radius: 0.625rem;
+    color: #FFFFFF;
     transition-property: background-color, scale;
     transition-duration: 0.2s, 0.1s;
 }
@@ -271,10 +271,10 @@ fieldset h2 {
 
 .logregswitch {
     cursor: pointer;
-    margin-left: 20px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
+    margin-left: 1.25rem;
+    background-color: #FFFFFF;
+    padding: 0.625rem;
+    border-radius: 0.625rem;
     border-width: 0;
     color: #003459;
     scale: 137.5%;
@@ -284,12 +284,12 @@ fieldset h2 {
 }
 
 .logregswitch:hover {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,0.9); /* #FFFFFF (white) */
 }
 
 #error {
     background-color: #003459;
-    color: white;
+    color: #FFFFFF;
     font-weight: bold;;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
