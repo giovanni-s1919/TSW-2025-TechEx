@@ -179,7 +179,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 13rem;
+    margin-top: 4rem;
     padding: 2rem;
     background-color: rgba(0, 168, 232, 0.4);
 }

@@ -38,7 +38,7 @@ const reviews = [
         name: "Alessandro F.",
         avatar: "https://i.pravatar.cc/100?img=52",
         rating: 5,
-        date: "30 Luglio 2025",
+        date: "30 Agosto 2025",
         text: "Componenti perfetti, prezzo competitivo e spedizione puntuale. Consigliato!"
     }
 ];
