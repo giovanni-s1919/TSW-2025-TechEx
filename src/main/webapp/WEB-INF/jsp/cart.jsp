@@ -82,9 +82,10 @@
     </div>
     <div id="cart-confirm">
         <div class="cart-total">
-            <div class="cart-total-field">Totale: </div>
-            <div class="cart-total-value">€89,97</div>
+            <span id="cart-total-field">Totale: </span>
+            <span id="cart-total-value">€89,97</span>
         </div>
+        <button id="cart-proceed">Procedi con l'acquisto</button>
     </div>
 </div>
 
