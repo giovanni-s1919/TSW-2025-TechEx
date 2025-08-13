@@ -46,7 +46,7 @@
       <li><span class="icon"><i class="fa-solid fa-circle-check"></i></span>
           <div class="presentation_content">
             <p class="presentation_menu">Qualità ed affidabilità</p>
-            <p>Solo ricambi originali e di ottima fattura per prestazioni garantite!</p>
+            <p>Solo ricambi di ottima fattura per prestazioni garantite!</p>
           </div>
       </li>
       <li><span class="icon"><i class="fa-solid fa-money-bills"></i></span>
@@ -208,65 +208,85 @@
           </p>
         </label>
         <div id="newsletter_success">Ora sei iscritto alla newsletter!</div>
-        <script>
-          $(document).ready(function(){
-            $(".newsletter_submit").on("click", function (e){
-              e.preventDefault();
-              $("#newsletter_success").fadeIn();
-            });
-          });
-        </script>
         <button type="submit" class="newsletter_submit">ISCRIVITI ALLA NEWSLETTER</button>
       </form>
     </div>
     <div class="newsletter_right">
     </div>
+    <script>
+      $(document).ready(function(){
+        $("form")[0].reset();
+        $(".newsletter_submit").on("click", function (e){
+          e.preventDefault();
+          $("#newsletter_success").fadeIn();
+          $("#newsletter_email").val("");
+          $(".newsletter_categories").prop("checked", false);
+        });
+      });
+    </script>
   </div>
   <div class="faq">
     <h1 class="faq_title">FAQ - Domande frequenti</h1>
-    <div class="faq_item">
-      <button class="faq_question">Quali tipi di pezzi di ricambio posso acquistare?</button>
-      <div class="faq_answer">
-        All'interno del nostro sito troverai ogni tipo di pezzi di ricambio per il tuo cellulare:<br>
-        display, touchscreen, fotocamere, batterie, microfoni, speaker, scocche, jack cuffie e porte di ricarica.
+    <div class="faq_content">
+      <div class="faq_item">
+        <button class="faq_question">Quali tipi di pezzi di ricambio posso acquistare?</button>
+        <div class="faq_answer">
+          All'interno del nostro sito troverai ogni tipo di pezzi di ricambio per il tuo cellulare:<br>
+          display, touchscreen, fotocamere, batterie, microfoni, speaker, scocche e anche diversi tipi di sensori.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">A quali brand sono destinati i pezzi di ricambio in vendita?</button>
+        <div class="faq_answer">
+          TechEx è rivenditore autorizzato di pezzi di ricambio per brand top di gamma come Apple e Samsung,<br>
+          brand di fascia alta come Google Pixel e brand destinati al grande pubblico come Xiaomi, Huawei, Realme, Oppo e Oneplus.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">I pezzi di ricambio sono originali?</button>
+        <div class="faq_answer">
+          Offriamo sia componenti originali al 100% sia componenti compatibili,<br>
+          divisi in tre categorie ("eccellente, "ottimo", "buono") a seconda del grado di qualità, tutti di ottima fattura.<br>
+          Puoi trovare le informazioni di compatibilità e tutti gli altri dettagli nella descrizione del prodotto.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">Quanto tempo impiega la spedizione?</button>
+        <div class="faq_answer">
+          La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.<br>
+          È possibile scegliere tra quattro fornitori differenti: DHL, UPS, SDA e BRT.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">Quali sono i metodi di pagamento accettati?</button>
+        <div class="faq_answer">
+          TechEx permette l'utilizzo di otto metodi di pagamento differenti:<br>
+          VISA, MasterCard, AmericanExpress, Postepay, PayPal, Klarna, Google Pay e Apple Pay.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">Quanto dura il periodo di tempo utile per il reso?</button>
+        <div class="faq_answer">
+          Ogni utente ha a disposizione un periodo di 30 giorni per poter usufruire del diritto di reso,<br>
+          valido a partire dal giorno di consegna del prodotto, per ogni prodotto acquistato.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">Si può usufruire del diritto di rimborso?</button>
+        <div class="faq_answer">
+          È possibile usufruire del diritto di rimborso durante il periodo utile per il reso.<br>
+          Ogni rimborso verrà emesso entro 14 giorni dalla data di consegna del prodotto reso a TechEx.
+        </div>
+      </div>
+      <div class="faq_item">
+        <button class="faq_question">Quanto dura la garanzia?</button>
+        <div class="faq_answer">
+          I pezzi di ricambio venduti da TechEx godono di 2 anni di garanzia, validi a partire dalla data di consegna del prodotto.
+        </div>
       </div>
     </div>
-    <div class="faq_item">
-      <button class="faq_question">A quali brand sono destinati i pezzi di ricambio in vendita?</button>
-      <div class="faq_answer">
-        TechEx è rivenditore autorizzato di pezzi di ricambio per brand top di gamma come Apple e Samsung,<br>
-        brand media-alta gamma come Xiaomi, Huawei, Realme, e Google ed anche brand di gamma medio-bassa come Oppo e Oneplus.
-      </div>
-    </div>
-    <div class="faq_item">
-      <button class="faq_question">I pezzi di ricambio sono originali?</button>
-      <div class="faq_answer">
-        Offriamo sia componenti originali che compatibili di alta qualità. Ogni prodotto è chiaramente etichettato nella descrizione.
-      </div>
-    </div>
-    <div class="faq_item">
-      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
-      <div class="faq_answer">
-        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
-      </div>
-    </div>
-    <div class="faq_item">
-      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
-      <div class="faq_answer">
-        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
-      </div>
-    </div>
-    <div class="faq_item">
-      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
-      <div class="faq_answer">
-        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
-      </div>
-    </div>
-    <div class="faq_item">
-      <button class="faq_question">Quanto tempo impiega la spedizione?</button>
-      <div class="faq_answer">
-        La spedizione standard impiega 2–3 giorni lavorativi. È disponibile anche la consegna express in 24h.
-      </div>
+    <div class="faq_decorations">
+      <img id="faq_image" src="${pageContext.request.contextPath}/images/faqimage.png">
     </div>
   </div>
 </div>
