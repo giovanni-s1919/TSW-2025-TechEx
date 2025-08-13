@@ -160,26 +160,26 @@
       <h1>BRAND</h1>
       <div class="brand_logos">
         <img src="${pageContext.request.contextPath}/images/apple.png" alt="APPLE">
-        <img src="${pageContext.request.contextPath}/images/samsung.jpg" alt="SAMSUNG">
-        <img src="${pageContext.request.contextPath}/images/xiaomi.jpg" alt="XIAOMI">
+        <img src="${pageContext.request.contextPath}/images/samsung.png" alt="SAMSUNG">
+        <img src="${pageContext.request.contextPath}/images/xiaomi.png" alt="XIAOMI">
         <img src="${pageContext.request.contextPath}/images/huawei.png" alt="HUAWEI"><br>
-        <img src="${pageContext.request.contextPath}/images/realme.jpg" alt="REALME">
-        <img src="${pageContext.request.contextPath}/images/googlepixel.jpg" alt="GOOGLE">
-        <img src="${pageContext.request.contextPath}/images/oppo.jpg" alt="OPPO">
+        <img src="${pageContext.request.contextPath}/images/realme.png" alt="REALME">
+        <img src="${pageContext.request.contextPath}/images/googlepixel.png" alt="GOOGLE">
+        <img src="${pageContext.request.contextPath}/images/oppo.png" alt="OPPO">
         <img src="${pageContext.request.contextPath}/images/oneplus.png" alt="ONEPLUS">
       </div>
     </div>
     <div class="certifications_column">
       <h1>CERTIFICAZIONI</h1>
       <div class="certifications_badges">
-        <img src="${pageContext.request.contextPath}/images/ce.jpg" alt="CE">
-        <img src="${pageContext.request.contextPath}/images/iso9001.jpg" alt="ISO 9001">
-        <img src="${pageContext.request.contextPath}/images/rohs.jpg" alt="RoHS">
-        <img src="${pageContext.request.contextPath}/images/ssl.jpg" alt="SSL ENCRYPTION"><br>
-        <img src="${pageContext.request.contextPath}/images/reach.jpg" alt="REACH">
-        <img src="${pageContext.request.contextPath}/images/gdpr.jpg" alt="GDPR CERTIFICATION">
-        <img src="${pageContext.request.contextPath}/images/pci-dss.jpg" alt="PSI DSS">
-        <img src="${pageContext.request.contextPath}/images/iso27001.jpg" alt="ISO 27001">
+        <img src="${pageContext.request.contextPath}/images/ce.png" alt="CE">
+        <img src="${pageContext.request.contextPath}/images/iso9001.png" alt="ISO 9001">
+        <img src="${pageContext.request.contextPath}/images/rohs.png" alt="RoHS">
+        <img src="${pageContext.request.contextPath}/images/ssl.png" alt="SSL ENCRYPTION"><br>
+        <img src="${pageContext.request.contextPath}/images/reach.png" alt="REACH">
+        <img src="${pageContext.request.contextPath}/images/gdpr.png" alt="GDPR CERTIFICATION">
+        <img src="${pageContext.request.contextPath}/images/pci-dss.png" alt="PSI DSS">
+        <img src="${pageContext.request.contextPath}/images/iso27001.png" alt="ISO 27001">
       </div>
     </div>
     <div class="discover_button">
