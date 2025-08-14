@@ -76,6 +76,22 @@ public class CartDAO extends AbstractDAO<CartDTO, Integer>{
 
         return null;
     }
+    public CartDTO findByUserID(Integer userID) throws SQLException {
+        if(userID == null || userID < 1) throw new IllegalArgumentException("UserID must be a positive integer.");
+
+        String sql = "SELECT * FROM Cart WHERE UserID = ?";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return extract(rs);
+                }
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public List<CartDTO> findAll(String order) throws SQLException {

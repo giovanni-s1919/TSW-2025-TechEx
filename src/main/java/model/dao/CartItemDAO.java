@@ -85,6 +85,23 @@ public class CartItemDAO implements GenericDAO<CartItemDTO, Integer>{
         return null;
     }
 
+    public List<CartItemDTO> findByCartID(Integer cartID) throws SQLException {
+        if(cartID == null || cartID < 1) throw new IllegalArgumentException("CartItem ID must be a positive integer.");
+
+        List<CartItemDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM CartItem WHERE CartID = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, cartID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(extractCartItem(rs));
+                }
+            }
+        }
+        return list;
+    }
+
     @Override
     public List<CartItemDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {

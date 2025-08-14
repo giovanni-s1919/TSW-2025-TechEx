@@ -92,7 +92,14 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return extract(rs);
+                    ProductDTO product = new ProductDTO();
+                    product.setId(rs.getInt("ID"));
+                    product.setName(rs.getString("Name"));
+                    product.setDescription(rs.getString("Description"));
+                    product.setBrand(rs.getString("Brand"));
+                    product.setPrice(rs.getFloat("Price"));
+                    product.setCategory(rs.getString("Category"));
+                    product.setStockQuantity(rs.getInt("StockQuantity"));
                 }
             }
         }
