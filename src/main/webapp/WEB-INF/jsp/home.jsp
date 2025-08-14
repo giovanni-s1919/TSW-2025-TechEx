@@ -147,7 +147,7 @@
         <span class="reviews_note">Basata su 4324 recensioni<br>
         <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
         <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Visualizza tutte le recensioni</button></a>
-        <img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_image.png" alt="REVIEWS MAN">
+        <img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_man.png" alt="REVIEWS MAN">
         </span>
       </p>
     </div>
