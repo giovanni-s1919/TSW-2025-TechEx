@@ -180,29 +180,34 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    position: relative;
+    overflow: visible !important;
     margin-top: 4rem;
-    padding: 2rem;
     background-color: rgba(0, 168, 232, 0.4); /* #00A8E8 */
     color: #00171F;
 }
 
 .reviews_left {
     flex: 1;
-    margin-left: 2.5rem;
+    margin-left: 3rem;
+    padding: 1rem;
 }
 
 .reviews_p {
-    padding-top: 0.5rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    margin-top: 0;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
 }
 
 .reviews_value {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 0;
 }
 
 .reviews_note {
+    display: inline-block;
     font-size: 1.2rem;
+    margin-top: 0.2rem;
 }
 
 .reviews_img {
@@ -228,6 +233,18 @@ body {
     background-color: #005B8F;
 }
 
+#reviews_man {
+    position: absolute;
+    max-width: 18.75rem;
+    max-height: 16.25rem;
+    margin: 0;
+    padding: 0;
+    left: 42%;
+    transform: translateX(-50%);
+    top: 16rem;
+    z-index: 10;
+}
+
 .reviews_right {
     display: flex;
     flex-wrap: wrap;
@@ -235,6 +252,7 @@ body {
     justify-content: flex-end;
     flex: 1;
     max-width: 50rem;
+    padding: 1rem 2rem 1rem 0;
 }
 
 .review_card {
@@ -514,6 +532,12 @@ body {
     line-height: 1.5;
 }
 
+.faq_ul {
+    list-style-position: inside;
+    padding-left: 0;
+    margin: 0;
+}
+
 .faq_decorations {
     flex: 0 0 auto;
 }
@@ -522,6 +546,6 @@ body {
     display: block;
     max-width: 31.25rem;
     max-height: 20.875rem;
-    margin-right: 25rem;
+    margin-right: 15rem;
     width: 100%;
 }

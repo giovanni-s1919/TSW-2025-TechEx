@@ -143,11 +143,11 @@
         Solo ricambi di qualità assoluta per riparazioni top!
       </p>
       <p class="reviews_value">
-        TechEx è valutata<br>
-        <b>Eccellente</b><br>
+        TechEx è valutata <b>Eccellente</b><br>
         <span class="reviews_note">Basata su 4324 recensioni<br>
         <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
         <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Visualizza tutte le recensioni</button></a>
+        <img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_image.png" alt="REVIEWS MAN">
         </span>
       </p>
     </div>
@@ -183,7 +183,7 @@
       </div>
     </div>
     <div class="discover_button">
-      <a href="" class="discover">Scopri di più</a>
+      <a href="https://www.youtube.com/watch?v=rJ5e_Bh91SM" class="discover">Scopri di più</a>
     </div>
   </div>
   <div class="newsletter">
@@ -238,8 +238,12 @@
       <div class="faq_item">
         <button class="faq_question">A quali brand sono destinati i pezzi di ricambio in vendita?</button>
         <div class="faq_answer">
-          TechEx è rivenditore autorizzato di pezzi di ricambio per brand top di gamma come Apple e Samsung,<br>
-          brand di fascia alta come Google Pixel e brand destinati al grande pubblico come Xiaomi, Huawei, Realme, Oppo e Oneplus.
+          TechEx è rivenditore autorizzato di pezzi di ricambio per:<br>
+          <ul class="faq_ul">
+            <li>brand top di gamma come Apple e Samsung;</li>
+            <li>brand di fascia alta come Google Pixel;</li>
+            <li>brand destinati al grande pubblico come Xiaomi, Huawei, Realme, Oppo e Oneplus.</li>
+          </ul>
         </div>
       </div>
       <div class="faq_item">
@@ -281,7 +285,8 @@
       <div class="faq_item">
         <button class="faq_question">Quanto dura la garanzia?</button>
         <div class="faq_answer">
-          I pezzi di ricambio venduti da TechEx godono di 2 anni di garanzia, validi a partire dalla data di consegna del prodotto.
+          I pezzi di ricambio venduti da TechEx godono di 2 anni di garanzia,<br>
+          validi a partire dalla data di consegna del prodotto.
         </div>
       </div>
     </div>
