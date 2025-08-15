@@ -292,6 +292,8 @@
     </div>
     <div class="faq_decorations">
       <img id="faq_image" src="${pageContext.request.contextPath}/images/faqimage.png">
+      <img id="faq?_image" src="${pageContext.request.contextPath}/images/faq1.png">
+      <img id="faq!_image" src="${pageContext.request.contextPath}/images/faq2.png">
     </div>
   </div>
 </div>
