@@ -8,6 +8,8 @@ html, body{
 body {
     font-family: Arial, sans-serif;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 #main {
