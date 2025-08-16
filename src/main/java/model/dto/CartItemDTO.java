@@ -7,12 +7,13 @@ public class CartItemDTO implements Serializable {
     private int cartID;
     private int productID;
     private int quantity;
+    private Float price;
 
 
     // Constructors
     public CartItemDTO() {}
 
-    public CartItemDTO(int id, int cartID, int productID, int quantity) {
+    public CartItemDTO(int id, int cartID, int productID, int quantity, Float price) {
         this.id = id;
         this.cartID = cartID;
         this.productID = productID;
@@ -48,6 +49,7 @@ public class CartItemDTO implements Serializable {
                 "cartID: " + cartID + ", " +
                 "productID: " + productID + ", " +
                 "quantity: " + quantity +
+                "price: " + price +
                 " }";
     }
 }

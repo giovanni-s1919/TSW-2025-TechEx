@@ -4,11 +4,11 @@ package model.view;
 import model.dto.ProductDTO;
 import java.io.Serializable;
 
-public class CartDispayItem implements Serializable{
+public class CartDisplayItem implements Serializable{
     private ProductDTO product;
     private int quantity;
 
-    public CartDispayItem(ProductDTO product, int quantity) {
+    public CartDisplayItem(ProductDTO product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
