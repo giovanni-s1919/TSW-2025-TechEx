@@ -41,10 +41,10 @@ public class CartServlet extends HttpServlet {
             return;
         }
         request.setAttribute("role",  user.getRole());
-        DataSource dataSource = (DataSource) request.getServletContext().getAttribute("dataSource");
-        CartDAO  cartDAO = new CartDAO(dataSource);
-        CartItemDAO cartItemDAO = new CartItemDAO(dataSource);
-        ProductDAO productDAO = new ProductDAO(dataSource);
+        DataSource ds = (DataSource) request.getServletContext().getAttribute("datasource");
+        CartDAO  cartDAO = new CartDAO(ds);
+        CartItemDAO cartItemDAO = new CartItemDAO(ds);
+        ProductDAO productDAO = new ProductDAO(ds);
         List<CartDispayItem> cartDispayItems = new ArrayList<>();
         Float cartTotal = 0.0f;
 
