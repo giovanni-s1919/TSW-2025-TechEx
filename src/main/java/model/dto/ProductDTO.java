@@ -4,28 +4,34 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ProductDTO implements Serializable {
+    public enum Grade {
+        ORIGINAL,
+        EXCELLENT,
+        GREAT,
+        GOOD
+    }
+
     private int id;
     private String name;
     private String description;
     private String brand;
     private float price;
     private String category;
-    private String seller;
+    private Grade grade;
     private int stockQuantity;
     private float vat;
-
 
     // Constructors
     public ProductDTO(){}
 
-    public ProductDTO(int id, String name, String description, String brand, float price, String category, String seller, int stockQuantity, float vat) {
+    public ProductDTO(int id, String name, String description, String brand, float price, String category, Grade grade, int stockQuantity, float vat) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.brand = brand;
         this.price = price;
         this.category = category;
-        this.seller = seller;
+        this.grade = grade;
         this.stockQuantity = stockQuantity;
         this.vat = vat;
     }
@@ -44,8 +50,8 @@ public class ProductDTO implements Serializable {
     public void setPrice(float price) {this.price = price;}
     public String getCategory() {return category;}
     public void setCategory(String category) {this.category = category;}
-    public String getSeller() {return seller;}
-    public void setSeller(String seller) {this.seller = seller;}
+    public Grade getGrade() {return grade;}
+    public void setGrade(Grade grade) {this.grade = grade;}
     public int getStockQuantity() { return stockQuantity; }
     public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
     public float getVat() { return vat; }
@@ -64,7 +70,7 @@ public class ProductDTO implements Serializable {
                 Objects.equals(description, that.description) &&
                 Objects.equals(brand, that.brand) &&
                 Objects.equals(category, that.category) &&
-                Objects.equals(seller, that.seller);
+                Objects.equals(grade, that.grade);
     }
 
 
@@ -76,8 +82,8 @@ public class ProductDTO implements Serializable {
                 "description: '" + description + "', " +
                 "brand: '" + brand + "', " +
                 "price: " + price + ", " +
-                "categotoStringry: '" + category + "', " +
-                "seller: '" + seller + "', " +
+                "category: '" + category + "', " +
+                "grade: '" + grade + "', " +
                 "stockQuantity: " + stockQuantity + ", " +
                 "vat: " + vat +
                 " }";
