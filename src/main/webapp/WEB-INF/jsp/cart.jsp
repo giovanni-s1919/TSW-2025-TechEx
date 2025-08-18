@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-<%-- STEP 1: Aggiungi le librerie JSTL in cima alla pagina --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -15,17 +14,13 @@
 <body>
 <%@ include file="fragments/header.jsp" %>
 <div id="main">
-    <%-- STEP 2: Usa un blocco <c:choose> per gestire sia il carrello pieno che quello vuoto --%>
     <c:choose>
-        <%-- CASO A: Il carrello NON è vuoto --%>
         <c:when test="${not empty cartItems}">
             <div id="cart-box">
-                    <%-- STEP 3: Itera sulla lista "cartItems" inviata dal servlet --%>
                 <c:forEach var="item" items="${cartItems}">
                     <div class="cart-element">
-                        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg"> <%-- NB: L'immagine è ancora statica --%>
+                        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg"> <%-- L'immagine è ancora statica --%>
                         <div class="cart-product-details">
-                                <%-- Usa Expression Language ${...} per accedere ai dati dell'oggetto --%>
                             <div class="cart-product-name">${item.product.name}</div>
                             <div class="cart-product-fieldvalue">
                                 <div class="cart-product-field">Brand: </div>
@@ -42,7 +37,6 @@
                             <div class="cart-product-fieldvalue">
                                 <div class="cart-product-field">Prezzo: </div>
                                 <div class="cart-product-value">
-                                        <%-- Usa la libreria <fmt> per formattare il prezzo come valuta --%>
                                     <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
                                 </div>
                             </div>
@@ -57,16 +51,14 @@
                         <fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="€"/>
                     </span>
                 </div>
-                <button id="cart-proceed">Procedi con l'acquisto</button>
+                <button class="cart-proceed">Procedi con l'acquisto</button>
             </div>
         </c:when>
 
-        <%-- CASO B: Il carrello è vuoto --%>
         <c:otherwise>
             <div id="cart-box-empty">
-                <h2>Il tuo carrello è vuoto</h2>
-                <p>Aggiungi prodotti per visualizzarli qui.</p>
-                <a href="${pageContext.request.contextPath}/" class="button">Torna alla Home</a>
+                <div id="cart-box-empty-warning">Il tuo carrello è vuoto</div>
+                <button class="cart-proceed">Torna alla Home</button>
             </div>
         </c:otherwise>
     </c:choose>

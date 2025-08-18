@@ -121,7 +121,7 @@ body {
     font-weight: bold;
 }
 
-#cart-proceed {
+.cart-proceed {
     height: 2.5rem;
     width: 12.5rem;
     margin: 1.25rem;
@@ -134,7 +134,26 @@ body {
     cursor: pointer;
 }
 
-#cart-proceed:hover {
+.cart-proceed:hover {
     background-color: rgba(0,0,0,0.2); /* #000000 (black) */
     scale: 0.98;
+}
+
+#cart-box-empty{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    width: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    padding: 3.125rem;
+    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
+    border-radius: 10px;
+}
+
+#cart-box-empty-warning{
+    font-size: 20px;
+    font-weight: bold;
 }
