@@ -74,7 +74,7 @@ CREATE TABLE OrderItem(
     ItemBrand           VARCHAR(255) NOT NULL,
     ItemPrice           DECIMAL(10, 2) NOT NULL,        -- prezzo senza IVA
     ItemCategory        VARCHAR(255) NOT NULL,
-    ItemSeller          VARCHAR(255) NOT NULL,
+    ItemGrade           ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     ItemQuantity        INT NOT NULL DEFAULT 0 CHECK (ItemQuantity >= 0),
     ItemVAT             DECIMAL(5, 2) DEFAULT 22.00 NOT NULL,          -- es. 22.00 -> 22%
     FOREIGN KEY (OrderID) REFERENCES `Order`(ID)
@@ -87,7 +87,7 @@ CREATE TABLE Product(
     Brand               VARCHAR(255) NOT NULL,
     Price               DECIMAL(10, 2) NOT NULL,        -- prezzo senza IVA
     Category            VARCHAR(255) NOT NULL,
-    Seller              VARCHAR(255) NOT NULL,
+    Grade               ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     StockQuantity       INT NOT NULL DEFAULT 0 CHECK (StockQuantity >= 0),
     VAT                 DECIMAL(5, 2) DEFAULT 22.00 NOT NULL          -- es. 22.00 -> 22%
 );
