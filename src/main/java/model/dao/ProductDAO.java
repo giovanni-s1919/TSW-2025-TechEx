@@ -99,6 +99,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
                     product.setBrand(rs.getString("Brand"));
                     product.setPrice(rs.getFloat("Price"));
                     product.setCategory(rs.getString("Category"));
+                    product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
                     product.setStockQuantity(rs.getInt("StockQuantity"));
                     return product;
                 }

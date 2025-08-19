@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.dto.OrderItemDTO;
+import model.dto.ProductDTO;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -17,7 +18,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
     public void save(OrderItemDTO orderItem) throws SQLException {
         validate(orderItem);
 
-        String sql = "INSERT INTO OrderItem (OrderID, ItemName, ItemDescription, ItemBrand, ItemPrice, ItemCategory, ItemSeller, ItemQuantity, ItemVAT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO OrderItem (OrderID, ItemName, ItemDescription, ItemBrand, ItemPrice, ItemCategory, ItemGrade, ItemQuantity, ItemVAT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -27,7 +28,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
             ps.setString(4, orderItem.getItemBrand());
             ps.setFloat(5, orderItem.getItemPrice());
             ps.setString(6, orderItem.getItemCategory());
-            ps.setString(7, orderItem.getItemSeller());
+            ps.setString(7, orderItem.getItemGrade().name());
             ps.setInt(8, orderItem.getItemQuantity());
             ps.setFloat(9, orderItem.getItemVAT());
 
@@ -48,7 +49,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
             throw new IllegalArgumentException("OrderItem ID must be positive for update operations.");
         }
 
-        String sql = "UPDATE OrderItem SET OrderID = ?, ItemName = ?, ItemDescription = ?, ItemBrand = ?, ItemPrice = ?, ItemCategory = ?, ItemSeller = ?, ItemQuantity = ?, ItemVAT = ? WHERE ID = ?";
+        String sql = "UPDATE OrderItem SET OrderID = ?, ItemName = ?, ItemDescription = ?, ItemBrand = ?, ItemPrice = ?, ItemCategory = ?, ItemGrade = ?, ItemQuantity = ?, ItemVAT = ? WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -58,7 +59,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
             ps.setString(4, orderItem.getItemBrand());
             ps.setFloat(5, orderItem.getItemPrice());
             ps.setString(6, orderItem.getItemCategory());
-            ps.setString(7, orderItem.getItemSeller());
+            ps.setString(7, orderItem.getItemGrade().name());
             ps.setInt(8, orderItem.getItemQuantity());
             ps.setFloat(9, orderItem.getItemVAT());
             ps.setInt(10, orderItem.getId());
@@ -123,7 +124,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        return List.of("ID", "OrderID", "ItemName", "ItemDescription", "ItemBrand", "ItemPrice", "ItemCategory", "ItemSeller", "ItemQuantity", "ItemVAT");
+        return List.of("ID", "OrderID", "ItemName", "ItemDescription", "ItemBrand", "ItemPrice", "ItemCategory", "ItemGrade", "ItemQuantity", "ItemVAT");
     }
 
 
@@ -147,8 +148,8 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
          if (orderItem.getItemCategory() == null || orderItem.getItemCategory().trim().isEmpty()) {
              throw new IllegalArgumentException("ItemCategory cannot be null or empty.");
          }
-         if (orderItem.getItemSeller() == null || orderItem.getItemSeller().trim().isEmpty()) {
-             throw new IllegalArgumentException("ItemSeller cannot be null or empty.");
+         if (orderItem.getItemGrade() == null) {
+             throw new IllegalArgumentException("ItemGrade cannot be null or empty.");
          }
         if (orderItem.getItemPrice() < 0) { // Il prezzo non può essere negativo
             throw new IllegalArgumentException("ItemPrice cannot be negative.");
@@ -171,7 +172,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
         orderItem.setItemBrand(rs.getString("ItemBrand"));
         orderItem.setItemPrice(rs.getFloat("ItemPrice"));
         orderItem.setItemCategory(rs.getString("ItemCategory"));
-        orderItem.setItemSeller(rs.getString("ItemSeller"));
+        orderItem.setItemGrade(OrderItemDTO.Grade.valueOf(rs.getString("Grade")));
         orderItem.setItemQuantity(rs.getInt("ItemQuantity"));
         orderItem.setItemVAT(rs.getFloat("ItemVAT"));
         return orderItem;

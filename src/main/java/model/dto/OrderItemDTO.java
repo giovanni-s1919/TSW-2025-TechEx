@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class OrderItemDTO implements Serializable {
+    public enum Grade {
+        ORIGINAL,
+        EXCELLENT,
+        GREAT,
+        GOOD
+    }
+
     private int id;
     private int orderID;
     private String itemName;
@@ -11,7 +18,7 @@ public class OrderItemDTO implements Serializable {
     private String itemBrand;
     private float itemPrice;
     private String itemCategory;
-    private String itemSeller;
+    private Grade itemGrade;
     private int itemQuantity;
     private float itemVAT;
 
@@ -19,7 +26,7 @@ public class OrderItemDTO implements Serializable {
     // Constructors
     public OrderItemDTO(){}
 
-    public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, String itemCategory, String itemSeller, int itemQuantity, float itemVAT) {
+    public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, String itemCategory, Grade itemGrade, int itemQuantity, float itemVAT) {
         this.id = id;
         this.orderID = orderID;
         this.itemName = itemName;
@@ -27,7 +34,7 @@ public class OrderItemDTO implements Serializable {
         this.itemBrand = itemBrand;
         this.itemPrice = itemPrice;
         this.itemCategory = itemCategory;
-        this.itemSeller = itemSeller;
+        this.itemGrade = itemGrade;
         this.itemQuantity = itemQuantity;
         this.itemVAT = itemVAT;
     }
@@ -48,8 +55,8 @@ public class OrderItemDTO implements Serializable {
     public void setItemPrice(float itemPrice){this.itemPrice = itemPrice;}
     public String getItemCategory(){return itemCategory;}
     public void setItemCategory(String itemCategory){this.itemCategory = itemCategory;}
-    public String getItemSeller(){return itemSeller;}
-    public void setItemSeller(String itemSeller){this.itemSeller = itemSeller;}
+    public Grade getItemGrade(){return itemGrade;}
+    public void setItemGrade(Grade itemGrade){this.itemGrade = itemGrade;}
     public int getItemQuantity(){return itemQuantity;}
     public void setItemQuantity(int itemQuantity){this.itemQuantity = itemQuantity;}
     public float getItemVAT(){return itemVAT;}
@@ -68,7 +75,7 @@ public class OrderItemDTO implements Serializable {
                 && Objects.equals(itemDescription, that.itemDescription)
                 && Objects.equals(itemBrand, that.itemBrand)
                 && Objects.equals(itemCategory, that.itemCategory)
-                && Objects.equals(itemSeller, that.itemSeller)
+                && Objects.equals(itemGrade, that.itemGrade)
                 && itemQuantity == that.itemQuantity
                 && Objects.equals(itemVAT, that.itemVAT);
     }
@@ -83,7 +90,7 @@ public class OrderItemDTO implements Serializable {
                 "itemBrand: '" + itemBrand + "', " +
                 "itemPrice: " + itemPrice + ", " +
                 "itemCategory: '" + itemCategory + "', " +
-                "itemSeller: '" + itemSeller + "', " +
+                "itemGrade: '" + itemGrade + "', " +
                 "itemQuantity: " + itemQuantity + ", " +
                 "itemVAT: " + itemVAT +
                 " }";
