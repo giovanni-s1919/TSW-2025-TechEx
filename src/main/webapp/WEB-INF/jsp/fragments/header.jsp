@@ -18,6 +18,7 @@
                         <li>Batterie</li>
                         <li>Microfoni & Speaker</li>
                         <li>Scocche</li>
+                        <li>Tasti</li>
                         <li>Sensori</li>
                     </ul>
                 </li>
