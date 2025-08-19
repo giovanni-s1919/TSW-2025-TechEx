@@ -4,6 +4,17 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ProductDTO implements Serializable {
+    public enum Category {
+        DISPLAY,
+        CAMERA,
+        BATTERY,
+        MICROPHONE,
+        SPEAKER,
+        CASE,
+        BUTTON,
+        SENSOR
+    }
+
     public enum Grade {
         ORIGINAL,
         EXCELLENT,
@@ -16,7 +27,7 @@ public class ProductDTO implements Serializable {
     private String description;
     private String brand;
     private float price;
-    private String category;
+    private Category category;
     private Grade grade;
     private int stockQuantity;
     private float vat;
@@ -24,7 +35,7 @@ public class ProductDTO implements Serializable {
     // Constructors
     public ProductDTO(){}
 
-    public ProductDTO(int id, String name, String description, String brand, float price, String category, Grade grade, int stockQuantity, float vat) {
+    public ProductDTO(int id, String name, String description, String brand, float price, Category category, Grade grade, int stockQuantity, float vat) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,8 +59,8 @@ public class ProductDTO implements Serializable {
     public void setBrand(String brand) {this.brand = brand;}
     public float getPrice() {return price;}
     public void setPrice(float price) {this.price = price;}
-    public String getCategory() {return category;}
-    public void setCategory(String category) {this.category = category;}
+    public Category getCategory() {return category;}
+    public void setCategory(Category category) {this.category = category;}
     public Grade getGrade() {return grade;}
     public void setGrade(Grade grade) {this.grade = grade;}
     public int getStockQuantity() { return stockQuantity; }

@@ -4,6 +4,17 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class OrderItemDTO implements Serializable {
+    public enum Category {
+        DISPLAY,
+        CAMERA,
+        BATTERY,
+        MICROPHONE,
+        SPEAKER,
+        CASE,
+        BUTTON,
+        SENSOR
+    }
+
     public enum Grade {
         ORIGINAL,
         EXCELLENT,
@@ -17,7 +28,7 @@ public class OrderItemDTO implements Serializable {
     private String itemDescription;
     private String itemBrand;
     private float itemPrice;
-    private String itemCategory;
+    private Category itemCategory;
     private Grade itemGrade;
     private int itemQuantity;
     private float itemVAT;
@@ -26,7 +37,7 @@ public class OrderItemDTO implements Serializable {
     // Constructors
     public OrderItemDTO(){}
 
-    public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, String itemCategory, Grade itemGrade, int itemQuantity, float itemVAT) {
+    public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, Category itemCategory, Grade itemGrade, int itemQuantity, float itemVAT) {
         this.id = id;
         this.orderID = orderID;
         this.itemName = itemName;
@@ -53,8 +64,8 @@ public class OrderItemDTO implements Serializable {
     public void setItemBrand(String itemBrand){this.itemBrand = itemBrand;}
     public float getItemPrice(){return itemPrice;}
     public void setItemPrice(float itemPrice){this.itemPrice = itemPrice;}
-    public String getItemCategory(){return itemCategory;}
-    public void setItemCategory(String itemCategory){this.itemCategory = itemCategory;}
+    public Category getItemCategory(){return itemCategory;}
+    public void setItemCategory(Category itemCategory){this.itemCategory = itemCategory;}
     public Grade getItemGrade(){return itemGrade;}
     public void setItemGrade(Grade itemGrade){this.itemGrade = itemGrade;}
     public int getItemQuantity(){return itemQuantity;}

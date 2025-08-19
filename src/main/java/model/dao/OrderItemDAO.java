@@ -27,7 +27,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
             ps.setString(3, orderItem.getItemDescription());
             ps.setString(4, orderItem.getItemBrand());
             ps.setFloat(5, orderItem.getItemPrice());
-            ps.setString(6, orderItem.getItemCategory());
+            ps.setString(6, orderItem.getItemCategory().name());
             ps.setString(7, orderItem.getItemGrade().name());
             ps.setInt(8, orderItem.getItemQuantity());
             ps.setFloat(9, orderItem.getItemVAT());
@@ -58,7 +58,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
             ps.setString(3, orderItem.getItemDescription());
             ps.setString(4, orderItem.getItemBrand());
             ps.setFloat(5, orderItem.getItemPrice());
-            ps.setString(6, orderItem.getItemCategory());
+            ps.setString(6, orderItem.getItemCategory().name());
             ps.setString(7, orderItem.getItemGrade().name());
             ps.setInt(8, orderItem.getItemQuantity());
             ps.setFloat(9, orderItem.getItemVAT());
@@ -145,7 +145,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
          if (orderItem.getItemBrand() == null || orderItem.getItemBrand().trim().isEmpty()) {
              throw new IllegalArgumentException("ItemBrand cannot be null or empty.");
          }
-         if (orderItem.getItemCategory() == null || orderItem.getItemCategory().trim().isEmpty()) {
+         if (orderItem.getItemCategory() == null) {
              throw new IllegalArgumentException("ItemCategory cannot be null or empty.");
          }
          if (orderItem.getItemGrade() == null) {
@@ -171,7 +171,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
         orderItem.setItemDescription(rs.getString("ItemDescription"));
         orderItem.setItemBrand(rs.getString("ItemBrand"));
         orderItem.setItemPrice(rs.getFloat("ItemPrice"));
-        orderItem.setItemCategory(rs.getString("ItemCategory"));
+        orderItem.setItemCategory(OrderItemDTO.Category.valueOf(rs.getString("ItemCategory")));
         orderItem.setItemGrade(OrderItemDTO.Grade.valueOf(rs.getString("Grade")));
         orderItem.setItemQuantity(rs.getInt("ItemQuantity"));
         orderItem.setItemVAT(rs.getFloat("ItemVAT"));

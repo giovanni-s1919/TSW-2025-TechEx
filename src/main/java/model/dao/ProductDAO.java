@@ -24,7 +24,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
             ps.setString(2, product.getDescription());
             ps.setString(3, product.getBrand());
             ps.setFloat(4, product.getPrice()); // DECIMAL(10, 2) in DB, float in Java
-            ps.setString(5, product.getCategory());
+            ps.setString(5, product.getCategory().name());
             ps.setString(6, product.getGrade().name());
             ps.setInt(7, product.getStockQuantity());
             ps.setFloat(8, product.getVat()); // DECIMAL(5, 2) in DB, float in Java
@@ -54,7 +54,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
             ps.setString(2, product.getDescription());
             ps.setString(3, product.getBrand());
             ps.setFloat(4, product.getPrice());
-            ps.setString(5, product.getCategory());
+            ps.setString(5, product.getCategory().name());
             ps.setString(6, product.getGrade().name());
             ps.setInt(7, product.getStockQuantity());
             ps.setFloat(8, product.getVat());
@@ -98,7 +98,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
                     product.setDescription(rs.getString("Description"));
                     product.setBrand(rs.getString("Brand"));
                     product.setPrice(rs.getFloat("Price"));
-                    product.setCategory(rs.getString("Category"));
+                    product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category")));
                     product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
                     product.setStockQuantity(rs.getInt("StockQuantity"));
                     return product;
@@ -187,7 +187,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         if (product.getPrice() < 0) { // Il prezzo non può essere negativo
             throw new IllegalArgumentException("Price cannot be negative.");
         }
-        if (product.getCategory() == null || product.getCategory().trim().isEmpty()) {
+        if (product.getCategory() == null) {
             throw new IllegalArgumentException("Category cannot be null or empty.");
         }
         if (product.getGrade() == null) {
@@ -210,7 +210,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         product.setDescription(rs.getString("Description"));
         product.setBrand(rs.getString("Brand"));
         product.setPrice(rs.getFloat("Price")); // DECIMAL(10, 2) in DB, float in Java
-        product.setCategory(rs.getString("Category"));
+        product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category")));
         product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
         product.setStockQuantity(rs.getInt("StockQuantity"));
         product.setVat(rs.getFloat("VAT")); // DECIMAL(5, 2) in DB, float in Java

@@ -73,7 +73,7 @@ CREATE TABLE OrderItem(
     ItemDescription     TEXT,
     ItemBrand           VARCHAR(255) NOT NULL,
     ItemPrice           DECIMAL(10, 2) NOT NULL,        -- prezzo senza IVA
-    ItemCategory        VARCHAR(255) NOT NULL,
+    ItemCategory        ENUM('Display', 'Camera', 'Battery', 'Microphone', 'Speaker', 'Case', 'Button', 'Sensor') NOT NULL,
     ItemGrade           ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     ItemQuantity        INT NOT NULL DEFAULT 0 CHECK (ItemQuantity >= 0),
     ItemVAT             DECIMAL(5, 2) DEFAULT 22.00 NOT NULL,          -- es. 22.00 -> 22%
@@ -86,7 +86,7 @@ CREATE TABLE Product(
     Description         TEXT,
     Brand               VARCHAR(255) NOT NULL,
     Price               DECIMAL(10, 2) NOT NULL,        -- prezzo senza IVA
-    Category            VARCHAR(255) NOT NULL,
+    Category            ENUM('Display', 'Camera', 'Battery', 'Microphone', 'Speaker', 'Case', 'Button', 'Sensor') NOT NULL,
     Grade               ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     StockQuantity       INT NOT NULL DEFAULT 0 CHECK (StockQuantity >= 0),
     VAT                 DECIMAL(5, 2) DEFAULT 22.00 NOT NULL          -- es. 22.00 -> 22%
