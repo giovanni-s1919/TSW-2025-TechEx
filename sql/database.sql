@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS OrderAddress(
     AddressType         ENUM('Shipping', 'Billing') NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Order(
+CREATE TABLE IF NOT EXISTS `Order`(
     ID                  INT AUTO_INCREMENT PRIMARY KEY,
     UserID              INT NOT NULL,
     OrderDate           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS OrderItem(
     ItemGrade           ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     ItemQuantity        INT NOT NULL DEFAULT 0 CHECK (ItemQuantity >= 0),
     ItemVAT             DECIMAL(5, 2) DEFAULT 22.00 NOT NULL,          -- es. 22.00 -> 22%
-    FOREIGN KEY (OrderID) REFERENCES Order(ID)
+    FOREIGN KEY (OrderID) REFERENCES `Order`(ID)
 );
 
 CREATE TABLE IF NOT EXISTS Product(
