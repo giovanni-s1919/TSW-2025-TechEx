@@ -122,16 +122,32 @@
                 <fieldset>
                     <h2 id="ftitle" style="font-size: 100%;">Login</h2>
 
+                    <div class="divauth reg" id="divname">
+                        <label for="name" class="hiddenlabel" hidden></label>
+                        <input type="text" id="name" class="auth" name="name" placeholder="Nome">
+                    </div>
+                    <div class="divauth reg" id="divsurname">
+                        <label for="surname" class="hiddenlabel" hidden></label>
+                        <input type="text" id="surname" class="auth" name="surname" placeholder="Cognome">
+                    </div>
+                    <div class="divauth reg" id="divdate">
+                        <label for="birthdate" class="hiddenlabel" hidden></label>
+                        <input type="date" class="auth" name="birthdate">
+                    </div>
                     <div class="divauth reg" id="divusername">
-                        <label for="username" class="hiddenlabel" hidden>Username: </label>
+                        <label for="username" class="hiddenlabel" hidden></label>
                         <input type="text" id="username" class="auth" name="username" placeholder="Username">
                     </div>
                     <div class="divauth open" id="divemail">
-                        <label for="loginemail" class="hiddenlabel" hidden>Email: </label>
+                        <label for="loginemail" class="hiddenlabel" hidden></label>
                         <input type="email" id="loginemail" name="email" required class="auth" placeholder="Email">
                     </div>
+                    <div class="divauth reg" id="divphone">
+                        <label for="phonenumber" class="hiddenlabel" hidden></label>
+                        <input type="tel" name="phonenumber" class="auth" placeholder="Numero di telefono">
+                    </div>
                     <div class="divauth">
-                        <label for="loginpassword" class="hiddenlabel" hidden>Password: </label>
+                        <label for="loginpassword" class="hiddenlabel" hidden></label>
                         <input type="password" id="loginpassword" name="password" required class="auth" placeholder="Password">
                     </div>
                     <div class="divauth reg" id="pwdcnf">

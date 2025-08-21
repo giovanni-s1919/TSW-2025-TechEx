@@ -45,7 +45,7 @@ fieldset {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 25rem;
+    width: 30rem;
     height: 100%;
     font-size: 2.5rem;
     border-style: hidden;
@@ -90,6 +90,21 @@ fieldset h2 {
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.4s ease;
 }
+
+/*#divnamesurname{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*    width: 23.438rem;*/
+/*}*/
+
+/*#name{*/
+/*    width: 85%;*/
+/*}*/
+
+/*#surname{*/
+/*    width: 85%;*/
+/*}*/
 
 #divemail {
     max-height: 0;
@@ -152,7 +167,8 @@ fieldset h2 {
 .auth {
     background-color: #E8E8E8;
     height: 2.813rem;
-    width: 18.75rem;
+    /*width: 18.75rem;*/
+    width: 100%;
     font-size: 0.938rem;
     font-weight: bold;
     border-style: hidden;
