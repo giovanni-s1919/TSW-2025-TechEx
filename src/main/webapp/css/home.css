@@ -47,17 +47,64 @@ body {
 
 .catalog {
     padding-top: 2.5rem;
-    margin-left:  4.8rem;
     border-bottom: 1px solid #E1E8ED;
+    padding-bottom: 4rem;
+}
+
+#useful_print {
+    margin:  1.5rem 4.8rem 0 4.8rem;
 }
 
 .products {
     color: #00A8E8;
+    margin:  0 4.8rem 0 4.8rem;
 }
 
-.waitingfordatabase {
-    margin-left: 0.8rem;
-    color: #000000;
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 13.75rem);
+    gap: 2.5rem;
+    justify-content: flex-start;
+    margin:  1.5rem 4.8rem 0 4.8rem;
+}
+
+.product-card {
+    width: 13.75rem;
+    height: 20rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 0.313rem;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-0.313rem);
+}
+
+.product-img {
+    max-width: 100%;
+    height: 11.25rem;
+    object-fit: contain;
+    margin-bottom: 0.625rem;
+}
+
+.product-name {
+    font-size: 1.1em;
+    margin: 0.313rem 0;
+    color: #003459;
+}
+
+.product-grade {
+    font-size: 0.9em;
+    color: #003459;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #00A8E8;
+    margin: 0.313rem 0;
 }
 
 .presentation {
@@ -125,10 +172,6 @@ body {
 .the_best {
     color: #00A8E8;
     text-align: center;
-}
-
-.waiting {
-    margin-left: 4.8rem;
 }
 
 .guides {

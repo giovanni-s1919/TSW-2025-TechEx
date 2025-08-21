@@ -19,25 +19,39 @@
   </div>
   <div class="catalog">
     <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
-    <p class="waitingfordatabase">
-      porcodio<br>
-      diocane<br>
-      luis dici dio cane<br>
-      mannaggia la madonna<br>
-      ma grazie al cazzo?<br>
-      è ripartito, PORCODDIO, DIO TARTUFO<br>
-      (si sto scrivendo queste stronzate per simulare lo spazio che verrà occupato dalle schede dei prodotti)<br>
-      ubriaco di merda mettila in mezzo<br>
-      the game<br>
-      ah certo, m'ha spostato Ramos asoaskasewui<br>
-      meow<br>
-      meow<br>
-      meow<br>
-      meow<br>
-      sybau<br>
-      Nikolas<br>
-      La prossima è una stampa utile, lasciala<br>
-      <%=request.getAttribute("role")%>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
+            <h1 class="product-name">Display iPhone 13</h1>
+            <p class="product-grade">Eccellente</p>
+            <p class="product-price">149,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Batteria Samsung S21</h1>
+            <p class="product-grade">Originale</p>
+            <p class="product-price">39,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
+            <p class="product-grade">Ottimo</p>
+            <p class="product-price">89,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Sensore Google Pixel 9</h1>
+            <p class="product-grade">Originale</p>
+            <p class="product-price">59,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
+            <p class="product-grade">Buono</p>
+            <p class="product-price">4,99€</p>
+        </div>
+    </div>
+    <p id="useful_print"><%=request.getAttribute("role")%>
     </p>
   </div>
   <div class="presentation">
@@ -79,24 +93,38 @@
   <div class="top_articles">
     <h1 class="top_h1">IL TOP DEL TOP</h1>
     <p class="the_best">I migliori articoli presenti nel nostro catalogo.<br>Qualità ultra per i clienti più esigenti.</p><br>
-    <p class="waiting">
-      dobbiamo muoverci a fa sto cazzo di database<br>
-      mi sono rotto il cazzo di usare ste cagate temporanee<br>
-      procratalamasion<br>
-      gne gne gne E VABBENE HO SCRITTO CIAO, PAUSA PRANZO?!<br>
-      MA COME HA FATTO?!<br>
-      chiedilo all'arciduca Ferdinando<br>
-      TU MI HAI BARATTATO PER UN NICHELINO?????!!!!!<br>
-      come, che cosa vuol dire girare una levet-MANNAGGIA QUEL MORTO DE OIIIIIIIDDDDDD<br>
-      denis 3 metri sotto terra<br>
-      è in vantaggio Desailly<br>
-      ALLORA LA PROSSIMA VOLTA TI CONDISCO QUEL RISO CON IL-<br>
-      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA NON LO POSSO DIREH<br>
-      inflazione<br>
-      cremona capitale<br>
-      tuo padre in realtà è il duce<br>
-      meow<br>
-    </p>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
+            <h1 class="product-name">Display iPhone 13</h1>
+            <p class="product-grade">Eccellente</p>
+            <p class="product-price">149,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Batteria Samsung S21</h1>
+            <p class="product-grade">Originale</p>
+            <p class="product-price">39,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
+            <p class="product-grade">Ottimo</p>
+            <p class="product-price">89,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Sensore Google Pixel 9</h1>
+            <p class="product-grade">Originale</p>
+            <p class="product-price">59,99€</p>
+        </div>
+        <div class="product-card">
+            <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+            <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
+            <p class="product-grade">Buono</p>
+            <p class="product-price">4,99€</p>
+        </div>
+    </div>
   </div>
   <div class="guides">
     <div class="guides_box">
@@ -115,25 +143,38 @@
   <div class="most_sales">
   <h1 id="mvp">I PIÙ VENDUTI</h1>
   <p>I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
-  <p class="waitingfordatabase">
-    <b>scrivi dinuovo quella cagata sul sushi e ti ammazzo la famiglia davanti ai tuoi occhi</b><br>
-    ti è piaciuto fare il coglione col sushi? bene, ora subisci<br>
-    the game<br>
-    never gonna give you up, never gonna let you down<br>
-    66<br>
-    the game<br>
-    never gonna give you up, never gonna let you down<br>
-    66<br>
-    the game<br>
-    never gonna give you up, never gonna let you down<br>
-    66<br>
-    the game<br>
-    never gonna give you up, never gonna let you down<br>
-    66<br>
-    the game<br>
-    never gonna give you up, never gonna let you down<br>
-    66<br>
-  </p>
+  <div class="products-grid">
+      <div class="product-card">
+          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
+          <h1 class="product-name">Display iPhone 13</h1>
+          <p class="product-grade">Eccellente</p>
+          <p class="product-price">149,99€</p>
+      </div>
+      <div class="product-card">
+          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+          <h1 class="product-name">Batteria Samsung S21</h1>
+          <p class="product-grade">Originale</p>
+          <p class="product-price">39,99€</p>
+      </div>
+      <div class="product-card">
+          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+          <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
+          <p class="product-grade">Ottimo</p>
+          <p class="product-price">89,99€</p>
+      </div>
+      <div class="product-card">
+          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+          <h1 class="product-name">Sensore Google Pixel 9</h1>
+          <p class="product-grade">Originale</p>
+          <p class="product-price">59,99€</p>
+      </div>
+      <div class="product-card">
+          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+          <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
+          <p class="product-grade">Buono</p>
+          <p class="product-price">4,99€</p>
+      </div>
+    </div>
   </div>
   <div class="reviews">
     <div class="reviews_left">
