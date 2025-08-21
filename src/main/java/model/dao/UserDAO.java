@@ -18,13 +18,17 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
     public void save(UserDTO user) throws SQLException {
         validate(user);
 
-        String sql = "INSERT INTO User (Username, Email, PasswordHash, Role) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO User (Username, Email, PasswordHash, Name, Surname, BirthDate, Phone, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPasswordHash());
-            ps.setString(4, user.getRole().name());
+            ps.setString(4, user.getName());
+            ps.setString(5, user.getSurname());
+            ps.setDate(6, Date.valueOf(user.getBirthDate()));
+            ps.setString(7, user.getPhone());
+            ps.setString(8, user.getRole().name());
 
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
@@ -41,14 +45,18 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
         validate(user);
         if(user.getId() < 1) throw new  IllegalArgumentException("User ID must be positive for update operations.");
 
-        String sql = "UPDATE `User` SET Username = ?, Email = ?, PasswordHash = ?, Role = ? WHERE ID = ?";
+        String sql = "UPDATE `User` SET Username=?, Email=?, PasswordHash=?, Name=?, Surname=?, BirthDate=?, Phone=?, Role=? WHERE ID=?";
         try (Connection connection = dataSource.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPasswordHash());
-            ps.setString(4, user.getRole().name());
-            ps.setInt(5, user.getId());
+            ps.setString(4, user.getName());
+            ps.setString(5, user.getSurname());
+            ps.setDate(6, Date.valueOf(user.getBirthDate()));
+            ps.setString(7, user.getPhone());
+            ps.setString(8, user.getRole().name());
+            ps.setInt(9, user.getId());
             ps.executeUpdate();
         }
     }
@@ -135,7 +143,7 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        return List.of("ID", "Username", "Email", "PasswordHash", "Role");
+        return List.of("ID", "Username", "Email", "PasswordHash", "Name", "Surname", "BirthDate", "Phone", "Role");
     }
 
 
@@ -145,8 +153,19 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
                 user.getUsername() == null || user.getUsername().trim().isEmpty() ||
                 user.getEmail() == null || user.getEmail().trim().isEmpty() ||
                 user.getPasswordHash() == null || user.getPasswordHash().trim().isEmpty() ||
+                user.getName() == null || user.getName().trim().isEmpty() ||
+                user.getSurname() == null || user.getSurname().trim().isEmpty() ||
+                user.getBirthDate() == null ||
                 user.getRole() == null) {
             throw new IllegalArgumentException("Some required User fields are null or invalid.");
+        }
+        if (user.getPhone() != null) {
+            String phone = user.getPhone();
+            if (phone.length() > 15 || !phone.matches("^[0-9+\\- ]+$")) {
+                throw new IllegalArgumentException(
+                        "Phone must be max 15 characters and contain only digits, spaces, '+' or '-'."
+                );
+            }
         }
     }
 
@@ -157,8 +176,11 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
         user.setUsername(rs.getString("Username"));
         user.setEmail(rs.getString("Email"));
         user.setPasswordHash(rs.getString("PasswordHash"));
+        user.setName(rs.getString("Name"));
+        user.setSurname(rs.getString("Surname"));
+        user.setBirthDate(rs.getDate("BirthDate").toLocalDate());
+        user.setPhone(rs.getString("Phone"));
         user.setRole(UserDTO.Role.valueOf(rs.getString("Role")));
-
         return user;
     }
 }

@@ -18,8 +18,9 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
     public void save(AddressDTO address) throws SQLException {
         validate(address);
 
-        String sql = "INSERT INTO Address (Street, AdditionalInfo, City, PostalCode, Region, Country) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Address " +
+                     "(Street, AdditionalInfo, City, PostalCode, Region, Country, Name, Surname, Phone, AddressType) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = dataSource.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -29,7 +30,10 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
             ps.setString(4, address.getPostalCode());
             ps.setString(5, address.getRegion());
             ps.setString(6, address.getCountry());
-
+            ps.setString(7, address.getName());
+            ps.setString(8, address.getSurname());
+            ps.setString(9, address.getPhone());
+            ps.setString(10, address.getAddressType().name());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -44,19 +48,20 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
         validate(address);
         if(address.getId() < 1) throw new IllegalArgumentException("Address ID must be positive for update operations.");
 
-        String sql = "UPDATE Address SET Street = ?, AdditionalInfo = ?, City = ?, PostalCode = ?, Region = ?, Country = ? " +
-                "WHERE ID = ?";
+        String sql = "UPDATE Address SET Street=?, AdditionalInfo=?, City=?, PostalCode=?, Region=?, Country=?, Name=?, Surname=?, Phone=?, AddressType=? WHERE ID=?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
             ps.setString(1, address.getStreet());
             ps.setString(2, address.getAdditionalInfo());
             ps.setString(3, address.getCity());
             ps.setString(4, address.getPostalCode());
             ps.setString(5, address.getRegion());
             ps.setString(6, address.getCountry());
-            ps.setInt(7, address.getId());
-
+            ps.setString(7, address.getName());
+            ps.setString(8, address.getSurname());
+            ps.setString(9, address.getPhone());
+            ps.setString(10, address.getAddressType().name());
+            ps.setInt(11, address.getId());
             ps.executeUpdate();
         }
     }
@@ -101,7 +106,7 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
         }
 
         List<AddressDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM Address WHERE " + order;
+        String sql = "SELECT * FROM Address ORDER BY " + order;
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -116,7 +121,7 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        return List.of("ID", "Street", "AdditionalInfo", "City", "PostalCode", "Region", "Country");
+        return List.of("ID", "Street", "AdditionalInfo", "City", "PostalCode", "Region", "Country", "Name", "Surname", "Phone", "AddressType");
     }
 
 
@@ -130,6 +135,10 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
         address.setPostalCode(rs.getString("PostalCode"));
         address.setRegion(rs.getString("Region"));
         address.setCountry(rs.getString("Country"));
+        address.setName(rs.getString("Name"));
+        address.setSurname(rs.getString("Surname"));
+        address.setPhone(rs.getString("Phone"));
+        address.setAddressType(AddressDTO.AddressType.valueOf(rs.getString("AddressType")));
         return address;
     }
 
@@ -139,8 +148,15 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
                 address.getStreet() == null || address.getStreet().trim().isEmpty() ||
                 address.getCity() == null || address.getCity().trim().isEmpty() ||
                 address.getPostalCode() == null || address.getPostalCode().trim().isEmpty() ||
-                address.getCountry() == null || address.getCountry().trim().isEmpty()) {
+                address.getCountry() == null || address.getCountry().trim().isEmpty() ||
+                address.getName() == null || address.getName().trim().isEmpty() ||
+                address.getSurname() == null || address.getSurname().trim().isEmpty() ||
+                address.getAddressType() == null) {
             throw new IllegalArgumentException("Some required address fields are null or empty.");
+        }
+        if (address.getPhone() != null &&
+                (address.getPhone().length() > 15 || !address.getPhone().matches("^[0-9+\\- ]+$"))) {
+            throw new IllegalArgumentException("Phone must be max 15 characters and contain only digits, spaces, '+' or '-'.");
         }
     }
 }

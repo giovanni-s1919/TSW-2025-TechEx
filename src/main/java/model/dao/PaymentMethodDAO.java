@@ -153,8 +153,8 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
             throw new IllegalArgumentException("Number cannot be null or empty.");
         }
         // La lunghezza del numero è VARCHAR(4) nel DB, quindi un controllo aggiuntivo può essere utile
-        if (paymentMethod.getNumber().length() != 4) {
-            throw new IllegalArgumentException("Number must be exactly 4 characters long.");
+        if (paymentMethod.getNumber().length() != 19) {
+            throw new IllegalArgumentException("Number must be exactly 9 characters long.");
         }
         if (paymentMethod.getExpiration() == null) {
             throw new IllegalArgumentException("Expiration date cannot be null.");

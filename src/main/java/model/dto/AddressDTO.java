@@ -1,9 +1,24 @@
 package model.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AddressDTO implements Serializable
 {
+    public enum AddressType{
+        SHIPPING,
+        BILLING;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case SHIPPING -> "Spedizione";
+                case BILLING -> "Fatturazione";
+                default -> "";
+            };
+        }
+    }
+
     private int id;
     private String street;
     private String additionalInfo; // can be null
@@ -11,12 +26,16 @@ public class AddressDTO implements Serializable
     private String postalCode;
     private String region; // can be null
     private String country;
+    private String name;
+    private String surname;
+    private String phone;
+    private AddressType addressType;
 
 
     // Constructors
     public AddressDTO() {}
 
-    public AddressDTO(int id, String street, String additionalInfo, String city, String postalCode, String region, String country)
+    public AddressDTO(int id, String street, String additionalInfo, String city, String postalCode, String region, String country, String name, String surname, String phone, AddressType addressType)
     {
         this.id = id;
         this.street = street;
@@ -25,6 +44,10 @@ public class AddressDTO implements Serializable
         this.postalCode = postalCode;
         this.region = region;
         this.country = country;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.addressType = addressType;
     }
 
 
@@ -43,6 +66,14 @@ public class AddressDTO implements Serializable
     public void setRegion(String region) {this.region = region;}
     public String getCountry() {return country;}
     public void setCountry(String country) {this.country = country;}
+    public String getName(){return name;}
+    public void setName(String name){this.name = name;}
+    public String getSurname(){return surname;}
+    public void setSurname(String surname){this.surname = surname;}
+    public String getPhone(){return phone;}
+    public void setPhone(String phone){this.phone = phone;}
+    public AddressType getAddressType(){return addressType;}
+    public void setAddressType(AddressType addressType){this.addressType = addressType;}
 
 
     @Override
@@ -51,11 +82,15 @@ public class AddressDTO implements Serializable
         if (!(o instanceof AddressDTO addressDTO)) return false;
         return id == addressDTO.id &&
                 street.equals(addressDTO.street) &&
-                additionalInfo.equals(addressDTO.additionalInfo) &&
+                Objects.equals(additionalInfo, addressDTO.additionalInfo) &&
                 city.equals(addressDTO.city) &&
                 postalCode.equals(addressDTO.postalCode) &&
-                region.equals(addressDTO.region) &&
-                country.equals(addressDTO.country);
+                Objects.equals(region, addressDTO.region) &&
+                country.equals(addressDTO.country) &&
+                name.equals(addressDTO.name) &&
+                surname.equals(addressDTO.surname) &&
+                Objects.equals(phone, addressDTO.phone) &&
+                addressType == addressDTO.addressType;
     }
 
     @Override
@@ -66,6 +101,11 @@ public class AddressDTO implements Serializable
                 " city: " + city +
                 " postal code: " + postalCode +
                 " region: " + region +
-                " country: " + country;
+                " country: " + country +
+                ", name: " + name +
+                ", surname: " + surname +
+                ", phone: " + phone +
+                ", addressType: " + addressType +
+                " }";
     }
 }

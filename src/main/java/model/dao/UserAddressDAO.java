@@ -16,18 +16,12 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
     public void save(UserAddressDTO userAddress) throws SQLException {
         validate(userAddress);
 
-        String sql = "INSERT INTO UserAddress (AddressID, UserID, AddressType, Name, Surname, Phone, IsDefault) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO UserAddress (AddressID, UserID, IsDefault) VALUES (?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
             ps.setInt(1, userAddress.getAddressId());
             ps.setInt(2, userAddress.getUserId());
-            ps.setString(3, userAddress.getAddressType().name());
-            ps.setString(4, userAddress.getName());
-            ps.setString(5, userAddress.getSurname());
-            ps.setString(6, userAddress.getPhone());
-            ps.setBoolean(7, userAddress.isDefault());
-
+            ps.setBoolean(3, userAddress.isDefault());
             ps.executeUpdate();
         }
     }
@@ -35,22 +29,16 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
     @Override
     public void update(UserAddressDTO userAddress) throws SQLException {
         validate(userAddress);
-        if (userAddress.getAddressId() <= 0 || userAddress.getUserId() <= 0 || userAddress.getAddressType() == null) {
-            throw new IllegalArgumentException("Composite primary key (AddressID, UserID, AddressType) must be valid for update operations.");
+        if (userAddress.getAddressId() <= 0 || userAddress.getUserId() <= 0) {
+            throw new IllegalArgumentException("Composite primary key (AddressID, UserID) must be valid for update operations.");
         }
 
-        String sql = "UPDATE UserAddress SET Name = ?, Surname = ?, Phone = ?, IsDefault = ? WHERE AddressID = ? AND UserID = ? AND AddressType = ?";
+        String sql = "UPDATE UserAddress SET IsDefault = ? WHERE AddressID = ? AND UserID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setString(1, userAddress.getName());
-            ps.setString(2, userAddress.getSurname());
-            ps.setString(3, userAddress.getPhone());
-            ps.setBoolean(4, userAddress.isDefault());
-            ps.setInt(5, userAddress.getAddressId());
-            ps.setInt(6, userAddress.getUserId());
-            ps.setString(7, userAddress.getAddressType().name());
-
+            ps.setBoolean(1, userAddress.isDefault());
+            ps.setInt(2, userAddress.getAddressId());
+            ps.setInt(3, userAddress.getUserId());
             ps.executeUpdate();
         }
     }
@@ -62,18 +50,16 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         throw new UnsupportedOperationException("Deletion by single ID is not supported for UserAddress, use delete(addressId, userId, addressType) instead.");
     }
 
-    public boolean delete(int addressId, int userId, UserAddressDTO.AddressType addressType) throws SQLException {
-        if (addressId <= 0 || userId <= 0 || addressType == null) {
-            throw new IllegalArgumentException("Composite primary key (AddressID, UserID, AddressType) must be valid for deletion.");
+    public boolean delete(int addressId, int userId) throws SQLException {
+        if (addressId <= 0 || userId <= 0) {
+            throw new IllegalArgumentException("Composite primary key (AddressID, UserID) must be valid for deletion.");
         }
 
-        String sql = "DELETE FROM UserAddress WHERE AddressID = ? AND UserID = ? AND AddressType = ?";
+        String sql = "DELETE FROM UserAddress WHERE AddressID = ? AND UserID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
             ps.setInt(1, addressId);
             ps.setInt(2, userId);
-            ps.setString(3, addressType.name());
             return ps.executeUpdate() > 0;
         }
     }
@@ -85,18 +71,16 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         throw new UnsupportedOperationException("Lookup by single ID is not supported for UserAddress, use findById(addressId, userId, addressType) instead.");
     }
 
-    public UserAddressDTO findById(int addressId, int userId, UserAddressDTO.AddressType addressType) throws SQLException {
-        if (addressId <= 0 || userId <= 0 || addressType == null) {
+    public UserAddressDTO findById(int addressId, int userId) throws SQLException {
+        if (addressId <= 0 || userId <= 0) {
             throw new IllegalArgumentException("Composite primary key (AddressID, UserID, AddressType) must be valid for lookup.");
         }
 
-        String sql = "SELECT * FROM UserAddress WHERE AddressID = ? AND UserID = ? AND AddressType = ?";
+        String sql = "SELECT * FROM UserAddress WHERE AddressID = ? AND UserID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
             ps.setInt(1, addressId);
             ps.setInt(2, userId);
-            ps.setString(3, addressType.name());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return extract(rs);
@@ -113,7 +97,7 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         }
 
         List<UserAddressDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM UserAddress WHERE UserID = ? ORDER BY AddressID, AddressType";
+        String sql = "SELECT * FROM UserAddress WHERE UserID = ? ORDER BY AddressID";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -134,7 +118,7 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         }
 
         List<UserAddressDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM UserAddress WHERE AddressID = ? ORDER BY UserID, AddressType";
+        String sql = "SELECT * FROM UserAddress WHERE AddressID = ? ORDER BY UserID";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -151,7 +135,7 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
     @Override
     public List<UserAddressDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "AddressID, UserID, AddressType";
+            order = "AddressID, UserID";
         }
 
         List<UserAddressDTO> list = new ArrayList<>();
@@ -169,7 +153,7 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        return List.of("AddressID", "UserID", "AddressType", "Name", "Surname", "Phone", "IsDefault");
+        return List.of("AddressID", "UserID", "IsDefault");
     }
 
     @Override
@@ -183,18 +167,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         if (userAddress.getUserId() <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
         }
-        if (userAddress.getAddressType() == null) {
-            throw new IllegalArgumentException("AddressType cannot be null.");
-        }
-        if (userAddress.getName() == null || userAddress.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty.");
-        }
-        if (userAddress.getSurname() == null || userAddress.getSurname().trim().isEmpty()) {
-            throw new IllegalArgumentException("Surname cannot be null or empty.");
-        }
-        if (userAddress.getPhone() == null || userAddress.getPhone().trim().isEmpty()) {
-            throw new IllegalArgumentException("Phone cannot be null or empty.");
-        }
         // isDefault è un boolean, non richiede validazione di nullità o vuoto.
     }
 
@@ -203,10 +175,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         UserAddressDTO userAddress = new UserAddressDTO();
         userAddress.setAddressId(rs.getInt("AddressID"));
         userAddress.setUserId(rs.getInt("UserID"));
-        userAddress.setAddressType(UserAddressDTO.AddressType.valueOf(rs.getString("AddressType")));
-        userAddress.setName(rs.getString("Name"));
-        userAddress.setSurname(rs.getString("Surname"));
-        userAddress.setPhone(rs.getString("Phone"));
         userAddress.setDefault(rs.getBoolean("IsDefault"));
         return userAddress;
     }

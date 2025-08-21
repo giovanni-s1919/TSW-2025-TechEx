@@ -1,28 +1,49 @@
 package model.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class OrderAddressDTO implements Serializable
 {
+    public enum AddressType{
+        SHIPPING,
+        BILLING;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case SHIPPING -> "Spedizione";
+                case BILLING -> "Fatturazione";
+                default -> "";
+            };
+        }
+    }
+
     private int id;
     private String street;
     private String city;
     private String postalCode;
     private String region;
     private String country;
+    private String name;
+    private String surname;
+    private String phone;
     private AddressType addressType;
 
 
     // Constructor
     public OrderAddressDTO(){}
 
-    public OrderAddressDTO(int id, String street, String city, String postalCode, String region, String country, AddressType addressType) {
+    public OrderAddressDTO(int id, String street, String city, String postalCode, String region, String country, String name, String surname, String phone, AddressType addressType) {
         this.id = id;
         this.street = street;
         this.city = city;
         this.postalCode = postalCode;
         this.region = region;
         this.country = country;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
         this.addressType = addressType;
     }
 
@@ -40,7 +61,13 @@ public class OrderAddressDTO implements Serializable
     public void setRegion(String region) {this.region = region;}
     public String getCountry() {return country;}
     public void setCountry(String country) {this.country = country;}
-    public AddressType getAddressType() {return addressType;}
+    public String getName(){return name;}
+    public void setName(String name){this.name = name;}
+    public String getSurname(){return surname;}
+    public void setSurname(String surname){this.surname = surname;}
+    public String getPhone(){return phone;}
+    public void setPhone(String phone){this.phone = phone;}
+    public AddressType getAddressType(){return addressType;}
     public void setAddressType(AddressType addressType) {this.addressType = addressType;}
 
 
@@ -53,8 +80,11 @@ public class OrderAddressDTO implements Serializable
                 street.equals(that.street) &&
                 city.equals(that.city) &&
                 postalCode.equals(that.postalCode) &&
-                region.equals(that.region) &&
+                Objects.equals(region, that.region) &&
                 country.equals(that.country) &&
+                name.equals(that.name) &&
+                surname.equals(that.surname) &&
+                Objects.equals(phone, that.phone) &&
                 addressType == that.addressType;
     }
 
@@ -67,21 +97,10 @@ public class OrderAddressDTO implements Serializable
                 " postal code: " + postalCode +
                 " region: " + region +
                 " country: " + country +
-                " addressType: " + addressType;
-    }
-
-
-    public enum AddressType{
-        Shipping,
-        Billing;
-
-        @Override
-        public String toString() {
-            return switch (this) {
-                case Shipping -> "Spedizione";
-                case Billing -> "Fatturazione";
-                default -> "";
-            };
-        }
+                ", name: " + name +
+                ", surname: " + surname +
+                ", phone: " + phone +
+                ", addressType: " + addressType +
+                " }";
     }
 }

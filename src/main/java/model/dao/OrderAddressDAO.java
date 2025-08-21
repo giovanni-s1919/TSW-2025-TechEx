@@ -18,7 +18,8 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
     public void save(OrderAddressDTO orderAddress) throws SQLException {
         validate(orderAddress);
 
-        String sql = "INSERT INTO OrderAddress (Street, City, PostalCode, Region, Country, AddressType) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO OrderAddress (Street, City, PostalCode, Region, Country, Name, Surname, Phone, AddressType) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -27,10 +28,11 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
             ps.setString(3, orderAddress.getPostalCode());
             ps.setString(4, orderAddress.getRegion());
             ps.setString(5, orderAddress.getCountry());
-            ps.setString(6, orderAddress.getAddressType().name()); // Salva l'enum come String
-
+            ps.setString(6, orderAddress.getName());
+            ps.setString(7, orderAddress.getSurname());
+            ps.setString(8, orderAddress.getPhone());
+            ps.setString(9, orderAddress.getAddressType().name()); // Salva l'enum come String
             ps.executeUpdate();
-
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     orderAddress.setId(generatedKeys.getInt(1));
@@ -46,18 +48,19 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
             throw new IllegalArgumentException("OrderAddress ID must be positive for update operations.");
         }
 
-        String sql = "UPDATE OrderAddress SET Street = ?, City = ?, PostalCode = ?, Region = ?, Country = ?, AddressType = ? WHERE ID = ?";
+        String sql = "UPDATE OrderAddress SET Street = ?, City = ?, PostalCode = ?, Region = ?, Country = ?, Name = ?, Surname = ?, Phone = ?, AddressType = ? WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
             ps.setString(1, orderAddress.getStreet());
             ps.setString(2, orderAddress.getCity());
             ps.setString(3, orderAddress.getPostalCode());
             ps.setString(4, orderAddress.getRegion());
             ps.setString(5, orderAddress.getCountry());
-            ps.setString(6, orderAddress.getAddressType().name()); // Aggiorna l'enum come String
-            ps.setInt(7, orderAddress.getId());
-
+            ps.setString(6, orderAddress.getName());
+            ps.setString(7, orderAddress.getSurname());
+            ps.setString(8, orderAddress.getPhone());
+            ps.setString(9, orderAddress.getAddressType().name()); // Aggiorna l'enum come String
+            ps.setInt(10, orderAddress.getId());
             ps.executeUpdate();
         }
     }
@@ -118,7 +121,7 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
 
     @Override
     public List<String> getAllowedOrderColumns() {
-        return List.of("ID", "Street", "City", "PostalCode", "Region", "Country", "AddressType");
+        return List.of("ID", "Street", "City", "PostalCode", "Region", "Country", "Name", "Surname", "Phone", "AddressType");
     }
 
 
@@ -130,8 +133,14 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
                 orderAddress.getPostalCode() == null || orderAddress.getPostalCode().trim().isEmpty() ||
                 orderAddress.getRegion() == null || orderAddress.getRegion().trim().isEmpty() ||
                 orderAddress.getCountry() == null || orderAddress.getCountry().trim().isEmpty() ||
+                orderAddress.getName() == null || orderAddress.getName().trim().isEmpty() ||
+                orderAddress.getSurname() == null || orderAddress.getSurname().trim().isEmpty() ||
                 orderAddress.getAddressType() == null)
             throw new IllegalArgumentException("Some required address fields are null or empty.");
+        if (orderAddress.getPhone() != null &&
+                (orderAddress.getPhone().length() > 15 || !orderAddress.getPhone().matches("^[0-9+\\- ]+$"))) {
+            throw new IllegalArgumentException("Phone must be max 15 characters and contain only digits, spaces, '+' or '-'.");
+        }
     }
 
     @Override
@@ -143,6 +152,9 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
         orderAddress.setPostalCode(rs.getString("PostalCode"));
         orderAddress.setRegion(rs.getString("Region"));
         orderAddress.setCountry(rs.getString("Country"));
+        orderAddress.setName(rs.getString("Name"));
+        orderAddress.setSurname(rs.getString("Surname"));
+        orderAddress.setPhone(rs.getString("Phone"));
         orderAddress.setAddressType(OrderAddressDTO.AddressType.valueOf(rs.getString("AddressType")));
         return orderAddress;
     }
