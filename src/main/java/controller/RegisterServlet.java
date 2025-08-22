@@ -12,6 +12,7 @@ import util.Utility;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 @WebServlet(name = "register", value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -34,43 +35,15 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String surname =  request.getParameter("surname");
+        LocalDate  birthDate = LocalDate.parse(request.getParameter("birthDate"));
         String username = request.getParameter("username");
         String email = request.getParameter("email");
+        String telephone = request.getParameter("telephone");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
         String role = request.getParameter("role");
-        //boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-
-        /*try{
-            if(userDAO.findByEmail(email) != null){
-                if(isAjax){
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-                    String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Email già registrata");
-                    response.getWriter().write(json);
-                    return;
-                } else {
-                    request.setAttribute("errorMessage", "Email già registrata");
-                    request.setAttribute("islogin", false);
-                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-                    return;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            if(isAjax) {
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Errore interno del server");
-                response.getWriter().write(json);
-                return;
-            } else {
-                request.setAttribute("errorMessage", "Errore interno del server");
-                request.setAttribute("islogin", false);
-                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-                return;
-            }
-        }*/
 
         try {
             if(userDAO.findByEmail(email) != null){
@@ -110,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
 
         String passwordHash = Utility.hashPassword(password);
 
-        UserDTO user = new UserDTO(username, email, passwordHash, UserDTO.Role.valueOf(role));
+        UserDTO user = new UserDTO(name, surname, birthDate, username, email, passwordHash, telephone, UserDTO.Role.valueOf(role));
         try {
             userDAO.save(user);
         } catch (SQLException e) {
@@ -123,3 +96,40 @@ public class RegisterServlet extends HttpServlet {
         response.sendRedirect("login?action=login");
     }
 }
+
+
+
+
+
+//boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+        /*try{
+            if(userDAO.findByEmail(email) != null){
+                if(isAjax){
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Email già registrata");
+                    response.getWriter().write(json);
+                    return;
+                } else {
+                    request.setAttribute("errorMessage", "Email già registrata");
+                    request.setAttribute("islogin", false);
+                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                    return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if(isAjax) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Errore interno del server");
+                response.getWriter().write(json);
+                return;
+            } else {
+                request.setAttribute("errorMessage", "Errore interno del server");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+        }*/

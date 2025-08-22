@@ -131,8 +131,8 @@
                         <input type="text" id="surname" class="auth" name="surname" placeholder="Cognome">
                     </div>
                     <div class="divauth reg" id="divdate">
-                        <label for="birthdate" class="hiddenlabel" hidden></label>
-                        <input type="date" class="auth" name="birthdate">
+                        <label for="birthDate" class="hiddenlabel" hidden></label>
+                        <input type="date" class="auth" name="birthDate">
                     </div>
                     <div class="divauth reg" id="divusername">
                         <label for="username" class="hiddenlabel" hidden></label>
