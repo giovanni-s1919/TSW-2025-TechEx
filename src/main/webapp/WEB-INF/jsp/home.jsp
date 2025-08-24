@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TechEx - Pezzi di ricambio per smartphone</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>TechEx - Pezzi di ricambio per smartphone</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -51,8 +51,9 @@
             <p class="product-price">4,99€</p>
         </div>
     </div>
-    <p id="useful_print"><%=request.getAttribute("role")%>
-    </p>
+    <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
+    <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
+    <p id="useful_print"><%=request.getAttribute("role")%></p>
   </div>
   <div class="presentation">
     <p class="presentation_menu">Il futuro della riparazione è qui!</p>
@@ -90,9 +91,9 @@
     </ul>
     <img class="presentation_img" src="${pageContext.request.contextPath}/images/homeimage.png" alt="HOMEIMAGE">
   </div>
-  <div class="top_articles">
-    <h1 class="top_h1">IL TOP DEL TOP</h1>
-    <p class="the_best">I migliori articoli presenti nel nostro catalogo.<br>Qualità ultra per i clienti più esigenti.</p><br>
+  <div class="élite_selection">
+    <h1 id="élite_selection-intro">ÉLITE SELECTION</h1>
+    <p class="élite_selection-top">I migliori articoli presenti nel nostro catalogo. Qualità ultra per i clienti più esigenti.</p><br>
     <div class="products-grid">
         <div class="product-card">
             <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
@@ -125,6 +126,8 @@
             <p class="product-price">4,99€</p>
         </div>
     </div>
+    <p class="élite_selection-top" id="élite_selection-phrase">Non finisce qui! Consulta il nostro catalogo per accedere ad altri prodotti premium!</p>
+    <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
   </div>
   <div class="guides">
     <div class="guides_box">
@@ -140,60 +143,62 @@
     </ul>
     </div>
   </div>
-  <div class="most_sales">
-  <h1 id="mvp">I PIÙ VENDUTI</h1>
-  <p>I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
-  <div class="products-grid">
-      <div class="product-card">
-          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
-          <h1 class="product-name">Display iPhone 13</h1>
-          <p class="product-grade">Eccellente</p>
-          <p class="product-price">149,99€</p>
+  <div class="best_sellers">
+      <h1 id="best_sellers-intro">BEST SELLERS</h1>
+      <p class="best_sellers-favourites">I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
+      <div class="products-grid">
+          <div class="product-card">
+              <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
+              <h1 class="product-name">Display iPhone 13</h1>
+              <p class="product-grade">Eccellente</p>
+              <p class="product-price">149,99€</p>
+          </div>
+          <div class="product-card">
+              <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+              <h1 class="product-name">Batteria Samsung S21</h1>
+              <p class="product-grade">Originale</p>
+              <p class="product-price">39,99€</p>
+        </div>
+        <div class="product-card">
+              <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+              <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
+              <p class="product-grade">Ottimo</p>
+              <p class="product-price">89,99€</p>
+        </div>
+        <div class="product-card">
+              <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+              <h1 class="product-name">Sensore Google Pixel 9</h1>
+              <p class="product-grade">Originale</p>
+              <p class="product-price">59,99€</p>
+        </div>
+        <div class="product-card">
+              <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
+              <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
+              <p class="product-grade">Buono</p>
+              <p class="product-price">4,99€</p>
+        </div>
       </div>
-      <div class="product-card">
-          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-          <h1 class="product-name">Batteria Samsung S21</h1>
-          <p class="product-grade">Originale</p>
-          <p class="product-price">39,99€</p>
-      </div>
-      <div class="product-card">
-          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-          <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
-          <p class="product-grade">Ottimo</p>
-          <p class="product-price">89,99€</p>
-      </div>
-      <div class="product-card">
-          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-          <h1 class="product-name">Sensore Google Pixel 9</h1>
-          <p class="product-grade">Originale</p>
-          <p class="product-price">59,99€</p>
-      </div>
-      <div class="product-card">
-          <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-          <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
-          <p class="product-grade">Buono</p>
-          <p class="product-price">4,99€</p>
-      </div>
+      <p class="best_sellers-favourites" id="best_sellers-phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
+      <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
     </div>
-  </div>
-  <div class="reviews">
-    <div class="reviews_left">
-      <p class="reviews_p">
-        <b>Recensioni dei nostri utenti</b><br>
-        TechEx è in testa alle classifiche<br>dei siti di pezzi di ricambio per smartphone in Italia.<br>
-        Solo ricambi di qualità assoluta per riparazioni top!
-      </p>
-      <p class="reviews_value">
-        TechEx è valutata <b>Eccellente</b><br>
-        <span class="reviews_note">Basata su 4324 recensioni<br>
-        <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
-        <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Visualizza tutte le recensioni</button></a>
-        <img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_man.png" alt="REVIEWS MAN">
-        </span>
-      </p>
+    <div class="reviews">
+        <div class="reviews_left">
+        <p class="reviews_p">
+            <b>Recensioni dei nostri utenti</b><br>
+            TechEx è in testa alle classifiche<br>dei siti di pezzi di ricambio per smartphone in Italia.<br>
+            Solo ricambi di qualità assoluta per riparazioni top!
+        </p>
+        <p class="reviews_value">
+            TechEx è valutata <b>Eccellente</b><br>
+            <span class="reviews_note">Basata su 4324 recensioni<br>
+            <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
+            <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Visualizza tutte le recensioni</button></a>
+            <img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_man.png" alt="REVIEWS MAN">
+            </span>
+        </p>
+        </div>
+        <div class="reviews_right" id="reviewsContainer"></div>
     </div>
-    <div class="reviews_right" id="reviewsContainer"></div>
-  </div>
   <div class="collabs">
     <h1 id="collabs_top-text" class="collabs_intro">TechEx: un nome, una garanzia.</h1>
     <p class="collabs_intro">Collaboriamo con i migliori brand e operiamo secondo standard internazionali di qualità.</p>

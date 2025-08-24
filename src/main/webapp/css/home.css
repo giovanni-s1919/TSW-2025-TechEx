@@ -17,6 +17,10 @@ body {
     flex-direction: column;
 }
 
+a {
+    text-decoration: none;
+}
+
 .main {
     position: relative;
     flex: 1;
@@ -46,41 +50,47 @@ body {
 }
 
 .catalog {
-    padding-top: 2.5rem;
+    background-color: #F2F9FC;
     border-bottom: 1px solid #E1E8ED;
-    padding-bottom: 4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 #useful_print {
-    margin:  1.5rem 4.8rem 0 4.8rem;
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .products {
     color: #00A8E8;
-    margin:  0 4.8rem 0 4.8rem;
+    text-align: center;
 }
 
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 13.75rem);
     gap: 2.5rem;
-    justify-content: flex-start;
-    margin:  1.5rem 4.8rem 0 4.8rem;
+    justify-content: center;
+    margin: 1.5rem auto 0 8.18rem;
+    max-width: calc((13.75rem * 5) + (2.5rem * 4));
+    width: 100%;
 }
 
 .product-card {
     width: 13.75rem;
-    height: 20rem;
+    height: 22rem;
     background-color: #FFFFFF;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     text-align: center;
     padding: 0.313rem;
-    transition: transform 0.2s ease;
+    /*transition: transform 0.2s ease;*/
+    transition: scale ease-out 0.2s;
 }
 
 .product-card:hover {
-    transform: translateY(-0.313rem);
+    /*transform: translateY(-0.313rem);*/
+    scale: 1.02;
 }
 
 .product-img {
@@ -88,6 +98,7 @@ body {
     height: 11.25rem;
     object-fit: contain;
     margin-bottom: 0.625rem;
+    padding: 0.5rem;
 }
 
 .product-name {
@@ -98,6 +109,7 @@ body {
 
 .product-grade {
     font-size: 0.9em;
+    font-weight: bold;
     color: #003459;
 }
 
@@ -107,10 +119,32 @@ body {
     margin: 0.313rem 0;
 }
 
+#catalog_phrase {
+    margin-top: 1.5rem;
+}
+
+.catalog_button {
+    display: block;
+    margin: 0 auto;
+    color: #FFFFFF;
+    background-color: #003459;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    height: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.catalog_button:hover {
+    background-color: #005B8F;
+}
+
 .presentation {
     position: relative;
-    margin-top: 3rem;
-    margin-left: 12rem;
+    padding: 3rem 0 3rem 2rem;
+    border-bottom: 1px solid #E1E8ED;
 }
 
 .presentation_menu {
@@ -153,32 +187,40 @@ body {
 
 .presentation .presentation_img {
     position: absolute;
-    top: -9.5rem;
-    right: 5rem;
+    top: -5.5rem;
+    right: 15rem;
     height: 40rem;
     width: auto;
     object-fit: cover;
 }
 
-.top_articles {
-    margin-top: 3rem;
+.élite_selection {
+    background-color: #F2F9FC;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    text-align: center;
 }
 
-.top_h1 {
+#élite_selection-intro {
     color: #FFED00;
-    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
 }
 
-.the_best {
+.élite_selection-top {
     color: #00A8E8;
-    text-align: center;
+    margin-bottom: -1rem;
+}
+
+#élite_selection-phrase {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .guides {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 3rem;
     padding: 3.4rem 3.4rem 3.4rem 0;
     color: #00171F;
     box-sizing: border-box;
@@ -209,14 +251,27 @@ body {
     text-align: center;
 }
 
-.most_sales {
-    margin-top: 3rem;
-    margin-left:  4.8rem;
-    color: #00A8E8;
+.best_sellers {
+    background-color: #F2F9FC;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    text-align: center;
 }
 
-#mvp {
+#best_sellers-intro {
     color: #FF0000;
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
+}
+
+.best_sellers-favourites {
+    color: #00A8E8;
+    padding-bottom: 0.2rem;
+}
+
+#best_sellers-phrase {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .reviews {
@@ -225,7 +280,6 @@ body {
     align-items: flex-start;
     position: relative;
     overflow: visible !important;
-    margin-top: 4rem;
     background-color: rgba(0, 168, 232, 0.4); /* #00A8E8 */
     color: #00171F;
 }
