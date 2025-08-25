@@ -58,7 +58,7 @@
         <c:otherwise>
             <div id="cart-box-empty">
                 <div id="cart-box-empty-warning">Il tuo carrello è vuoto</div>
-                <button class="cart-proceed">Torna alla Home</button>
+                <div class="cart-proceed"><a class="ref" href="${pageContext.request.contextPath}/home">Torna alla Home</a></div>
             </div>
         </c:otherwise>
     </c:choose>
