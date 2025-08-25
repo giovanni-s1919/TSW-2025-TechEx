@@ -145,3 +145,8 @@ header {
 #promo::after {
     background-color: #FF0000;
 }
+
+#forcustomer a:link, #forcustomer a:visited {
+    color: #003459;
+    text-decoration: none;
+}
