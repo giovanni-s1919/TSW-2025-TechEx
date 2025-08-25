@@ -51,7 +51,6 @@ a {
 
 .catalog {
     background-color: #F2F9FC;
-    border-bottom: 1px solid #E1E8ED;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
@@ -143,7 +142,8 @@ a {
 
 .presentation {
     position: relative;
-    padding: 3rem 0 3rem 2rem;
+    padding: 3.25rem 0 3rem 2.5rem;
+    border-top: 1px solid #E1E8ED;
     border-bottom: 1px solid #E1E8ED;
 }
 
@@ -187,8 +187,8 @@ a {
 
 .presentation .presentation_img {
     position: absolute;
-    top: -5.5rem;
-    right: 15rem;
+    top: -5rem;
+    right: 12.5rem;
     height: 40rem;
     width: auto;
     object-fit: cover;
@@ -197,14 +197,21 @@ a {
 .élite_selection {
     background-color: #F2F9FC;
     padding-top: 0.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     text-align: center;
 }
 
 #élite_selection-intro {
-    color: #FFED00;
     margin-top: 0.5rem;
     margin-bottom: -0.5rem;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.125rem;
+    text-shadow: 0 0 5px rgba(255, 237, 0, 0.6),
+                 0 0 10px rgba(255, 237, 0, 0.4);
+    background: linear-gradient(90deg, gold, #ffed00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .élite_selection-top {
@@ -254,12 +261,18 @@ a {
 .best_sellers {
     background-color: #F2F9FC;
     padding-top: 0.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     text-align: center;
 }
 
 #best_sellers-intro {
     color: #FF0000;
+    font-family: 'Montserrat ExtraBold', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.188rem;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
+                 0 0 6px rgba(255, 0, 0, 0.5);
     margin-top: 0.5rem;
     margin-bottom: -0.5rem;
 }
