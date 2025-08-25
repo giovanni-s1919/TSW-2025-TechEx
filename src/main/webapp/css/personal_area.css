@@ -17,11 +17,45 @@ body {
     flex-direction: column;
 }
 
-.main {
-    flex: 1;
-    position: relative;
+body#personal_area #forguest {
+    display: none !important;
+}
+
+body#personal_area .menu > ul > li::after,
+body#personal_area .menu > ul > li:hover::after {
+    content: none;
+    opacity: 0 !important;
+}
+
+#main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
     padding-top: 2.2rem;
     margin-top: var(--header-height);
-    text-align: center;
-    margin-bottom: 0;
+    box-sizing: border-box;
 }
+
+#left {
+    flex: 0 0 auto;
+    text-align: left;
+    background-color: #00A8E8;
+    height: 100%;
+    width: 20rem;
+}
+
+#left {
+    flex: 0 0 auto;
+    text-align: center;
+    height: 100%;
+}
+
+#right {
+    flex: 0 0 auto;
+    text-align: right;
+    background-color: #00A8E8;
+    height: 100%;
+    width: 20rem;
+}
+

@@ -8,55 +8,63 @@
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-    <body>
+    <body id="personal_area">
         <%@ include file="fragments/header.jsp" %>
-        <div class="main">
-            <p>boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-                boh<br>
-            </p>
+        <div id="main">
+            <div id="left">
+
+            </div>
+            <div id="center">
+                <p> boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                    boh<br>
+                </p>
+            </div>
+            <div id="right">
+
+            </div>
         </div>
         <%@ include file="fragments/footer.jsp" %>
     </body>
