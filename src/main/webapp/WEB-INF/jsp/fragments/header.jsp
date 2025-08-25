@@ -70,7 +70,7 @@
                         <a href="${pageContext.request.contextPath}/login?action=register" style="text-decoration: none; color: #003459;"><li>Registrati</li></a>
                     </ul>
                     <ul id="forcustomer" hidden>
-                        <li>Area Personale</li>
+                        <li><a href="${pageContext.request.contextPath}/personal_area">Area Personale</a></li>
                         <li>Esci</li>
                     </ul>
                     <ul id="foradmin" hidden>
