@@ -1,0 +1,27 @@
+:root {
+    --header-height: 3.125rem;
+    --footer-height: 9.375rem;
+}
+
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+    position: relative;
+    padding-top: 2.2rem;
+    margin-top: var(--header-height);
+    text-align: center;
+    margin-bottom: 0;
+}
