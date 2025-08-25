@@ -21,34 +21,34 @@
                 <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
-                        <h1 class="product-name">Display iPhone 13</h1>
-                        <p class="product-grade">Eccellente</p>
-                        <p class="product-price">149,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Batteria Samsung S21</h1>
-                        <p class="product-grade">Originale</p>
-                        <p class="product-price">39,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 14 Pro Max" class="product-img">
+                        <h1 class="product-name">Display Apple Iphone 14 Pro Max</h1>
                         <p class="product-grade">Ottimo</p>
-                        <p class="product-price">89,99€</p>
+                        <p class="product-price">87,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Sensore Google Pixel 9</h1>
-                        <p class="product-grade">Originale</p>
-                        <p class="product-price">59,99€</p>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Google Pixel 7" class="product-img">
+                        <h1 class="product-name">Batteria Google Pixel 7</h1>
+                        <p class="product-grade">Eccellente</p>
+                        <p class="product-price">25,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
-                        <p class="product-grade">Buono</p>
-                        <p class="product-price">4,99€</p>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Tasto accensione Realme 9 5G" class="product-img">
+                        <h1 class="product-name">Tasto accensione Realme 9 5G</h1>
+                            <p class="product-grade">Buono</p>
+                        <p class="product-price">3,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Samsung Galaxy S23 Ultra" class="product-img">
+                        <h1 class="product-name">Fotocamera posteriore Samsung Galaxy S23 Ultra</h1>
+                        <p class="product-grade">Ottimo</p>
+                        <p class="product-price">37,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Speaker Xiaomi 14T Pro" class="product-img">
+                        <h1 class="product-name">Speaker Xiaomi 14T Pro</h1>
+                        <p class="product-grade">Eccellente</p>
+                        <p class="product-price">12,99€</p>
                     </div>
                 </div>
                 <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
@@ -93,37 +93,37 @@
             </div>
             <div class="élite_selection">
                 <h1 id="élite_selection-intro">ÉLITE SELECTION</h1>
-                <p class="élite_selection-top">I migliori articoli presenti nel nostro catalogo. Qualità ultra per i clienti più esigenti.</p><br>
+                <p class="élite_selection-top">I migliori articoli presenti nel nostro catalogo. Componenti 100% originali per i clienti più esigenti.</p><br>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
-                        <h1 class="product-name">Display iPhone 13</h1>
-                        <p class="product-grade">Eccellente</p>
-                        <p class="product-price">149,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Batteria Samsung S21</h1>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera anteriore Samsung Galaxy S25+" class="product-img">
+                        <h1 class="product-name">Fotocamera anteriore Samsung Galaxy S25+</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">39,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
-                        <p class="product-grade">Ottimo</p>
-                        <p class="product-price">89,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Sensore Google Pixel 9</h1>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 16 Pro Max" class="product-img">
+                        <h1 class="product-name">Display Apple Iphone 16 Pro Max</h1>
                         <p class="product-grade">Originale</p>
-                        <p class="product-price">59,99€</p>
+                        <p class="product-price">749,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
-                        <p class="product-grade">Buono</p>
-                        <p class="product-price">4,99€</p>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Apple Iphone 16 Pro" class="product-img">
+                        <h1 class="product-name">Batteria Apple Iphone 16 Pro</h1>
+                        <p class="product-grade">Originale</p>
+                        <p class="product-price">135,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
+                        <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
+                        <p class="product-grade">Originale</p>
+                        <p class="product-price">269,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
+                        <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
+                        <p class="product-grade">Originale</p>
+                        <p class="product-price">79,99€</p>
                     </div>
                 </div>
                 <p class="élite_selection-top" id="élite_selection-phrase">Non finisce qui! Consulta il nostro catalogo per accedere ad altri prodotti premium!</p>
@@ -148,34 +148,34 @@
                 <p class="best_sellers-favourites">I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display iPhone 13" class="product-img">
-                        <h1 class="product-name">Display iPhone 13</h1>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung Galaxy S22 Ultra" class="product-img">
+                        <h1 class="product-name">Batteria Samsung Galaxy S22 Ultra</h1>
+                        <p class="product-grade">Ottimo</p>
+                        <p class="product-price">25,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 13 Pro" class="product-img">
+                        <h1 class="product-name">Display Apple Iphone 13 Pro</h1>
+                        <p class="product-grade">Eccellente</p>
+                        <p class="product-price">79,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Apple Iphone 14" class="product-img">
+                        <h1 class="product-name">Fotocamera posteriore Apple Iphone 14</h1>
+                        <p class="product-grade">Ottimo</p>
+                        <p class="product-price">45,99€</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Samsung Galaxy S23" class="product-img">
+                        <h1 class="product-name">Display Samsung Galaxy S23</h1>
                         <p class="product-grade">Eccellente</p>
                         <p class="product-price">149,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Batteria Samsung S21</h1>
-                        <p class="product-grade">Originale</p>
-                        <p class="product-price">39,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Fotocamera Iphone 16 Pro</h1>
-                        <p class="product-grade">Ottimo</p>
-                        <p class="product-price">89,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Sensore Google Pixel 9</h1>
-                        <p class="product-grade">Originale</p>
+                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Apple Iphone 14 Pro" class="product-img">
+                        <h1 class="product-name">Batteria Apple Iphone 14 Pro</h1>
+                        <p class="product-grade">Eccellente</p>
                         <p class="product-price">59,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung S21" class="product-img">
-                        <h1 class="product-name">Tasto accensione Huawei P20 Pro</h1>
-                        <p class="product-grade">Buono</p>
-                        <p class="product-price">4,99€</p>
                     </div>
                 </div>
                 <p class="best_sellers-favourites" id="best_sellers-phrase">Hai bisogno di altro? Esplora il nostro catalogo!</p>
