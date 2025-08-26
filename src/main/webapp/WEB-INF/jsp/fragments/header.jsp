@@ -62,16 +62,15 @@
         <nav class="menu topright">
             <ul>
                 <li>
-                    <a href="${pageContext.request.contextPath}/login?action=login">
+                    <a href="${pageContext.request.contextPath}/personal_area">
                         <img class="header_icons" src="${pageContext.request.contextPath}/images/utente.svg" alt="AREA PERSONALE">
-                    </a>
                     <ul id="forguest" hidden>
                         <a href="${pageContext.request.contextPath}/login?action=login" style="text-decoration: none; color: #003459;"><li>Accedi</li></a>
                         <a href="${pageContext.request.contextPath}/login?action=register" style="text-decoration: none; color: #003459;"><li>Registrati</li></a>
                     </ul>
                     <ul id="forcustomer" hidden>
                         <li><a href="${pageContext.request.contextPath}/personal_area">Area Personale</a></li>
-                        <li>Esci</li>che
+                        <li>Esci</li>
                     </ul>
                     <ul id="foradmin" hidden>
                         <li>Centro di controllo</li>
