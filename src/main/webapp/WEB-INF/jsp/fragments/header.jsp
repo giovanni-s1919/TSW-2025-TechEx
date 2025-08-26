@@ -71,7 +71,7 @@
                     </ul>
                     <ul id="forcustomer" hidden>
                         <li><a href="${pageContext.request.contextPath}/personal_area">Area Personale</a></li>
-                        <li>Esci</li>
+                        <li>Esci</li>che
                     </ul>
                     <ul id="foradmin" hidden>
                         <li>Centro di controllo</li>
