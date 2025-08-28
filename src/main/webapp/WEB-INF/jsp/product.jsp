@@ -17,10 +17,26 @@
                 <div id="product-element">
                     <img id="product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
                     <div id="product-details">
-                        <div id="product-name">Yodoit Kit di sostituzione dello schermo per iPhone 11 Pro con strumento di riparazione</div>
-                        <div id="product-fieldvalue">
-                            <div id="product-field">Brand: </div>
-                            <div id="product-value">Yodoit</div>
+                        <div id="product-name">iPhone 11 Pro Display</div>
+                        <div class="product-fieldvalue">
+                            <div class="product-field">Brand:</div>
+                            <div class="product-value">Yodoit</div>
+                        </div>
+                        <div class="product-fieldvalue">
+                            <div class="product-field">Prezzo:</div>
+                            <div class="product-value">€29,99</div>
+                        </div>
+                        <div class="product-fieldvalue">
+                            <div class="product-field">Categoria:</div>
+                            <div class="product-value">Display</div>
+                        </div>
+                        <div class="product-fieldvalue">
+                            <div class="product-field">Grado:</div>
+                            <div class="product-value">Buono</div>
+                        </div>
+                        <div class="product-fieldvalue">
+                            <div class="product-field">Quantità:</div>
+                            <div class="product-value">22</div>
                         </div>
                 </div>
             </div>

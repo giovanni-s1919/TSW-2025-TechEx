@@ -105,7 +105,7 @@ header {
     /*border: 2px solid #003459;*/
     border-width: 0;
     box-shadow: 0 0 5px 1px #000000;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 0.5rem 0;
     list-style: none;
     min-width: 9.375rem;
@@ -130,7 +130,7 @@ header {
     white-space: nowrap;
     color: #003459;
     transition-duration: 0.2s;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .menu .submenu li:hover {
