@@ -70,7 +70,7 @@ public class CartServlet extends HttpServlet {
                         System.out.println("Product non è null");
                         CartDisplayItem displayItem = new CartDisplayItem(product,cartItem.getQuantity());
                         cartDisplayItems.add(displayItem);
-                        cartTotal = cartTotal+product.getPrice();
+                        cartTotal = cartTotal+(product.getPrice()*cartItem.getQuantity());
                     }
                 }
             }

@@ -106,9 +106,9 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
                     System.out.println("Brand impostato");
                     product.setPrice(rs.getFloat("Price"));
                     System.out.println("Prezzo impostato");
-                    product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category").toUpperCase()));
+                    product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category")));
                     System.out.println("Categoria impostato");
-                    product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade").toUpperCase()));
+                    product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
                     System.out.println("Grado impostato");
                     product.setStockQuantity(rs.getInt("StockQuantity"));
                     System.out.println("StockQuantity impostato");
