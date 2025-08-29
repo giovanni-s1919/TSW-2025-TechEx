@@ -18,6 +18,7 @@
                     <img id="product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
                     <div id="product-details">
                         <div id="product-name">iPhone 11 Pro Display</div>
+                        <div id="product-description">Display LCD Full HD compatibile con iPhone 11 Pro </div>
                         <div class="product-fieldvalue">
                             <div class="product-field">Brand:</div>
                             <div class="product-value">Yodoit</div>
@@ -38,6 +39,7 @@
                             <div class="product-field">Quantità:</div>
                             <div class="product-value">22</div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

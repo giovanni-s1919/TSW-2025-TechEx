@@ -56,7 +56,6 @@ public class CartServlet extends HttpServlet {
 
         try {
             CartDTO cart = cartDAO.findByUserID(user.getId());
-            System.out.println("2. Risultato da cartDAO.findByUserID: " + cart);
 
             if(cart != null){
                 List<CartItemDTO> cartItems = cartItemDAO.findByCartID(cart.getId());

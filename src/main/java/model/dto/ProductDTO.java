@@ -5,21 +5,21 @@ import java.util.Objects;
 
 public class ProductDTO implements Serializable {
     public enum Category {
-        DISPLAY,
-        CAMERA,
-        BATTERY,
-        MICROPHONE,
-        SPEAKER,
-        CASE,
-        BUTTON,
-        SENSOR
+        Display,
+        Camera,
+        Battery,
+        Microphone,
+        Speaker,
+        Case,
+        Button,
+        Sensor
     }
 
     public enum Grade {
-        ORIGINAL,
-        EXCELLENT,
-        GREAT,
-        GOOD
+        Original,
+        Excellent,
+        Great,
+        Good
     }
 
     private int id;

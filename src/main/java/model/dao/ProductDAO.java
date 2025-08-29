@@ -82,29 +82,42 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
     @Override
     public ProductDTO findById(Integer id) throws SQLException {
         if (id == null || id <= 0) {
+            System.out.println("ERRORE PARAMETRO");
             throw new IllegalArgumentException("Product ID must be a positive integer for lookup.");
         }
-
+        System.out.println("Primo throw superato");
         String sql = "SELECT * FROM Product WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
+            System.out.println("Connessione effettuata");
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    System.out.println("rs.next() effettuato");
                     ProductDTO product = new ProductDTO();
+                    System.out.println("Prodotto inizializzato");
                     product.setId(rs.getInt("ID"));
+                    System.out.println("ID impostato");
                     product.setName(rs.getString("Name"));
+                    System.out.println("Nome impostato");
                     product.setDescription(rs.getString("Description"));
+                    System.out.println("Descrizione impostata");
                     product.setBrand(rs.getString("Brand"));
+                    System.out.println("Brand impostato");
                     product.setPrice(rs.getFloat("Price"));
-                    product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category")));
-                    product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
+                    System.out.println("Prezzo impostato");
+                    product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category").toUpperCase()));
+                    System.out.println("Categoria impostato");
+                    product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade").toUpperCase()));
+                    System.out.println("Grado impostato");
                     product.setStockQuantity(rs.getInt("StockQuantity"));
+                    System.out.println("StockQuantity impostato");
+                    System.out.println("Operazione completata");
                     return product;
                 }
             }
         }
+        System.out.println("Operazione completata, prodotto restituito NULL");
         return null;
     }
 
