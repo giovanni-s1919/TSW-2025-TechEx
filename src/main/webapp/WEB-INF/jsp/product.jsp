@@ -13,35 +13,45 @@
     <body>
         <%@include file="fragments/header.jsp"%>
         <div id="main">
-            <div id="product-box">
-                <div id="product-element">
-                    <img id="product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
-                    <div id="product-details">
-                        <div id="product-name">iPhone 11 Pro Display</div>
-                        <div id="product-description">Display LCD Full HD compatibile con iPhone 11 Pro </div>
-                        <div class="product-fieldvalue">
-                            <div class="product-field">Brand:</div>
-                            <div class="product-value">Yodoit</div>
-                        </div>
-                        <div class="product-fieldvalue">
-                            <div class="product-field">Prezzo:</div>
-                            <div class="product-value">€29,99</div>
-                        </div>
-                        <div class="product-fieldvalue">
-                            <div class="product-field">Categoria:</div>
-                            <div class="product-value">Display</div>
-                        </div>
-                        <div class="product-fieldvalue">
-                            <div class="product-field">Grado:</div>
-                            <div class="product-value">Buono</div>
-                        </div>
-                        <div class="product-fieldvalue">
-                            <div class="product-field">Quantità:</div>
-                            <div class="product-value">22</div>
+            <c:choose>
+                <c:when test="${not empty product}">
+                <div id="product-box">
+                    <div id="product-element">
+                        <img id="product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+                        <div id="product-details">
+                            <div id="product-name">${product.name}</div>
+                            <div id="product-description">${product.description}</div>
+                            <div class="product-fieldvalue">
+                                <div class="product-field">Brand:</div>
+                                <div class="product-value">${product.brand}</div>
+                            </div>
+                            <div class="product-fieldvalue">
+                                <div class="product-field">Prezzo:</div>
+                                <div class="product-value">€${product.price}</div>
+                            </div>
+                            <div class="product-fieldvalue">
+                                <div class="product-field">Categoria:</div>
+                                <div class="product-value">${product.category}</div>
+                            </div>
+                            <div class="product-fieldvalue">
+                                <div class="product-field">Grado:</div>
+                                <div class="product-value">${product.grade}</div>
+                            </div>
+                            <div class="product-fieldvalue">
+                                <div class="product-field">Quantità:</div>
+                                <div class="product-value">${product.stockQuantity}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                </c:when>
+                <c:otherwise>
+                    <div id="product-box">
+                        <div id="not-existing-product-warning">Questo prodotto non esiste</div>
+                        <div class="product-proceed">Torna alla homepage</div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <%@include file="fragments/footer.jsp"%>

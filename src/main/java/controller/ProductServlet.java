@@ -29,43 +29,41 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         UserDTO user = null;
-        int id = Integer.parseInt(request.getParameter("idProduct"));
-        System.out.println("id prodotto: " + id);
+        int id=0;
+
+        if(request.getParameter("idProduct") != null) {
+            id = Integer.parseInt(request.getParameter("idProduct"));
+        }
+
         if(session != null){
             user =  (UserDTO) session.getAttribute("user");
         }
+
         if(user == null) request.setAttribute("role", "Guest");
         else request.setAttribute("role", user.getRole());
+
         try{
-            System.out.println("Ricerca avviata");
             ProductDTO product = null;
             if(id > 0){
                 product = productDAO.findById(id);
             }
-            System.out.println("Ricerca completata");
             if(product != null){
-                System.out.println("Il prodotto è stato trovato");
-                request.setAttribute("product-name", product.getName());
-                System.out.println(product.getName());
-                request.setAttribute("product-description", product.getDescription());
-                request.setAttribute("product-brand", product.getBrand());
-                request.setAttribute("product-price", product.getPrice());
-                request.setAttribute("product-category", product.getCategory());
-                request.setAttribute("product-grade", product.getGrade());
-                request.setAttribute("product-quantity", product.getStockQuantity());
+                request.setAttribute("product", product);
             }
             else {
                 System.out.println("Il prodotto non è stato trovato");
-                request.setAttribute("isempty", true);
+                request.setAttribute("product", null);
             }
         }catch (SQLException e){
             e.printStackTrace();
             request.setAttribute("role", "Guest");
             request.setAttribute("isempty", true);
+            request.setAttribute("error", "Errore interno del server");
             request.getRequestDispatcher("/WEB-INF/jsp/product.jsp").forward(request, response);
             return;
         }
         request.getRequestDispatcher("/WEB-INF/jsp/product.jsp").forward(request, response);
+        return;
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
