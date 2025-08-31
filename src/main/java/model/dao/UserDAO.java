@@ -159,7 +159,7 @@ public class UserDAO extends AbstractDAO<UserDTO, Integer> {
                 user.getRole() == null) {
             throw new IllegalArgumentException("Some required User fields are null or invalid.");
         }
-        if (user.getPhone() != null) {
+        if (user.getPhone() != null && !user.getPhone().trim().isEmpty()) {
             String phone = user.getPhone();
             if (phone.length() > 15 || !phone.matches("^[0-9+\\- ]+$")) {
                 throw new IllegalArgumentException(

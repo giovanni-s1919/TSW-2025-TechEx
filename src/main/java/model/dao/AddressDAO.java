@@ -154,7 +154,7 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
                 address.getAddressType() == null) {
             throw new IllegalArgumentException("Some required address fields are null or empty.");
         }
-        if (address.getPhone() != null &&
+        if (address.getPhone() != null && !address.getPhone().trim().isEmpty() &&
                 (address.getPhone().length() > 15 || !address.getPhone().matches("^[0-9+\\- ]+$"))) {
             throw new IllegalArgumentException("Phone must be max 15 characters and contain only digits, spaces, '+' or '-'.");
         }

@@ -6,14 +6,14 @@ import java.util.Objects;
 public class AddressDTO implements Serializable
 {
     public enum AddressType{
-        SHIPPING,
-        BILLING;
+        Shipping,
+        Billing;
 
         @Override
         public String toString() {
             return switch (this) {
-                case SHIPPING -> "Spedizione";
-                case BILLING -> "Fatturazione";
+                case Shipping -> "Spedizione";
+                case Billing -> "Fatturazione";
                 default -> "";
             };
         }
@@ -30,6 +30,7 @@ public class AddressDTO implements Serializable
     private String surname;
     private String phone;
     private AddressType addressType;
+    private boolean isDefault;
 
 
     // Constructors
@@ -74,6 +75,8 @@ public class AddressDTO implements Serializable
     public void setPhone(String phone){this.phone = phone;}
     public AddressType getAddressType(){return addressType;}
     public void setAddressType(AddressType addressType){this.addressType = addressType;}
+    public boolean isDefault(){return isDefault;}
+    public void setDefault(boolean aDefault){isDefault = aDefault;}
 
 
     @Override
