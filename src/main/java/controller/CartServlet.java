@@ -73,7 +73,6 @@ public class CartServlet extends HttpServlet {
             }
         }catch (SQLException e){
             e.printStackTrace();
-            request.setAttribute("role", "Guest");
             request.setAttribute("cartItems", new  ArrayList<CartItemDTO>());
             request.setAttribute("cartTotal", 0);
             request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp").forward(request, response);
