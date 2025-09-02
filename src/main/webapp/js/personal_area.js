@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (fieldName === 'email') {
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailPattern.test(newValue)) {
-                    displayMessage('Per favore, inserisci un formato email valido (es. nome@dominio(.com, .it ecc.).', 'error');
+                    displayMessage('Per favore, inserisci un formato email valido (es. nome@dominio).', 'error');
                     return;
                 }
             }
