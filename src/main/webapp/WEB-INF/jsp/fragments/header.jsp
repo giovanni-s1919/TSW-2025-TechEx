@@ -53,7 +53,7 @@
             <input type="text" id="searchbar" placeholder="Cerca...">
             <i class="fas fa-search lens"></i>
         </div>
-        <a href="preferiti.jsp">
+        <a href="${pageContext.request.contextPath}/wishlist">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
         </a>
         <a href="${pageContext.request.contextPath}/cart">
