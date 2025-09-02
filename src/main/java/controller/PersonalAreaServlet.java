@@ -292,8 +292,22 @@ public class PersonalAreaServlet extends HttpServlet {
                 sendJsonResponse(response, false, "La nuova password e la conferma non corrispondono.", HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
+            List<String> errors = new ArrayList<>();
             if (newPassword.length() < 8) {
-                sendJsonResponse(response, false, "La nuova password deve contenere almeno 8 caratteri.", HttpServletResponse.SC_BAD_REQUEST);
+                errors.add("deve essere lunga almeno 8 caratteri;");
+            }
+            if (!newPassword.matches(".*[A-Z].*[A-Z].*")) {
+                errors.add("deve contenere almeno 2 lettere maiuscole;");
+            }
+            if (!newPassword.matches(".*[a-z].*[a-z].*")) {
+                errors.add("deve contenere almeno 2 lettere minuscole;");
+            }
+            if (!newPassword.matches(".*[^a-zA-Z0-9].*")) {
+                errors.add("deve contenere almeno 1 carattere speciale o un numero;");
+            }
+            if (!errors.isEmpty()) {
+                String errorMessage = "Errore! La password non è valida: " + String.join(", ", errors) + ".";
+                sendJsonResponse(response, false, errorMessage, HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
             try {
@@ -309,7 +323,7 @@ public class PersonalAreaServlet extends HttpServlet {
                 log("Errore del database durante il cambio password per l'utente " + currentUser.getId(), e);
                 sendJsonResponse(response, false, "Errore del database durante il cambio password.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             } catch (Exception e) {
-                log("Errore durante l l'hashing della nuova password.", e);
+                log("Errore durante l'hashing della nuova password.", e);
                 sendJsonResponse(response, false, "Errore interno durante il cambio password.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         } else if ("addAddress".equals(action)) {

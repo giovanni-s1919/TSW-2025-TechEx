@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function displayMessage(message, type = 'info', targetElement = messagesDiv) {
-        targetElement.textContent = message;
+        targetElement.innerHTML = message;
         targetElement.className = '';
         targetElement.classList.add(type);
     }
@@ -209,12 +209,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const newPassword = document.getElementById('newPassword').value;
         const confirmNewPassword = document.getElementById('confirmNewPassword').value;
         clearMessages(passwordModalMessages);
+        const errors = [];
         if (newPassword !== confirmNewPassword) {
             displayMessage('La nuova password e la conferma non corrispondono.', 'error', passwordModalMessages);
             return;
         }
         if (newPassword.length < 8) {
-            displayMessage('La nuova password deve contenere almeno 8 caratteri.', 'error', passwordModalMessages);
+            errors.push("<li>Almeno 8 caratteri;</li>");
+        }
+        if ((newPassword.match(/[A-Z]/g) || []).length < 2) {
+            errors.push("<li>Almeno 2 lettere maiuscole;</li>");
+        }
+        if ((newPassword.match(/[a-z]/g) || []).length < 2) {
+            errors.push("<li>Almeno 2 lettere minuscole;</li>");
+        }
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(newPassword)) {
+            errors.push("<li>Almeno 1 carattere speciale o un numero;</li>");
+        }
+        if (errors.length > 0) {
+            const errorMessage = "Errore! La password deve rispettare i seguenti criteri:<ul>" + errors.join('') + "</ul>";
+            displayMessage(errorMessage, 'error', passwordModalMessages);
             return;
         }
         sendPasswordChangeRequest(currentPassword, newPassword);
