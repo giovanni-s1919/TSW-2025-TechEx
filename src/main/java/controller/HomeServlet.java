@@ -7,16 +7,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.dao.ProductDAO;
+import model.dto.ProductDTO;
 import model.dto.UserDTO;
+import model.view.ProductCardDisplay;
 
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 // maps the servlet to the root URL ("/") and "/home"
 @WebServlet(name = "HomeServlet",  value = {"", "/home"})
 public class HomeServlet extends HttpServlet {
+    ProductDAO productDAO;
+    List<ProductDTO> productList;
+
+    @Override
+    public void init() throws ServletException {
+        DataSource ds = (DataSource) getServletContext().getAttribute("datasource");
+        productDAO =  new ProductDAO(ds);
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         //TODO
         HttpSession session = request.getSession(false);
         if(session!=null){
@@ -31,6 +45,18 @@ public class HomeServlet extends HttpServlet {
         else{
             request.setAttribute("role", "Guest");
         }
+        List<ProductCardDisplay> products = new  ArrayList<>();
+        try {
+            List<ProductDTO> productDTOS = productDAO.findAll("ID");
+
+            for (ProductDTO productDTO : productDTOS) {
+                ProductCardDisplay product = new ProductCardDisplay(productDTO);
+                products.add(product);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        request.setAttribute("products", products);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
         dispatcher.forward(request, response);
     }

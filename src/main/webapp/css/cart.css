@@ -122,6 +122,10 @@ body {
 }
 
 .cart-proceed {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
     height: 2.5rem;
     width: 12.5rem;
     margin: 1.25rem;

@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,38 +22,26 @@
             </div>
             <div class="catalog">
                 <h1 class="products">Scopri la nostra selezione di pezzi di ricambio per smartphone:</h1>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 14 Pro Max" class="product-img">
-                        <h1 class="product-name">Display Apple Iphone 14 Pro Max</h1>
-                        <p class="product-grade">Ottimo</p>
-                        <p class="product-price">87,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Google Pixel 7" class="product-img">
-                        <h1 class="product-name">Batteria Google Pixel 7</h1>
-                        <p class="product-grade">Eccellente</p>
-                        <p class="product-price">25,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Tasto accensione Realme 9 5G" class="product-img">
-                        <h1 class="product-name">Tasto accensione Realme 9 5G</h1>
-                            <p class="product-grade">Buono</p>
-                        <p class="product-price">3,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Samsung Galaxy S23 Ultra" class="product-img">
-                        <h1 class="product-name">Fotocamera posteriore Samsung Galaxy S23 Ultra</h1>
-                        <p class="product-grade">Ottimo</p>
-                        <p class="product-price">37,99€</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Speaker Xiaomi 14T Pro" class="product-img">
-                        <h1 class="product-name">Speaker Xiaomi 14T Pro</h1>
-                        <p class="product-grade">Eccellente</p>
-                        <p class="product-price">12,99€</p>
-                    </div>
-                </div>
+                    <c:choose>
+                        <c:when test="${not empty products}">
+                            <div class="products-grid">
+                            <c:forEach var="item" items="${products}">
+                                <div class="product-card" id="${item.product.id}">
+                                    <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 14 Pro Max" class="product-img">
+                                    <h1 class="product-name">${item.product.name}</h1>
+                                    <p class="product-grade">${item.product.grade}</p>
+                                    <p class="product-price">€${item.product.price}</p>
+                                </div>
+                            </c:forEach>
+                            <script>
+                                $(".product-card").on("click", function(e){
+                                    e.preventDefault();
+                                    window.location.href = "${pageContext.request.contextPath}/product?idProduct="+$(this).attr("id");
+                                })
+                            </script>
+                        </div>
+                    </c:when>
+                </c:choose>
                 <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
                 <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
                 <p id="useful_print"><%=request.getAttribute("role")%></p>
@@ -332,7 +323,7 @@
                         <button class="faq_question">Quanto dura la garanzia?</button>
                         <div class="faq_answer">
                             I pezzi di ricambio venduti da TechEx godono di 2 anni di garanzia,<br>
-                            validi a partire dalla data di consegna del prodotto.
+                            validi a partire dalla data di consegna del prodotto. Inoltre il sushi è meglio della pizza
                         </div>
                     </div>
                 </div>

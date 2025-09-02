@@ -2,9 +2,8 @@ package model.view;
 
 
 import model.dto.ProductDTO;
-import java.io.Serializable;
 
-public class CartDisplayItem implements Serializable{
+public class CartDisplayItem {
     private ProductDTO product;
     private int quantity;
 

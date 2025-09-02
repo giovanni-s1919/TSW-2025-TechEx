@@ -103,7 +103,7 @@ body {
     font-weight: bold;
 }
 
-#cart-box-empty{
+#product-box-empty{
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -129,6 +129,26 @@ body {
 .product-proceed{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 12.5rem;
+    margin: 1.25rem;
+    font-weight: bold;
+    border-style: hidden;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
+    transition-property: background-color, scale;
+    transition-duration: 0.2s, 0.1s;
+    cursor: pointer;
+}
+
+.product-proceed:hover {
+    scale: 0.98;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.ref{
+    text-decoration: none;
+    color: black;
 }

@@ -59,12 +59,9 @@ public class CartServlet extends HttpServlet {
 
             if(cart != null){
                 List<CartItemDTO> cartItems = cartItemDAO.findByCartID(cart.getId());
-                System.out.println("3. Oggetti trovati nel carrello: " + cartItems.size());
 
                 for(CartItemDTO cartItem : cartItems){
-                    System.out.println("4. Analizzo l'oggetto: ProductID=" + cartItem.getProductID() + ", Quantità=" + cartItem.getQuantity());
                     ProductDTO product = productDAO.findById(cartItem.getProductID());
-                    System.out.println("ID prodotto: " + cartItem.getProductID());
 
                     if(product != null){
                         System.out.println("Product non è null");

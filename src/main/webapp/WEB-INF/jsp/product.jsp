@@ -46,9 +46,9 @@
                 </div>
                 </c:when>
                 <c:otherwise>
-                    <div id="product-box">
+                    <div id="product-box-empty">
                         <div id="not-existing-product-warning">Questo prodotto non esiste</div>
-                        <div class="product-proceed">Torna alla homepage</div>
+                        <div class="product-proceed"><a class="ref" href="${pageContext.request.contextPath}/home">Torna alla homepage</a></div>
                     </div>
                 </c:otherwise>
             </c:choose>
