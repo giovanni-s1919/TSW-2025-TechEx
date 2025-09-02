@@ -292,22 +292,15 @@ public class PersonalAreaServlet extends HttpServlet {
                 sendJsonResponse(response, false, "La nuova password e la conferma non corrispondono.", HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
-            List<String> errors = new ArrayList<>();
-            if (newPassword.length() < 8) {
-                errors.add("deve essere lunga almeno 8 caratteri;");
-            }
-            if (!newPassword.matches(".*[A-Z].*[A-Z].*")) {
-                errors.add("deve contenere almeno 2 lettere maiuscole;");
-            }
-            if (!newPassword.matches(".*[a-z].*[a-z].*")) {
-                errors.add("deve contenere almeno 2 lettere minuscole;");
-            }
-            if (!newPassword.matches(".*[^a-zA-Z0-9].*")) {
-                errors.add("deve contenere almeno 1 carattere speciale o un numero;");
-            }
-            if (!errors.isEmpty()) {
-                String errorMessage = "Errore! La password non è valida: " + String.join(", ", errors) + ".";
-                sendJsonResponse(response, false, errorMessage, HttpServletResponse.SC_BAD_REQUEST);
+            boolean isLengthValid = newPassword.length() >= 8;
+            boolean hasEnoughUppercases = newPassword.matches(".*[A-Z].*[A-Z].*");
+            boolean hasEnoughLowercases = newPassword.matches(".*[a-z].*[a-z].*");
+            boolean hasSpecialChar = newPassword.matches(".*[^a-zA-Z0-9].*");
+            boolean hasNumber = newPassword.matches(".*[0-9].*");
+            boolean isPasswordValid = isLengthValid && hasEnoughUppercases && hasEnoughLowercases && hasSpecialChar && hasNumber;
+            if (!isPasswordValid) {
+                String policyMessage = "La password non è valida. Deve rispettare i seguenti criteri: lunga almeno 8 caratteri, contenere almeno 2 lettere maiuscole, contenere almeno 2 lettere minuscole, contenere almeno 1 carattere speciale e almeno 1 numero.";
+                sendJsonResponse(response, false, policyMessage, HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
             try {
