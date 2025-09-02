@@ -79,7 +79,7 @@
                 </div>
                 <div class="content-panel" id="payments">
                     <h1 class="content_intro">Metodi di pagamento</h1>
-                    <p class="content_description">Aggiungi o modifica i tuoi metodi di pagamento.</p>
+                    <p class="content_description">Aggiungi e visualizza i tuoi metodi di pagamento.</p>
                 </div>
                 <div class="content-panel" id="orders">
                     <h1 class="content_intro">Ordini</h1>
