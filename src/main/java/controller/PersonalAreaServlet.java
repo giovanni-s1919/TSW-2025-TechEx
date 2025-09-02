@@ -1,31 +1,36 @@
 package controller;
 
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.Utility;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-import util.Utility;
-
-import model.dao.UserDAO;
 import model.dto.UserDTO;
-
+import model.dao.UserDAO;
+import model.dto.AddressDTO;
+import model.dao.AddressDAO;
+import model.dto.UserAddressDTO;
+import model.dao.UserAddressDAO;
 
 
 @WebServlet(name = "PersonalAreaServlet", value = {"/personal_area"})
 public class PersonalAreaServlet extends HttpServlet {
-
     private UserDAO userDAO;
+    private AddressDAO addressDAO;
+    private UserAddressDAO userAddressDAO;
     private Gson gson = new Gson();
 
     @Override
@@ -36,9 +41,11 @@ public class PersonalAreaServlet extends HttpServlet {
             if (dataSource == null) {
                 throw new ServletException("DataSource non disponibile nel contesto della servlet.");
             }
-            userDAO = new UserDAO(dataSource);
+            this.userDAO = new UserDAO(dataSource);
+            this.addressDAO = new AddressDAO(dataSource);
+            this.userAddressDAO = new UserAddressDAO(dataSource);
         } catch (ServletException e) {
-            log("Errore durante l'inizializzazione del UserDAO", e);
+            log("Errore durante l'inizializzazione dei DAO", e);
             throw e;
         }
     }
@@ -47,7 +54,15 @@ public class PersonalAreaServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         UserDTO loggedInUser = (UserDTO) session.getAttribute("user");
-
+        String action = request.getParameter("action");
+        if ("getAddresses".equals(action)) {
+            handleGetAddresses(request, response);
+            return;
+        }
+        else if ("getAddressDetails".equals(action)) {
+            handleGetAddressDetails(request, response);
+            return;
+        }
         if (session == null || loggedInUser == null || loggedInUser.getId() == 0) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -71,16 +86,87 @@ public class PersonalAreaServlet extends HttpServlet {
                 .forward(request, response);
     }
 
+    private void handleGetAddresses(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+        if (loggedInUser == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Utente non autenticato.")));
+            return;
+        }
+        try {
+            List<UserAddressDTO> userAddressLinks = userAddressDAO.findByUserID(loggedInUser.getId());
+            List<Map<String, Object>> addressListForJson = new ArrayList<>();
+            for (UserAddressDTO link : userAddressLinks) {
+                AddressDTO addressDetails = addressDAO.findById(link.getAddressId());
+                if (addressDetails != null) {
+                    Map<String, Object> addressMap = new HashMap<>();
+                    addressMap.put("id", addressDetails.getId());
+                    addressMap.put("name", addressDetails.getName());
+                    addressMap.put("surname", addressDetails.getSurname());
+                    addressMap.put("street", addressDetails.getStreet());
+                    addressMap.put("additionalInfo", addressDetails.getAdditionalInfo());
+                    addressMap.put("city", addressDetails.getCity());
+                    addressMap.put("postalCode", addressDetails.getPostalCode());
+                    addressMap.put("region", addressDetails.getRegion());
+                    addressMap.put("country", addressDetails.getCountry());
+                    addressMap.put("phone", addressDetails.getPhone());
+                    addressMap.put("isDefault", link.isDefault());
+                    addressMap.put("addressType", addressDetails.getAddressType().name());
+                    addressMap.put("translatedAddressType", addressDetails.getAddressType().toString());
+                    addressListForJson.add(addressMap);
+                }
+            }
+            response.getWriter().write(gson.toJson(addressListForJson));
+        } catch (SQLException e) {
+            log("Errore nel recupero degli indirizzi per l'utente " + loggedInUser.getId(), e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Errore del server durante il recupero degli indirizzi.")));
+        }
+    }
+
+    private void handleGetAddressDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+        if (loggedInUser == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Utente non autenticato.")));
+            return;
+        }
+        try {
+            int addressId = Integer.parseInt(request.getParameter("addressId"));
+            UserAddressDTO link = userAddressDAO.findById(addressId, loggedInUser.getId());
+            if (link == null) {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Accesso non autorizzato.")));
+                return;
+            }
+            AddressDTO address = addressDAO.findById(addressId);
+            if (address != null) {
+                address.setDefault(link.isDefault());
+                response.getWriter().write(gson.toJson(address));
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Indirizzo non trovato.")));
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Richiesta non valida o errore del server.")));
+            log("Errore durante il recupero dei dettagli dell'indirizzo", e);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
         HttpSession session = request.getSession(false);
         UserDTO loggedInUser = (UserDTO) session.getAttribute("user");
-
-
         if (session == null || loggedInUser == null || loggedInUser.getId() == 0) {
             sendJsonResponse(response, false, "Sessione scaduta o utente non autenticato. Riloggarsi.", HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -97,9 +183,7 @@ public class PersonalAreaServlet extends HttpServlet {
             sendJsonResponse(response, false, "Errore interno del server durante la verifica utente.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
-
         String action = request.getParameter("action");
-
         if ("updateField".equals(action)) {
             String field = request.getParameter("field");
             String value = request.getParameter("value");
@@ -110,7 +194,6 @@ public class PersonalAreaServlet extends HttpServlet {
             try {
                 boolean fieldUpdated = false;
                 String successMessage = "";
-
                 switch (field) {
                     case "name":
                         currentUser.setName(value);
@@ -133,6 +216,11 @@ public class PersonalAreaServlet extends HttpServlet {
                         fieldUpdated = true;
                         break;
                     case "email":
+                        String emailPattern = "\\A[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}\\z";
+                        if (value == null || !value.matches(emailPattern)) {
+                            sendJsonResponse(response, false, "Formato email non valido.", HttpServletResponse.SC_BAD_REQUEST);
+                            return;
+                        }
                         UserDTO existingUserByEmail = userDAO.findByEmail(value);
                         if (existingUserByEmail != null && existingUserByEmail.getId() != currentUser.getId()) {
                             sendJsonResponse(response, false, "Email già in uso.", HttpServletResponse.SC_CONFLICT);
@@ -144,12 +232,28 @@ public class PersonalAreaServlet extends HttpServlet {
                         break;
                     case "birthDate":
                         try {
-                            currentUser.setBirthDate(LocalDate.parse(value));
-                            successMessage = "Data di nascita aggiornata con successo.";
-                            fieldUpdated = true;
+                            LocalDate birthDate = LocalDate.parse(value);
+                            LocalDate today = LocalDate.now();
+                            LocalDate eighteenYearsAgo = today.minusYears(18);
+                            boolean isValid = true;
+                            String errorMessage = "";
+                            if (birthDate.isAfter(today)) {
+                                isValid = false;
+                                errorMessage = "La data di nascita non può essere una data futura.";
+                            }
+                            if (isValid && birthDate.isAfter(eighteenYearsAgo)) {
+                                isValid = false;
+                                errorMessage = "Devi avere almeno 18 anni!";
+                            }
+                            if (isValid) {
+                                currentUser.setBirthDate(birthDate);
+                                successMessage = "Data di nascita aggiornata con successo.";
+                                fieldUpdated = true;
+                            } else {
+                                sendJsonResponse(response, false, errorMessage, HttpServletResponse.SC_BAD_REQUEST);
+                            }
                         } catch (java.time.format.DateTimeParseException e) {
                             sendJsonResponse(response, false, "Formato data non valido (YYYY-MM-DD).", HttpServletResponse.SC_BAD_REQUEST);
-                            return;
                         }
                         break;
                     case "phone":
@@ -161,7 +265,6 @@ public class PersonalAreaServlet extends HttpServlet {
                         sendJsonResponse(response, false, "Campo non valido o non modificabile.", HttpServletResponse.SC_BAD_REQUEST);
                         return;
                 }
-
                 if (fieldUpdated) {
                     userDAO.update(currentUser);
                     session.setAttribute("user", currentUser);
@@ -180,45 +283,163 @@ public class PersonalAreaServlet extends HttpServlet {
             String currentPassword = request.getParameter("currentPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmNewPassword = request.getParameter("confirmNewPassword");
-
             if (currentPassword == null || newPassword == null || confirmNewPassword == null ||
                     currentPassword.trim().isEmpty() || newPassword.trim().isEmpty() || confirmNewPassword.trim().isEmpty()) {
                 sendJsonResponse(response, false, "Tutti i campi della password sono obbligatori.", HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
-
             if (!newPassword.equals(confirmNewPassword)) {
                 sendJsonResponse(response, false, "La nuova password e la conferma non corrispondono.", HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
-
-            if (newPassword.length() < 8) { // Esempio
+            if (newPassword.length() < 8) {
                 sendJsonResponse(response, false, "La nuova password deve contenere almeno 8 caratteri.", HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
-
             try {
                 if (!Utility.checkPassword(currentPassword, currentUser.getPasswordHash())) {
                     sendJsonResponse(response, false, "La password attuale non è corretta.", HttpServletResponse.SC_UNAUTHORIZED);
                     return;
                 }
-                String newPasswordHash = Utility.hashPassword(newPassword); // Assicurati che Utility.hashPassword esista
-
+                String newPasswordHash = Utility.hashPassword(newPassword);
                 currentUser.setPasswordHash(newPasswordHash);
                 userDAO.update(currentUser);
-
-                // Non aggiornare la sessione con la nuova password in chiaro!
-                // La sessione contiene già l'hash, non c'è bisogno di ricaricarlo per la sessione.
-
                 sendJsonResponse(response, true, "Password aggiornata con successo.", HttpServletResponse.SC_OK);
             } catch (SQLException e) {
                 log("Errore del database durante il cambio password per l'utente " + currentUser.getId(), e);
                 sendJsonResponse(response, false, "Errore del database durante il cambio password.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            } catch (Exception e) { // Catch per Utility.hashPassword se lancia eccezioni
+            } catch (Exception e) {
                 log("Errore durante l l'hashing della nuova password.", e);
                 sendJsonResponse(response, false, "Errore interno durante il cambio password.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        } else {
+        } else if ("addAddress".equals(action)) {
+            try {
+                String name = request.getParameter("name");
+                String surname = request.getParameter("surname");
+                String street = request.getParameter("street");
+                String additionalInfo = request.getParameter("additionalInfo");
+                String city = request.getParameter("city");
+                String postalCode = request.getParameter("postalCode");
+                String region = request.getParameter("region");
+                String country = request.getParameter("country");
+                String phone = request.getParameter("phone");
+                String addressTypeStr = request.getParameter("addressType");
+                boolean isDefault = Boolean.parseBoolean(request.getParameter("isDefault"));
+                AddressDTO newAddress = new AddressDTO();
+                newAddress.setName(name);
+                newAddress.setSurname(surname);
+                newAddress.setStreet(street);
+                newAddress.setAdditionalInfo(additionalInfo);
+                newAddress.setCity(city);
+                newAddress.setPostalCode(postalCode);
+                newAddress.setRegion(region);
+                newAddress.setCountry(country);
+                newAddress.setPhone(phone);
+                newAddress.setAddressType(AddressDTO.AddressType.valueOf(addressTypeStr));
+                addressDAO.save(newAddress);
+                if (isDefault) {
+                    List<UserAddressDTO> existingAddresses = userAddressDAO.findByUserID(loggedInUser.getId());
+                    for (UserAddressDTO addrLink : existingAddresses) {
+                        if (addrLink.isDefault()) {
+                            addrLink.setDefault(false);
+                            userAddressDAO.update(addrLink);
+                        }
+                    }
+                }
+                UserAddressDTO newUserAddressLink = new UserAddressDTO(newAddress.getId(), loggedInUser.getId(), isDefault);
+                userAddressDAO.save(newUserAddressLink);
+                sendJsonResponse(response, true, "Indirizzo aggiunto con successo!", HttpServletResponse.SC_OK);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'aggiunta dell'indirizzo per l'utente " + loggedInUser.getId(), e);
+                sendJsonResponse(response, false, "Errore durante il salvataggio nel database.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (IllegalArgumentException e) {
+                log("Errore nei dati per l'aggiunta dell'indirizzo: " + e.getMessage());
+                sendJsonResponse(response, false, "I dati inseriti non sono validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } else if ("deleteAddress".equals(action)) {
+            try {
+                String addressIdStr = request.getParameter("addressId");
+                if (addressIdStr == null || addressIdStr.trim().isEmpty()) {
+                    sendJsonResponse(response, false, "ID indirizzo mancante.", HttpServletResponse.SC_BAD_REQUEST);
+                    return;
+                }
+                int addressId = Integer.parseInt(addressIdStr);
+                UserAddressDTO link = userAddressDAO.findById(addressId, loggedInUser.getId());
+                if (link == null) {
+                    sendJsonResponse(response, false, "Tentativo di eliminare un indirizzo non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                    return;
+                }
+                boolean wasDefault = link.isDefault();
+                userAddressDAO.delete(addressId, loggedInUser.getId());
+                addressDAO.delete(addressId);
+                if (wasDefault) {
+                    List<UserAddressDTO> remainingAddresses = userAddressDAO.findByUserID(loggedInUser.getId());
+                    if (!remainingAddresses.isEmpty()) {
+                        UserAddressDTO newDefault = remainingAddresses.get(0);
+                        newDefault.setDefault(true);
+                        userAddressDAO.update(newDefault);
+                    }
+                }
+                sendJsonResponse(response, true, "Indirizzo eliminato con successo.", HttpServletResponse.SC_OK);
+            } catch (NumberFormatException e) {
+                sendJsonResponse(response, false, "ID indirizzo non valido.", HttpServletResponse.SC_BAD_REQUEST);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'eliminazione dell'indirizzo: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore del database durante l'eliminazione.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } else if ("updateAddress".equals(action)) {
+            try {
+                int addressId = Integer.parseInt(request.getParameter("addressId"));
+                String name = request.getParameter("name");
+                String surname = request.getParameter("surname");
+                String street = request.getParameter("street");
+                String additionalInfo = request.getParameter("additionalInfo");
+                String city = request.getParameter("city");
+                String postalCode = request.getParameter("postalCode");
+                String region = request.getParameter("region");
+                String country = request.getParameter("country");
+                String phone = request.getParameter("phone");
+                String addressTypeStr = request.getParameter("addressType");
+                boolean isDefault = Boolean.parseBoolean(request.getParameter("isDefault"));
+                UserAddressDTO linkToUpdate = userAddressDAO.findById(addressId, loggedInUser.getId());
+                if (linkToUpdate == null) {
+                    sendJsonResponse(response, false, "Tentativo di modificare un indirizzo non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                    return;
+                }
+                AddressDTO updatedAddress = new AddressDTO();
+                updatedAddress.setId(addressId);
+                updatedAddress.setName(name);
+                updatedAddress.setSurname(surname);
+                updatedAddress.setStreet(street);
+                updatedAddress.setAdditionalInfo(additionalInfo);
+                updatedAddress.setCity(city);
+                updatedAddress.setPostalCode(postalCode);
+                updatedAddress.setRegion(region);
+                updatedAddress.setCountry(country);
+                updatedAddress.setPhone(phone);
+                updatedAddress.setAddressType(AddressDTO.AddressType.valueOf(addressTypeStr));
+                addressDAO.update(updatedAddress);
+                if (isDefault) {
+                    List<UserAddressDTO> existingAddresses = userAddressDAO.findByUserID(loggedInUser.getId());
+                    for (UserAddressDTO addrLink : existingAddresses) {
+                        if (addrLink.getAddressId() != addressId && addrLink.isDefault()) {
+                            addrLink.setDefault(false);
+                            userAddressDAO.update(addrLink);
+                        }
+                    }
+                }
+                linkToUpdate.setDefault(isDefault);
+                userAddressDAO.update(linkToUpdate);
+                sendJsonResponse(response, true, "Indirizzo aggiornato con successo.", HttpServletResponse.SC_OK);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'aggiornamento dell'indirizzo: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore durante l'aggiornamento nel database.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (Exception e) {
+                log("Errore generico durante l'aggiornamento dell'indirizzo: " + e.getMessage());
+                sendJsonResponse(response, false, "Dati non validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
+            }
+        }
+        else {
             sendJsonResponse(response, false, "Azione non riconosciuta.", HttpServletResponse.SC_BAD_REQUEST);
         }
     }

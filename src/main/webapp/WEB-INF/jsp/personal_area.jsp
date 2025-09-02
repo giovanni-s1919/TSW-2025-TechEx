@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personal_area.css">
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>const contextPath = "${pageContext.request.contextPath}";</script>
     </head>
-    <body id="personal_area" data-context-path="${pageContext.request.contextPath}">
+    <body id="personal_area">
         <%@ include file="fragments/header.jsp" %>
         <div id="main">
             <ul id="account_voices">
@@ -68,7 +69,13 @@
                 </div>
                 <div class="content-panel" id="addresses">
                     <h1 class="content_intro">Indirizzi</h1>
-                    <p class="content_description">Qui puoi gestire i tuoi indirizzi di spedizione.</p>
+                    <p class="content_description">Qui puoi gestire i tuoi indirizzi di spedizione e fatturazione.</p>
+                    <div id="address-list-container"></div>
+                    <div class="add-address-container">
+                        <button id="add-address-btn" class="save-btn">
+                            <i class="fa-solid fa-plus"></i> Aggiungi un nuovo indirizzo
+                        </button>
+                    </div>
                 </div>
                 <div class="content-panel" id="payments">
                     <h1 class="content_intro">Metodi di pagamento</h1>

@@ -64,7 +64,7 @@ body#personal_area #forguest {
     white-space: nowrap;
     color: #003459;
     transition-duration: 0.2s;
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     line-height: 1.2;
@@ -171,11 +171,11 @@ body#personal_area #forguest {
     transition: background-color 0.3s ease-in-out, transform 0.3s ease;
     min-width: 6.25rem;
     text-align: center;
+    color: #FFFFFF;
 }
 
 .edit-btn {
     background-color: #003459;
-    color: white;
 }
 
 .edit-btn:hover {
@@ -184,7 +184,6 @@ body#personal_area #forguest {
 
 .save-btn {
     background-color: #00A8E8;
-    color: white;
 }
 
 .save-btn:hover {
@@ -193,7 +192,6 @@ body#personal_area #forguest {
 
 .cancel-btn {
     background-color: #DC3545;
-    color: white;
 }
 
 .cancel-btn:hover {
@@ -253,7 +251,7 @@ body#personal_area #forguest {
 .modal-content h2 {
     margin-top: 0;
     color: #003459;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
     text-align: center;
 }
 
@@ -280,9 +278,7 @@ body#personal_area #forguest {
 .modal-content .save-btn {
     display: block;
     width: 15.625rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.5rem;
+    margin: 1.5rem auto -2rem auto;
     padding: 0.7rem 1.5rem;
     text-align: center;
 }
@@ -291,21 +287,20 @@ body#personal_area #forguest {
     padding: 0.625rem;
     border-radius: 5px;
     font-size: 0.95rem;
-    margin-bottom: 0.938rem;
+    margin: 3.5rem 1.5rem 0 1.5rem;
 }
 
 #passwordModalMessages.success {
     background-color: #D4EDDA;
     color: #155724;
     border: 1px solid #C3E6CB;
-    margin: 1.5rem 1.5rem 0 1.5rem;
+
 }
 
 #passwordModalMessages.error {
     background-color: #F8D7DA;
     color: #721C24;
     border: 1px solid #F5C6CB;
-    margin: 1.5rem 1.5rem 0 1.5rem;
 }
 
 #messages {
@@ -324,6 +319,229 @@ body#personal_area #forguest {
 }
 
 #messages.error {
+    background-color: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+#address-list-container {
+    margin-top: 0.5rem;
+    max-width: 37.5rem;
+}
+
+.loading-msg, .error-msg, .no-addresses-msg {
+    text-align: center;
+    padding: 1rem;
+    color: #00171F;
+    border-radius: 5px;
+}
+
+.error-msg {
+    background-color: #F8D7DA;
+    color: #721C24;
+    border-color: #F5C6CB;
+}
+
+.add-address-container {
+    max-width: 37.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #CCCCCC;
+    text-align: center;
+}
+
+.add-address-container .save-btn i {
+    margin-right: 0.5rem;
+}
+
+.address-card {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.address-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.address-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 4.375rem;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.summary-text-intro {
+    display: flex;
+    align-items: center;
+}
+
+.summary-text strong {
+    font-size: 1.2rem;
+    color: #003459;
+    font-weight: bold;
+}
+
+.summary-text span {
+    color: #00171F;
+    display: block;
+    margin-top: 0.75rem;
+}
+
+.default-badge {
+    position: relative;
+    top: -4px;
+    display: inline-block;
+    width: auto;
+    background-color: #003459;
+    color: #FFFFFF !important;
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 1.9rem;
+    white-space: nowrap;
+}
+
+.address-actions .action-btn {
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+}
+
+.address-actions .edit-address-btn {
+    background-color: #00A8E8;
+}
+
+.address-actions .edit-address-btn:hover {
+    background-color: #0084B5;
+}
+
+.address-actions .delete-address-btn {
+    background-color: #DC3545;
+}
+
+.address-actions .delete-address-btn:hover {
+    background-color: #C82333;
+}
+
+.address-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding: 0 1.5rem;
+    background-color: #ECECEC;
+}
+
+.address-details.expanded {
+    border-top: 1px dashed #A6A6A6;
+    max-height: 31.25rem;
+    padding: 0.5rem 0 1rem 1.5rem;
+    transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+}
+
+.address-details p {
+    margin: 0.5rem 0;
+    color: #00171F;
+}
+
+.address-details p:last-child {
+    margin-bottom: 0;
+}
+
+#addAddressForm .form-group input[type="text"],
+#addAddressForm .form-group input[type="tel"],
+#addAddressForm .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #00171F;
+    background-color: #FFFFFF;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+#addAddressForm .form-group {
+    margin: 0 0 1rem 0;
+}
+
+#addAddressForm .form-group select {
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: 0.65em auto;
+    cursor: pointer;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.form-check input[type="checkbox"] {
+    width: 1.15em;
+    height: 1.15em;
+    cursor: pointer;
+}
+
+.form-check label {
+    margin-left: 0.6rem;
+    color: #00171F;
+}
+
+.modal-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#addAddressModal .save-btn {
+    display: inline-block;
+    width: auto;
+    min-width: 6.25rem;
+    margin: 0 0.5rem;
+    padding: 0.7rem 1.5rem;
+}
+
+#addressModalMessages {
+    padding: 0.625rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    margin-top: 2.4rem;
+}
+
+#addressModalMessages.success {
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+#addressModalMessages.error {
     background-color: #F8D7DA;
     color: #721C24;
     border: 1px solid #F5C6CB;
