@@ -23,7 +23,7 @@
                 <div id="wishlist-box">
                     <c:forEach var="item" items="${displayItems}">
                         <div class="wishlist-item">
-                            <img class="wishlist-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+                            <img class="wishlist-product-image" src="${pageContext.request.contextPath}/images/products/prodotto.jpg">
                             <div class="wishlist-product-details">
                                 <div class="wishlist-product=name">${item.product.name}</div>
                                 <div class="wishlist-product-fieldvalue">
@@ -36,7 +36,9 @@
                                 </div>
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Price:</div>
-                                    <div class="wishlist-product-value">€${item.product.brand}</div>
+                                    <div class="whislist-product-value">
+                                        <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

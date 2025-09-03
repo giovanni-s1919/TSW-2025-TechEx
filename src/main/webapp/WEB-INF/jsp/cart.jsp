@@ -19,7 +19,7 @@
             <div id="cart-box">
                 <c:forEach var="item" items="${cartItems}">
                     <div class="cart-element" id="${item.product.id}">
-                        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg"> <%-- L'immagine è ancora statica --%>
+                        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}">
                         <div class="cart-product-details">
                             <div class="cart-product-name">${item.product.name}</div>
                             <div class="cart-product-fieldvalue">

@@ -27,7 +27,7 @@
                             <div class="products-grid">
                             <c:forEach var="item" items="${products}">
                                 <div class="product-card" id="${item.product.id}">
-                                    <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 14 Pro Max" class="product-img">
+                                    <img src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}" class="product-img">
                                     <h1 class="product-name">${item.product.name}</h1>
                                     <p class="product-grade">${item.product.grade}</p>
                                     <p class="product-price">€${item.product.price}</p>
@@ -87,31 +87,31 @@
                 <p class="élite_selection-top">I migliori articoli presenti nel nostro catalogo. Componenti 100% originali per i clienti più esigenti.</p><br>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera anteriore Samsung Galaxy S25+" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera anteriore Samsung Galaxy S25+" class="product-img">
                         <h1 class="product-name">Fotocamera anteriore Samsung Galaxy S25+</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">39,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 16 Pro Max" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Apple Iphone 16 Pro Max" class="product-img">
                         <h1 class="product-name">Display Apple Iphone 16 Pro Max</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">749,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Apple Iphone 16 Pro" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Batteria Apple Iphone 16 Pro" class="product-img">
                         <h1 class="product-name">Batteria Apple Iphone 16 Pro</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">135,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
                         <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">269,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
                         <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
                         <p class="product-grade">Originale</p>
                         <p class="product-price">79,99€</p>
@@ -139,31 +139,31 @@
                 <p class="best_sellers-favourites">I prodotti più apprezzati ed acquistati dagli utenti. Vuoi andare sul sicuro? Sei nel posto giusto!</p>
                 <div class="products-grid">
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Samsung Galaxy S22 Ultra" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Batteria Samsung Galaxy S22 Ultra" class="product-img">
                         <h1 class="product-name">Batteria Samsung Galaxy S22 Ultra</h1>
                         <p class="product-grade">Ottimo</p>
                         <p class="product-price">25,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Apple Iphone 13 Pro" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Apple Iphone 13 Pro" class="product-img">
                         <h1 class="product-name">Display Apple Iphone 13 Pro</h1>
                         <p class="product-grade">Eccellente</p>
                         <p class="product-price">79,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Fotocamera posteriore Apple Iphone 14" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 14" class="product-img">
                         <h1 class="product-name">Fotocamera posteriore Apple Iphone 14</h1>
                         <p class="product-grade">Ottimo</p>
                         <p class="product-price">45,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Display Samsung Galaxy S23" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S23" class="product-img">
                         <h1 class="product-name">Display Samsung Galaxy S23</h1>
                         <p class="product-grade">Eccellente</p>
                         <p class="product-price">149,99€</p>
                     </div>
                     <div class="product-card">
-                        <img src="${pageContext.request.contextPath}/images/prodotto.jpg" alt="Batteria Apple Iphone 14 Pro" class="product-img">
+                        <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Batteria Apple Iphone 14 Pro" class="product-img">
                         <h1 class="product-name">Batteria Apple Iphone 14 Pro</h1>
                         <p class="product-grade">Eccellente</p>
                         <p class="product-price">59,99€</p>

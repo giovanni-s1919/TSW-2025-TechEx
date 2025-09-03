@@ -17,7 +17,7 @@
                 <c:when test="${not empty product}">
                 <div id="product-box">
                     <div id="product-element">
-                        <img id="product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg">
+                        <img id="product-image" src="${pageContext.request.contextPath}/images/products/${product.id}.png">
                         <div id="product-details">
                             <div id="product-name">${product.name}</div>
                             <div id="product-description">${product.description}</div>
