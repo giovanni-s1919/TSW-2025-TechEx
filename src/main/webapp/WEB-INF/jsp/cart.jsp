@@ -18,7 +18,7 @@
         <c:when test="${not empty cartItems}">
             <div id="cart-box">
                 <c:forEach var="item" items="${cartItems}">
-                    <div class="cart-element">
+                    <div class="cart-element" id="${item.product.id}">
                         <img class="cart-product-image" src="${pageContext.request.contextPath}/images/prodotto.jpg"> <%-- L'immagine è ancora statica --%>
                         <div class="cart-product-details">
                             <div class="cart-product-name">${item.product.name}</div>
@@ -43,6 +43,12 @@
                         </div>
                     </div>
                 </c:forEach>
+                <script>
+                    $(".cart-element").on("click", function(e){
+                        e.preventDefault();
+                        window.location.href = "${pageContext.request.contextPath}/product?idProduct="+$(this).attr("id");
+                    })
+                </script>
             </div>
             <div id="cart-confirm">
                 <div class="cart-total">

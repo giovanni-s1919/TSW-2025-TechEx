@@ -23,10 +23,10 @@ body {
     flex-direction: column;
     justify-self: center;
     align-self: center;
-    width: 70%;
+    width: 50%;
     margin-top: 10%;
     margin-bottom: 5%;
-    padding: 3.125rem;
+    padding: 2.125rem;
     background-color: rgba(0,0,0,0.1); /* #000000 (black) */
     border-radius: 10px;
 }
