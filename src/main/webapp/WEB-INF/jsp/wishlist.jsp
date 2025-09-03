@@ -11,6 +11,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <script>
+        if ("${role}" === "Guest") {
+            window.location.replace("${pageContext.request.contextPath}/login");
+        }
+    </script>
     <%@ include file="fragments/header.jsp" %>
     <div id="main">
         <c:choose>
@@ -24,6 +29,14 @@
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Brand:</div>
                                     <div class="wishlist-product-value">${item.product.brand}</div>
+                                </div>
+                                <div class="wishlist-product-fieldvalue">
+                                    <div class="wishlist-product-field">Categoria:</div>
+                                    <div class="wishlist-product-value">${item.product.category}</div>
+                                </div>
+                                <div class="wishlist-product-fieldvalue">
+                                    <div class="wishlist-product-field">Price:</div>
+                                    <div class="wishlist-product-value">€${item.product.brand}</div>
                                 </div>
                             </div>
                         </div>
