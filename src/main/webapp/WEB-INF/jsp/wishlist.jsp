@@ -23,9 +23,9 @@
                 <div id="wishlist-box">
                     <c:forEach var="item" items="${displayItems}">
                         <div class="wishlist-item">
-                            <img class="wishlist-product-image" src="${pageContext.request.contextPath}/images/products/prodotto.jpg">
+                            <img class="wishlist-product-image" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png">
                             <div class="wishlist-product-details">
-                                <div class="wishlist-product=name">${item.product.name}</div>
+                                <div class="wishlist-product-name">${item.product.name}</div>
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Brand:</div>
                                     <div class="wishlist-product-value">${item.product.brand}</div>
