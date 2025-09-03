@@ -79,7 +79,13 @@
                 </div>
                 <div class="content-panel" id="payments">
                     <h1 class="content_intro">Metodi di pagamento</h1>
-                    <p class="content_description">Aggiungi e visualizza i tuoi metodi di pagamento.</p>
+                    <p class="content_description">Qui puoi gestire i tuoi metodi di pagamento salvati.</p>
+                    <div id="payment-methods-list-container"></div>
+                    <div class="add-payment-methods-container">
+                        <button id="add-payment-methods-btn" class="save-btn">
+                            <i class="fa-solid fa-plus"></i> Aggiungi un nuovo metodo di pagamento
+                        </button>
+                    </div>
                 </div>
                 <div class="content-panel" id="orders">
                     <h1 class="content_intro">Ordini</h1>

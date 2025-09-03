@@ -546,3 +546,161 @@ body#personal_area #forguest {
     color: #721C24;
     border: 1px solid #F5C6CB;
 }
+
+#payment-methods-list-container {
+    margin-top: 0.5rem;
+    max-width: 37.5rem;
+}
+
+.add-payment-methods-container {
+    max-width: 37.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #CCCCCC;
+    text-align: center;
+}
+
+.add-payment-methods-container .save-btn i {
+    margin-right: 0.5rem;
+}
+
+.payment-method-card {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.payment-method-card .default-badge {
+    position: relative;
+}
+
+.summary-text-intro:has(.card-logo.american-express) .default-badge {
+    margin-top: -0.3rem;
+    margin-left: -0.4rem;
+}
+
+.summary-text-intro:has(.card-logo.visa) .default-badge {
+    margin-top: 0.6rem;
+    margin-left: 5.5rem;
+}
+
+.summary-text-intro:has(.card-logo.mastercard) .default-badge {
+    margin-top: 0.7rem;
+    margin-left: 2.3rem;
+}
+
+.summary-text-intro:has(.card-logo.postepay) .default-badge {
+    margin-top: 0.6rem;
+    margin-left: 2.75rem;
+}
+
+.payment-method-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 4.375rem;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    cursor: default;
+}
+
+.payment-method-summary strong {
+    margin-left: 0.5rem;
+}
+
+.card-logo {
+    width: 2.688rem;
+    height: 1.513rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.card-logo.american-express {
+    background-image: url('../images/americanexpress.jpg');
+}
+
+.card-logo.visa {
+    background-image: url('../images/visa.png');
+    margin-left: -0.15rem;
+}
+
+.card-logo.mastercard {
+    background-image: url('../images/mastercard.jpg');
+    margin-left: -0.15rem;
+}
+
+.card-logo.postepay {
+    background-image: url('../images/postepay.jpg');
+}
+
+.card-logo.postepay + .summary-text-intro .default-badge {
+    margin-left: 2rem;
+}
+
+.payment-method-card .delete-payment-method-btn {
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    background-color: #DC3545;
+}
+
+.payment-method-card .delete-payment-method-btn:hover {
+    background-color: #C82333;
+}
+
+#addPaymentMethodForm .form-group input[type="text"],
+#addPaymentMethodForm .form-group input[type="month"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #00171F;
+    background-color: #FFFFFF;
+}
+
+#addPaymentMethodForm .form-group {
+    margin: 0 0 1rem 0;
+}
+
+#addPaymentMethodModal .save-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 6.25rem;
+    padding: 0.7rem 1.5rem;
+}
+
+#paymentMethodModalMessages {
+    padding: 0.625rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    margin-top: 2.4rem;
+}
+
+#paymentMethodModalMessages.success {
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+#paymentMethodModalMessages.error {
+    background-color: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}

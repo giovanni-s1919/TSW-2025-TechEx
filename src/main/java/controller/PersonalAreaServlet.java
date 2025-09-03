@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,8 @@ import model.dto.AddressDTO;
 import model.dao.AddressDAO;
 import model.dto.UserAddressDTO;
 import model.dao.UserAddressDAO;
+import model.dto.PaymentMethodDTO;
+import model.dao.PaymentMethodDAO;
 
 
 @WebServlet(name = "PersonalAreaServlet", value = {"/personal_area"})
@@ -31,6 +35,7 @@ public class PersonalAreaServlet extends HttpServlet {
     private UserDAO userDAO;
     private AddressDAO addressDAO;
     private UserAddressDAO userAddressDAO;
+    private PaymentMethodDAO paymentMethodDAO;
     private Gson gson = new Gson();
 
     @Override
@@ -44,6 +49,7 @@ public class PersonalAreaServlet extends HttpServlet {
             this.userDAO = new UserDAO(dataSource);
             this.addressDAO = new AddressDAO(dataSource);
             this.userAddressDAO = new UserAddressDAO(dataSource);
+            this.paymentMethodDAO = new PaymentMethodDAO(dataSource);
         } catch (ServletException e) {
             log("Errore durante l'inizializzazione dei DAO", e);
             throw e;
@@ -61,6 +67,10 @@ public class PersonalAreaServlet extends HttpServlet {
         }
         else if ("getAddressDetails".equals(action)) {
             handleGetAddressDetails(request, response);
+            return;
+        }
+        else if ("getPaymentMethods".equals(action)) {
+            handleGetPaymentMethods(request, response);
             return;
         }
         if (session == null || loggedInUser == null || loggedInUser.getId() == 0) {
@@ -157,6 +167,37 @@ public class PersonalAreaServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Richiesta non valida o errore del server.")));
             log("Errore durante il recupero dei dettagli dell'indirizzo", e);
+        }
+    }
+
+    private void handleGetPaymentMethods(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+        if (loggedInUser == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Utente non autenticato.")));
+            return;
+        }
+        try {
+            List<PaymentMethodDTO> paymentMethods = paymentMethodDAO.findByUserID(loggedInUser.getId());
+            List<Map<String, Object>> paymentMethodsForJson = new ArrayList<>();
+            for (PaymentMethodDTO pm : paymentMethods) {
+                Map<String, Object> pmMap = new HashMap<>();
+                pmMap.put("id", pm.getId());
+                pmMap.put("name", pm.getName());
+                pmMap.put("expiration", pm.getExpiration().toString());
+                pmMap.put("isDefault", pm.isDefault());
+                pmMap.put("maskedNumber", pm.getMaskedNumber());
+                pmMap.put("cardType", pm.getCardType());
+                paymentMethodsForJson.add(pmMap);
+            }
+            response.getWriter().write(gson.toJson(paymentMethodsForJson));
+        } catch (SQLException e) {
+            log("Errore nel recupero dei metodi di pagamento per l'utente " + loggedInUser.getId(), e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Errore del server durante il recupero dei dati.")));
         }
     }
 
@@ -444,6 +485,65 @@ public class PersonalAreaServlet extends HttpServlet {
             } catch (Exception e) {
                 log("Errore generico durante l'aggiornamento dell'indirizzo: " + e.getMessage());
                 sendJsonResponse(response, false, "Dati non validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } else if ("addPaymentMethod".equals(action)) {
+            try {
+                String name = request.getParameter("name");
+                String rawNumber = request.getParameter("number");
+                String cleanedNumber = rawNumber.replaceAll("[^0-9]", "");
+                String expirationStr = request.getParameter("expiration");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                YearMonth yearMonth = YearMonth.parse(expirationStr, formatter);
+                LocalDate expiration = yearMonth.atEndOfMonth();
+                boolean isDefault = Boolean.parseBoolean(request.getParameter("isDefault"));
+                PaymentMethodDTO newPaymentMethod = new PaymentMethodDTO();
+                newPaymentMethod.setUserID(loggedInUser.getId());
+                newPaymentMethod.setName(name);
+                newPaymentMethod.setNumber(cleanedNumber);
+                newPaymentMethod.setExpiration(expiration);
+                newPaymentMethod.setDefault(isDefault);
+                if (isDefault) {
+                    List<PaymentMethodDTO> existingMethods = paymentMethodDAO.findByUserID(loggedInUser.getId());
+                    for (PaymentMethodDTO pm : existingMethods) {
+                        if (pm.isDefault()) {
+                            pm.setDefault(false);
+                            paymentMethodDAO.update(pm);
+                        }
+                    }
+                }
+                paymentMethodDAO.save(newPaymentMethod);
+                sendJsonResponse(response, true, "Metodo di pagamento aggiunto con successo!", HttpServletResponse.SC_OK);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'aggiunta del metodo di pagamento: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore durante il salvataggio nel database.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (Exception e) {
+                log("Errore nei dati per l'aggiunta del metodo di pagamento: " + e.getMessage());
+                sendJsonResponse(response, false, "I dati inseriti non sono validi. Riprova. (" + e.getMessage() + ")", HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } else if ("deletePaymentMethod".equals(action)) {
+            try {
+                int methodId = Integer.parseInt(request.getParameter("methodId"));
+                PaymentMethodDTO pmToDelete = paymentMethodDAO.findById(methodId);
+                if (pmToDelete == null || pmToDelete.getUserID() != loggedInUser.getId()) {
+                    sendJsonResponse(response, false, "Tentativo di eliminare un metodo di pagamento non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                    return;
+                }
+                boolean wasDefault = pmToDelete.isDefault();
+                paymentMethodDAO.delete(methodId);
+                if (wasDefault) {
+                    List<PaymentMethodDTO> remainingMethods = paymentMethodDAO.findByUserID(loggedInUser.getId());
+                    if (!remainingMethods.isEmpty()) {
+                        PaymentMethodDTO newDefault = remainingMethods.get(0);
+                        newDefault.setDefault(true);
+                        paymentMethodDAO.update(newDefault);
+                    }
+                }
+                sendJsonResponse(response, true, "Metodo di pagamento eliminato con successo.", HttpServletResponse.SC_OK);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'eliminazione del metodo di pagamento: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore del database durante l'eliminazione.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (NumberFormatException e) {
+                sendJsonResponse(response, false, "ID metodo di pagamento non valido.", HttpServletResponse.SC_BAD_REQUEST);
             }
         }
         else {

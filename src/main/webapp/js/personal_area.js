@@ -556,4 +556,215 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     `;
     }
+
+    const addPaymentMethodModalHTML = `
+        <div id="addPaymentMethodModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Aggiungi Metodo di Pagamento</h2>
+                <form id="addPaymentMethodForm" novalidate>
+                    <div class="form-group">
+                        <label for="pm_name">Nome del titolare della carta:</label>
+                        <input type="text" id="pm_name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pm_number">Numero carta:</label>
+                        <input type="text" id="pm_number" name="number" required placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="19">
+                    </div>
+                    <div class="form-group">
+                        <label for="pm_expiration">Data di scadenza (MM/AAAA):</label>
+                        <input type="text" id="pm_expiration" name="expiration" required placeholder="MM/AAAA" maxlength="7">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="pm_isDefault" name="isDefault">
+                        <label for="pm_isDefault">Imposta come metodo di pagamento predefinito</label>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="save-btn">Salva Metodo di Pagamento</button>
+                    </div>
+                </form>
+                <div id="paymentMethodModalMessages"></div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', addPaymentMethodModalHTML);
+    const addPaymentMethodModal = document.getElementById('addPaymentMethodModal');
+    const addPaymentMethodForm = document.getElementById('addPaymentMethodForm');
+    const paymentMethodModalMessages = document.getElementById('paymentMethodModalMessages');
+    const paymentMethodTab = document.querySelector('#account_voices li[data-target="payments"]');
+    const paymentMethodListContainer = document.getElementById('payment-methods-list-container');
+    const addPaymentMethodBtn = document.getElementById('add-payment-methods-btn');
+    const cardNumberInput = document.getElementById('pm_number');
+    const cardExpirationInput = document.getElementById('pm_expiration');
+
+    if (cardNumberInput && cardExpirationInput) {
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = (value.match(/.{1,4}/g) || []).join('-');
+            e.target.value = formattedValue.substring(0, 19);
+        });
+        cardExpirationInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 6);
+            }
+            e.target.value = value;
+        });
+    }
+
+    function showAddPaymentMethodModal() {
+        addPaymentMethodModal.style.display = 'block';
+        clearMessages(paymentMethodModalMessages);
+        addPaymentMethodForm.reset();
+    }
+
+    function hideAddPaymentMethodModal() {
+        addPaymentMethodModal.style.display = 'none';
+    }
+
+    addPaymentMethodModal.querySelector('.close-button').addEventListener('click', hideAddPaymentMethodModal);
+    addPaymentMethodModal.addEventListener('click', function(event) {
+        if (event.target === addPaymentMethodModal) {
+            hideAddPaymentMethodModal();
+        }
+    });
+
+    addPaymentMethodForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(addPaymentMethodForm);
+        const params = new URLSearchParams();
+        for (const pair of formData.entries()) {
+            params.append(pair[0], pair[1]);
+        }
+        params.append('action', 'addPaymentMethod');
+        if (!params.has('isDefault')) {
+            params.append('isDefault', 'false');
+        } else {
+            params.set('isDefault', 'true');
+        }
+        sendAddPaymentMethodRequest(params);
+    });
+
+    function sendAddPaymentMethodRequest(params) {
+        fetch(`${contextPath}/personal_area`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        })
+            .then(response => {
+                if (!response.ok) { return response.json().then(err => Promise.reject(err)); }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    hideAddPaymentMethodModal();
+                    loadPaymentMethods();
+                } else {
+                    displayMessage(data.message || 'Errore durante il salvataggio.', 'error', paymentMethodModalMessages);
+                }
+            })
+            .catch(error => {
+                console.error('Errore AJAX aggiunta metodo di pagamento:', error);
+                displayMessage(error.message || 'Errore di comunicazione con il server.', 'error', paymentMethodModalMessages);
+            });
+    }
+
+    if (paymentMethodTab && paymentMethodListContainer && addPaymentMethodBtn) {
+        paymentMethodTab.addEventListener('click', loadPaymentMethods);
+        addPaymentMethodBtn.addEventListener('click', showAddPaymentMethodModal);
+        paymentMethodListContainer.addEventListener('click', handlePaymentMethodCardClick);
+    }
+
+    function handlePaymentMethodCardClick(event) {
+        const target = event.target;
+        const card = target.closest('.payment-method-card'); // Usa la nuova classe
+        if (!card) return;
+        if (target.matches('.delete-payment-method-btn')) { // Usa la nuova classe
+            const methodId = card.dataset.methodId; // Usa il nuovo data-attributo
+            if (confirm('Sei sicuro di voler eliminare questo metodo di pagamento?')) {
+                sendDeletePaymentMethodRequest(methodId, card);
+            }
+        }
+    }
+
+    function sendDeletePaymentMethodRequest(methodId, cardElement) {
+        const params = new URLSearchParams();
+        params.append('action', 'deletePaymentMethod');
+        params.append('methodId', methodId); // Nuovo parametro
+        fetch(`${contextPath}/personal_area`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        })
+            .then(response => {
+                if (!response.ok) { return response.json().then(err => Promise.reject(err)); }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    cardElement.remove();
+                    displayMessage(data.message || 'Metodo eliminato con successo!', 'success');
+                    setTimeout(() => clearMessages(), 3000);
+                    if (paymentMethodListContainer.querySelectorAll('.payment-method-card').length === 0) {
+                        paymentMethodListContainer.innerHTML = '<p class="no-addresses-msg">Nessun metodo di pagamento inserito.</p>';
+                    }
+                } else {
+                    displayMessage(data.message || 'Errore durante l\'eliminazione.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Errore AJAX eliminazione metodo di pagamento:', error);
+                displayMessage(error.message || 'Errore di comunicazione con il server.', 'error');
+            });
+    }
+
+    function loadPaymentMethods() {
+        paymentMethodListContainer.innerHTML = '<p class="loading-msg">Caricamento metodi di pagamento...</p>';
+        fetch(`${contextPath}/personal_area?action=getPaymentMethods`)
+            .then(response => {
+                if (!response.ok) { throw new Error('Errore di rete o del server.'); }
+                return response.json();
+            })
+            .then(paymentMethods => {
+                paymentMethodListContainer.innerHTML = '';
+                if (paymentMethods.length === 0) {
+                    paymentMethodListContainer.innerHTML = '<p class="no-addresses-msg">Nessun metodo di pagamento inserito.</p>';
+                } else {
+                    paymentMethods.forEach(pm => {
+                        const pmCardHTML = createPaymentMethodCard(pm);
+                        paymentMethodListContainer.insertAdjacentHTML('beforeend', pmCardHTML);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Errore nel caricamento dei metodi di pagamento:', error);
+                paymentMethodListContainer.innerHTML = '<p class="error-msg">Impossibile caricare i metodi di pagamento. Riprova più tardi.</p>';
+            });
+    }
+
+    function createPaymentMethodCard(pm) {
+        const isDefaultBadge = pm.isDefault ? `<span class="default-badge">Predefinito</span>` : '';
+        const expirationDate = new Date(pm.expiration);
+        const formattedExpiration = `${String(expirationDate.getMonth() + 1).padStart(2, '0')}/${expirationDate.getFullYear()}`;
+        const cardTypeClass = pm.cardType.toLowerCase().replace(' ', '-'); // "American Express" -> "american-express"
+        const logoHtml = `<div class="card-logo ${cardTypeClass}"></div>`;
+        return `
+            <div class="payment-method-card" data-method-id="${pm.id}">
+                <div class="payment-method-summary">
+                    <div class="summary-text">
+                         <div class="summary-text-intro">
+                            ${logoHtml}
+                            <strong>${pm.cardType} ${pm.maskedNumber}</strong>
+                            ${isDefaultBadge}
+                        </div>
+                        <span>Scade il ${formattedExpiration} - ${pm.name}</span>
+                    </div>
+                    <div class="payment-method-actions">
+                        <button class="action-btn delete-payment-method-btn" title="Elimina Metodo">Elimina</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 });
