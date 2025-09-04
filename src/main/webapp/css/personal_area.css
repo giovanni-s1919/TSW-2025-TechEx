@@ -326,7 +326,7 @@ body#personal_area #forguest {
 
 #address-list-container {
     margin-top: 0.5rem;
-    max-width: 37.5rem;
+    max-width: 40rem;
 }
 
 .loading-msg, .error-msg, .no-addresses-msg {
@@ -343,7 +343,7 @@ body#personal_area #forguest {
 }
 
 .add-address-container {
-    max-width: 37.5rem;
+    max-width: 40rem;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     padding-top: 1rem;
@@ -511,8 +511,9 @@ body#personal_area #forguest {
 }
 
 .form-check input[type="checkbox"] {
-    width: 1.15em;
-    height: 1.15em;
+    width: 2.5em;
+    height: 2.5em;
+    margin-left: 0;
     accent-color: #003459;
     cursor: pointer;
 }
@@ -651,10 +652,6 @@ body#personal_area #forguest {
 
 .card-logo.postepay {
     background-image: url('../images/postepay.jpg');
-}
-
-.card-logo.postepay + .summary-text-intro .default-badge {
-    margin-left: 2rem;
 }
 
 .payment-method-actions {

@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <input type="text" id="addr_region" name="region">
                         </div>
                         <div class="form-group">
-                            <label for="addr_country">Stato:</label>
+                            <label for="addr_country">Paese:</label>
                             <input type="text" id="addr_country" name="country" required>
                         </div>
                     </div>
@@ -354,6 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showAddAddressModal(addressData = null) {
         clearMessages(addressModalMessages);
         addAddressForm.reset();
+        document.getElementById('addr_id').value = '';
         if (addressData) {
             addressModalTitle.textContent = 'Modifica Indirizzo';
             addressModalSaveBtn.textContent = 'Salva Modifiche';
@@ -549,7 +550,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p><strong>Città:</strong> ${address.city}</p>
                 <p><strong>CAP:</strong> ${address.postalCode}</p>
                 <p><strong>Provincia:</strong> ${address.region || 'N/D'}</p>
-                <p><strong>Stato:</strong> ${address.country}</p>
+                <p><strong>Paese:</strong> ${address.country}</p>
                 <p><strong>Telefono:</strong> ${address.phone || 'N/D'}</p>
                 <p><strong>Tipo di indirizzo:</strong> ${address.translatedAddressType}</p>
             </div>
@@ -619,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showAddPaymentMethodModal(methodData = null) {
         clearMessages(paymentMethodModalMessages);
         addPaymentMethodForm.reset();
-
+        document.getElementById('pm_id').value = '';
         if (methodData) {
             paymentMethodModalTitle.textContent = 'Modifica Metodo di Pagamento';
             paymentMethodModalSaveBtn.textContent = 'Salva Modifiche';
