@@ -12,12 +12,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<script>
+    if ("${role}" === "Guest") {
+        window.location.replace("${pageContext.request.contextPath}/login");
+    }
+</script>
 <%@ include file="fragments/header.jsp" %>
 <div id="main">
     <c:choose>
         <c:when test="${not empty cartItems}">
             <div id="cart-box">
-                <c:forEach var="item" items="${cartItems}">
+                <c:forEach var="item" items="${cartItems}" varStatus="loop">
                     <div class="cart-element" id="${item.product.id}">
                         <img class="cart-product-image" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}">
                         <div class="cart-product-details">
@@ -42,6 +47,9 @@
                             </div>
                         </div>
                     </div>
+                    <c:if test="${not loop.last}">
+                        <div id="separator"></div>
+                    </c:if>
                 </c:forEach>
                 <script>
                     $(".cart-element").on("click", function(e){
