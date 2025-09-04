@@ -561,8 +561,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <div id="addPaymentMethodModal" class="modal">
             <div class="modal-content">
                 <span class="close-button">&times;</span>
-                <h2>Aggiungi Metodo di Pagamento</h2>
+                <h2 id="payment-method-modal-title">Aggiungi Metodo di Pagamento</h2>
                 <form id="addPaymentMethodForm" novalidate>
+                <input type="hidden" id="pm_id" name="methodId">
                     <div class="form-group">
                         <label for="pm_name">Nome del titolare della carta:</label>
                         <input type="text" id="pm_name" name="name" required>
@@ -580,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <label for="pm_isDefault">Imposta come metodo di pagamento predefinito</label>
                     </div>
                     <div class="modal-actions">
-                        <button type="submit" class="save-btn">Salva Metodo di Pagamento</button>
+                        <button type="submit" class="save-btn" id="payment-method-modal-save-btn">Salva Metodo di Pagamento</button>
                     </div>
                 </form>
                 <div id="paymentMethodModalMessages"></div>
@@ -592,6 +593,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const addPaymentMethodModal = document.getElementById('addPaymentMethodModal');
     const addPaymentMethodForm = document.getElementById('addPaymentMethodForm');
     const paymentMethodModalMessages = document.getElementById('paymentMethodModalMessages');
+    const paymentMethodModalTitle = document.getElementById('payment-method-modal-title');
+    const paymentMethodModalSaveBtn = document.getElementById('payment-method-modal-save-btn');
     const paymentMethodTab = document.querySelector('#account_voices li[data-target="payments"]');
     const paymentMethodListContainer = document.getElementById('payment-methods-list-container');
     const addPaymentMethodBtn = document.getElementById('add-payment-methods-btn');
@@ -613,10 +616,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function showAddPaymentMethodModal() {
-        addPaymentMethodModal.style.display = 'block';
+    function showAddPaymentMethodModal(methodData = null) {
         clearMessages(paymentMethodModalMessages);
         addPaymentMethodForm.reset();
+
+        if (methodData) {
+            paymentMethodModalTitle.textContent = 'Modifica Metodo di Pagamento';
+            paymentMethodModalSaveBtn.textContent = 'Salva Modifiche';
+            document.getElementById('pm_id').value = methodData.id;
+            document.getElementById('pm_name').value = methodData.name;
+            document.getElementById('pm_number').value = methodData.number.replace(/(\d{4})(?=\d)/g, '$1-');
+            const expirationDate = new Date(methodData.expiration);
+            const formattedExpiration = `${String(expirationDate.getMonth() + 1).padStart(2, '0')}/${expirationDate.getFullYear()}`;
+            document.getElementById('pm_expiration').value = formattedExpiration;
+            document.getElementById('pm_isDefault').checked = methodData.isDefault;
+        } else {
+            paymentMethodModalTitle.textContent = 'Aggiungi Metodo di Pagamento';
+            paymentMethodModalSaveBtn.textContent = 'Salva Metodo di Pagamento';
+        }
+        addPaymentMethodModal.style.display = 'block';
     }
 
     function hideAddPaymentMethodModal() {
@@ -637,16 +655,21 @@ document.addEventListener("DOMContentLoaded", function () {
         for (const pair of formData.entries()) {
             params.append(pair[0], pair[1]);
         }
-        params.append('action', 'addPaymentMethod');
+        const methodId = document.getElementById('pm_id').value;
+        if (methodId) {
+            params.append('action', 'updatePaymentMethod');
+        } else {
+            params.append('action', 'addPaymentMethod');
+        }
         if (!params.has('isDefault')) {
             params.append('isDefault', 'false');
         } else {
             params.set('isDefault', 'true');
         }
-        sendAddPaymentMethodRequest(params);
+        sendSavePaymentMethodRequest(params);
     });
 
-    function sendAddPaymentMethodRequest(params) {
+    function sendSavePaymentMethodRequest(params) {
         fetch(`${contextPath}/personal_area`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -672,16 +695,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (paymentMethodTab && paymentMethodListContainer && addPaymentMethodBtn) {
         paymentMethodTab.addEventListener('click', loadPaymentMethods);
-        addPaymentMethodBtn.addEventListener('click', showAddPaymentMethodModal);
+        addPaymentMethodBtn.addEventListener('click', () => showAddPaymentMethodModal());
         paymentMethodListContainer.addEventListener('click', handlePaymentMethodCardClick);
     }
 
     function handlePaymentMethodCardClick(event) {
         const target = event.target;
-        const card = target.closest('.payment-method-card'); // Usa la nuova classe
+        const card = target.closest('.payment-method-card');
         if (!card) return;
-        if (target.matches('.delete-payment-method-btn')) { // Usa la nuova classe
-            const methodId = card.dataset.methodId; // Usa il nuovo data-attributo
+        const methodId = card.dataset.methodId;
+        if (target.matches('.edit-payment-method-btn')) {
+            fetch(`${contextPath}/personal_area?action=getPaymentMethodDetails&methodId=${methodId}`)
+                .then(response => {
+                    if (!response.ok) { throw new Error('Impossibile recuperare i dettagli del metodo.'); }
+                    return response.json();
+                })
+                .then(methodData => {
+                    showAddPaymentMethodModal(methodData);
+                })
+                .catch(error => {
+                    console.error("Errore recupero dettagli metodo:", error);
+                    displayMessage(error.message, 'error');
+                });
+            return;
+        }
+        if (target.matches('.delete-payment-method-btn')) {
             if (confirm('Sei sicuro di voler eliminare questo metodo di pagamento?')) {
                 sendDeletePaymentMethodRequest(methodId, card);
             }
@@ -757,10 +795,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             ${logoHtml}
                             <strong>${pm.cardType} ${pm.maskedNumber}</strong>
                             ${isDefaultBadge}
-                        </div>
-                        <span>Scade il ${formattedExpiration} - ${pm.name}</span>
+                         </div>
+                         <span>Scade il ${formattedExpiration} - ${pm.name}</span>
                     </div>
                     <div class="payment-method-actions">
+                        <button class="action-btn edit-payment-method-btn" title="Modifica Metodo">Modifica</button>
                         <button class="action-btn delete-payment-method-btn" title="Elimina Metodo">Elimina</button>
                     </div>
                 </div>

@@ -73,6 +73,10 @@ public class PersonalAreaServlet extends HttpServlet {
             handleGetPaymentMethods(request, response);
             return;
         }
+        else if ("getPaymentMethodDetails".equals(action)) {
+            handleGetPaymentMethodDetails(request, response);
+            return;
+        }
         if (session == null || loggedInUser == null || loggedInUser.getId() == 0) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -198,6 +202,35 @@ public class PersonalAreaServlet extends HttpServlet {
             log("Errore nel recupero dei metodi di pagamento per l'utente " + loggedInUser.getId(), e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write(gson.toJson(Map.of("success", false, "message", "Errore del server durante il recupero dei dati.")));
+        }
+    }
+
+    private void handleGetPaymentMethodDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+        if (loggedInUser == null) {
+            sendJsonResponse(response, false, "Utente non autenticato.", HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        try {
+            int methodId = Integer.parseInt(request.getParameter("methodId"));
+            PaymentMethodDTO paymentMethod = paymentMethodDAO.findById(methodId);
+            if (paymentMethod == null || paymentMethod.getUserID() != loggedInUser.getId()) {
+                sendJsonResponse(response, false, "Accesso non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                return;
+            }
+            Map<String, Object> pmMap = new HashMap<>();
+            pmMap.put("id", paymentMethod.getId());
+            pmMap.put("name", paymentMethod.getName());
+            pmMap.put("number", paymentMethod.getNumber()); // <-- Il campo cruciale
+            pmMap.put("expiration", paymentMethod.getExpiration().toString());
+            pmMap.put("isDefault", paymentMethod.isDefault());
+            response.getWriter().write(gson.toJson(pmMap));
+        } catch (Exception e) {
+            sendJsonResponse(response, false, "Richiesta non valida o errore del server.", HttpServletResponse.SC_BAD_REQUEST);
+            log("Errore durante il recupero dei dettagli del metodo di pagamento", e);
         }
     }
 
@@ -404,37 +437,6 @@ public class PersonalAreaServlet extends HttpServlet {
                 log("Errore nei dati per l'aggiunta dell'indirizzo: " + e.getMessage());
                 sendJsonResponse(response, false, "I dati inseriti non sono validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
             }
-        } else if ("deleteAddress".equals(action)) {
-            try {
-                String addressIdStr = request.getParameter("addressId");
-                if (addressIdStr == null || addressIdStr.trim().isEmpty()) {
-                    sendJsonResponse(response, false, "ID indirizzo mancante.", HttpServletResponse.SC_BAD_REQUEST);
-                    return;
-                }
-                int addressId = Integer.parseInt(addressIdStr);
-                UserAddressDTO link = userAddressDAO.findById(addressId, loggedInUser.getId());
-                if (link == null) {
-                    sendJsonResponse(response, false, "Tentativo di eliminare un indirizzo non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
-                    return;
-                }
-                boolean wasDefault = link.isDefault();
-                userAddressDAO.delete(addressId, loggedInUser.getId());
-                addressDAO.delete(addressId);
-                if (wasDefault) {
-                    List<UserAddressDTO> remainingAddresses = userAddressDAO.findByUserID(loggedInUser.getId());
-                    if (!remainingAddresses.isEmpty()) {
-                        UserAddressDTO newDefault = remainingAddresses.get(0);
-                        newDefault.setDefault(true);
-                        userAddressDAO.update(newDefault);
-                    }
-                }
-                sendJsonResponse(response, true, "Indirizzo eliminato con successo.", HttpServletResponse.SC_OK);
-            } catch (NumberFormatException e) {
-                sendJsonResponse(response, false, "ID indirizzo non valido.", HttpServletResponse.SC_BAD_REQUEST);
-            } catch (SQLException e) {
-                log("Errore SQL durante l'eliminazione dell'indirizzo: " + e.getMessage());
-                sendJsonResponse(response, false, "Errore del database durante l'eliminazione.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
         } else if ("updateAddress".equals(action)) {
             try {
                 int addressId = Integer.parseInt(request.getParameter("addressId"));
@@ -486,6 +488,37 @@ public class PersonalAreaServlet extends HttpServlet {
                 log("Errore generico durante l'aggiornamento dell'indirizzo: " + e.getMessage());
                 sendJsonResponse(response, false, "Dati non validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
             }
+        } else if ("deleteAddress".equals(action)) {
+            try {
+                String addressIdStr = request.getParameter("addressId");
+                if (addressIdStr == null || addressIdStr.trim().isEmpty()) {
+                    sendJsonResponse(response, false, "ID indirizzo mancante.", HttpServletResponse.SC_BAD_REQUEST);
+                    return;
+                }
+                int addressId = Integer.parseInt(addressIdStr);
+                UserAddressDTO link = userAddressDAO.findById(addressId, loggedInUser.getId());
+                if (link == null) {
+                    sendJsonResponse(response, false, "Tentativo di eliminare un indirizzo non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                    return;
+                }
+                boolean wasDefault = link.isDefault();
+                userAddressDAO.delete(addressId, loggedInUser.getId());
+                addressDAO.delete(addressId);
+                if (wasDefault) {
+                    List<UserAddressDTO> remainingAddresses = userAddressDAO.findByUserID(loggedInUser.getId());
+                    if (!remainingAddresses.isEmpty()) {
+                        UserAddressDTO newDefault = remainingAddresses.get(0);
+                        newDefault.setDefault(true);
+                        userAddressDAO.update(newDefault);
+                    }
+                }
+                sendJsonResponse(response, true, "Indirizzo eliminato con successo.", HttpServletResponse.SC_OK);
+            } catch (NumberFormatException e) {
+                sendJsonResponse(response, false, "ID indirizzo non valido.", HttpServletResponse.SC_BAD_REQUEST);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'eliminazione dell'indirizzo: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore del database durante l'eliminazione.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } else if ("addPaymentMethod".equals(action)) {
             try {
                 String name = request.getParameter("name");
@@ -519,6 +552,44 @@ public class PersonalAreaServlet extends HttpServlet {
             } catch (Exception e) {
                 log("Errore nei dati per l'aggiunta del metodo di pagamento: " + e.getMessage());
                 sendJsonResponse(response, false, "I dati inseriti non sono validi. Riprova. (" + e.getMessage() + ")", HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } else if ("updatePaymentMethod".equals(action)) {
+            try {
+                int methodId = Integer.parseInt(request.getParameter("methodId"));
+                String name = request.getParameter("name");
+                String rawNumber = request.getParameter("number");
+                String cleanedNumber = rawNumber.replaceAll("[^0-9]", "");
+                String expirationStr = request.getParameter("expiration");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                YearMonth yearMonth = YearMonth.parse(expirationStr, formatter);
+                LocalDate expiration = yearMonth.atEndOfMonth();
+                boolean isDefault = Boolean.parseBoolean(request.getParameter("isDefault"));
+                PaymentMethodDTO methodToUpdate = paymentMethodDAO.findById(methodId);
+                if (methodToUpdate == null || methodToUpdate.getUserID() != loggedInUser.getId()) {
+                    sendJsonResponse(response, false, "Tentativo di modificare un metodo non autorizzato.", HttpServletResponse.SC_FORBIDDEN);
+                    return;
+                }
+                methodToUpdate.setName(name);
+                methodToUpdate.setNumber(cleanedNumber);
+                methodToUpdate.setExpiration(expiration);
+                methodToUpdate.setDefault(isDefault);
+                if (isDefault) {
+                    List<PaymentMethodDTO> existingMethods = paymentMethodDAO.findByUserID(loggedInUser.getId());
+                    for (PaymentMethodDTO pm : existingMethods) {
+                        if (pm.getId() != methodId && pm.isDefault()) {
+                            pm.setDefault(false);
+                            paymentMethodDAO.update(pm);
+                        }
+                    }
+                }
+                paymentMethodDAO.update(methodToUpdate);
+                sendJsonResponse(response, true, "Metodo di pagamento aggiornato con successo.", HttpServletResponse.SC_OK);
+            } catch (SQLException e) {
+                log("Errore SQL durante l'aggiornamento del metodo di pagamento: " + e.getMessage());
+                sendJsonResponse(response, false, "Errore durante l'aggiornamento nel database.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (Exception e) {
+                log("Errore nei dati per l'aggiornamento del metodo di pagamento: " + e.getMessage());
+                sendJsonResponse(response, false, "I dati inseriti non sono validi. Riprova.", HttpServletResponse.SC_BAD_REQUEST);
             }
         } else if ("deletePaymentMethod".equals(action)) {
             try {
