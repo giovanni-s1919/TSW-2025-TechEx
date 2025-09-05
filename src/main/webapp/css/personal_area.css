@@ -39,17 +39,12 @@ body#personal_area #forguest {
     width: 100%;
     padding-top: 2.2rem;
     margin-top: var(--header-height);
-    background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0) 100%
-    );
 }
 
 #account_voices {
     list-style: none;
     margin-top: 2rem;
-    margin-left: 18rem;
+    margin-left: 30rem;
     padding: 0.25rem;
     border: 1px solid #F2F9FC;
     border-radius: 8px;
@@ -652,6 +647,7 @@ body#personal_area #forguest {
 
 .card-logo.postepay {
     background-image: url('../images/postepay.jpg');
+    border-radius: 5px;
 }
 
 .payment-method-actions {
@@ -731,4 +727,74 @@ body#personal_area #forguest {
     background-color: #F8D7DA;
     color: #721C24;
     border: 1px solid #F5C6CB;
+}
+
+.support-container {
+    margin-top: -0.5rem;
+    max-width: 48rem;
+}
+
+.support-block {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px dashed #CCCCCC;
+}
+
+.support-block:last-child {
+    border-bottom: none;
+}
+
+.support-icons {
+    width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-left: -0.5rem;
+}
+
+.support-icons i {
+    font-size: 2.5rem;
+    color: #003459;
+}
+
+.support-details {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.support-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003459;
+}
+
+.support-text {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #00171F;
+}
+
+.support-hours {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.9rem;
+    color: #6C757D;
+}
+
+.support-btn {
+    display: inline-block;
+    background-color: #00A8E8;
+    color: #FFFFFF;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    min-width: 8rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.support-btn:hover {
+    background-color: #0084B5;
 }

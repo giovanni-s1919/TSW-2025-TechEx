@@ -98,6 +98,47 @@
                 <div class="content-panel" id="support">
                     <h1 class="content_intro">Aiuto e contatti</h1>
                     <p class="content_description">Hai bisogno di aiuto? Contattaci qui.</p>
+                    <div class="support-container">
+                        <div class="support-block">
+                            <div class="support-icons">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="support-details">
+                                <h1 class="support-title">Inviaci un'email</h1>
+                                <p class="support-text">supporto@techex.com</p>
+                                <p class="support-hours">Risposte entro 24 ore lavorative! </p>
+                            </div>
+                            <div class="support-action">
+                                <a href="mailto:supporto@techex.com" class="support-btn">Invia Email</a>
+                            </div>
+                        </div>
+                        <div class="support-block">
+                            <div class="support-icons">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="support-details">
+                                <h1 class="support-title">Chiamaci</h1>
+                                <p class="support-text">+39 012 345 6789</p>
+                                <p class="support-hours">Servizio attivo dal Lunedì al Sabato, ore 9:00 - 18:00</p>
+                            </div>
+                            <div class="support-action">
+                                <a href="" class="support-btn">Chiama Ora</a>
+                            </div>
+                        </div>
+                        <div class="support-block">
+                            <div class="support-icons">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div class="support-details">
+                                <h1 class="support-title">Chatta con noi</h1>
+                                <p class="support-text">Ottieni supporto in tempo reale!</p>
+                                <p class="support-hours">Servizio attivo dal Lunedì al Sabato, ore 9:00 - 18:00</p>
+                            </div>
+                            <div class="support-action">
+                                <a href="#" class="support-btn" id="chat-now-btn">Chatta Ora</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
