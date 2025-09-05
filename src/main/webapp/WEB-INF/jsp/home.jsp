@@ -43,8 +43,7 @@
                     </c:when>
                 </c:choose>
                 <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
-                <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
-                <p id="useful_print"><%=request.getAttribute("role")%></p>
+                <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
             </div>
             <div class="presentation">
                 <p class="presentation_menu">Il futuro della riparazione è qui!</p>
@@ -118,7 +117,7 @@
                     </div>
                 </div>
                 <p class="élite_selection-top" id="élite_selection-phrase">Non finisce qui! Consulta il nostro catalogo per accedere ad altri prodotti premium!</p>
-                <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
+                <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
             </div>
             <div class="guides">
                 <div class="guides_box">
@@ -170,7 +169,7 @@
                     </div>
                 </div>
                 <p class="best_sellers-favourites" id="best_sellers-phrase">Hai bisogno di altro? Esplora il nostro catalogo!</p>
-                <a href="${pageContext.request.contextPath}/home" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
+                <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
             </div>
             <div class="reviews">
                 <div class="reviews_left">
