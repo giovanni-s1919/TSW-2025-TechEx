@@ -23,7 +23,7 @@
                 <div id="wishlist-box">
                     <c:forEach var="item" items="${displayItems}" varStatus="loop">
                         <div class="wishlist-item">
-                            <img class="wishlist-product-image" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png">
+                            <img class="wishlist-product-image" id="${item.product.id}" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png">
                             <div class="wishlist-product-details">
                                 <div class="wishlist-product-name">${item.product.name}</div>
                                 <div class="wishlist-product-fieldvalue">
@@ -50,7 +50,7 @@
                                     Aggiungi al carrello
                                 </div>
                                 <div class="wishlist-interation">
-                                    Rimuovi dalla lista preferiti
+                                    Rimuovi dalla lista
                                 </div>
                             </div>
                         </div>
@@ -58,6 +58,12 @@
                             <div id="separator"></div>
                         </c:if>
                     </c:forEach>
+                    <script>
+                        $(".wishlist-product-image").on("click", function(e) {
+                            e.preventDefault();
+                            window.location.href = "${pageContext.request.contextPath}/product?idProduct=" + $(this).attr("id");
+                        })
+                    </script>
                 </div>
             </c:when>
             <c:otherwise>

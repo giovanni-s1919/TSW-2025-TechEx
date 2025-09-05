@@ -61,13 +61,12 @@ a {
 }
 
 .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 13.75rem);
+    display: flex;
+    flex-direction: row;
     gap: 2.5rem;
     justify-content: center;
-    margin: 1.5rem auto 0 8.18rem;
-    max-width: calc((13.75rem * 5) + (2.5rem * 4));
-    width: 100%;
+    justify-self: center;
+    margin: 1.5rem;
 }
 
 .product-card {
