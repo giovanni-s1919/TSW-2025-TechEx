@@ -322,7 +322,7 @@
                         <button class="faq_question">Quanto dura la garanzia?</button>
                         <div class="faq_answer">
                             I pezzi di ricambio venduti da TechEx godono di 2 anni di garanzia,<br>
-                            validi a partire dalla data di consegna del prodotto. Inoltre il sushi è meglio della pizza
+                            validi a partire dalla data di consegna del prodotto.
                         </div>
                     </div>
                 </div>
