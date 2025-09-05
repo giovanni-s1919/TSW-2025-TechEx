@@ -28,8 +28,10 @@ body {
     margin-top: 10%;
     margin-bottom: 5%;
     padding: 3.125rem;
-    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
-    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(0,0,0,0.3);
+    border-radius: 8px;
 }
 
 #product-details{
@@ -51,8 +53,7 @@ body {
 #product-image{
     height: 30rem;
     width: 30rem;
-    border-radius: 10px;
-    /*box-shadow: 0 0 10px 1px #000000;*/
+    border-radius: 8px;
 }
 
 #product-name{
@@ -62,10 +63,11 @@ body {
     font-size: 3rem;
     font-weight: bold;
     color: #003459;
-    background-color: #ffffff;
     width: 43rem;
     padding: 1rem;
-    border-radius: 10px;
+    border-width: 2px;
+    border-bottom-style: solid;
+    border-color: rgba(0,0,0,0.3);
     margin-bottom: 1rem;
 }
 
@@ -74,10 +76,11 @@ body {
     flex-direction: row;
     justify-self: center;
     font-size: 1.5rem;
-    background-color: #ffffff;
     width: 43rem;
     padding: 1rem;
-    border-radius: 10px;
+    border-width: 2px;
+    border-bottom-style: dashed;
+    border-color: rgba(0,0,0,0.3);
     margin-bottom: 1rem;
 }
 
@@ -90,7 +93,9 @@ body {
     width: 43rem;
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    border-radius: 10px;
+    border-width: 2px;
+    border-bottom-style: dashed;
+    border-color: rgba(0,0,0,0.3);
     padding: 1rem;
 }
 
