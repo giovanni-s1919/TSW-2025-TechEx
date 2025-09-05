@@ -48,10 +48,13 @@ public class HomeServlet extends HttpServlet {
         List<ProductCardDisplay> products = new  ArrayList<>();
         try {
             List<ProductDTO> productDTOS = productDAO.findAll("ID");
+            int elements = 0;
 
             for (ProductDTO productDTO : productDTOS) {
+                if(elements == 6) break;
                 ProductCardDisplay product = new ProductCardDisplay(productDTO);
                 products.add(product);
+                elements++;
             }
         }catch (SQLException e){
             e.printStackTrace();
