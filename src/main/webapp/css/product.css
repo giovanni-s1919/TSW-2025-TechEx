@@ -108,6 +108,33 @@ body {
     font-weight: bold;
 }
 
+.product-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 43rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.product-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #004F86;
+    color: white;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.product-button:hover {
+    scale: 0.98;
+    background-color: #003459;
+}
+
 #product-box-empty{
     display: flex;
     flex-direction: column;

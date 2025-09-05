@@ -39,7 +39,7 @@ public class ProductServlet extends HttpServlet {
             user =  (UserDTO) session.getAttribute("user");
         }
 
-        if(user == null) request.setAttribute("role", "Guest");
+        if(user == null) request.setAttribute("role", UserDTO.Role.valueOf("Guest"));
         else request.setAttribute("role", user.getRole());
 
         try{

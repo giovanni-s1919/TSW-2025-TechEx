@@ -92,6 +92,7 @@ public class UserDTO implements Serializable
 
     public enum Role {
         Customer,
-        Admin
+        Admin,
+        Guest
     }
 }
