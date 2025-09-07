@@ -730,7 +730,7 @@ body#personal_area #forguest {
 }
 
 .support-container {
-    margin-top: -0.5rem;
+    margin-top: -0.3rem;
     max-width: 48rem;
 }
 
@@ -746,10 +746,10 @@ body#personal_area #forguest {
 }
 
 .support-icons {
-    width: 60px;
+    width: 3.75rem;
     text-align: center;
     flex-shrink: 0;
-    margin-left: -0.5rem;
+    margin-left: 0;
 }
 
 .support-icons i {

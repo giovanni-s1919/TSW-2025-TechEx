@@ -109,7 +109,7 @@
                                 <p class="support-hours">Risposte entro 24 ore lavorative! </p>
                             </div>
                             <div class="support-action">
-                                <a href="mailto:supporto@techex.com" class="support-btn">Invia Email</a>
+                                <a href="${pageContext.request.contextPath}/images/bimbo.jpg" class="support-btn">Invia Email</a>
                             </div>
                         </div>
                         <div class="support-block">
@@ -122,7 +122,7 @@
                                 <p class="support-hours">Servizio attivo dal Lunedì al Sabato, ore 9:00 - 18:00</p>
                             </div>
                             <div class="support-action">
-                                <a href="" class="support-btn">Chiama Ora</a>
+                                <a href="${pageContext.request.contextPath}/images/ettorino.jpg" class="support-btn">Chiama Ora</a>
                             </div>
                         </div>
                         <div class="support-block">
@@ -135,7 +135,7 @@
                                 <p class="support-hours">Servizio attivo dal Lunedì al Sabato, ore 9:00 - 18:00</p>
                             </div>
                             <div class="support-action">
-                                <a href="#" class="support-btn" id="chat-now-btn">Chatta Ora</a>
+                                <a href="${pageContext.request.contextPath}/images/angela.jpg" class="support-btn" id="chat-now-btn">Chatta Ora</a>
                             </div>
                         </div>
                     </div>
