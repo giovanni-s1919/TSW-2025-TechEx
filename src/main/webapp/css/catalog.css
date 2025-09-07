@@ -34,11 +34,13 @@ body {
 .catalog-container {
     display: flex;
     gap: 2rem;
+    margin-top: -0.7rem;
 }
 
 .filters-sidebar {
-    width: 250px; /* Larghezza fissa della sidebar */
-    flex-shrink: 0; /* Impedisce alla sidebar di rimpicciolirsi */
+    width: 15.625rem;
+    flex-shrink: 0;
+    margin-left: 4rem;
 }
 
 .sidebar-title {
@@ -51,7 +53,7 @@ body {
 }
 
 .filter-block {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .filter-title {
@@ -59,7 +61,7 @@ body {
     font-weight: bold;
     color: #00171F;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #E0E0E0;
     padding-bottom: 0.5rem;
 }
 
@@ -71,54 +73,103 @@ body {
 
 .filter-options li {
     margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
 }
 
 .filter-options input[type="checkbox"],
 .filter-options input[type="radio"] {
-    margin-right: 0.5rem;
-    accent-color: #00A8E8; /* Colora la checkbox/radio quando selezionati */
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.7rem;
+    accent-color: #003459;
     cursor: pointer;
-    transform: scale(1.1); /* Rende le checkbox leggermente più grandi */
+    flex-shrink: 0;
 }
 
 .filter-options label {
-    color: #333;
-    cursor: pointer;
-    transition: color 0.2s;
+    color: #00171F;
+    line-height: 1.5rem;
+    transform: translateY(1px);
 }
 
-.filter-options label:hover {
-    color: #00A8E8;
-}
-
-/* --- Stili per l'Area Prodotti (Colonna Destra) --- */
 .products-area {
-    flex-grow: 1; /* Occupa tutto lo spazio rimanente */
+    flex-grow: 1;
 }
 
 .catalog-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-top: -0.9rem;
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.product-count {
-    color: #555;
+    border-bottom: 2px solid #E0E0E0;
 }
 
 #sort-options {
     padding: 0.5rem;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #CCCCCC;
     font-size: 0.9rem;
+    cursor: pointer;
 }
 
-.product-grid {
+.products-grid {
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*gap: 2.5rem;*/
+    /*justify-content: center;*/
+    /*justify-self: center;*/
+    /*margin: 1.5rem;*/
+
     display: grid;
-    /* Crea 3 colonne di larghezza uguale, ma puoi cambiarlo (es. repeat(4, 1fr) per 4 colonne) */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Layout responsivo */
-    gap: 1.5rem; /* Spazio tra le card dei prodotti */
+    grid-template-columns: repeat(6, 13.75rem);
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: flex-start;
+    margin: 1.5rem 0 1.5rem 0.3rem;
+}
+
+.product-card {
+    width: 13.75rem;
+    height: 22rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 0.313rem;
+    transition: transform 0.3s ease-out;
+    /*transition: scale ease-out 0.2s;*/
+}
+
+.product-card:hover {
+    /*transform: translateY(-0.313rem);*/
+    scale: 1.02;
+}
+
+.product-img {
+    max-width: 100%;
+    height: 11.25rem;
+    object-fit: contain;
+    margin-bottom: 0.625rem;
+    padding: 0.5rem;
+}
+
+.product-name {
+    font-size: 1.1em;
+    margin: 0.313rem 0;
+    color: #003459;
+}
+
+.product-grade {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #003459;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #00A8E8;
+    margin: 0.313rem 0;
 }

@@ -20,15 +20,35 @@
                         <ul class="filter-options">
                             <li>
                                 <input type="checkbox" id="cat_display" name="category" value="Display">
-                                <label for="cat_display">Display</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_battery" name="category" value="Battery">
-                                <label for="cat_battery">Batterie</label>
+                                <label for="cat_display">Display & Touchscreen</label>
                             </li>
                             <li>
                                 <input type="checkbox" id="cat_camera" name="category" value="Camera">
-                                <label for="cat_camera">Fotocamere</label>
+                                <label for="cat_camera">Fotocamera</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_battery" name="category" value="Battery">
+                                <label for="cat_battery">Batteria</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_microphone" name="category" value="Microphone">
+                                <label for="cat_microphone">Microfono</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_speaker" name="category" value="Speaker">
+                                <label for="cat_speaker">Speaker</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_case" name="category" value="Case">
+                                <label for="cat_case">Scocca</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_button" name="category" value="Button">
+                                <label for="cat_button">Tasto</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="cat_sensor" name="category" value="Sensor">
+                                <label for="cat_sensor">Sensore</label>
                             </li>
                         </ul>
                     </div>
@@ -43,6 +63,30 @@
                                 <input type="checkbox" id="brand_samsung" name="brand" value="Samsung">
                                 <label for="brand_samsung">Samsung</label>
                             </li>
+                            <li>
+                                <input type="checkbox" id="brand_xiaomi" name="brand" value="Xiaomi">
+                                <label for="brand_xiaomi">Xiaomi</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="brand_huawei" name="brand" value="Huawei">
+                                <label for="brand_huawei">Huawei</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="brand_realme" name="brand" value="Realme">
+                                <label for="brand_realme">Realme</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="brand_google" name="brand" value="Google">
+                                <label for="brand_google">Google</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="brand_oppo" name="brand" value="Oppo">
+                                <label for="brand_oppo">Oppo</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="brand_oneplus" name="brand" value="Oneplus">
+                                <label for="brand_oneplus">Oneplus</label>
+                            </li>
                         </ul>
                     </div>
                     <div class="filter-block">
@@ -55,6 +99,14 @@
                             <li>
                                 <input type="checkbox" id="grade_excellent" name="grade" value="Excellent">
                                 <label for="grade_excellent">Eccellente</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="grade_great" name="grade" value="Great">
+                                <label for="grade_great">Ottimo</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="grade_goodt" name="grade" value="Good">
+                                <label for="grade_good">Buono</label>
                             </li>
                         </ul>
                     </div>
@@ -74,28 +126,71 @@
                                 <label for="price_51_100">51€ - 100€</label>
                             </li>
                             <li>
-                                <input type="radio" id="price_101_200" name="price" value="101-200">
-                                <label for="price_101_200">101€ - 200€</label>
+                                <input type="radio" id="price_101_300" name="price" value="101-300">
+                                <label for="price_101_300">101€ - 300€</label>
                             </li>
                             <li>
-                                <input type="radio" id="price_201_plus" name="price" value="201+">
-                                <label for="price_201_plus">Oltre 200€</label>
+                                <input type="radio" id="price_301_500" name="price" value="301-500">
+                                <label for="price_301_500">301€ - 500€</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="price_501_plus" name="price" value="501+">
+                                <label for="price_501_plus">Oltre 500€</label>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="products-area">
                     <div class="catalog-header">
-                        <p class="product-count">Mostrando 12 prodotti</p>
                         <select name="sort" id="sort-options">
                             <option value="default">Ordinamento predefinito</option>
                             <option value="price-asc">Prezzo: crescente</option>
                             <option value="price-desc">Prezzo: decrescente</option>
                         </select>
                     </div>
-
-                    <div class="product-grid">
-                        <p>Caricamento prodotti...</p>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera anteriore Samsung Galaxy S25+" class="product-img">
+                            <h1 class="product-name">Fotocamera anteriore Samsung Galaxy S25+</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">39,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Apple Iphone 16 Pro Max" class="product-img">
+                            <h1 class="product-name">Display Apple Iphone 16 Pro Max</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">749,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Batteria Apple Iphone 16 Pro" class="product-img">
+                            <h1 class="product-name">Batteria Apple Iphone 16 Pro</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">135,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
+                            <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">269,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
+                            <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">79,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
+                            <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">269,99€</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
+                            <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
+                            <p class="product-grade">Originale</p>
+                            <p class="product-price">79,99€</p>
+                        </div>
                     </div>
                 </div>
             </div>
