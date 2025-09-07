@@ -16,7 +16,8 @@
                         <li>Display & Touchscreen</li>
                         <li>Fotocamere</li>
                         <li>Batterie</li>
-                        <li>Microfoni & Speaker</li>
+                        <li>Microfoni</li>
+                        <li>Speakers</li>
                         <li>Scocche</li>
                         <li>Tasti</li>
                         <li>Sensori</li>
