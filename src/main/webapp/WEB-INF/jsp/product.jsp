@@ -19,7 +19,7 @@
                     <div id="product-element">
                         <img id="product-image" src="${pageContext.request.contextPath}/images/products/${product.id}.png">
                         <div id="product-details">
-                            <div id="product-name">${role}</div>
+                            <div id="product-name">${product.name}</div>
                             <div id="product-description">${product.description}</div>
                             <div class="product-fieldvalue">
                                 <div class="product-field">Brand:</div>
@@ -42,7 +42,7 @@
                                 <div class="product-value">${product.stockQuantity}</div>
                             </div>
                                 <div class="product-buttons">
-                                    <c:if test="${not (role.name() == 'Guest')}">
+                                    <c:if test="${not (role == 'Guest')}">
                                     <div class="product-button">
                                         Aggiungi alla lista preferiti
                                     </div>
