@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +8,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/catalog.css">
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>const contextPath = "${pageContext.request.contextPath}";</script>
     </head>
     <body>
         <%@ include file="fragments/header.jsp" %>
@@ -14,42 +16,16 @@
             <h1 id="catalog_intro">Il catalogo di TechEx: qualità ed affidabilità ad un prezzo sostenibile</h1>
             <div class="catalog-container">
                 <div class="filters-sidebar">
-                    <h2 class="sidebar-title">Filtri</h2>
+                    <h1 class="sidebar-title">Filtri</h1>
                     <div class="filter-block">
-                        <h3 class="filter-title">Categoria</h3>
+                        <h1 class="filter-title">Categoria</h1>
                         <ul class="filter-options">
-                            <li>
-                                <input type="checkbox" id="cat_display" name="category" value="Display">
-                                <label for="cat_display">Display & Touchscreen</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_camera" name="category" value="Camera">
-                                <label for="cat_camera">Fotocamera</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_battery" name="category" value="Battery">
-                                <label for="cat_battery">Batteria</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_microphone" name="category" value="Microphone">
-                                <label for="cat_microphone">Microfono</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_speaker" name="category" value="Speaker">
-                                <label for="cat_speaker">Speaker</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_case" name="category" value="Case">
-                                <label for="cat_case">Scocca</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_button" name="category" value="Button">
-                                <label for="cat_button">Tasto</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="cat_sensor" name="category" value="Sensor">
-                                <label for="cat_sensor">Sensore</label>
-                            </li>
+                            <c:forEach items="${categories}" var="category">
+                                <li>
+                                    <input type="checkbox" id="cat_${category.name()}" name="category" value="${category.name()}">
+                                    <label for="cat_${category.name()}">${category.name()}</label>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <div class="filter-block">
@@ -92,22 +68,12 @@
                     <div class="filter-block">
                         <h3 class="filter-title">Grado</h3>
                         <ul class="filter-options">
-                            <li>
-                                <input type="checkbox" id="grade_original" name="grade" value="Original">
-                                <label for="grade_original">Originale</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="grade_excellent" name="grade" value="Excellent">
-                                <label for="grade_excellent">Eccellente</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="grade_great" name="grade" value="Great">
-                                <label for="grade_great">Ottimo</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="grade_goodt" name="grade" value="Good">
-                                <label for="grade_good">Buono</label>
-                            </li>
+                            <c:forEach items="${grades}" var="grade">
+                                <li>
+                                    <input type="checkbox" id="grade_${grade.name()}" name="grade" value="${grade.name()}">
+                                    <label for="grade_${grade.name()}">${grade.name()}</label>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <div class="filter-block">
@@ -139,6 +105,7 @@
                             </li>
                         </ul>
                     </div>
+                    <button id="apply-filters-btn" class="save-btn" hidden>Applica Filtri</button>
                 </div>
                 <div class="products-area">
                     <div class="catalog-header">
@@ -149,52 +116,11 @@
                         </select>
                     </div>
                     <div class="products-grid">
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera anteriore Samsung Galaxy S25+" class="product-img">
-                            <h1 class="product-name">Fotocamera anteriore Samsung Galaxy S25+</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">39,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Apple Iphone 16 Pro Max" class="product-img">
-                            <h1 class="product-name">Display Apple Iphone 16 Pro Max</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">749,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Batteria Apple Iphone 16 Pro" class="product-img">
-                            <h1 class="product-name">Batteria Apple Iphone 16 Pro</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">135,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
-                            <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">269,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
-                            <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">79,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Display Samsung Galaxy S25 Ultra" class="product-img">
-                            <h1 class="product-name">Display Samsung Galaxy S25 Ultra</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">269,99€</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="${pageContext.request.contextPath}/images/products/1.png" alt="Fotocamera posteriore Apple Iphone 16" class="product-img">
-                            <h1 class="product-name">Fotocamera posteriore Apple Iphone 16</h1>
-                            <p class="product-grade">Originale</p>
-                            <p class="product-price">79,99€</p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <%@ include file="fragments/footer.jsp" %>
+        <script src="${pageContext.request.contextPath}/js/catalog.js"></script>
     </body>
 </html>

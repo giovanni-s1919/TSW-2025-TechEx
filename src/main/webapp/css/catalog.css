@@ -40,7 +40,6 @@ body {
 .filters-sidebar {
     width: 15.625rem;
     flex-shrink: 0;
-    margin-left: 4rem;
 }
 
 .sidebar-title {
@@ -116,19 +115,12 @@ body {
 }
 
 .products-grid {
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*gap: 2.5rem;*/
-    /*justify-content: center;*/
-    /*justify-self: center;*/
-    /*margin: 1.5rem;*/
-
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(6, 13.75rem);
     flex-wrap: wrap;
     gap: 2.5rem;
     justify-content: flex-start;
-    margin: 1.5rem 0 1.5rem 0.3rem;
+    margin: 1.5rem 0 1.5rem 0.9rem;
 }
 
 .product-card {
@@ -172,4 +164,13 @@ body {
     font-weight: bold;
     color: #00A8E8;
     margin: 0.313rem 0;
+}
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+
+    /*position: relative;*/
+    /*z-index: 1;*/
 }
