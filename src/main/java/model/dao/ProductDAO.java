@@ -180,6 +180,85 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return list;
     }
 
+    public List<ProductDTO> findByFilters(List<String> categories, List<String> brands, List<String> grades, String priceRange, String sortBy) throws SQLException {
+        StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+        if (categories != null && !categories.isEmpty()) {
+            sql.append(" AND Category IN (");
+            for (int i = 0; i < categories.size(); i++) {
+                sql.append(i == 0 ? "?" : ", ?");
+            }
+            sql.append(")");
+            params.addAll(categories);
+        }
+        if (brands != null && !brands.isEmpty()) {
+            sql.append(" AND (");
+            for (int i = 0; i < brands.size(); i++) {
+                sql.append(i == 0 ? "UPPER(Name) LIKE ?" : " OR UPPER(Name) LIKE ?");
+            }
+            sql.append(")");
+            for (String brand : brands) {
+                params.add("%" + brand.toUpperCase() + "%");
+            }
+        }
+        if (grades != null && !grades.isEmpty()) {
+            sql.append(" AND Grade IN (");
+            for (int i = 0; i < grades.size(); i++) {
+                sql.append(i == 0 ? "?" : ", ?");
+            }
+            sql.append(")");
+            params.addAll(grades);
+        }
+        if (priceRange != null && !priceRange.equals("any")) {
+            String[] prices = priceRange.split("-");
+            if (prices.length == 2) {
+                sql.append(" AND Price BETWEEN ? AND ?");
+                params.add(Float.parseFloat(prices[0]));
+                params.add(Float.parseFloat(prices[1]));
+            } else if (priceRange.endsWith("+")) {
+                sql.append(" AND Price >= ?");
+                params.add(Float.parseFloat(priceRange.replace("+", "")));
+            }
+        }
+        if (sortBy != null && !sortBy.equals("default")) {
+            if (sortBy.equals("price-asc")) {
+                sql.append(" ORDER BY Price ASC");
+            } else if (sortBy.equals("price-desc")) {
+                sql.append(" ORDER BY Price DESC");
+            }
+        } else {
+            sql.append(" ORDER BY Name ASC");
+        }
+        List<ProductDTO> list = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(extract(rs));
+                }
+            }
+        }
+        return list;
+    }
+
+    // Metodo per ottenere la lista di Brand unici dal DB
+    public List<String> findDistinctBrands() throws SQLException {
+        List<String> brands = new ArrayList<>();
+        String sql = "SELECT DISTINCT Brand FROM Product ORDER BY Brand ASC";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                brands.add(rs.getString("Brand"));
+            }
+        }
+        return brands;
+    }
+
     @Override
     public List<String> getAllowedOrderColumns() {
         return List.of("ID", "Name", "Brand", "Price", "Category", "Grade", "StockQuantity", "VAT");
