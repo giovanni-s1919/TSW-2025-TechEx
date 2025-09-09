@@ -39,6 +39,7 @@ body {
     flex-direction: column;
     align-items: flex-end;
     width: 80%;
+    gap: 0.5rem;
 }
 
 #product-element{
@@ -92,7 +93,6 @@ body {
     background-color: #ffffff;
     width: 43rem;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
     border-width: 2px;
     border-bottom-style: dashed;
     border-color: rgba(0,0,0,0.3);
@@ -106,6 +106,19 @@ body {
     width: 4rem;
     padding-right: 1rem;
     font-weight: bold;
+}
+
+#quantity-input{
+    border-style: hidden;
+    height: 2rem;
+    width: 5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+}
+
+#quantity-input:focus{
+    outline: none;
 }
 
 .product-buttons {

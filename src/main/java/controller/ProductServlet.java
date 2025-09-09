@@ -85,6 +85,7 @@ public class ProductServlet extends HttpServlet {
 
         try {
             if("addToCart".equals(action)){
+                Integer quantity =  Integer.parseInt(request.getParameter("quantity"));
                 CartDTO cart = cartDAO.findByUserID(user.getId());
                 if(cart == null){
                     cart = new CartDTO();
@@ -95,7 +96,7 @@ public class ProductServlet extends HttpServlet {
                     CartItemDTO test = cartItemDAO.findByProductIDAndCartID(cart.getId(), productID);
                     if(test != null){
                         System.out.println("test non è null");
-                        test.setQuantity(test.getQuantity()+1);
+                        test.setQuantity(test.getQuantity()+quantity);
                         cartItemDAO.update(test);
                         response.sendRedirect(request.getContextPath() + "/cart");
                         return;
@@ -104,7 +105,7 @@ public class ProductServlet extends HttpServlet {
                 CartItemDTO newItem = new CartItemDTO();
                 newItem.setCartID(cart.getId());
                 newItem.setProductID(productID);
-                newItem.setQuantity(1);
+                newItem.setQuantity(quantity);
                 cartItemDAO.save(newItem);
                 response.sendRedirect(request.getContextPath() + "/cart");
             }
