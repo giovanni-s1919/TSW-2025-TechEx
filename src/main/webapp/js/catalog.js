@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const filtersSidebar = document.querySelector('.filters-sidebar');
     const applyFiltersBtn = document.getElementById('apply-filters-btn');
+    const filtersForm = document.getElementById('filters-form');
     const productGrid = document.querySelector('.products-grid');
     const sortOptions = document.getElementById('sort-options');
+
+    if (filtersForm) {
+        filtersForm.reset();
+    }
 
     function showApplyButton() {
         applyFiltersBtn.hidden = false;
@@ -83,6 +88,4 @@ document.addEventListener("DOMContentLoaded", function () {
             </a>
         `;
     }
-
-    applyFiltersBtn.click();
 });

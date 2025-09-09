@@ -12,13 +12,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 
 import model.dto.UserDTO;
 import model.dto.ProductDTO;
 import model.dao.ProductDAO;
 
-@WebServlet(name = "CatalogServlet", value = "/catalog")
+@WebServlet(name = "CatalogServlet", value = {"/catalog"})
 public class CatalogServlet extends HttpServlet {
     private ProductDAO productDAO;
     private Gson gson = new Gson();
@@ -50,6 +52,8 @@ public class CatalogServlet extends HttpServlet {
         }
         request.setAttribute("role", role);
         try {
+            List<ProductDTO> allProducts = productDAO.findAll("Name");
+            request.setAttribute("products", allProducts);
             request.setAttribute("categories", ProductDTO.Category.values());
             request.setAttribute("grades", ProductDTO.Grade.values());
             List<String> brands = productDAO.findDistinctBrands();
@@ -76,8 +80,17 @@ public class CatalogServlet extends HttpServlet {
             List<String> brandList = (brands != null) ? Arrays.asList(brands) : null;
             List<String> gradeList = (grades != null) ? Arrays.asList(grades) : null;
             List<ProductDTO> filteredProducts = productDAO.findByFilters(categoryList, brandList, gradeList, priceRange, sortBy);
-            response.getWriter().write(gson.toJson(filteredProducts));
-
+            List<Map<String, Object>> productsForJson = new ArrayList<>();
+            for (ProductDTO product : filteredProducts) {
+                Map<String, Object> productMap = new HashMap<>();
+                productMap.put("id", product.getId());
+                productMap.put("name", product.getName());
+                productMap.put("price", product.getPrice());
+                productMap.put("grade", product.getGrade().toString());
+                productMap.put("category", product.getCategory().toString());
+                productsForJson.add(productMap);
+            }
+            response.getWriter().write(gson.toJson(productsForJson));
         } catch (SQLException e) {
             log("Errore SQL durante il filtraggio dei prodotti", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -92,7 +105,8 @@ public class CatalogServlet extends HttpServlet {
         if ("filterProducts".equals(action)) {
             handleFilterProducts(request, response);
         } else {
-            doGet(request, response);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write(gson.toJson(Map.of("error", "Azione POST non supportata.")));
         }
     }
 }
