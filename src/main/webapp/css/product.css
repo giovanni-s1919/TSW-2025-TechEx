@@ -25,7 +25,7 @@ body {
     align-self: center;
     width: 70%;
     height: 100%;
-    margin-top: 10%;
+    margin-top: 10rem;
     margin-bottom: 5%;
     padding: 3.125rem;
     border-style: solid;
@@ -47,7 +47,7 @@ body {
     flex-direction: row;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: normal;
 }
 
@@ -110,7 +110,7 @@ body {
 #quantity-input{
     border-style: hidden;
     height: 2rem;
-    width: 5rem;
+    width: 4rem;
     font-weight: bold;
     font-size: 1.5rem;
     color: black;
@@ -126,6 +126,7 @@ body {
     width: 80%;
     justify-content: space-evenly;
     padding: 1rem;
+    gap: 3%;
 }
 
 .product-button {
@@ -138,7 +139,7 @@ body {
     background-color: #004F86;
     color: white;
     font-weight: bold;
-    padding: 1rem 2rem;
+    padding: 3%;
     cursor: pointer;
     transition: 0.2s ease-out;
 }
