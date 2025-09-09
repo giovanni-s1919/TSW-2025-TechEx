@@ -17,7 +17,7 @@
                         <li>Fotocamere</li>
                         <li>Batterie</li>
                         <li>Microfoni</li>
-                        <li>Speakers</li>
+                        <li>Altoparlanti</li>
                         <li>Scocche</li>
                         <li>Tasti</li>
                         <li>Sensori</li>
