@@ -12,6 +12,11 @@
     </head>
     <body>
         <%@include file="fragments/header.jsp"%>
+
+        <form action="${pageContext.request.contextPath}/product" method="POST" id="productActionForm">
+            <input type="hidden" name="idProduct" value="${product.id}">
+            <input type="hidden" name="action" id="actionInput">
+        </form>
         <div id="main">
             <c:choose>
                 <c:when test="${not empty product}">
@@ -43,17 +48,23 @@
                             </div>
                                 <div class="product-buttons">
                                     <c:if test="${not (role == 'Guest')}">
-                                    <div class="product-button">
+                                    <button class="product-button">
                                         Aggiungi alla lista preferiti
-                                    </div>
-                                    <div class="product-button">
+                                    </button>
+                                    <button class="product-button" onclick="submitProductAction('addToCart')">
                                         Aggiungi al carrello
-                                    </div>
+                                    </button>
                                     </c:if>
-                                    <div class="product-button">
+                                    <button class="product-button">
                                         Acquista ora
-                                    </div>
+                                    </button>
                                 </div>
+                            <script>
+                                function submitProductAction(action) {
+                                    document.getElementById('actionInput').value = action;
+                                    document.getElementById('productActionForm').submit();
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>

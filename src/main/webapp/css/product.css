@@ -122,6 +122,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    border-style: hidden;
     background-color: #004F86;
     color: white;
     font-weight: bold;

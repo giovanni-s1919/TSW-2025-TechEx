@@ -7,7 +7,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.dao.CartDAO;
+import model.dao.CartItemDAO;
 import model.dao.ProductDAO;
+import model.dao.UserDAO;
+import model.dto.CartDTO;
+import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import model.dto.UserDTO;
 
@@ -18,11 +23,16 @@ import java.sql.SQLException;
 @WebServlet(name = "ProductServlet", value = {"/product"})
 public class ProductServlet extends HttpServlet {
     private ProductDAO  productDAO;
+    private CartDAO cartDAO;
+    private CartItemDAO cartItemDAO;
+
 
     @Override
     public void init() throws ServletException {
         DataSource ds = (DataSource) getServletContext().getAttribute("datasource");
         productDAO = new ProductDAO(ds);
+        cartItemDAO = new CartItemDAO(ds);
+        cartDAO = new CartDAO(ds);
     }
 
     @Override
@@ -66,6 +76,42 @@ public class ProductServlet extends HttpServlet {
         return;
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String action = request.getParameter("action");
+        int productID =  Integer.parseInt(request.getParameter("idProduct"));
+        HttpSession session = request.getSession(false);
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if(user==null){
+            response.sendRedirect("login?action=login");
+        }
+
+        try {
+            if("addToCart".equals(action)){
+                CartDTO cart = cartDAO.findByUserID(user.getId());
+                if(cart == null){
+                    cart = new CartDTO();
+                    cart.setUserID(user.getId());
+                    cartDAO.save(cart);
+                }
+                else{
+                    CartItemDTO test = cartItemDAO.findByProductIDAndCartID(cart.getId(), productID);
+                    if(test != null){
+                        System.out.println("test non è null");
+                        test.setQuantity(test.getQuantity()+1);
+                        cartItemDAO.update(test);
+                        response.sendRedirect(request.getContextPath() + "/cart");
+                        return;
+                    }
+                }
+                CartItemDTO newItem = new CartItemDTO();
+                newItem.setCartID(cart.getId());
+                newItem.setProductID(productID);
+                newItem.setQuantity(1);
+                cartItemDAO.save(newItem);
+                response.sendRedirect(request.getContextPath() + "/cart");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

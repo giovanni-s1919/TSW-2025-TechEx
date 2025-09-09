@@ -55,11 +55,10 @@ public class LoginServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect(request.getContextPath() + "/home"); // Added contextPath for robustness
+                response.sendRedirect(request.getContextPath() + "/home");
             } catch (SQLException e) {
                 e.printStackTrace();
                 request.setAttribute("errorMessage", "Errore interno del server");
-                // Also fix it here for the catch block
                 String action = request.getParameter("action");
                 request.setAttribute("islogin", true);
                 request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);

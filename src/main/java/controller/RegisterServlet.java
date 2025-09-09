@@ -100,36 +100,3 @@ public class RegisterServlet extends HttpServlet {
 
 
 
-
-//boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-
-        /*try{
-            if(userDAO.findByEmail(email) != null){
-                if(isAjax){
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-                    String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Email già registrata");
-                    response.getWriter().write(json);
-                    return;
-                } else {
-                    request.setAttribute("errorMessage", "Email già registrata");
-                    request.setAttribute("islogin", false);
-                    request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-                    return;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            if(isAjax) {
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                String json = String.format("{\"errorMessage\":\"%s\",\"islogin\":false}", "Errore interno del server");
-                response.getWriter().write(json);
-                return;
-            } else {
-                request.setAttribute("errorMessage", "Errore interno del server");
-                request.setAttribute("islogin", false);
-                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-                return;
-            }
-        }*/

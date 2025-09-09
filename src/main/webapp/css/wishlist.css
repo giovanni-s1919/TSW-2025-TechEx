@@ -16,6 +16,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #wishlist-box {
@@ -135,35 +137,39 @@ body {
 #wishlist-box-empty {
     display: flex;
     flex-direction: column;
-    justify-self: center;
-    align-self: center;
-    justify-content: center;
-    align-content: center;
+    justify-content: space-between;
     text-align: center;
-    width: auto;
+    min-width: 15%;
+    min-height: 20%;
+    font-size: 1.25rem;
     font-weight: bold;
-    margin-top: 10%;
-    margin-bottom: 5%;
-    padding: 3.125rem;
-    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
-    border-radius: 10px;
+    padding: 1.125rem;
+    border-width: 2px;
+    border-color: rgba(0,0,0,0.3);
+    border-style: solid;
+    border-radius: 8px;
+}
+
+#empty-wishlist-warning {
+    border-bottom-width: 2px;
+    border-bottom-style: dashed;
+    border-bottom-color: rgba(0,0,0,0.3);
+    padding-bottom: 1rem;
 }
 
 .wishlist-proceed {
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
     justify-content: center;
-    height: 2.5rem;
-    width: 12.5rem;
-    margin: 1.25rem;
-    font-weight: bold;
+    align-items: center;
+    border-radius: 8px;
     border-style: hidden;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,0.1); /* #000000 (black) */
-    transition-property: background-color, scale;
-    transition-duration: 0.2s, 0.1s;
+    background-color: #004F86;
+    color: white;
+    font-weight: bold;
+    padding: 1rem 2rem;
     cursor: pointer;
+    transition: 0.2s ease-out;
 }
 
 .wishlist-proceed:hover {
@@ -173,5 +179,5 @@ body {
 
 .ref {
     text-decoration: none;
-    color: black;
+    color: white;
 }
