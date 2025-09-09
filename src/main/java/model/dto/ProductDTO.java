@@ -12,14 +12,40 @@ public class ProductDTO implements Serializable {
         Speaker,
         Case,
         Button,
-        Sensor
+        Sensor;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Display -> "Display & Touchscreen";
+                case Camera -> "Fotocamera";
+                case Battery -> "Batteria";
+                case Microphone -> "Microfono";
+                case Speaker -> "Altoparlante";
+                case Case -> "Scocca";
+                case Button -> "Tasto";
+                case Sensor -> "Sensore";
+                default -> name();
+            };
+        }
     }
 
     public enum Grade {
         Original,
         Excellent,
         Great,
-        Good
+        Good;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Original -> "Originale";
+                case Excellent -> "Eccellente";
+                case Great -> "Ottimo";
+                case Good -> "Buono";
+                default -> name();
+            };
+        }
     }
 
     private int id;
@@ -68,6 +94,12 @@ public class ProductDTO implements Serializable {
     public float getVat() { return vat; }
     public void setVat(float vat) { this.vat = vat; }
 
+    public String getCategoryTranslated() {
+        return this.category != null ? this.category.toString() : "";
+    }
+    public String getGradeTranslated() {
+        return this.grade != null ? this.grade.toString() : "";
+    }
 
     @Override
     public boolean equals(Object o) {
