@@ -69,12 +69,12 @@
                         <a href="${pageContext.request.contextPath}/login?action=register" style="text-decoration: none; color: #003459;"><li>Registrati</li></a>
                     </ul>
                     <ul id="forcustomer" hidden>
-                        <li><a href="${pageContext.request.contextPath}/personal_area">Area Personale</a></li>
-                        <li>Esci</li>
+                        <a href="${pageContext.request.contextPath}/personal_area"><li>Area Personale</li></a>
+                        <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
                     </ul>
                     <ul id="foradmin" hidden>
                         <li>Centro di controllo</li>
-                        <li>Esci</li>
+                        <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
                     </ul>
                 </li>
             </ul>
@@ -99,6 +99,17 @@
                 const { right } = submenu.getBoundingClientRect();
                 if (right > window.innerWidth) {
                     submenu.classList.add('flip');
+                }
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.logout-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const userConfirmed = confirm("Sei sicuro di voler uscire?");
+                if (userConfirmed) {
+                    window.location.href = this.href;
                 }
             });
         });
