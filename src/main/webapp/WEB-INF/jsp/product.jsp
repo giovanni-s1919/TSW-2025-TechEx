@@ -48,7 +48,7 @@
                             </div>
                                 <div class="product-buttons">
                                     <c:if test="${not (role == 'Guest')}">
-                                    <button class="product-button">
+                                    <button class="product-button"  onclick="submitProductAction('addToWishlist')">
                                         Aggiungi alla lista preferiti
                                     </button>
                                     <button class="product-button" onclick="submitProductAction('addToCart')">

@@ -7,14 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.dao.CartDAO;
-import model.dao.CartItemDAO;
-import model.dao.ProductDAO;
-import model.dao.UserDAO;
-import model.dto.CartDTO;
-import model.dto.CartItemDTO;
-import model.dto.ProductDTO;
-import model.dto.UserDTO;
+import model.dao.*;
+import model.dto.*;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -25,6 +19,8 @@ public class ProductServlet extends HttpServlet {
     private ProductDAO  productDAO;
     private CartDAO cartDAO;
     private CartItemDAO cartItemDAO;
+    private WishlistDAO wishlistDAO;
+    private WishlistItemDAO wishlistItemDAO;
 
 
     @Override
@@ -33,6 +29,8 @@ public class ProductServlet extends HttpServlet {
         productDAO = new ProductDAO(ds);
         cartItemDAO = new CartItemDAO(ds);
         cartDAO = new CartDAO(ds);
+        wishlistDAO = new WishlistDAO(ds);
+        wishlistItemDAO = new WishlistItemDAO(ds);
     }
 
     @Override
@@ -109,6 +107,28 @@ public class ProductServlet extends HttpServlet {
                 newItem.setQuantity(1);
                 cartItemDAO.save(newItem);
                 response.sendRedirect(request.getContextPath() + "/cart");
+            }
+            else if("addToWishlist".equals(action)){
+                WishlistDTO wishlist =  wishlistDAO.findByUserID(user.getId());
+                if(wishlist == null){
+                    wishlist = new WishlistDTO();
+                    wishlist.setUserID(user.getId());
+                    wishlistDAO.save(wishlist);
+                    response.sendRedirect(request.getContextPath() + "/wishlist");
+                }
+                else{
+                    WishlistItemDTO test = wishlistItemDAO.findByWishlistAndProduct(wishlist.getId(), productID);
+                    if(test != null){
+                        System.out.println("Il prodotto è già presente nella lista desideri");
+                        response.sendRedirect(request.getContextPath() + "/wishlist");
+                        return;
+                    }
+                    WishlistItemDTO newItem = new WishlistItemDTO();
+                    newItem.setProductID(productID);
+                    newItem.setWishlistID(wishlist.getId());
+                    wishlistItemDAO.save(newItem);
+                    response.sendRedirect(request.getContextPath() + "/wishlist");
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
