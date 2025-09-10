@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <c:if test="${not loop.last}">
-                        <div id="separator"></div>
+                        <div class="separator" id="separator-${item.product.id}"></div>
                     </c:if>
                 </c:forEach>
             </div>
@@ -112,8 +112,6 @@
             });
 
             if (!response.ok) {
-                // Se il server risponde con un errore (es. 500), il JSON non sarà valido
-                // quindi gestiamo l'errore qui.
                 throw new Error(`Errore dal server: ${response.status} ${response.statusText}`);
             }
 
@@ -121,13 +119,16 @@
 
             if (data.success) {
                 if (isRemoving) {
-                    const elementIdToFind = `item-row-${productId}`;
+                    const elementIdToFind = `item-row-` + productId;
+                    const separatorToFind = `separator-` + productId;
                     console.log("Tentativo di rimuovere l'elemento con ID:", elementIdToFind);
                     const elementToRemove = document.getElementById(elementIdToFind);
                     console.log("Elemento trovato:", elementToRemove);
-                    document.getElementById(`item-row-${productId}`).remove();
+                    document.getElementById(elementIdToFind).remove();
+                    document.getElementById(separatorToFind).remove();
                 } else {
-                    document.getElementById(`subtotal-${productId}`).textContent = data.newSubtotalFormatted;
+                    const subTotalElement = `subtotal-`+ productId;
+                    document.getElementById(subTotalElement).textContent = data.newSubtotalFormatted;
                 }
                 document.getElementById('cart-total-value').textContent = data.newCartTotalFormatted;
 
