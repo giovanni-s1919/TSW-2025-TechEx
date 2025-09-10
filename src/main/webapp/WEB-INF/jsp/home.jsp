@@ -39,9 +39,9 @@
                                     window.location.href = "${pageContext.request.contextPath}/product?idProduct="+$(this).attr("id");
                                 })
                             </script>
-                        </div>
-                    </c:when>
-                </c:choose>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
                 <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
             </div>
