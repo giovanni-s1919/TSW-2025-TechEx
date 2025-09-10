@@ -74,10 +74,10 @@
             <c:otherwise>
                 <div id="wishlist-box-empty">
                     <div id="empty-wishlist-warning">La lista desideri è vuota</div>
-                    <div class="wishlist-proceed"><a class="ref" href="${pageContext.request.contextPath}/home">Torna alla homepage</a></div>
-                </div>
-            </c:otherwise>
-        </c:choose>
+                    <a class="ref" href="${pageContext.request.contextPath}/home"><div class="wishlist-proceed">Torna alla Home</div></a>
+    </div>
+    </c:otherwise>
+    </c:choose>
     </div>
     <script>
         function submitWishlistAction(productId, action) {

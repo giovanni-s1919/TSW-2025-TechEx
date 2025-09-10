@@ -23,8 +23,8 @@
         <c:when test="${not empty cartItems}">
             <div id="cart-box">
                 <c:forEach var="item" items="${cartItems}" varStatus="loop">
-                    <div class="cart-element" id="${item.product.id}">
-                        <img class="cart-product-image" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}">
+                    <div class="cart-element" id="item-row-${item.product.id}">
+                        <img class="cart-product-image" id="${item.product.id}" src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}">
                         <div class="cart-product-details">
                             <div class="cart-product-name">${item.product.name}</div>
                             <div class="cart-product-fieldvalue">
@@ -37,13 +37,30 @@
                             </div>
                             <div class="cart-product-fieldvalue">
                                 <div class="cart-product-field">Quantità: </div>
-                                <div class="cart-product-value">${item.quantity}</div>
+                                <div class="cart-product-value">
+                                    <input type="number"
+                                           class="quantity-input"
+                                           value="${item.quantity}"
+                                           min="1"
+                                           max="${item.product.stockQuantity}"
+                                           data-product-id="${item.product.id}"
+                                           onchange="updateCartQuantity(this)">
+                                </div>
                             </div>
                             <div class="cart-product-fieldvalue">
-                                <div class="cart-product-field">Prezzo: </div>
+                                <div class="cart-product-field">Prezzo Unitario: </div>
                                 <div class="cart-product-value">
                                     <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
                                 </div>
+                            </div>
+                            <div class="cart-product-fieldvalue">
+                                <div class="cart-product-field">Subtotale: </div>
+                                <div class="cart-product-value" id="subtotal-${item.product.id}">
+                                    <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="€"/>
+                                </div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <button class="remove-button" data-product-id="${item.product.id}" onclick="updateCartQuantity(this, 0)">Rimuovi dal carrello</button>
                             </div>
                         </div>
                     </div>
@@ -51,12 +68,6 @@
                         <div id="separator"></div>
                     </c:if>
                 </c:forEach>
-                <script>
-                    $(".cart-element").on("click", function(e){
-                        e.preventDefault();
-                        window.location.href = "${pageContext.request.contextPath}/product?idProduct="+$(this).attr("id");
-                    })
-                </script>
             </div>
             <div id="cart-confirm">
                 <div class="cart-total">
@@ -68,7 +79,6 @@
                 <button class="cart-proceed">Procedi con l'acquisto</button>
             </div>
         </c:when>
-
         <c:otherwise>
             <div id="cart-box-empty">
                 <div id="cart-box-empty-warning">Il tuo carrello è vuoto</div>
@@ -79,5 +89,61 @@
 </div>
 
 <%@ include file="fragments/footer.jsp" %>
+<script>
+    $(".cart-product-image").on("click", function(e){
+        e.preventDefault();
+        window.location.href = "${pageContext.request.contextPath}/product?idProduct="+$(this).attr("id");
+    });
+
+    async function updateCartQuantity(element, forceQuantity) {
+        const isRemoving = (forceQuantity === 0);
+        const productId = element.dataset.productId;
+        const quantity = isRemoving ? 0 : element.value;
+
+        const formData = new FormData();
+        formData.append('action', 'updateQuantity');
+        formData.append('productId', productId);
+        formData.append('quantity', quantity);
+
+        try {
+            const response = await fetch('${pageContext.request.contextPath}/cart', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                // Se il server risponde con un errore (es. 500), il JSON non sarà valido
+                // quindi gestiamo l'errore qui.
+                throw new Error(`Errore dal server: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (isRemoving) {
+                    const elementIdToFind = `item-row-${productId}`;
+                    console.log("Tentativo di rimuovere l'elemento con ID:", elementIdToFind);
+                    const elementToRemove = document.getElementById(elementIdToFind);
+                    console.log("Elemento trovato:", elementToRemove);
+                    document.getElementById(`item-row-${productId}`).remove();
+                } else {
+                    document.getElementById(`subtotal-${productId}`).textContent = data.newSubtotalFormatted;
+                }
+                document.getElementById('cart-total-value').textContent = data.newCartTotalFormatted;
+
+                if (data.cartIsEmpty) {
+                    window.location.reload();
+                }
+            } else {
+
+                alert("Impossibile aggiornare: " + data.message);
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Errore nella chiamata AJAX:', error);
+            alert('Errore di comunicazione con il server. Apri la console (F12) per i dettagli.');
+        }
+    }
+</script>
 </body>
 </html>
