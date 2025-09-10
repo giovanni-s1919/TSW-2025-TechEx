@@ -17,6 +17,11 @@
         }
     </script>
     <%@ include file="fragments/header.jsp" %>
+    <form action="${pageContext.request.contextPath}/wishlist" method="POST" id="wishlistActionForm">
+
+        <input type="hidden" name="idProduct" id="productIdInput">
+        <input type="hidden" name="action" id="actionInput">
+    </form>
     <div id="main">
         <c:choose>
             <c:when test="${not empty displayItems}">
@@ -46,12 +51,12 @@
                                 </div>
                             </div>
                             <div class="wishlist-interact">
-                                <div class="wishlist-interation">
+                                <button class="wishlist-interation" id="${item.product.id}" onclick="submitWishlistAction('${item.product.id}', 'addToCart')">
                                     Aggiungi al carrello
-                                </div>
-                                <div class="wishlist-interation">
+                                </button>
+                                <button class="wishlist-interation" onclick="submitWishlistAction('${item.product.id}', 'removeFromWishlist')">
                                     Rimuovi dalla lista
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <c:if test="${not loop.last}">
@@ -74,6 +79,18 @@
             </c:otherwise>
         </c:choose>
     </div>
+    <script>
+        function submitWishlistAction(productId, action) {
+            document.getElementById('productIdInput').value = productId;
+            document.getElementById('actionInput').value = action;
+            document.getElementById('wishlistActionForm').submit();
+        }
+
+        $(".wishlist-product-image").on("click", function(e) {
+            e.preventDefault();
+            window.location.href = "${pageContext.request.contextPath}/product?idProduct=" + $(this).attr("id");
+        });
+    </script>
     <%@ include file="fragments/footer.jsp" %>
 </body>
 </html>
