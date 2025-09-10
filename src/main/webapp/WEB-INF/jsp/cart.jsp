@@ -44,7 +44,7 @@
                                            min="1"
                                            max="${item.product.stockQuantity}"
                                            data-product-id="${item.product.id}"
-                                           onchange="updateCartQuantity(this)">
+                                           onchange="updateCartQuantity(this, this.value)">
                                 </div>
                             </div>
                             <div class="cart-product-fieldvalue">
@@ -98,6 +98,7 @@
     async function updateCartQuantity(element, forceQuantity) {
         const isRemoving = (forceQuantity === 0);
         const productId = element.dataset.productId;
+        console.log(productId);
         const quantity = isRemoving ? 0 : element.value;
 
         const formData = new FormData();
@@ -119,13 +120,22 @@
 
             if (data.success) {
                 if (isRemoving) {
+                    console.log("Removing cart element");
                     const elementIdToFind = `item-row-` + productId;
                     const separatorToFind = `separator-` + productId;
                     console.log("Tentativo di rimuovere l'elemento con ID:", elementIdToFind);
                     const elementToRemove = document.getElementById(elementIdToFind);
                     console.log("Elemento trovato:", elementToRemove);
                     document.getElementById(elementIdToFind).remove();
-                    document.getElementById(separatorToFind).remove();
+                    let separator = document.getElementById(separatorToFind);
+                    if(separator) {
+                        separator.remove();
+                    } else {
+                        separator = document.getElementById('separator-' + (productId-1));
+                        if(separator) {
+                            separator.remove();
+                        }
+                    }
                 } else {
                     const subTotalElement = `subtotal-`+ productId;
                     document.getElementById(subTotalElement).textContent = data.newSubtotalFormatted;
@@ -133,6 +143,7 @@
                 document.getElementById('cart-total-value').textContent = data.newCartTotalFormatted;
 
                 if (data.cartIsEmpty) {
+                    console.log('Cart is empty');
                     window.location.reload();
                 }
             } else {
