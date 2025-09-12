@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- LOGICA GESTIONE PRODOTTI ---
 
-    // 1. CARICARE LA LISTA INIZIALE
     async function loadProducts() {
         try {
             const response = await fetchWithAction('getProducts');
@@ -39,8 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             products.forEach(p => {
                 const row = document.createElement('tr');
-                const imageUrl = `${window.contextPath}/images/products/${p.id}.png`;
+
+                // --- MODIFICA 1: Aggiunto cache busting alla visualizzazione in tabella ---
+                const cacheBuster = `?v=${new Date().getTime()}`;
+                const imageUrl = `${window.contextPath}/images/products/${p.id}.png${cacheBuster}`;
                 const placeholderUrl = `${window.contextPath}/images/placeholder.png`;
+
                 row.innerHTML = `
                     <td>${p.id}</td>
                     <td><img src="${imageUrl}" alt="${p.name}" style="width: 50px; height: 50px; border-radius: 5px; object-fit: cover;" onerror="this.onerror=null;this.src='${placeholderUrl}';"></td>
@@ -62,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     loadProducts();
 
-    // 2. GESTIRE L'APERTURA DEL MODAL
     addProductBtn.addEventListener('click', () => {
         productForm.reset();
         modalTitle.textContent = 'Aggiungi Nuovo Prodotto';
@@ -82,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
         img.src = url;
     }
 
-    // 3. GESTIRE L'EDIT E IL DELETE
     productListContainer.addEventListener('click', async function (event) {
         const target = event.target;
         if (target.classList.contains('edit-btn')) {
@@ -98,7 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('productGrade').value = product.grade;
             document.getElementById('productVat').value = product.vat;
             document.getElementById('productDescription').value = product.description;
-            const imageUrl = `${window.contextPath}/images/products/${product.id}.png`;
+
+            // --- MODIFICA 2: Aggiunto cache busting anche all'anteprima ---
+            const cacheBuster = `?v=${new Date().getTime()}`;
+            const imageUrl = `${window.contextPath}/images/products/${product.id}.png${cacheBuster}`;
+
             checkImageExists(imageUrl, (exists) => {
                 imagePreview.innerHTML = exists ? `<p>Immagine attuale:</p><img src="${imageUrl}" alt="Immagine prodotto" style="max-width: 100px; border-radius: 5px;">` : '<p>Nessuna immagine presente.</p>';
             });
@@ -116,32 +121,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 4. GESTIRE IL SALVATAGGIO (Create/Update)
-    // QUESTA È LA PARTE CORRETTA CHE RISOLVE IL PROBLEMA
     productForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-
-        // FormData raccoglie tutti i campi, inclusa l'immagine
         const formData = new FormData(productForm);
-
-        // L'URL conterrà l'azione, come richiesto
-        const url = `${window.contextPath}/admin/panel?action=saveProduct`;
-
+        const productId = formData.get('productId');
+        let url = `${window.contextPath}/admin/panel?action=saveProduct`;
+        if (productId) {
+            url += `&productId=${productId}`;
+        }
         try {
-            // Usiamo fetch direttamente, ma lasciamo che il browser imposti
-            // l'header 'Content-Type' a 'multipart/form-data' in automatico.
-            // NON lo impostiamo noi.
             const response = await fetch(url, {
                 method: 'POST',
                 body: formData
             });
-
             if (!response.ok) throw new Error(`Errore del server: ${response.statusText}`);
-
             const result = await response.json();
             if (result.success) {
                 productModal.classList.remove('active');
-                loadProducts();
+                loadProducts(); // Questa chiamata ora ricaricherà le immagini aggiornate
             } else {
                 document.getElementById('productModalMessages').textContent = 'Errore: ' + result.message;
             }
@@ -151,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // FUNZIONE HELPER FETCH
     async function fetchWithAction(action, data = {}) {
         const body = new URLSearchParams();
         body.append('action', action);
@@ -160,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return await fetch(`${window.contextPath}/admin/panel`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Corretto
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: body
         });
     }
