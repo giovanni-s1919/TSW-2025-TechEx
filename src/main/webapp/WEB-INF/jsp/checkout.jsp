@@ -53,6 +53,30 @@
                                         <label for="guest_street">Indirizzo</label>
                                         <input type="text" id="guest_street" name="street" required>
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="guest_city">Città</label>
+                                            <input type="text" id="guest_city" name="city" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="guest_postalCode">CAP</label>
+                                            <input type="text" id="guest_postalCode" name="postalCode" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="guest_region">Provincia</label>
+                                            <input type="text" id="guest_region" name="region">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="guest_country">Paese</label>
+                                            <input type="text" id="guest_country" name="country" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="guest_phone">Telefono</label>
+                                        <input type="text" id="guest_phone" name="phone">
+                                    </div>
                                 </c:otherwise>
                             </c:choose>
                         </div>

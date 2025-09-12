@@ -154,13 +154,14 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
                 orderAddress.getStreet() == null || orderAddress.getStreet().trim().isEmpty() ||
                 orderAddress.getCity() == null || orderAddress.getCity().trim().isEmpty() ||
                 orderAddress.getPostalCode() == null || orderAddress.getPostalCode().trim().isEmpty() ||
-                orderAddress.getRegion() == null || orderAddress.getRegion().trim().isEmpty() ||
                 orderAddress.getCountry() == null || orderAddress.getCountry().trim().isEmpty() ||
                 orderAddress.getName() == null || orderAddress.getName().trim().isEmpty() ||
                 orderAddress.getSurname() == null || orderAddress.getSurname().trim().isEmpty() ||
-                orderAddress.getAddressType() == null)
+                orderAddress.getAddressType() == null) {
             throw new IllegalArgumentException("Some required address fields are null or empty.");
-        if (orderAddress.getPhone() != null &&
+        }
+
+        if (orderAddress.getPhone() != null && !orderAddress.getPhone().trim().isEmpty() &&
                 (orderAddress.getPhone().length() > 15 || !orderAddress.getPhone().matches("^[0-9+\\- ]+$"))) {
             throw new IllegalArgumentException("Phone must be max 15 characters and contain only digits, spaces, '+' or '-'.");
         }
