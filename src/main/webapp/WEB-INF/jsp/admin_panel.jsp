@@ -36,6 +36,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Immagine</th> <!-- <-- COLONNA MANCANTE AGGIUNTA QUI -->
                         <th>Nome</th>
                         <th>Brand</th>
                         <th>Prezzo</th>
@@ -123,6 +124,12 @@
             <div class="form-group">
                 <label for="productVat">IVA (%):</label>
                 <input type="number" step="0.01" id="productVat" name="vat" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productImage">Immagine Prodotto (verrà rinominata in base all'ID):</label>
+                <input type="file" id="productImage" name="image" accept="image/png, image/jpeg, image/webp">
+                <div id="image-preview" style="margin-top:10px;"></div> <!-- Area per l'anteprima -->
             </div>
 
             <div class="form-group">

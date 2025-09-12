@@ -143,8 +143,9 @@ tbody tr:last-child td {
     border-bottom: none;
 }
 
-td:last-child {
-    text-align: right;
+#last-child-buttons {
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -205,12 +206,14 @@ td:last-child {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+
+    /* MODIFICHE CHIAVE */
+    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale se necessario */
+    padding: 3rem 0;  /* Aggiunge spazio sopra e sotto per non toccare i bordi */
 }
 
 .modal.active {
-    display: flex;
+    display: block; /* Cambiato da 'flex' a 'block' per un miglior controllo dello scroll */
 }
 
 .modal-content {
@@ -221,6 +224,9 @@ td:last-child {
     width: 90%;
     max-width: 40rem;
     position: relative;
+
+    /* MODIFICA CHIAVE */
+    margin: 0 auto; /* Mantiene la centratura orizzontale */
 }
 
 .close-button {
