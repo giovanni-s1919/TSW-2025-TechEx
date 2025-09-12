@@ -25,7 +25,7 @@
                                     <div class="selection-group">
                                         <select name="addressId" class="checkout-select">
                                             <c:forEach items="${userAddresses}" var="addr">
-                                                <option value="${addr.id}" ${addr.default ? 'selected' : ''}>
+                                                <option value="${addr.id}" ${addr['default'] ? 'selected' : ''}>
                                                         ${addr.street}, ${addr.city}
                                                 </option>
                                             </c:forEach>
@@ -63,7 +63,7 @@
                                     <div class="selection-group">
                                         <select name="paymentMethodId" class="checkout-select">
                                             <c:forEach items="${userPaymentMethods}" var="pm">
-                                                <option value="${pm.id}" ${pm.default ? 'selected' : ''}>
+                                                <option value="${pm.id}" ${pm['default'] ? 'selected' : ''}>
                                                         ${pm.cardType} ${pm.maskedNumber}
                                                 </option>
                                             </c:forEach>

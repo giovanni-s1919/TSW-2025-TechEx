@@ -160,7 +160,7 @@
     const checkoutBtn = document.getElementById('proceed-to-checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            window.location.href = '${pageContext.request.contextPath}/checkout';
+            window.location.href = '${pageContext.request.contextPath}/checkout?from=cart';
         });
     }
 </script>

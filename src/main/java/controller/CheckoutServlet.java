@@ -68,10 +68,15 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String from = request.getParameter("from");
-        if (from != null && session != null) {
-            session.setAttribute("checkoutSource", from);
+//        String from = request.getParameter("from");
+        String fromParam = request.getParameter("from");
+//        if (from != null && session != null) {
+//            session.setAttribute("checkoutSource", from);
+//        }
+        if (fromParam != null) {
+            session.setAttribute("checkoutSource", fromParam);
         }
+        String from = (String) session.getAttribute("checkoutSource");
         UserDTO user = (session != null) ? (UserDTO) session.getAttribute("user") : null;
         String role = (user != null) ? user.getRole().name() : "Guest";
         request.setAttribute("role", role);
