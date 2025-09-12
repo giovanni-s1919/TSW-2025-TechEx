@@ -173,8 +173,11 @@ public class CheckoutServlet extends HttpServlet {
                     }
                 } else if ("buyNow".equals(from)) {
                     Integer productId = (Integer) session.getAttribute("buyNowProduct");
+                    System.out.println("id Prodotto: " + productId);
                     Integer quantity = Integer.parseInt((String) session.getAttribute("buyNowQuantity"));
+                    System.out.println("quantity Prodotto: " + quantity);
                     ProductDTO product = productDAO.findById(productId);
+                    System.out.println("product Prodotto: " + product);
                     if (product != null && product.getStockQuantity() >= quantity) {
                         itemsToPurchase.add(new CartDisplayItem(product, quantity));
                         totalAmount += product.getPrice() * quantity;
@@ -188,11 +191,12 @@ public class CheckoutServlet extends HttpServlet {
 
                 if (user != null) { // === CASO: UTENTE LOGGATO ===
                     String addressIdStr = request.getParameter("addressId");
+                    System.out.println("Id indirizzo: "+addressIdStr);
                     if (addressIdStr == null || addressIdStr.isEmpty()) {
                         throw new ServletException("ID indirizzo non fornito per l'utente registrato.");
                     }
                     int addressId = Integer.parseInt(addressIdStr);
-
+                    System.out.println("Id del address: "+addressId);
                     // Carica l'indirizzo salvato dal DB
                     AddressDTO chosenAddress = addressDAO.findById(addressId);
                     if (chosenAddress == null) {
@@ -200,6 +204,7 @@ public class CheckoutServlet extends HttpServlet {
                     }
 
                     // Copia i dati dall'indirizzo salvato all'indirizzo dell'ordine
+                    System.out.println("inizio dei set su orderAddress... CASO NON GUEST");
                     orderAddress.setName(chosenAddress.getName());
                     orderAddress.setSurname(chosenAddress.getSurname());
                     orderAddress.setStreet(chosenAddress.getStreet());
@@ -211,6 +216,7 @@ public class CheckoutServlet extends HttpServlet {
 
                 } else { // === CASO: UTENTE OSPITE (GUEST) ===
                     // Leggi i dati direttamente dal form (logica precedente)
+                    System.out.println("inizio dei set su orderAddress... CASO GUEST");
                     orderAddress.setName(request.getParameter("name"));
                     orderAddress.setSurname(request.getParameter("surname"));
                     orderAddress.setStreet(request.getParameter("street"));
