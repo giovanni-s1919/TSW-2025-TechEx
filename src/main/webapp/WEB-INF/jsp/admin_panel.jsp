@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>TechEx - Pannello Amministrazione</title>
-    <%-- Usa lo stesso CSS o creane uno nuovo admin_panel.css --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personal_area.css">
-    <%-- ... altri link ... --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_panel.css">
+    <script>window.contextPath = "${pageContext.request.contextPath}";</script>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
+
 <div id="main">
     <%-- MENU LATERALE PER ADMIN --%>
     <ul id="account_voices">
@@ -68,7 +68,76 @@
         </div>
     </div>
 </div>
-<%-- Includi il NUOVO file JS per l'admin --%>
+
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-title">Aggiungi Nuovo Prodotto</h2>
+        <form id="product-form">
+            <input type="hidden" id="productId" name="productId">
+
+            <div class="form-group">
+                <label for="productName">Nome Prodotto:</label>
+                <input type="text" id="productName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="productBrand">Brand:</label>
+                <input type="text" id="productBrand" name="brand" required>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Prezzo:</label>
+                <input type="number" step="0.01" id="productPrice" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="productQuantity">Quantità in Stock:</label>
+                <input type="number" id="productQuantity" name="stockQuantity" required>
+            </div>
+
+            <!-- CAMPO CATEGORIA (MIGLIORATO) -->
+            <div class="form-group">
+                <label for="productCategory">Categoria:</label>
+                <select id="productCategory" name="category" required>
+                    <option value="Display">Display & Touchscreen</option>
+                    <option value="Camera">Fotocamera</option>
+                    <option value="Battery">Batteria</option>
+                    <option value="Microphone">Microfono</option>
+                    <option value="Speaker">Altoparlante</option>
+                    <option value="Case">Scocca</option>
+                    <option value="Button">Tasto</option>
+                    <option value="Sensor">Sensore</option>
+                </select>
+            </div>
+
+            <!-- CAMPO GRADE (AGGIUNTO) -->
+            <div class="form-group">
+                <label for="productGrade">Grado:</label>
+                <select id="productGrade" name="grade" required>
+                    <option value="Original">Originale</option>
+                    <option value="Excellent">Eccellente</option>
+                    <option value="Great">Ottimo</option>
+                    <option value="Good">Buono</option>
+                </select>
+            </div>
+
+            <!-- CAMPO VAT (AGGIUNTO) -->
+            <div class="form-group">
+                <label for="productVat">IVA (%):</label>
+                <input type="number" step="0.01" id="productVat" name="vat" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productDescription">Descrizione:</label>
+                <textarea id="productDescription" name="description" rows="4"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="submit" class="save-btn">Salva Prodotto</button>
+            </div>
+            <div id="productModalMessages"></div>
+        </form>
+    </div>
+</div>
+
 <script src="${pageContext.request.contextPath}/js/admin_panel.js"></script>
 <%@ include file="fragments/footer.jsp" %>
 </body>

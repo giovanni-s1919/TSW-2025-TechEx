@@ -73,8 +73,9 @@
                         <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
                     </ul>
                     <ul id="foradmin" hidden>
-                        <li>Centro di controllo</li>
+                        <a href="${pageContext.request.contextPath}/admin/panel"><li>Centro di controllo</li>
                         <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
+                        </a>
                     </ul>
                 </li>
             </ul>
