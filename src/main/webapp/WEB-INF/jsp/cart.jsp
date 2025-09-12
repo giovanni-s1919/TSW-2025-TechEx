@@ -76,7 +76,7 @@
                         <fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="€"/>
                     </span>
                 </div>
-                <button class="cart-proceed">Procedi con l'acquisto</button>
+                <button class="cart-proceed" id="proceed-to-checkout-btn">Procedi con l'acquisto</button>
             </div>
         </c:when>
         <c:otherwise>
@@ -87,7 +87,6 @@
         </c:otherwise>
     </c:choose>
 </div>
-
 <%@ include file="fragments/footer.jsp" %>
 <script>
     $(".cart-product-image").on("click", function(e){
@@ -155,6 +154,14 @@
             console.error('Errore nella chiamata AJAX:', error);
             alert('Errore di comunicazione con il server. Apri la console (F12) per i dettagli.');
         }
+    }
+</script>
+<script>
+    const checkoutBtn = document.getElementById('proceed-to-checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            window.location.href = '${pageContext.request.contextPath}/checkout';
+        });
     }
 </script>
 </body>
