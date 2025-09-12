@@ -66,6 +66,17 @@ public class CartItemDAO implements GenericDAO<CartItemDTO, Integer>{
         }
     }
 
+    public boolean deleteByCartId(int cartId, Connection connection) throws SQLException {
+        if (cartId <= 0) {
+            throw new IllegalArgumentException("CartID must be a positive integer.");
+        }
+        String sql = "DELETE FROM CartItem WHERE CartID = ?"; // Usa la connessione passata
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, cartId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
     @Override
     public CartItemDTO findById(Integer id) throws SQLException {
         if(id == null || id < 1)  throw new IllegalArgumentException("ID must be a positive integer.");

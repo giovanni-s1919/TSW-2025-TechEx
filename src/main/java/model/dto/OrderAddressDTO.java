@@ -6,14 +6,14 @@ import java.util.Objects;
 public class OrderAddressDTO implements Serializable
 {
     public enum AddressType{
-        SHIPPING,
-        BILLING;
+        Shipping,
+        Billing;
 
         @Override
         public String toString() {
             return switch (this) {
-                case SHIPPING -> "Spedizione";
-                case BILLING -> "Fatturazione";
+                case Shipping -> "Spedizione";
+                case Billing -> "Fatturazione";
                 default -> "";
             };
         }

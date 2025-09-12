@@ -45,11 +45,9 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         if (product.getId() <= 0) {
             throw new IllegalArgumentException("Product ID must be positive for update operations.");
         }
-
         String sql = "UPDATE Product SET Name = ?, Description = ?, Brand = ?, Price = ?, Category = ?, Grade = ?, StockQuantity = ?, VAT = ? WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
             ps.setString(1, product.getName());
             ps.setString(2, product.getDescription());
             ps.setString(3, product.getBrand());
@@ -59,7 +57,26 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
             ps.setInt(7, product.getStockQuantity());
             ps.setFloat(8, product.getVat());
             ps.setInt(9, product.getId());
+            ps.executeUpdate();
+        }
+    }
 
+    public void update(ProductDTO product, Connection connection) throws SQLException {
+        validate(product);
+        if (product.getId() <= 0) {
+            throw new IllegalArgumentException("Product ID must be positive for update operations.");
+        }
+        String sql = "UPDATE Product SET Name = ?, Description = ?, Brand = ?, Price = ?, Category = ?, Grade = ?, StockQuantity = ?, VAT = ? WHERE ID = ?"; // Usa la connessione passata
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, product.getName());
+            ps.setString(2, product.getDescription());
+            ps.setString(3, product.getBrand());
+            ps.setFloat(4, product.getPrice());
+            ps.setString(5, product.getCategory().name());
+            ps.setString(6, product.getGrade().name());
+            ps.setInt(7, product.getStockQuantity());
+            ps.setFloat(8, product.getVat());
+            ps.setInt(9, product.getId());
             ps.executeUpdate();
         }
     }

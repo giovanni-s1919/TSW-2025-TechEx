@@ -39,6 +39,30 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         }
     }
 
+    public void save(OrderDTO order, Connection connection) throws SQLException {
+        validate(order);
+        String sql = "INSERT INTO `Order` (UserID, OrderDate, OrderStatus, DeliveryDate, TotalAmount, ShippingAddressId, BillingAddressId) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Usa la connessione passata
+        try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, order.getUserID());
+            ps.setTimestamp(2, order.getOrderDate());
+            ps.setString(3, order.getOrderStatus());
+            if (order.getDeliveryDate() != null) {
+                ps.setDate(4, Date.valueOf(order.getDeliveryDate()));
+            } else {
+                ps.setNull(4, Types.DATE);
+            }
+            ps.setFloat(5, order.getTotalAmount());
+            ps.setInt(6, order.getShippingAddressId());
+            ps.setInt(7, order.getBillingAddressId());
+            ps.executeUpdate();
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    order.setId(generatedKeys.getInt(1));
+                }
+            }
+        }
+    }
+
     @Override
     public void update(OrderDTO order) throws SQLException {
         validate(order);

@@ -99,6 +99,25 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
         return null;
     }
 
+    public List<AddressDTO> findAddressesByUserId(int userId) throws SQLException {
+        List<AddressDTO> addresses = new ArrayList<>();
+        String sql = "SELECT a.*, ua.IsDefault FROM Address a " +
+                "JOIN UserAddress ua ON a.ID = ua.AddressID " +
+                "WHERE ua.UserID = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    AddressDTO address = extract(rs);
+                    address.setDefault(rs.getBoolean("IsDefault")); // Aggiunge il flag
+                    addresses.add(address);
+                }
+            }
+        }
+        return addresses;
+    }
+
     @Override
     public List<AddressDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {

@@ -41,6 +41,29 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
         }
     }
 
+    public void save(OrderAddressDTO orderAddress, Connection connection) throws SQLException {
+        validate(orderAddress);
+        String sql = "INSERT INTO OrderAddress (Street, City, PostalCode, Region, Country, Name, Surname, Phone, AddressType) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Usa la connessione passata, NON ne apre una nuova
+        try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, orderAddress.getStreet());
+            ps.setString(2, orderAddress.getCity());
+            ps.setString(3, orderAddress.getPostalCode());
+            ps.setString(4, orderAddress.getRegion());
+            ps.setString(5, orderAddress.getCountry());
+            ps.setString(6, orderAddress.getName());
+            ps.setString(7, orderAddress.getSurname());
+            ps.setString(8, orderAddress.getPhone());
+            ps.setString(9, orderAddress.getAddressType().name());
+            ps.executeUpdate();
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    orderAddress.setId(generatedKeys.getInt(1));
+                }
+            }
+        }
+    }
+
     @Override
     public void update(OrderAddressDTO orderAddress) throws SQLException {
         validate(orderAddress);
