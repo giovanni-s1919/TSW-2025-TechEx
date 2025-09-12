@@ -1,0 +1,159 @@
+#main {
+    padding: 2rem 1rem; /* Aggiunge un po' di spazio */
+}
+
+.checkout-container {
+    display: flex;
+    gap: 2rem; /* Spazio tra le due colonne */
+    max-width: 1200px;
+    margin: 0 auto; /* Centra il layout */
+}
+
+/* Colonna sinistra (Dettagli) e destra (Riepilogo) */
+.customer-details-column {
+    flex: 2; /* Occupa 2/3 dello spazio */
+}
+
+.order-summary-column {
+    flex: 1; /* Occupa 1/3 dello spazio */
+}
+
+.customer-details-column h1 {
+    font-size: 2rem;
+    color: #003459;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #00A8E8;
+    padding-bottom: 0.5rem;
+}
+
+/* Stile per le sezioni (Indirizzo, Pagamento, Riepilogo) */
+.checkout-section {
+    margin-bottom: 2.5rem;
+}
+
+.checkout-section h2 {
+    font-size: 1.3rem;
+    color: #00171F;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+
+/* Stile per i gruppi con select + bottone */
+.selection-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkout-select {
+    flex-grow: 1; /* Fa espandere il select */
+    padding: 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+}
+
+.add-new-btn {
+    /* Stile simile ai tuoi bottoni di modifica/elimina */
+    background-color: #003459;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.add-new-btn:hover {
+    background-color: #005B8F;
+}
+
+
+/* Stili per i Form dei Guest (riutilizza gli stili dei modali) */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+.form-row .form-group {
+    flex: 1;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #00171F;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+
+/* Stili per il Riepilogo Ordine */
+.summary-box {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.summary-items {
+    margin-bottom: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-top: 1rem;
+    margin-bottom: 1.5rem;
+    border-top: 2px solid #003459;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #00A8E8; /* Colore save-btn */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.pay-button:hover {
+    background-color: #0084B5;
+}
+
+.pay-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
