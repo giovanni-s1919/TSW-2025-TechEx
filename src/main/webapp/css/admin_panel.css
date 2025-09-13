@@ -92,6 +92,44 @@ body {
 /* =============================================
    STILE TABELLE (PER PRODOTTI E ORDINI)
    ============================================= */
+
+#order-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: #f7f9fa;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #e1e8ed;
+}
+
+#order-filters input {
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    flex-grow: 1; /* Permette agli input di espandersi */
+}
+#order-filters input::placeholder {
+    color: #999;
+}
+
+#filter-orders-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #003459; /* Blu scuro */
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#filter-orders-btn:hover {
+    background-color: #005B8F;
+}
+
 .add-product-container {
     margin-bottom: 1.5rem;
 }
