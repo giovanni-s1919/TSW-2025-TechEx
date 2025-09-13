@@ -4,6 +4,7 @@ import model.dto.OrderDTO;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,45 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
             }
         }
         return null;
+    }
+
+    public List<OrderDTO> findWithFilters(LocalDate startDate, LocalDate endDate, Integer customerId) throws SQLException {
+        List<OrderDTO> orders = new ArrayList<>();
+
+        // Costruisce la query SQL dinamicamente
+        StringBuilder sql = new StringBuilder("SELECT * FROM `Order` WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        if (startDate != null) {
+            sql.append(" AND OrderDate >= ?");
+            params.add(Timestamp.valueOf(startDate.atStartOfDay()));
+        }
+        if (endDate != null) {
+            sql.append(" AND OrderDate <= ?");
+            params.add(Timestamp.valueOf(endDate.atTime(23, 59, 59)));
+        }
+        if (customerId != null && customerId > 0) {
+            sql.append(" AND UserID = ?");
+            params.add(customerId);
+        }
+
+        sql.append(" ORDER BY OrderDate DESC"); // Ordina dal più recente al più vecchio
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+
+            // Imposta i parametri nella PreparedStatement
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    orders.add(extract(rs));
+                }
+            }
+        }
+        return orders;
     }
 
     @Override

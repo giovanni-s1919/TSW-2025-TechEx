@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     // --- GESTIONE CAMBIO PANNELLI ---
     const menuItems = document.querySelectorAll('#account_voices li');
     const panels = document.querySelectorAll('.content-panel');
@@ -15,7 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     if (menuItems.length > 0) menuItems[0].click();
 
-    // --- ELEMENTI DEL DOM ---
+
+    // =================================================================
+    // --- SEZIONE: LOGICA GESTIONE PRODOTTI ---
+    // =================================================================
     const productListContainer = document.querySelector('#product-list-container tbody');
     const addProductBtn = document.getElementById('add-product-btn');
     const productModal = document.getElementById('product-modal');
@@ -23,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModalBtn = productModal.querySelector('.close-button');
     const modalTitle = document.getElementById('modal-title');
     const imagePreview = document.getElementById('image-preview');
-
-    // --- LOGICA GESTIONE PRODOTTI ---
 
     async function loadProducts() {
         try {
@@ -38,12 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             products.forEach(p => {
                 const row = document.createElement('tr');
-
-                // --- MODIFICA 1: Aggiunto cache busting alla visualizzazione in tabella ---
                 const cacheBuster = `?v=${new Date().getTime()}`;
                 const imageUrl = `${window.contextPath}/images/products/${p.id}.png${cacheBuster}`;
                 const placeholderUrl = `${window.contextPath}/images/placeholder.png`;
-
                 row.innerHTML = `
                     <td>${p.id}</td>
                     <td><img src="${imageUrl}" alt="${p.name}" style="width: 50px; height: 50px; border-radius: 5px; object-fit: cover;" onerror="this.onerror=null;this.src='${placeholderUrl}';"></td>
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         imagePreview.innerHTML = '';
         productModal.classList.add('active');
     });
+
     closeModalBtn.addEventListener('click', () => productModal.classList.remove('active'));
     window.addEventListener('click', (event) => {
         if (event.target == productModal) productModal.classList.remove('active');
@@ -99,11 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('productGrade').value = product.grade;
             document.getElementById('productVat').value = product.vat;
             document.getElementById('productDescription').value = product.description;
-
-            // --- MODIFICA 2: Aggiunto cache busting anche all'anteprima ---
             const cacheBuster = `?v=${new Date().getTime()}`;
             const imageUrl = `${window.contextPath}/images/products/${product.id}.png${cacheBuster}`;
-
             checkImageExists(imageUrl, (exists) => {
                 imagePreview.innerHTML = exists ? `<p>Immagine attuale:</p><img src="${imageUrl}" alt="Immagine prodotto" style="max-width: 100px; border-radius: 5px;">` : '<p>Nessuna immagine presente.</p>';
             });
@@ -138,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
             if (result.success) {
                 productModal.classList.remove('active');
-                loadProducts(); // Questa chiamata ora ricaricherà le immagini aggiornate
+                loadProducts();
             } else {
                 document.getElementById('productModalMessages').textContent = 'Errore: ' + result.message;
             }
@@ -148,11 +145,95 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // =================================================================
+    // --- SEZIONE: LOGICA GESTIONE ORDINI (CORRETTA) ---
+    // =================================================================
+
+    const filterOrdersBtn = document.getElementById('filter-orders-btn');
+    const orderListContainer = document.getElementById('order-list-container');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+    const customerIdInput = document.getElementById('customer-id');
+
+    if (filterOrdersBtn) {
+        filterOrdersBtn.addEventListener('click', function() {
+            console.log("CLICK su 'Filtra Ordini' registrato! Avvio caricamento...");
+            loadOrders();
+        });
+    }
+
+    const orderPanelTab = document.querySelector('li[data-target="order-overview"]');
+    if(orderPanelTab) {
+        orderPanelTab.addEventListener('click', () => {
+            if (orderListContainer.innerHTML.trim() === '') {
+                loadOrders();
+            }
+        }, { once: true });
+    }
+
+    async function loadOrders() {
+        orderListContainer.innerHTML = '<p>Caricamento ordini in corso...</p>';
+        try {
+            const response = await fetchWithAction('getOrders', {
+                startDate: startDateInput.value,
+                endDate: endDateInput.value,
+                customerId: customerIdInput.value
+            });
+            if (!response.ok) throw new Error('Errore di rete.');
+            const orders = await response.json();
+            displayOrders(orders);
+        } catch (error) {
+            console.error('Errore caricamento ordini:', error);
+            orderListContainer.innerHTML = '<p style="color: red;">Impossibile caricare gli ordini.</p>';
+        }
+    }
+
+    function displayOrders(orders) {
+        if (!orders || orders.length === 0) {
+            orderListContainer.innerHTML = '<p>Nessun ordine trovato con i filtri specificati.</p>';
+            return;
+        }
+
+        // Codice per creare la tabella (ora completo e corretto)
+        let tableHtml = `
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>ID Ordine</th>
+                        <th>ID Cliente</th>
+                        <th>Data Ordine</th>
+                        <th>Stato</th>
+                        <th>Importo Totale</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        orders.forEach(order => {
+            const orderDate = new Date(order.orderDate).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' });
+            tableHtml += `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.userID}</td>
+                    <td>${orderDate}</td>
+                    <td>${order.orderStatus}</td>
+                    <td>€${order.totalAmount.toFixed(2)}</td>
+                    <td><button class="view-details-btn" data-order-id="${order.id}">Dettagli</button></td>
+                </tr>`;
+        });
+
+        tableHtml += '</tbody></table>';
+        orderListContainer.innerHTML = tableHtml;
+    }
+
+    // FUNZIONE HELPER FETCH
     async function fetchWithAction(action, data = {}) {
         const body = new URLSearchParams();
         body.append('action', action);
         for (const key in data) {
-            body.append(key, data[key]);
+            if (data[key]) { // Invia solo i parametri con un valore
+                body.append(key, data[key]);
+            }
         }
         return await fetch(`${window.contextPath}/admin/panel`, {
             method: 'POST',
