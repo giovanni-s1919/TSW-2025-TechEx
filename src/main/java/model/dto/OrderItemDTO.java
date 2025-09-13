@@ -5,21 +5,47 @@ import java.util.Objects;
 
 public class OrderItemDTO implements Serializable {
     public enum Category {
-        DISPLAY,
-        CAMERA,
-        BATTERY,
-        MICROPHONE,
-        SPEAKER,
-        CASE,
-        BUTTON,
-        SENSOR
+        Display,
+        Camera,
+        Battery,
+        Microphone,
+        Speaker,
+        Case,
+        Button,
+        Sensor;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Display -> "Display & Touchscreen";
+                case Camera -> "Fotocamera";
+                case Battery -> "Batteria";
+                case Microphone -> "Microfono";
+                case Speaker -> "Altoparlante";
+                case Case -> "Scocca";
+                case Button -> "Tasto";
+                case Sensor -> "Sensore";
+                default -> name();
+            };
+        }
     }
 
     public enum Grade {
-        ORIGINAL,
-        EXCELLENT,
-        GREAT,
-        GOOD
+        Original,
+        Excellent,
+        Great,
+        Good;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Original -> "Originale";
+                case Excellent -> "Eccellente";
+                case Great -> "Ottimo";
+                case Good -> "Buono";
+                default -> name();
+            };
+        }
     }
 
     private int id;
