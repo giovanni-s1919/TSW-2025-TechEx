@@ -14,9 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.dao.OrderDAO;
+import model.dao.OrderItemDAO;
 import model.dao.ProductDAO;
 import model.dto.OrderDTO;
+import model.dto.OrderItemDTO;
 import model.dto.ProductDTO;
+
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -40,6 +43,7 @@ import java.util.Scanner;
 public class AdminServlet extends HttpServlet {
     private ProductDAO productDAO;
     private OrderDAO orderDAO;
+    private OrderItemDAO orderItemDAO;
 
     // --- MODIFICA 1: Inizializzazione personalizzata di Gson ---
     private Gson gson;
@@ -49,6 +53,7 @@ public class AdminServlet extends HttpServlet {
         DataSource ds = (DataSource) getServletContext().getAttribute("datasource");
         this.productDAO = new ProductDAO(ds);
         this.orderDAO = new OrderDAO(ds);
+        this.orderItemDAO = new OrderItemDAO(ds);
 
         // Crea un GsonBuilder per personalizzare la serializzazione
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -105,6 +110,9 @@ public class AdminServlet extends HttpServlet {
                     break;
                 case "getOrders":
                     handleGetOrders(request, response);
+                    break;
+                case "getOrderDetails":
+                    handleGetOrderDetails(request, response);
                     break;
                 default:
                     sendJsonResponse(response, false, "Azione non riconosciuta.", 400);
@@ -224,6 +232,32 @@ public class AdminServlet extends HttpServlet {
             }
         }
     }
+
+    private void handleGetOrderDetails(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        try {
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+
+            OrderDTO order = orderDAO.findById(orderId);
+            List<OrderItemDTO> items = orderItemDAO.findByOrderId(orderId);
+
+            if (order == null) {
+                sendJsonResponse(response, false, "Ordine non trovato.", 404);
+                return;
+            }
+
+            // Crea un oggetto Map per contenere sia l'ordine che i suoi articoli
+            Map<String, Object> orderDetails = Map.of(
+                    "order", order,
+                    "items", items
+            );
+
+            response.getWriter().write(gson.toJson(orderDetails));
+
+        } catch (NumberFormatException e) {
+            sendJsonResponse(response, false, "ID ordine non valido.", 400);
+        }
+    }
+
     private void sendJsonResponse(HttpServletResponse response, boolean success, String message, int statusCode) throws IOException {
         response.setStatus(statusCode);
         response.getWriter().write(gson.toJson(Map.of("success", success, "message", message)));

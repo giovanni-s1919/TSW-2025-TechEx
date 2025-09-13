@@ -125,6 +125,26 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
         return null;
     }
 
+    public List<OrderItemDTO> findByOrderId(int orderId) throws SQLException {
+        if (orderId <= 0) {
+            throw new IllegalArgumentException("Order ID must be a positive integer.");
+        }
+
+        List<OrderItemDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM OrderItem WHERE OrderID = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, orderId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(extract(rs));
+                }
+            }
+        }
+        return list;
+    }
+
     @Override
     public List<OrderItemDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
@@ -194,7 +214,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
         orderItem.setItemBrand(rs.getString("ItemBrand"));
         orderItem.setItemPrice(rs.getFloat("ItemPrice"));
         orderItem.setItemCategory(OrderItemDTO.Category.valueOf(rs.getString("ItemCategory")));
-        orderItem.setItemGrade(OrderItemDTO.Grade.valueOf(rs.getString("Grade")));
+        orderItem.setItemGrade(OrderItemDTO.Grade.valueOf(rs.getString("ItemGrade")));
         orderItem.setItemQuantity(rs.getInt("ItemQuantity"));
         orderItem.setItemVAT(rs.getFloat("ItemVAT"));
         return orderItem;

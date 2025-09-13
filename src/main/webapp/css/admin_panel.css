@@ -8,30 +8,26 @@ html, body {
     padding: 0;
     cursor: default;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
 }
-
 #main {
     display: flex;
-    justify-content: center; /* Centrato come in wishlist */
+    justify-content: center;
     align-items: flex-start;
     width: 90%;
     max-width: 1400px;
     margin: 0 auto;
-    padding-top: 5rem; /* Spazio dall'header */
+    padding-top: 5rem;
     padding-bottom: 4rem;
 }
-
 
 /* =============================================
    MENU LATERALE E CONTENUTO
    ============================================= */
-
 #account_voices {
     list-style: none;
     margin-top: 2rem;
@@ -45,7 +41,6 @@ body {
     font-weight: bold;
     flex-shrink: 0;
 }
-
 #account_voices li {
     padding: 0.5rem 1rem;
     color: #003459;
@@ -55,39 +50,31 @@ body {
     align-items: center;
     cursor: pointer;
 }
-
 #account_voices li:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
-
 #account_voices li.active-voice {
     background-color: #003459;
     color: #FFFFFF;
 }
-
 #account_voices li i {
     margin-right: 0.8rem;
     width: 1.25rem;
     text-align: center;
 }
-
 #account_voices li.active-voice i {
     color: #FFFFFF;
 }
-
 #account_content {
     flex: 1;
 }
-
 .content-panel {
     display: none;
     color: #003459;
 }
-
 .content-panel.active {
     display: block;
 }
-
 .content_intro {
     padding-top: 0.6rem;
     margin-bottom: 0.25rem;
@@ -95,7 +82,6 @@ body {
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 1rem;
 }
-
 .content_description {
     margin-top: 0.5rem;
     margin-bottom: 2rem;
@@ -104,56 +90,54 @@ body {
 
 
 /* =============================================
-   TABELLA PRODOTTI
+   STILE TABELLE (PER PRODOTTI E ORDINI)
    ============================================= */
-
 .add-product-container {
     margin-bottom: 1.5rem;
 }
-
-#product-list-container {
+#product-list-container, #order-list-container {
     margin-top: 2rem;
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
     border: 1px solid #CCCCCC;
     border-radius: 8px;
-    overflow: hidden; /* Per arrotondare gli angoli */
+    overflow: hidden;
 }
-
 thead {
     background-color: #003459;
     color: #FFFFFF;
 }
-
 th, td {
     padding: 0.8rem 1rem;
     text-align: left;
     border-bottom: 1px solid #CCCCCC;
+    vertical-align: middle; /* Allinea il contenuto verticalmente */
 }
-
 tbody tr:hover {
     background-color: #f5f5f5;
+}
+tbody tr:last-child td {
+    border-bottom: none;
+}
+td:last-child {
+    text-align: right;
 }
 
 tbody tr:last-child td {
     border-bottom: none;
 }
-
 #last-child-buttons {
     display: flex;
     justify-content: center;
 }
 
-
 /* =============================================
    BOTTONI
    ============================================= */
-
-.save-btn, .edit-btn, .delete-btn {
+.save-btn, .edit-btn, .delete-btn, .view-details-btn {
     padding: 0.6rem 1.2rem;
     border-style: hidden;
     border-radius: 5px;
@@ -163,20 +147,15 @@ tbody tr:last-child td {
     color: #FFFFFF;
     transition: background-color 0.2s ease-out, transform 0.2s ease-out;
 }
-
-.save-btn:hover, .edit-btn:hover, .delete-btn:hover {
+.save-btn:hover, .edit-btn:hover, .delete-btn:hover, .view-details-btn:hover {
     transform: scale(0.98);
 }
-
-#add-product-btn,
-#product-form .save-btn {
+#add-product-btn, #product-form .save-btn {
     background-color: #00A8E8;
 }
-#add-product-btn:hover,
-#product-form .save-btn:hover {
+#add-product-btn:hover, #product-form .save-btn:hover {
     background-color: #0084B5;
 }
-
 .edit-btn {
     background-color: #003459;
     margin-right: 0.5rem;
@@ -184,119 +163,64 @@ tbody tr:last-child td {
 .edit-btn:hover {
     background-color: #005B8F;
 }
-
 .delete-btn {
     background-color: #DC3545;
 }
 .delete-btn:hover {
     background-color: #C82333;
 }
+.view-details-btn { /* Stile per il bottone dettagli */
+    background-color: #6c757d;
+}
+.view-details-btn:hover {
+    background-color: #5a6268;
+}
+
+/* =============================================
+   FINESTRA MODALE E FORM
+   ============================================= */
+/* ... (Il tuo codice esistente per modale e form va qui, è corretto) ... */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); overflow-y: auto; padding: 3rem 0; }
+.modal.active { display: block; }
+.modal-content { background-color: #FFFFFF; padding: 2.5rem; border: 1px solid #888888; border-radius: 10px; width: 90%; max-width: 40rem; position: relative; margin: 0 auto; }
+.close-button { color: #AAAAAA; position: absolute; top: 1rem; right: 1.5rem; font-size: 1.75rem; font-weight: bold; cursor: pointer; }
+.close-button:hover, .close-button:focus { color: #000000; }
+#modal-title { margin-top: 0; color: #003459; margin-bottom: 2rem; text-align: center; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #00171F; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #CCCCCC; border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
+.modal-actions { text-align: center; margin-top: 1.5rem; }
+#productModalMessages { padding: 0.8rem; border-radius: 5px; font-size: 0.95rem; margin-top: 1.5rem; text-align: center; }
+#productModalMessages.success { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+#productModalMessages.error { background-color: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
 
 
 /* =============================================
-   FINESTRA MODALE
+   PANNELLO DETTAGLI ORDINE (CON TRANSIZIONI)
    ============================================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-
-    /* MODIFICHE CHIAVE */
-    overflow-y: auto; /* Aggiunge la barra di scorrimento verticale se necessario */
-    padding: 3rem 0;  /* Aggiunge spazio sopra e sotto per non toccare i bordi */
+.order-details-row td {
+    padding: 0 !important; /* Forza il padding a zero */
+    border-bottom: 2px solid #003459;
 }
-
-.modal.active {
-    display: block; /* Cambiato da 'flex' a 'block' per un miglior controllo dello scroll */
+.order-details-panel {
+    background-color: #f0f8ff;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, padding 0.5s ease-in-out;
 }
-
-.modal-content {
-    background-color: #FFFFFF;
-    padding: 2.5rem;
-    border: 1px solid #888888;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 40rem;
-    position: relative;
-
-    /* MODIFICA CHIAVE */
-    margin: 0 auto; /* Mantiene la centratura orizzontale */
+.order-details-panel.expanded {
+    max-height: 500px;
+    opacity: 1;
+    padding: 1.5rem 2rem;
 }
-
-.close-button {
-    color: #AAAAAA;
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 1.75rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #000000;
-}
-
-#modal-title {
-    margin-top: 0;
-    color: #003459;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-
-/* =============================================
-   FORM NELLA MODALE
-   ============================================= */
-.form-group {
-    margin-bottom: 1.2rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #00171F;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.modal-actions {
-    text-align: center;
-    margin-top: 1.5rem;
-}
-
-#productModalMessages {
-    padding: 0.8rem;
-    border-radius: 5px;
-    font-size: 0.95rem;
-    margin-top: 1.5rem;
-    text-align: center;
-}
-
-#productModalMessages.success {
-    background-color: #D4EDDA;
-    color: #155724;
-    border: 1px solid #C3E6CB;
-}
-
-#productModalMessages.error {
-    background-color: #F8D7DA;
-    color: #721C24;
-    border: 1px solid #F5C6CB;
-}
+.order-details-panel h4, .order-details-panel h5 { margin-top: 0; margin-bottom: 1rem; color: #003459; border-bottom: 1px solid #d0e0f0; padding-bottom: 0.5rem; }
+.order-details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; margin-bottom: 1rem; }
+.order-item-list { list-style: none; padding-left: 0; margin-top: 0.5rem; }
+.order-item-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #d0e0f0; }
+.order-item-list li:last-child { border-bottom: none; }
+.order-item-list .quantity { font-weight: bold; color: #005B8F; flex-basis: 10%; }
+.order-item-list .item-name { flex-grow: 1; }
+.order-item-list .item-price { font-weight: bold; text-align: right; flex-basis: 20%; }
