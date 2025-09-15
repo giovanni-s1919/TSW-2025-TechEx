@@ -37,16 +37,16 @@
                                 </div>
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Categoria:</div>
-                                    <div class="wishlist-product-value">${item.product.category}</div>
+                                    <div class="wishlist-product-value">${item.product.category.toString()}</div>
                                 </div>
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Grado:</div>
-                                    <div class="wishlist-product-value">${item.product.grade}</div>
+                                    <div class="wishlist-product-value">${item.product.grade.toString()}</div>
                                 </div>
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Prezzo:</div>
                                     <div class="wishlist-product-value">
-                                        <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
+                                        <fmt:formatNumber value="${item.product.price}" type="currency" pattern="¤#,##0.00"/>
                                     </div>
                                 </div>
                                 <div class="wishlist-interact">
