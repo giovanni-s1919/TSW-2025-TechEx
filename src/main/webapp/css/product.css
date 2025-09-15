@@ -198,3 +198,33 @@ body {
     text-decoration: none;
     color: black;
 }
+
+@media (max-width: 1080px){
+
+    #product-element{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+        font-weight: normal;
+        align-items: center;
+    }
+
+    #product-details{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        gap: 0.5rem;
+    }
+
+    .product-buttons{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        padding: 1rem;
+        gap: 1rem;
+        justify-content: space-evenly;
+    }
+}
