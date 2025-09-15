@@ -74,7 +74,7 @@
                     </ul>
                     <ul id="foradmin" hidden>
                         <a href="${pageContext.request.contextPath}/admin/panel" style="text-decoration: none; color: #003459;"><li>Centro di controllo</li>
-                        <a href="${pageContext.request.contextPath}/logout" style="text-decoration: none; color: #003459;"><li>Esci</li></a>
+                            <a href="${pageContext.request.contextPath}/logout" style="text-decoration: none; color: #003459;"><li>Esci</li></a>
                         </a>
                     </ul>
                 </li>
