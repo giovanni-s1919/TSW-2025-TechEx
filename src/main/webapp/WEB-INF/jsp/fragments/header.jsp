@@ -69,12 +69,12 @@
                         <a href="${pageContext.request.contextPath}/login?action=register" style="text-decoration: none; color: #003459;"><li>Registrati</li></a>
                     </ul>
                     <ul id="forcustomer" hidden>
-                        <a href="${pageContext.request.contextPath}/personal_area"><li>Area Personale</li></a>
-                        <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
+                        <a href="${pageContext.request.contextPath}/personal_area" style="text-decoration: none; color: #003459;"><li>Area Personale</li></a>
+                        <a href="${pageContext.request.contextPath}/logout" class="logout-link" style="text-decoration: none; color: #003459;"><li>Esci</li></a>
                     </ul>
                     <ul id="foradmin" hidden>
-                        <a href="${pageContext.request.contextPath}/admin/panel"><li>Centro di controllo</li>
-                        <a href="${pageContext.request.contextPath}/logout" class="logout-link"><li>Esci</li></a>
+                        <a href="${pageContext.request.contextPath}/admin/panel" style="text-decoration: none; color: #003459;"><li>Centro di controllo</li>
+                        <a href="${pageContext.request.contextPath}/logout" style="text-decoration: none; color: #003459;"><li>Esci</li></a>
                         </a>
                     </ul>
                 </li>
