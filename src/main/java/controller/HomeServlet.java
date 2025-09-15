@@ -31,7 +31,6 @@ public class HomeServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO
         HttpSession session = request.getSession(false);
         if(session!=null){
             UserDTO  user = (UserDTO)session.getAttribute("user");
@@ -51,7 +50,7 @@ public class HomeServlet extends HttpServlet {
             int elements = 0;
 
             for (ProductDTO productDTO : productDTOS) {
-                if(elements == 6) break;
+                if(elements == 7) break;
                 ProductCardDisplay product = new ProductCardDisplay(productDTO);
                 products.add(product);
                 elements++;
@@ -66,7 +65,6 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //  home page doesn't handle POST requests
         doGet(request,response);
     }
 }
