@@ -33,6 +33,12 @@ body#personal_area #forguest {
     cursor: none;
 }
 
+#main-wrapper {
+    display: flex;
+    align-items: center;
+    width: 60%;
+}
+
 #main {
     display: flex;
     justify-content: space-between;
