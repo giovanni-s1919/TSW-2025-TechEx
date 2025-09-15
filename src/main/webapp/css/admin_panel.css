@@ -259,3 +259,39 @@ tbody tr:last-child td {
 .order-item-list .quantity { font-weight: bold; color: #005B8F; flex-basis: 10%; }
 .order-item-list .item-name { flex-grow: 1; }
 .order-item-list .item-price { font-weight: bold; text-align: right; flex-basis: 20%; }
+
+@media (orientation: portrait) {
+    #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+        flex-direction: column;
+    }
+
+    #account_voices{
+        display: flex;
+        justify-content: center;
+        width: auto;
+        list-style: none;
+        margin-top: 2rem;
+        margin-right: 2.5rem;
+        padding: 0.25rem;
+        border: 1px solid #F2F9FC;
+        border-radius: 8px;
+        background-color: rgba(128, 128, 128, 0.2);
+        font-size: 1.2rem;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .content-panel.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
