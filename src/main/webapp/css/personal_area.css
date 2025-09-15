@@ -619,7 +619,7 @@ body#personal_area #forguest {
     align-items: center;
     min-height: 4.375rem;
     padding: 1rem 1.5rem;
-    gap: 1rem;
+    gap: 2rem;
     cursor: default;
 }
 
