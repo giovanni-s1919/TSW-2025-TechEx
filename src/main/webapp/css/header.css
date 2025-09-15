@@ -28,7 +28,16 @@ header {
 }
 
 #searchbar {
-    width: 25rem;
+    /* La larghezza ora è relativa al viewport */
+    width: 21vw;
+
+    /* La barra non supererà mai la sua dimensione originale (25rem) */
+    max-width: 25rem;
+
+    /* La barra non diventerà mai più piccola di 15rem */
+    min-width: 15rem;
+
+    /* Le altre proprietà rimangono identiche */
     height: 2.5rem;
     border: 2px solid #003459;
     border-radius: 12px;

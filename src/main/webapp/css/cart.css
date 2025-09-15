@@ -21,6 +21,8 @@ body {
     justify-content: center;
     align-items: flex-start; /* Allinea gli elementi in cima */
     padding: 0 1rem;
+    gap: 5rem;
+    margin-top: 10rem;
     box-sizing: border-box;
 }
 
@@ -29,7 +31,6 @@ body {
     flex-direction: column;
     justify-self: center;
     width: 65%;
-    margin-top: 10rem;
     margin-bottom: 5%;
     padding: 1.5rem;
     border: 2px solid rgba(0,0,0,0.3);
@@ -62,6 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 1rem;
     padding: 0.313rem;
     margin: 0.938rem;
     font-size: 1.25rem;
@@ -81,7 +83,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1%;
     padding: 0.75rem 1rem;
     border-bottom: 2px dashed rgba(0,0,0,0.3);
 }
@@ -101,7 +102,6 @@ body {
 .cart-item-actions {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
 }
 
 .remove-button {
@@ -130,14 +130,11 @@ body {
 #cart-confirm {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 15rem;
+    gap: 0rem;
     width: 20rem;
     border: 2px solid rgba(0,0,0,0.3);
-    border-radius: 8px;
-    margin-top: 10rem;
-    margin-left: 5%;
-    padding-bottom: 3rem;
     box-sizing: border-box;
     align-items: center;
 }
@@ -146,7 +143,6 @@ body {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin-bottom: 20%;
     padding: 1rem 1.25rem;
     font-size: 1.563rem;
     border-bottom: 2px dashed rgba(0,0,0,0.3);
@@ -206,109 +202,34 @@ body {
     color: white;
 }
 
-/* --- MEDIA QUERIES PER LA RESPONSIVITÀ --- */
-
-/* --- OTTIMIZZAZIONE PER TABLET (fino a 1200px) --- */
-@media (max-width: 1200px) {
-    #main {
-        flex-direction: column; /* Impila gli elementi verticalmente */
-        align-items: center; /* Li centra */
-        gap: 2rem; /* Aggiunge spazio tra i due box */
-    }
-
-    #cart-box {
-        width: 90%; /* Occupa più larghezza */
-        max-width: 700px; /* Limita la larghezza massima */
-        margin-top: 8rem;
-        margin-bottom: 0;
-    }
-
-    #cart-confirm {
-        width: 90%;
-        max-width: 700px;
-        margin-top: 0; /* Rimuove il margine per allinearsi con il gap */
-        margin-left: 0;
-        margin-bottom: 5%;
-        height: auto;
-        padding: 1.5rem;
-    }
-
-    .cart-total {
-        margin-bottom: 1.5rem;
-    }
-
-    /* Ridimensionamenti interni per un look più pulito su tablet */
-    .cart-product-image {
-        width: 12rem;
-        height: 12rem;
-        min-width: 12rem;
-    }
-
-    .cart-product-name {
-        font-size: 1.8rem;
-    }
-
-    .cart-product-details {
-        font-size: 1.1rem;
-    }
-
-    .quantity-input {
-        font-size: 1.1rem;
-    }
-}
-
 @media (orientation: portrait) {
-    #cart-box, #cart-confirm {
-        width: 100%; /* Occupa tutto lo schermo */
-        margin-top: 6rem;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-    }
-
     #main {
-        gap: 1.5rem;
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10rem;
     }
 
-    #cart-confirm {
-        margin-top: 0;
-    }
+     #cart-box {
+         width: 100%;
+     }
 
     .cart-element {
-        flex-direction: column; /* Impila immagine e dettagli */
+        display: flex;
+        flex-direction: column;
         align-items: center;
     }
 
-    .cart-product-image {
-        width: 10rem;
-        height: 10rem;
-        min-width: 10rem;
+    #cart-confirm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        width: 65%;
     }
 
-    .cart-product-details {
-        font-size: 1rem;
-    }
-
-    .cart-product-name {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    .cart-product-fieldvalue {
-        padding: 0.6rem 0.5rem;
-    }
-
-    .remove-button {
-        padding: 0.8rem 1rem;
-        width: 50%; /* Pulsante più grande per il tocco */
-    }
-
-    #cart-box-empty {
-        width: 100%;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        margin-top: 6rem;
+    #cart-proceed {
+        width: 80%;
     }
 }
