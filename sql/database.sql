@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS User(
     Surname             VARCHAR(255) NOT NULL,
     BirthDate           DATE NOT NULL,
     Phone               VARCHAR(15), -- (opzionale)
-    Role                ENUM ('Customer', 'Admin') DEFAULT 'Customer'
+    Role                ENUM ('Customer', 'Admin', 'Guest') DEFAULT 'Customer'
 );
 
 CREATE TABLE IF NOT EXISTS Address(
