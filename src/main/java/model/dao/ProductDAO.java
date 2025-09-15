@@ -138,6 +138,23 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return null;
     }
 
+    public ProductDTO findByName(String name) throws SQLException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be null or empty for lookup.");
+        }
+        String sql = "SELECT * FROM Product WHERE Name = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return extract(rs);
+                }
+            }
+        }
+        return null;
+    }
+
     // Metodo per trovare prodotti per categoria
     public List<ProductDTO> findByCategory(String category) throws SQLException {
         if (category == null || category.trim().isEmpty()) {
