@@ -68,11 +68,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-//        String from = request.getParameter("from");
         String fromParam = request.getParameter("from");
-//        if (from != null && session != null) {
-//            session.setAttribute("checkoutSource", from);
-//        }
         if (fromParam != null) {
             session.setAttribute("checkoutSource", fromParam);
         }
@@ -114,9 +110,20 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("checkoutItems", checkoutItems);
             request.setAttribute("checkoutTotal", checkoutTotal);
             if (user != null) {
-                List<AddressDTO> addresses = addressDAO.findAddressesByUserId(user.getId());
+                List<AddressDTO> allAddresses = addressDAO.findAddressesByUserId(user.getId());
                 List<PaymentMethodDTO> paymentMethods = paymentMethodDAO.findByUserID(user.getId());
-                request.setAttribute("userAddresses", addresses);
+                List<AddressDTO> shippingAddresses = new ArrayList<>();
+                List<AddressDTO> billingAddresses = new ArrayList<>();
+                for (AddressDTO addr : allAddresses) {
+                    if (addr.getAddressType() == AddressDTO.AddressType.Shipping) {
+                        shippingAddresses.add(addr);
+                    }
+                    if (addr.getAddressType() == AddressDTO.AddressType.Billing) {
+                        billingAddresses.add(addr);
+                    }
+                }
+                request.setAttribute("userShippingAddresses", shippingAddresses);
+                request.setAttribute("userBillingAddresses", billingAddresses);
                 request.setAttribute("userPaymentMethods", paymentMethods);
             }
         } catch (SQLException e) {
@@ -133,30 +140,43 @@ public class CheckoutServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
-
         if (session == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write(new Gson().toJson(Map.of("success", false, "message", "Sessione non valida.")));
             return;
         }
-
         UserDTO user = (UserDTO) session.getAttribute("user");
         String action = request.getParameter("action");
-
         if ("placeOrder".equals(action)) {
             Connection conn = null;
             try {
                 DataSource ds = (DataSource) getServletContext().getAttribute("datasource");
                 conn = ds.getConnection();
                 conn.setAutoCommit(false);
-
-                // 1. Calcola gli articoli da acquistare e il totale (questa parte è invariata)
+                if (user == null) {
+                    String cardName = request.getParameter("cardName");
+                    String cardNumber = request.getParameter("cardNumber");
+                    String cardExpiration = request.getParameter("cardExpiration");
+                    String cardCvc = request.getParameter("cardCvc");
+                    if (cardName == null || cardName.trim().isEmpty() ||
+                            cardNumber == null || cardNumber.trim().isEmpty() ||
+                            cardExpiration == null || cardExpiration.trim().isEmpty() ||
+                            cardCvc == null || cardCvc.trim().isEmpty()) {
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400 Bad Request
+                        response.getWriter().write(new Gson().toJson(Map.of("success", false, "message", "Tutti i campi del metodo di pagamento sono obbligatori.")));
+                        return;
+                    }
+                } else {
+                    String paymentMethodId = request.getParameter("paymentMethodId");
+                    if (paymentMethodId == null || paymentMethodId.trim().isEmpty()) {
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        response.getWriter().write(new Gson().toJson(Map.of("success", false, "message", "Nessun metodo di pagamento selezionato.")));
+                        return;
+                    }
+                }
                 List<CartDisplayItem> itemsToPurchase = new ArrayList<>();
                 float totalAmount = 0.0f;
                 String from = (String) session.getAttribute("checkoutSource");
-
-                // Logica per popolare itemsToPurchase e totalAmount...
-                // (La tua logica esistente qui va bene)
                 if ("cart".equals(from) && user != null) {
                     CartDTO cart = cartDAO.findByUserID(user.getId());
                     if (cart != null) {
@@ -173,11 +193,8 @@ public class CheckoutServlet extends HttpServlet {
                     }
                 } else if ("buyNow".equals(from)) {
                     Integer productId = (Integer) session.getAttribute("buyNowProduct");
-                    System.out.println("id Prodotto: " + productId);
                     Integer quantity = Integer.parseInt((String) session.getAttribute("buyNowQuantity"));
-                    System.out.println("quantity Prodotto: " + quantity);
                     ProductDTO product = productDAO.findById(productId);
-                    System.out.println("product Prodotto: " + product);
                     if (product != null && product.getStockQuantity() >= quantity) {
                         itemsToPurchase.add(new CartDisplayItem(product, quantity));
                         totalAmount += product.getPrice() * quantity;
@@ -185,77 +202,93 @@ public class CheckoutServlet extends HttpServlet {
                         throw new SQLException("Prodotto non disponibile o quantità in stock insufficiente.");
                     }
                 }
-
-                // 2. Prepara e salva l'indirizzo dell'ordine (LOGICA CHIAVE)
-                OrderAddressDTO orderAddress = new OrderAddressDTO();
-
-                if (user != null) { // === CASO: UTENTE LOGGATO ===
+                final float SHIPPING_COST = 7.99f;
+                float finalTotal = totalAmount;
+                if (user != null && totalAmount > 50.0f) {
+                } else {
+                    finalTotal += SHIPPING_COST;
+                }
+                OrderAddressDTO shippingOrderAddress = new OrderAddressDTO();
+                if (user != null) {
                     String addressIdStr = request.getParameter("addressId");
-                    System.out.println("Id indirizzo: "+addressIdStr);
                     if (addressIdStr == null || addressIdStr.isEmpty()) {
-                        throw new ServletException("ID indirizzo non fornito per l'utente registrato.");
+                        throw new ServletException("ID indirizzo di spedizione non fornito per l'utente registrato.");
                     }
                     int addressId = Integer.parseInt(addressIdStr);
-                    System.out.println("Id del address: "+addressId);
-                    // Carica l'indirizzo salvato dal DB
                     AddressDTO chosenAddress = addressDAO.findById(addressId);
                     if (chosenAddress == null) {
-                        throw new ServletException("Indirizzo selezionato con ID " + addressId + " non trovato.");
+                        throw new ServletException("Indirizzo di spedizione selezionato con ID " + addressId + " non trovato.");
                     }
-
-                    // Copia i dati dall'indirizzo salvato all'indirizzo dell'ordine
-                    System.out.println("inizio dei set su orderAddress... CASO NON GUEST");
-                    orderAddress.setName(chosenAddress.getName());
-                    orderAddress.setSurname(chosenAddress.getSurname());
-                    orderAddress.setStreet(chosenAddress.getStreet());
-                    orderAddress.setCity(chosenAddress.getCity());
-                    orderAddress.setPostalCode(chosenAddress.getPostalCode());
-                    orderAddress.setRegion(chosenAddress.getRegion());
-                    orderAddress.setCountry(chosenAddress.getCountry());
-                    orderAddress.setPhone(chosenAddress.getPhone());
-
-                } else { // === CASO: UTENTE OSPITE (GUEST) ===
-                    // Leggi i dati direttamente dal form (logica precedente)
-                    System.out.println("inizio dei set su orderAddress... CASO GUEST");
-                    orderAddress.setName(request.getParameter("name"));
-                    orderAddress.setSurname(request.getParameter("surname"));
-                    orderAddress.setStreet(request.getParameter("street"));
-                    orderAddress.setCity(request.getParameter("city"));
-                    orderAddress.setPostalCode(request.getParameter("postalCode"));
-                    orderAddress.setRegion(request.getParameter("region"));
-                    orderAddress.setCountry(request.getParameter("country"));
-                    orderAddress.setPhone(request.getParameter("phone"));
+                    shippingOrderAddress.setName(chosenAddress.getName());
+                    shippingOrderAddress.setSurname(chosenAddress.getSurname());
+                    shippingOrderAddress.setStreet(chosenAddress.getStreet());
+                    shippingOrderAddress.setCity(chosenAddress.getCity());
+                    shippingOrderAddress.setPostalCode(chosenAddress.getPostalCode());
+                    shippingOrderAddress.setRegion(chosenAddress.getRegion());
+                    shippingOrderAddress.setCountry(chosenAddress.getCountry());
+                    shippingOrderAddress.setPhone(chosenAddress.getPhone());
+                } else {
+                    shippingOrderAddress.setName(request.getParameter("name"));
+                    shippingOrderAddress.setSurname(request.getParameter("surname"));
+                    shippingOrderAddress.setStreet(request.getParameter("street"));
+                    shippingOrderAddress.setCity(request.getParameter("city"));
+                    shippingOrderAddress.setPostalCode(request.getParameter("postalCode"));
+                    shippingOrderAddress.setRegion(request.getParameter("region"));
+                    shippingOrderAddress.setCountry(request.getParameter("country"));
+                    shippingOrderAddress.setPhone(request.getParameter("phone"));
                 }
-
-                orderAddress.setAddressType(OrderAddressDTO.AddressType.Shipping);
-                orderAddressDAO.save(orderAddress, conn); // Ora 'orderAddress' ha dati validi e la validazione passerà
-
-                // 3. Crea l'ordine
+                shippingOrderAddress.setAddressType(OrderAddressDTO.AddressType.Shipping);
+                orderAddressDAO.save(shippingOrderAddress, conn);
+                OrderAddressDTO billingOrderAddress;
+                String billingSameAsShipping = request.getParameter("billingSameAsShipping");
+                if (billingSameAsShipping != null && billingSameAsShipping.equals("true")) {
+                    billingOrderAddress = shippingOrderAddress;
+                } else {
+                    billingOrderAddress = new OrderAddressDTO();
+                    if (user != null) {
+                        String billingAddressIdStr = request.getParameter("billingAddressId");
+                        if (billingAddressIdStr == null || billingAddressIdStr.isEmpty()) {
+                            throw new ServletException("ID indirizzo di fatturazione non fornito.");
+                        }
+                        int billingAddressId = Integer.parseInt(billingAddressIdStr);
+                        AddressDTO chosenBillingAddress = addressDAO.findById(billingAddressId);
+                        if (chosenBillingAddress == null) {
+                            throw new ServletException("Indirizzo di fatturazione selezionato con ID " + billingAddressId + " non trovato.");
+                        }
+                        billingOrderAddress.setName(chosenBillingAddress.getName());
+                        billingOrderAddress.setSurname(chosenBillingAddress.getSurname());
+                        billingOrderAddress.setStreet(chosenBillingAddress.getStreet());
+                        billingOrderAddress.setCity(chosenBillingAddress.getCity());
+                        billingOrderAddress.setPostalCode(chosenBillingAddress.getPostalCode());
+                        billingOrderAddress.setRegion(chosenBillingAddress.getRegion());
+                        billingOrderAddress.setCountry(chosenBillingAddress.getCountry());
+                        billingOrderAddress.setPhone(chosenBillingAddress.getPhone());
+                    } else {
+                        billingOrderAddress.setName(request.getParameter("billing_name"));
+                        billingOrderAddress.setSurname(request.getParameter("billing_surname"));
+                        billingOrderAddress.setStreet(request.getParameter("billing_street"));
+                        billingOrderAddress.setCity(request.getParameter("billing_city"));
+                        billingOrderAddress.setPostalCode(request.getParameter("billing_postalCode"));
+                        billingOrderAddress.setRegion(request.getParameter("billing_region"));
+                        billingOrderAddress.setCountry(request.getParameter("billing_country"));
+                        billingOrderAddress.setPhone(request.getParameter("billing_phone"));
+                    }
+                    billingOrderAddress.setAddressType(OrderAddressDTO.AddressType.Billing);
+                    orderAddressDAO.save(billingOrderAddress, conn);
+                }
                 OrderDTO newOrder = new OrderDTO();
-                // L'UserID in Order è NOT NULL, quindi gestiamo il caso guest
                 if (user != null) {
                     newOrder.setUserID(user.getId());
                 } else {
-                    // Qui dovresti decidere come gestire un ordine senza utente.
-                    // Una soluzione comune è avere un utente "guest" fittizio nel DB (es. con ID=0 o 1)
-                    // Per ora, se il tuo DB lo permette, potresti settare un ID di default.
-                    // Ma la tua tabella `Order` ha UserID NOT NULL, quindi questo è un problema.
-                    // ASSUMIAMO CHE GLI ORDINI GUEST NON SIANO PERMESSI PER ORA,
-                    // dato che il form guest non è completo e mancano i dati di pagamento.
-                    // Se vuoi abilitarli, dovrai modificare lo schema o la logica.
-                    throw new ServletException("Checkout come ospite non ancora pienamente implementato.");
+                    newOrder.setUserID(999);
                 }
-
                 newOrder.setOrderDate(new java.sql.Timestamp(System.currentTimeMillis()));
                 newOrder.setOrderStatus("Processing");
-                newOrder.setTotalAmount(totalAmount);
-                newOrder.setShippingAddressId(orderAddress.getId());
-                newOrder.setBillingAddressId(orderAddress.getId()); // Semplificazione: fatturazione = spedizione
+                newOrder.setTotalAmount(finalTotal);
+                newOrder.setShippingAddressId(shippingOrderAddress.getId());
+                newOrder.setBillingAddressId(billingOrderAddress.getId());
                 orderDAO.save(newOrder, conn);
-
-                // 4. Salva gli articoli dell'ordine e aggiorna lo stock
                 for (CartDisplayItem item : itemsToPurchase) {
-                    // ... (la tua logica per salvare OrderItemDTO e aggiornare ProductDTO è corretta)
                     ProductDTO product = item.getProduct();
                     OrderItemDTO orderItem = new OrderItemDTO();
                     orderItem.setOrderID(newOrder.getId());
@@ -271,8 +304,6 @@ public class CheckoutServlet extends HttpServlet {
                     product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
                     productDAO.update(product, conn);
                 }
-
-                // 5. Svuota il carrello e pulisci la sessione
                 if ("cart".equals(from) && user != null) {
                     CartDTO cart = cartDAO.findByUserID(user.getId());
                     if (cart != null) {
@@ -282,14 +313,11 @@ public class CheckoutServlet extends HttpServlet {
                 session.removeAttribute("buyNowProduct");
                 session.removeAttribute("buyNowQuantity");
                 session.removeAttribute("checkoutSource");
-
-                // 6. Finalizza la transazione
                 conn.commit();
                 response.getWriter().write(new Gson().toJson(Map.of("success", true, "orderId", newOrder.getId())));
-
             } catch (Exception e) {
                 if (conn != null) try { conn.rollback(); } catch (SQLException ex) { log("Rollback fallito", ex); }
-                log("Errore creazione ordine: ", e); // Usa e, non e.getMessage() per avere lo stack trace nei log
+                log("Errore creazione ordine: ", e);
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write(new Gson().toJson(Map.of("success", false, "message", "Errore durante la creazione dell'ordine.")));

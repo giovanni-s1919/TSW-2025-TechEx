@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     <div class="form-group">
                         <label for="addr_phone">Telefono:</label>
-                        <input type="tel" id="addr_phone" name="phone">
+                        <input type="text" id="addr_phone" name="phone">
                     </div>
                     <div class="form-group">
                          <label for="addr_addressType">Tipo di Indirizzo:</label>
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         function sendSaveAddressRequest(params) {
-            fetch(`${contextPath}/personal_area`, { // Punta a personal_area
+            fetch(`${contextPath}/personal_area`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         function sendSavePaymentMethodRequest(params) {
-            fetch(`${contextPath}/personal_area`, { // Punta a personal_area
+            fetch(`${contextPath}/personal_area`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params
@@ -346,14 +346,78 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    const guestCardNumberInput = document.getElementById('guest_card_number');
+    const guestCardExpirationInput = document.getElementById('guest_card_expiration');
+    if (guestCardNumberInput && guestCardExpirationInput) {
+        guestCardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = (value.match(/.{1,4}/g) || []).join('-');
+            e.target.value = formattedValue.substring(0, 19);
+        });
+        guestCardExpirationInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 6);
+            }
+            e.target.value = value;
+        });
+    }
+
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            let isValid = true;
+            let errorMessage = '';
+            const requiredInputs = checkoutForm.querySelectorAll('input[required]:not(:disabled)');
+            for(const input of requiredInputs) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    const label = document.querySelector(`label[for='${input.id}']`);
+                    errorMessage = `Il campo "${label ? label.textContent.replace(':', '') : input.name}" è obbligatorio.`;
+                    break;
+                }
+            }
+            if (isValid && guestCardExpirationInput && !guestCardExpirationInput.disabled) {
+                const expirationValue = guestCardExpirationInput.value;
+                if (expirationValue.match(/^\d{2}\/\d{4}$/)) {
+                    const [month, year] = expirationValue.split('/').map(num => parseInt(num, 10));
+                    const now = new Date();
+                    const currentMonth = now.getMonth() + 1;
+                    const currentYear = now.getFullYear();
+                    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+                        isValid = false;
+                        errorMessage = "La data di scadenza della carta non può essere nel passato.";
+                    }
+                } else if (expirationValue) {
+                    isValid = false;
+                    errorMessage = "Il formato della data di scadenza non è valido. Usa MM/AAAA.";
+                }
+            }
+            if (isValid) {
+                const paymentSelect = checkoutForm.querySelector('select[name="paymentMethodId"]');
+                if (paymentSelect && !paymentSelect.value) {
+                    isValid = false;
+                    errorMessage = "Nessun metodo di pagamento disponibile. Aggiungine uno per procedere.";
+                }
+            }
+            if (!isValid) {
+                alert(errorMessage);
+                return;
+            }
             const formData = new FormData(checkoutForm);
             const params = new URLSearchParams();
-            for (const pair of formData.entries()) {
-                params.append(pair[0], pair[1]);
+            if (!document.getElementById('billing-same-as-shipping').checked) {
+                for (const pair of formData.entries()) {
+                    params.append(pair[0], pair[1]);
+                }
+            } else {
+                for (const pair of formData.entries()) {
+                    if (!pair[0].startsWith('billing_') && pair[0] !== 'billingAddressId') {
+                        params.append(pair[0], pair[1]);
+                    }
+                }
+                params.append('billingSameAsShipping', 'true');
             }
             params.append('action', 'placeOrder');
             fetch(`${contextPath}/checkout`, {
@@ -363,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = `${contextPath}/order-confirmation?id=${data.orderId}`;
+                        window.location.href = `${contextPath}/order_confirmation?id=${data.orderId}`;
                     } else {
                         alert('Errore: ' + data.message);
                     }
@@ -374,4 +438,66 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     }
+
+    const billingCheckbox = document.getElementById('billing-same-as-shipping');
+    const billingSection = document.getElementById('billing-address-section');
+    if (billingCheckbox && billingSection) {
+        const billingInputs = billingSection.querySelectorAll('input, select');
+        billingCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                billingSection.classList.add('hidden-section');
+                billingInputs.forEach(input => {
+                    input.disabled = true;
+                });
+            } else {
+                billingSection.classList.remove('hidden-section');
+                billingInputs.forEach(input => {
+                    input.disabled = false;
+                });
+            }
+        });
+    }
+
+    const cardLogoContainer = document.getElementById('card-logo-container');
+    if (guestCardNumberInput && cardLogoContainer) {
+        function detectCardType(number) {
+            number = number.replace(/[\s-]/g, '');
+            if (/^4/.test(number)) {
+                return 'visa';
+            }
+            if (/^(5[1245]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)/.test(number)) {
+                return 'mastercard';
+            }
+            if (/^3[47]/.test(number)) {
+                return 'american-express';
+            }
+            if (/^53/.test(number)) {
+                return 'postepay';
+            }
+            return null;
+        }
+
+        guestCardNumberInput.addEventListener('input', function(e) {
+            const cardNumber = e.target.value;
+            const cardType = detectCardType(cardNumber);
+            cardLogoContainer.classList.remove('visa', 'mastercard', 'american-express', 'postepay', 'generic-card', 'visible');
+            if (cardType) {
+                cardLogoContainer.classList.add(cardType);
+            } else {
+                cardLogoContainer.classList.add('generic-card');
+            }
+            cardLogoContainer.classList.add('visible');
+        });
+    }
+
+    window.addEventListener('pageshow', function(event) {
+        const form = document.getElementById('checkout-form');
+        if (form) {
+            form.reset();
+        }
+        if (billingCheckbox && billingSection) {
+            billingCheckbox.checked = true;
+            billingCheckbox.dispatchEvent(new Event('change'));
+        }
+    });
 });

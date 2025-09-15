@@ -25,50 +25,57 @@ body {
 
 #main {
     width: 100%;
-    max-width: 1200px; /* Larghezza massima per leggibilità */
-    margin: 0 auto; /* Centra il contenuto */
-    padding: 2.2rem 1.5rem; /* Padding laterale */
-    margin-top: var(--header-height);
+    max-width: 1200px;
+    margin: var(--header-height) auto 0 auto;
+    padding: 2.2rem 1.5rem;
     flex-grow: 1;
 }
 
 .checkout-container {
     display: flex;
-    gap: 2.5rem; /* Spazio tra le due colonne */
+    gap: 2.5rem;
     align-items: flex-start;
 }
 
+.checkout-container p {
+    color: var(--dark-text);
+}
+
 .customer-details-column {
-    flex: 2; /* Occupa 2/3 dello spazio */
+    flex: 2;
 }
 
 .order-summary-column {
-    flex: 1; /* Occupa 1/3 dello spazio */
-    position: sticky; /* Rimane visibile durante lo scroll */
+    flex: 1;
+    position: sticky;
     top: calc(var(--header-height) + 2rem);
+    padding-top: 2.1rem;
 }
 
-h1 {
+#checkout-intro {
     color: var(--primary-blue);
     font-size: 2.2rem;
     margin-bottom: 2rem;
+    margin-left: -0.15rem;
 }
 
-h2 {
+.checkout-phrase {
     color: var(--primary-blue);
     font-size: 1.5rem;
     border-bottom: 2px solid var(--primary-blue);
     padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+#checkout-phrase-cc {
+    margin-top: -3.2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--light-grey-border);
 }
 
 .checkout-section {
     margin-bottom: 2.5rem;
 }
-
-/* ============================================= */
-/*                 STILI FORM                    */
-/* ============================================= */
 
 .form-group {
     margin-bottom: 1.2rem;
@@ -121,10 +128,6 @@ h2 {
     flex-grow: 1;
 }
 
-/* ============================================= */
-/*                  PULSANTI                     */
-/* ============================================= */
-
 .add-new-btn {
     padding: 0.75rem 1.2rem;
     border: none;
@@ -140,7 +143,104 @@ h2 {
 }
 
 .add-new-btn:hover {
-    background-color: #005B8F; /* Blu più scuro al passaggio del mouse */
+    background-color: #005B8F;
+}
+
+.no-items-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-radius: 5px;
+    color: var(--dark-text);
+}
+
+.billing-address-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem 3rem 1rem;
+    margin: -2.3rem auto 0 auto;
+    border-radius: 5px;
+}
+
+.billing-address-toggle input[type="checkbox"] {
+    width: 2.5em;
+    height: 2.5em;
+    margin-left: -1rem;
+    margin-right: 0.8rem;
+    accent-color: var(--primary-blue);
+    cursor: pointer;
+}
+
+.billing-address-toggle label {
+    font-weight: bold;
+    color: var(--dark-text);
+    cursor: pointer;
+}
+
+#billing-address-section {
+    border-top: 1px solid var(--light-grey-border);
+    padding-bottom: 2.5rem;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    margin-top: 0;
+    opacity: 1;
+}
+
+#billing-address-section.hidden-section {
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+    padding-top: 0;
+    border-top: none;
+    visibility: hidden;
+}
+
+.card-number-wrapper {
+    position: relative;
+}
+
+#guest_card_number {
+    padding-right: 60px;
+}
+
+#card-logo-container {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 1.563rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease;
+    opacity: 0;
+}
+
+#card-logo-container.visible {
+    opacity: 1;
+}
+
+.card-logo.visa {
+    background-image: url('../images/visa.png');
+}
+
+.card-logo.mastercard {
+    background-image: url('../images/mastercard.jpg');
+}
+
+.card-logo.american-express {
+    background-image: url('../images/americanexpress.jpg');
+}
+
+.card-logo.postepay {
+    background-image: url('../images/postepay.jpg');
+}
+
+.card-logo.generic-card {
+    background-image: url('../images/card.png');
 }
 
 .pay-button {
@@ -158,12 +258,8 @@ h2 {
 }
 
 .pay-button:hover {
-    background-color: #0084B5; /* Blu secondario più scuro */
+    background-color: #0084B5;
 }
-
-/* ============================================= */
-/*            RIEPILOGO ORDINE (COLONNA DX)      */
-/* ============================================= */
 
 .summary-box {
     border: 1px solid var(--light-grey-border);
@@ -173,39 +269,71 @@ h2 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.summary-box h2 {
+.summary-box h1 {
     margin-top: 0;
     text-align: center;
-    border-bottom-color: var(--light-grey-border);
+    border-bottom-color: var(--primary-blue);
 }
 
 .summary-item {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 0.938rem;
     padding: 1rem 0;
     border-bottom: 1px dashed var(--light-grey-border);
     color: var(--dark-text);
+}
+
+.summary-item-image {
+    width: 3.125rem;
+    height: 3.125rem;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.summary-item-name {
+    flex-grow: 1;
+}
+
+.summary-item-price {
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .summary-item:last-child {
     border-bottom: none;
 }
 
-.summary-total {
+.summary-totals {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-grey-border);
+}
+
+.total-row {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.total-row span {
+    color: var(--dark-text);
+}
+
+.grand-total {
     font-size: 1.3rem;
     font-weight: bold;
     color: var(--primary-blue);
-    padding-top: 1.5rem;
     margin-top: 1rem;
+    padding-top: 1rem;
     border-top: 2px solid var(--primary-blue);
 }
 
-/* ============================================= */
-/*              STILI PER I MODAL                */
-/* (Copiati/Adattati dal tuo CSS esistente)      */
-/* ============================================= */
+#free-shipping {
+    color: #28A745;
+    font-weight: bold;
+}
 
 .modal {
     display: none;
@@ -227,7 +355,7 @@ h2 {
     padding: 2.5rem;
     border: 1px solid #888888;
     width: 90%;
-    max-width: 38rem; /* Aumentata leggermente per form più complessi */
+    max-width: 38rem;
     border-radius: 10px;
     position: relative;
     animation: fadeIn 0.3s ease-out;
@@ -258,16 +386,36 @@ h2 {
     margin-top: 0;
     margin-bottom: 2rem;
     text-align: center;
+    color: var(--primary-blue);
 }
 
-/* Stili specifici per i form dentro i modal */
 #addAddressForm .form-group, #addPaymentMethodForm .form-group {
     margin: 0 0 1rem 0;
 }
 
 #addAddressForm .form-group input, #addAddressForm .form-group select,
 #addPaymentMethodForm .form-group input {
-    background-color: #FFFFFF; /* Sfondo bianco per input modal */
+    background-color: #FFFFFF;
+}
+
+#addAddressForm .form-group input[type="text"],
+#addAddressForm .form-group input[type="tel"],
+#addAddressForm .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--light-grey-border);
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: var(--dark-text);
+    background-color: #FFFFFF;
+}
+
+#addAddressForm .form-group input[type="text"]:focus,
+#addAddressForm .form-group input[type="tel"]:focus,
+#addAddressForm .form-group select:focus {
+    border-color: var(--primary-blue);
+    outline: none;
 }
 
 .form-check {
@@ -278,15 +426,15 @@ h2 {
 }
 
 .form-check input[type="checkbox"] {
-    width: 1.5em;
-    height: 1.5em;
+    width: 2.5em;
+    height: 2.5em;
     margin-right: 0.6rem;
     accent-color: var(--primary-blue);
     cursor: pointer;
 }
 
 .form-check label {
-    margin-bottom: 0; /* Resetta il margine per allineamento */
+    margin-bottom: 0;
     font-weight: normal;
 }
 
@@ -313,17 +461,16 @@ h2 {
     background-color: #0084B5;
 }
 
-/* Messaggi di errore/successo nei modal */
 #addressModalMessages, #paymentMethodModalMessages {
     padding: 0.8rem;
     border-radius: 5px;
     font-size: 0.95rem;
     margin-top: 1.5rem;
-    display: none; /* Nascosti di default */
+    display: none;
 }
 
 #addressModalMessages:not(:empty), #paymentMethodModalMessages:not(:empty) {
-    display: block; /* Visibili solo se contengono testo */
+    display: block;
 }
 
 #addressModalMessages.success, #paymentMethodModalMessages.success {
@@ -337,39 +484,3 @@ h2 {
     color: #721C24;
     border: 1px solid #F5C6CB;
 }
-
-/* ============================================= */
-/*                 RESPONSIVE                    */
-/* ============================================= */
-
-/*@media (max-width: 992px) {*/
-/*    .checkout-container {*/
-/*        flex-direction: column-reverse; !* Riepilogo ordine in alto su mobile *!*/
-/*        gap: 0;*/
-/*    }*/
-
-/*    .order-summary-column {*/
-/*        position: static; !* Rimuove lo sticky su mobile *!*/
-/*        width: 100%;*/
-/*        margin-bottom: 2.5rem;*/
-/*    }*/
-
-/*    .customer-details-column {*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 576px) {*/
-/*    .form-row {*/
-/*        flex-direction: column;*/
-/*        gap: 0;*/
-/*    }*/
-
-/*    #main {*/
-/*        padding: 2.2rem 1rem;*/
-/*    }*/
-
-/*    .modal-content {*/
-/*        padding: 2rem 1.5rem;*/
-/*    }*/
-/*}*/
