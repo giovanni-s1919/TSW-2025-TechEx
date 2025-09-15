@@ -49,14 +49,14 @@
                                         <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="wishlist-interact">
-                                <button class="wishlist-interation" id="${item.product.id}" onclick="submitWishlistAction('${item.product.id}', 'addToCart')">
-                                    Aggiungi al carrello
-                                </button>
-                                <button class="wishlist-interation" onclick="submitWishlistAction('${item.product.id}', 'removeFromWishlist')">
-                                    Rimuovi dalla lista
-                                </button>
+                                <div class="wishlist-interact">
+                                    <button class="wishlist-interation" id="${item.product.id}" onclick="submitWishlistAction('${item.product.id}', 'addToCart')">
+                                        Aggiungi al carrello
+                                    </button>
+                                    <button class="wishlist-interation" onclick="submitWishlistAction('${item.product.id}', 'removeFromWishlist')">
+                                        Rimuovi dalla lista
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <c:if test="${not loop.last}">

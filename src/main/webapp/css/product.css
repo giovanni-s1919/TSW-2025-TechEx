@@ -199,7 +199,7 @@ body {
     color: black;
 }
 
-@media (max-width: 1080px){
+@media (orientation: portrait){
 
     #product-element{
         display: flex;

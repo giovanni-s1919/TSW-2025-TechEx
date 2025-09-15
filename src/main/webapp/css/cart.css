@@ -257,9 +257,7 @@ body {
     }
 }
 
-
-/* --- OTTIMIZZAZIONE PER SMARTPHONE (fino a 768px) --- */
-@media (max-width: 768px) {
+@media (orientation: portrait) {
     #cart-box, #cart-confirm {
         width: 100%; /* Occupa tutto lo schermo */
         margin-top: 6rem;
