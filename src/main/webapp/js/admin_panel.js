@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // --- GESTIONE CAMBIO PANNELLI ---
-    // ... (codice esistente e funzionante) ...
     const menuItems = document.querySelectorAll('#account_voices li');
     const panels = document.querySelectorAll('.content-panel');
     menuItems.forEach(item => {
         item.addEventListener('click', () => {
-            menuItems.forEach(i => i.classList.remove('active-voice'));
-            item.classList.add('active-voice');
             const targetId = item.getAttribute('data-target');
             panels.forEach(panel => {
                 panel.classList.remove('active');
@@ -17,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (menuItems.length > 0) menuItems[0].click();
 
     // --- LOGICA GESTIONE PRODOTTI ---
-    // ... (tutto il tuo codice per i prodotti rimane qui, invariato) ...
     const productListContainer = document.querySelector('#product-list-container tbody');
     const addProductBtn = document.getElementById('add-product-btn');
     const productModal = document.getElementById('product-modal');
@@ -212,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </tr>`;
     }
 
-    // --- MODIFICA 2: Logica di apertura/chiusura animata per i dettagli ---
+    // --- Logica di apertura/chiusura animata per i dettagli ---
     orderListContainer.addEventListener('click', async function(event) {
         const target = event.target;
         if (!target.classList.contains('view-details-btn')) return;
@@ -232,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Chiudi tutti gli altri pannelli aperti (in modo animato)
+        // Chiudi tutti gli altri pannelli aperti
         document.querySelectorAll('.order-details-row').forEach(row => {
             const panel = row.querySelector('.order-details-panel');
             panel.classList.remove('expanded');
