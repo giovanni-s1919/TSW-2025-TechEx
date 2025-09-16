@@ -735,22 +735,12 @@ body#personal_area #forguest {
     border: 1px solid #F5C6CB;
 }
 
-#orders-list-container > *:not(.order-address-content) {
+#orders-list-container > *:not(.order-address-content):not(.order-card) {
     margin-top: 1rem;
     max-width: 48rem;
     text-align: center;
     margin-bottom: 1rem;
-    padding: 0.05rem 0 1rem 0;
-    color: #00171F;
-    border-bottom: 1px solid #CCCCCC;
-}
-
-#orders-list-container > *:not(.order-address-content) {
-    margin-top: 1rem;
-    max-width: 48rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    padding: 0.05rem 0 1rem 0;
+    padding: 0.9rem 0 2.1rem 0;
     color: #00171F;
     border-bottom: 1px solid #CCCCCC;
 }
