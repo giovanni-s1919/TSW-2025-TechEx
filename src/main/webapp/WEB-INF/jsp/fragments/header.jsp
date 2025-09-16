@@ -10,6 +10,11 @@
             <img id="logo" src="${pageContext.request.contextPath}/images/logo.png" alt="TECHEX">
         </a>
         <nav class="menu">
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <ul>
                 <li>
                     CATEGORIE
@@ -47,7 +52,6 @@
     <div class="top-right">
         <div class="search">
             <input type="text" id="searchbar" placeholder="Cerca...">
-            <i class="fas fa-search lens"></i>
         </div>
         <a href="${pageContext.request.contextPath}/wishlist">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
@@ -123,6 +127,11 @@
                 sessionStorage.setItem('catalogFilter', JSON.stringify(filter));
                 window.location.href = "${pageContext.request.contextPath}/catalog";
             });
+        });
+    </script>
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('active');
         });
     </script>
 </header>

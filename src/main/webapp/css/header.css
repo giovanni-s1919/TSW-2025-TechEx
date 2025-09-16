@@ -1,9 +1,12 @@
+/* =================================
+   Stili Base per Desktop
+   ================================= */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: Arial, sans-serif;
-    padding: 0.938rem;
+    padding: 0.938rem 1rem;
     background-color: #FFFFFF;
     left: 0;
     right: 0;
@@ -18,64 +21,60 @@ header {
 }
 
 .top-right {
-    justify-content: center;
+    flex-grow: 1; /* Permette a questa sezione di espandersi */
+    justify-content: flex-end; /* Allinea gli elementi a destra */
     gap: 1.25rem;
 }
 
-.search {
-    position: relative;
-    display: inline-block;
-}
-
-#searchbar {
-    /* La larghezza ora è relativa al viewport */
-    width: 21vw;
-
-    /* La barra non supererà mai la sua dimensione originale (25rem) */
-    max-width: 25rem;
-
-    /* La barra non diventerà mai più piccola di 15rem */
-    min-width: 15rem;
-
-    /* Le altre proprietà rimangono identiche */
-    height: 2.5rem;
-    border: 2px solid #003459;
-    border-radius: 12px;
-    padding: 0.313rem 1.875rem 0.313rem 1.875rem;
-}
-
-.lens {
-    position: absolute;
-    top: 50%;
-    left: 0.625rem;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    color: #003459;
-    pointer-events: none;
-}
-
-.header_icons {
-    width: 2.188rem;
-    height: 2.188rem;
+/* Protegge le icone dal restringimento */
+.top-right > a, .top-right > .menu {
+    flex-shrink: 0;
 }
 
 #logo {
     width: 12.5rem;
     height: 4.188rem;
-    margin-left: 0.313rem;
     margin-right: 1.875rem;
+    flex-shrink: 0; /* Il logo non si restringe */
 }
 
+/* =================================
+   Barra di Ricerca
+   ================================= */
+.search {
+    position: relative;
+    flex-grow: 1; /* Permette al contenitore di ricerca di occupare lo spazio */
+    display: flex;
+    justify-content: center;
+    margin: 0 1.25rem;
+}
+
+#searchbar {
+    width: 100%;
+    max-width: 25rem;
+    min-width: 15rem;
+    height: 2.5rem;
+    border: 2px solid #003459;
+    border-radius: 12px;
+    padding-left: 2.5rem;  /* Spazio a sinistra per l'icona */
+    padding-right: 1.25rem;
+
+    /* Icona come sfondo per un posizionamento perfetto */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23003459' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 0.75rem center;
+    background-size: 1rem 1rem;
+}
+
+/* =================================
+   Menu di Navigazione
+   ================================= */
 .menu > ul {
     display: flex;
     align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.topright {
-    margin-right: -1.25rem;
 }
 
 .menu > ul > li {
@@ -85,6 +84,10 @@ header {
     font-weight: bold;
     color: #003459;
     cursor: pointer;
+}
+
+.menu > ul > li:last-child {
+    margin-right: 0;
 }
 
 .menu > ul > li::after {
@@ -104,6 +107,15 @@ header {
     opacity: 1;
 }
 
+#promo {
+    color: #FF0000;
+}
+
+#promo::after {
+    background-color: #FF0000;
+}
+
+/* Sottomenu a tendina */
 .menu .submenu {
     display: none;
     opacity: 0;
@@ -111,40 +123,37 @@ header {
     top: 100%;
     left: 0;
     background: #FFFFFF;
-    /*border: 2px solid #003459;*/
-    border-width: 0;
-    box-shadow: 0 0 5px 1px #000000;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
     border-radius: 10px;
     padding: 0.5rem 0;
     list-style: none;
     min-width: 9.375rem;
     z-index: 500;
-    scale: 97%;
-    transition-property: scale, opacity;
-    transition-duration: 0.2s;
+    transform: scale(0.97);
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .menu > ul > li:hover > .submenu {
     display: block;
-    opacity: 100%;
-    scale: 100%;
+    opacity: 1;
+    transform: scale(1);
 }
 
 .menu > ul > li .submenu.flip {
-    transform: translate(-75%, 0);
+    transform: translate(-75%, 0) scale(1);
 }
 
 .menu .submenu li {
     padding: 0.313rem 0.938rem;
     white-space: nowrap;
     color: #003459;
-    transition-duration: 0.2s;
+    transition: transform 0.2s;
     border-radius: 8px;
 }
 
 .menu .submenu li:hover {
     background-color: rgba(0,0,0,0.1);
-    scale: 95%;
+    transform: scale(0.95);
 }
 
 .submenu-link, .submenu-link:link, .submenu-link:visited {
@@ -155,15 +164,116 @@ header {
     padding: 0.313rem 0.938rem;
 }
 
-#promo {
-    color: #FF0000;
+/* =================================
+   Icone Header e Hamburger
+   ================================= */
+.header_icons {
+    width: 2.188rem;
+    height: 2.188rem;
+    display: block;
 }
 
-#promo::after {
-    background-color: #FF0000;
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 1rem;
 }
 
-#forcustomer a:link, #forcustomer a:visited {
-    color: #003459;
-    text-decoration: none;
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: #003459;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+/* =================================
+   Media Queries per Responsività
+   ================================= */
+
+/* --- Tablet (fino a 1024px) --- */
+@media (max-width: 1024px) {
+    /* Nasconde il menu testuale e mostra l'hamburger */
+    .top-left .menu > ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #FFFFFF;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        padding: 1rem 0;
+    }
+
+    .top-left .menu.active > ul {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    #searchbar {
+        min-width: 10rem;
+    }
+}
+
+/* --- Mobile Grande (fino a 768px) --- */
+@media (max-width: 768px) {
+    .search {
+        flex-grow: 0.5;
+        margin: 0 1rem;
+    }
+
+    #searchbar {
+        /* Permette alla barra di restringersi completamente */
+        min-width: unset;
+    }
+
+    .top-right {
+        gap: 0.8rem;
+    }
+}
+
+/* --- Mobile Piccolo (fino a 480px) --- */
+@media (max-width: 480px) {
+    header {
+        flex-wrap: wrap;
+        padding: 0.5rem 1rem;
+    }
+
+    .top-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .top-right {
+        width: 100%;
+        justify-content: space-between; /* Spazia gli elementi in modo uniforme */
+        padding-top: 0.5rem;
+    }
+
+    /* Riorganizza gli elementi per visibilità */
+    .search {
+        order: 1;
+        flex-grow: 1;
+        margin: 0;
+    }
+
+    .top-right > a[href*="wishlist"] {
+        order: 2;
+    }
+    .top-right > a[href*="cart"] {
+        order: 3;
+    }
+    .top-right > .menu { /* Menu Utente */
+        order: 4;
+    }
+
+    .header_icons {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
 }
