@@ -147,6 +147,14 @@ header {
     scale: 95%;
 }
 
+.submenu-link, .submenu-link:link, .submenu-link:visited {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    margin: -0.313rem -0.938rem;
+    padding: 0.313rem 0.938rem;
+}
+
 #promo {
     color: #FF0000;
 }
