@@ -112,4 +112,72 @@ document.addEventListener("DOMContentLoaded", function () {
             </a>
         `;
     }
+
+    function addAccordionListeners() {
+        const filterTitles = document.querySelectorAll('.filter-title');
+        // Usiamo una funzione nominale per poterla rimuovere in seguito
+        const clickHandler = function () {
+            this.classList.toggle('active');
+            const options = this.nextElementSibling;
+            if (options.style.display === "block") {
+                options.style.display = "none";
+            } else {
+                options.style.display = "block";
+            }
+        };
+
+        filterTitles.forEach(title => {
+            // Aggiungiamo un "segnaposto" per sapere che abbiamo già aggiunto il listener
+            if (!title.dataset.listenerAdded) {
+                title.addEventListener('click', clickHandler);
+                title.dataset.listenerAdded = 'true';
+                // Salviamo un riferimento alla funzione per poterla rimuovere
+                title.clickHandler = clickHandler;
+            }
+        });
+    }
+
+    // Funzione che rimuove gli stili e gli event listener
+    function removeAccordion() {
+        const filterTitles = document.querySelectorAll('.filter-title');
+        const filterOptions = document.querySelectorAll('.filter-options');
+
+        filterTitles.forEach(title => {
+            // Rimuoviamo la classe 'active' per resettare l'icona +/-
+            title.classList.remove('active');
+            // Rimuoviamo il listener se esiste
+            if (title.dataset.listenerAdded) {
+                title.removeEventListener('click', title.clickHandler);
+                delete title.dataset.listenerAdded;
+                delete title.clickHandler;
+            }
+        });
+
+        // Rimuoviamo gli stili in linea per rendere di nuovo tutto visibile
+        filterOptions.forEach(options => {
+            options.removeAttribute('style');
+        });
+    }
+
+    // Oggetto che rappresenta la nostra media query
+    const portraitQuery = window.matchMedia("(orientation: portrait)");
+
+    // Funzione che gestisce il cambio di stato
+    function handleOrientationChange(e) {
+        if (e.matches) {
+            // Siamo in verticale
+            console.log("Orientamento verticale: attivo i menu a scomparsa.");
+            addAccordionListeners();
+        } else {
+            // Siamo in orizzontale
+            console.log("Orientamento orizzontale: ripristino la visualizzazione standard dei filtri.");
+            removeAccordion();
+        }
+    }
+
+    // Eseguiamo subito la funzione al caricamento della pagina
+    handleOrientationChange(portraitQuery);
+
+    // E la aggiungiamo come listener per i cambi futuri
+    portraitQuery.addEventListener("change", handleOrientationChange);
 });
