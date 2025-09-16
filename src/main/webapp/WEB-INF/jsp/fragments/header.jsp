@@ -62,7 +62,7 @@
                 <%-- Pulsante visibile solo in modalità ricerca attiva per CHIUDERE --%>
                 <%--the game--%>
                 <button class="search-close-btn">
-                    <img src="${pageContext.request.contextPath}/images/chiudi.svg" alt="Chiudi Ricerca">
+                    <img src="${pageContext.request.contextPath}/images/close.svg" alt="Chiudi Ricerca">
                 </button>
             </div>
         </div>
