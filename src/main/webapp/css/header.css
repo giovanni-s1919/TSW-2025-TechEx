@@ -11,26 +11,39 @@ header {
     z-index: 1000;
     border-bottom: 1px solid #E1E8ED;
 }
+
 .top-left, .top-right {
     display: flex;
     align-items: center;
 }
+
 .top-right {
     justify-content: center;
     gap: 1.25rem;
 }
+
 .search {
     position: relative;
     display: inline-block;
 }
+
 #searchbar {
+    /* La larghezza ora è relativa al viewport */
     width: 21vw;
+
+    /* La barra non supererà mai la sua dimensione originale (25rem) */
     max-width: 25rem;
+
+    /* La barra non diventerà mai più piccola di 15rem */
+    min-width: 15rem;
+
+    /* Le altre proprietà rimangono identiche */
     height: 2.5rem;
     border: 2px solid #003459;
     border-radius: 12px;
     padding: 0.313rem 1.875rem 0.313rem 1.875rem;
 }
+
 .lens {
     position: absolute;
     top: 50%;
@@ -40,16 +53,19 @@ header {
     color: #003459;
     pointer-events: none;
 }
+
 .header_icons {
     width: 2.188rem;
     height: 2.188rem;
 }
+
 #logo {
     width: 12.5rem;
     height: 4.188rem;
     margin-left: 0.313rem;
     margin-right: 1.875rem;
 }
+
 .menu > ul {
     display: flex;
     align-items: center;
@@ -57,9 +73,11 @@ header {
     margin: 0;
     padding: 0;
 }
+
 .topright {
     margin-right: -1.25rem;
 }
+
 .menu > ul > li {
     position: relative;
     margin-right: 1.25rem;
@@ -68,6 +86,7 @@ header {
     color: #003459;
     cursor: pointer;
 }
+
 .menu > ul > li::after {
     content: "";
     position: absolute;
@@ -80,9 +99,11 @@ header {
     transition: opacity 0.2s ease;
     border-radius: 10px;
 }
+
 .menu > ul > li:hover::after {
     opacity: 1;
 }
+
 .menu .submenu {
     display: none;
     opacity: 0;
@@ -90,8 +111,8 @@ header {
     top: 100%;
     left: 0;
     background: #FFFFFF;
-/border: 2px solid #003459;/
-border-width: 0;
+    /*border: 2px solid #003459;*/
+    border-width: 0;
     box-shadow: 0 0 5px 1px #000000;
     border-radius: 10px;
     padding: 0.5rem 0;
@@ -102,14 +123,17 @@ border-width: 0;
     transition-property: scale, opacity;
     transition-duration: 0.2s;
 }
+
 .menu > ul > li:hover > .submenu {
     display: block;
     opacity: 100%;
     scale: 100%;
 }
+
 .menu > ul > li .submenu.flip {
     transform: translate(-75%, 0);
 }
+
 .menu .submenu li {
     padding: 0.313rem 0.938rem;
     white-space: nowrap;
@@ -117,16 +141,28 @@ border-width: 0;
     transition-duration: 0.2s;
     border-radius: 8px;
 }
+
 .menu .submenu li:hover {
     background-color: rgba(0,0,0,0.1);
     scale: 95%;
 }
+
+.submenu-link, .submenu-link:link, .submenu-link:visited {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    margin: -0.313rem -0.938rem;
+    padding: 0.313rem 0.938rem;
+}
+
 #promo {
     color: #FF0000;
 }
+
 #promo::after {
     background-color: #FF0000;
 }
+
 #forcustomer a:link, #forcustomer a:visited {
     color: #003459;
     text-decoration: none;

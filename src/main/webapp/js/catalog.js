@@ -9,6 +9,30 @@ document.addEventListener("DOMContentLoaded", function () {
         filtersForm.reset();
     }
 
+    function applyFilterFromHeader() {
+        const savedFilterJSON = sessionStorage.getItem('catalogFilter');
+        if (savedFilterJSON) {
+            try {
+                const filter = JSON.parse(savedFilterJSON);
+                const filterInput = document.querySelector(`input[name="${filter.type}"][value="${filter.value}"]`);
+                if (filterInput) {
+                    filterInput.checked = true;
+                }
+                productGrid.innerHTML = '<p>Applicazione filtri in corso...</p>';
+                const params = new URLSearchParams();
+                params.append('action', 'filterProducts');
+                params.append(filter.type, filter.value);
+                params.append('sort', 'default');
+                fetchProducts(params);
+                sessionStorage.removeItem('catalogFilter');
+            } catch (e) {
+                console.error("Errore nel parsing del filtro salvato:", e);
+                sessionStorage.removeItem('catalogFilter');
+            }
+        }
+    }
+    applyFilterFromHeader();
+
     function showApplyButton() {
         applyFiltersBtn.hidden = false;
     }

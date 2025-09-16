@@ -17,6 +17,7 @@ import model.dto.UserDTO;
 import model.dto.ProductDTO;
 import model.dao.ProductDAO;
 import model.view.OrderConfirmationItem;
+import util.HeaderDataHelper;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class OrderConfirmationServlet extends HttpServlet {
             return;
         }
         try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             String role = (user != null) ? user.getRole().name() : "Guest";
             request.setAttribute("role", role);
             orderId = Integer.parseInt(orderIdStr);

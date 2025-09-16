@@ -220,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     if (data.success) {
                         hideAddAddressModal();
-                        // Ricarica la pagina di checkout per mostrare il nuovo indirizzo
                         window.location.reload();
                     } else {
                         displayMessage(data.message || 'Errore.', 'error', addressModalMessages);
@@ -328,7 +327,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     if (data.success) {
                         hideAddPaymentMethodModal();
-                        // Ricarica la pagina di checkout per mostrare il nuovo metodo
                         window.location.reload();
                     } else {
                         displayMessage(data.message || 'Errore.', 'error', paymentMethodModalMessages);
@@ -427,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = `${contextPath}/order_confirmation?id=${data.orderId}`;
+                        window.location.replace(`${contextPath}/order_confirmation?id=${data.orderId}`);
                     } else {
                         alert('Errore: ' + data.message);
                     }

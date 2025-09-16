@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,36 +14,30 @@
                 <li>
                     CATEGORIE
                     <ul class="submenu">
-                        <li>Display & Touchscreen</li>
-                        <li>Fotocamere</li>
-                        <li>Batterie</li>
-                        <li>Microfoni</li>
-                        <li>Altoparlanti</li>
-                        <li>Scocche</li>
-                        <li>Tasti</li>
-                        <li>Sensori</li>
+                        <c:forEach items="${categoriesForHeader}" var="category">
+                            <li><a class="submenu-link filter-link" href="#" data-filter-type="category" data-filter-value="${category.name()}">${category.toString()}</a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li>
                     BRAND
                     <ul class="submenu">
-                        <li>Apple</li>
-                        <li>Samsung</li>
-                        <li>Xiaomi</li>
-                        <li>Huawei</li>
-                        <li>Realme</li>
-                        <li>Google</li>
-                        <li>Oppo</li>
-                        <li>Oneplus</li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Apple">Apple</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Samsung">Samsung</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Xiaomi">Xiaomi</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Huawei">Huawei</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Realme">Realme</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Google">Google</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Oppo">Oppo</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Oneplus">Oneplus</a></li>
                     </ul>
                 </li>
                 <li>
                     GRADO
                     <ul class="submenu">
-                        <li>Premium</li>
-                        <li>Eccellente</li>
-                        <li>Ottimo</li>
-                        <li>Buono</li>
+                        <c:forEach items="${gradesForHeader}" var="grade">
+                            <li><a class="submenu-link filter-link" href="#" data-filter-type="grade" data-filter-value="${grade.name()}">${grade.toString()}</a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li id="promo">PROMO</li>
@@ -112,6 +107,21 @@
                 if (userConfirmed) {
                     window.location.href = this.href;
                 }
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.filter-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const filterType = this.dataset.filterType;
+                const filterValue = this.dataset.filterValue;
+                const filter = {
+                    type: filterType,
+                    value: filterValue
+                };
+                sessionStorage.setItem('catalogFilter', JSON.stringify(filter));
+                window.location.href = "${pageContext.request.contextPath}/catalog";
             });
         });
     </script>

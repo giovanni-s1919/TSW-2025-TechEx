@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import model.dao.*;
 import model.dto.*;
 import model.view.WishlistDisplayItem;
+import util.HeaderDataHelper;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class WishlistServlet extends HttpServlet {
         List<WishlistDisplayItem> displayItems = new ArrayList<>();
 
         try{
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             WishlistDTO wishlist = wishlistDAO.findByUserID(user.getId());
             if(wishlist!=null){
                 List<WishlistItemDTO> wishlistItems = wishlistItemDAO.findByWishlistID(wishlist.getId());

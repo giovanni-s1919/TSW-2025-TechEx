@@ -29,7 +29,7 @@
                                 <div class="product-card" id="${item.product.id}">
                                     <img src="${pageContext.request.contextPath}/images/products/${item.product.id}.png" alt="${item.product.name}" class="product-img">
                                     <h1 class="product-name">${item.product.name}</h1>
-                                    <p class="product-grade">${item.product.grade}</p>
+                                    <p class="product-grade">${item.product.grade.toString()}</p>
                                     <p class="product-price">€${item.product.price}</p>
                                 </div>
                             </c:forEach>

@@ -37,11 +37,11 @@
                                     </div>
                                     <div class="product-fieldvalue">
                                         <div class="product-field">Categoria:</div>
-                                        <div class="product-value">${product.category}</div>
+                                        <div class="product-value">${product.category.toString()}</div>
                                     </div>
                                     <div class="product-fieldvalue">
                                         <div class="product-field">Grado:</div>
-                                        <div class="product-value">${product.grade}</div>
+                                        <div class="product-value">${product.grade.toString()}</div>
                                     </div>
                                     <div class="product-fieldvalue">
                                         <div class="product-field">Disponibilità:</div>

@@ -72,7 +72,7 @@
                 <div class="actions">
                     <a href="${pageContext.request.contextPath}/home" class="cta-button primary">Continua lo shopping</a>
                     <c:if test="${role ne 'Guest'}">
-                        <a href="${pageContext.request.contextPath}/personal_area" class="cta-button secondary">I miei ordini</a>
+                        <a href="${pageContext.request.contextPath}/personal_area#orders" class="cta-button secondary">I miei ordini</a>
                     </c:if>
                 </div>
             </div>

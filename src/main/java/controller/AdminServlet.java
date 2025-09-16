@@ -19,6 +19,7 @@ import model.dao.ProductDAO;
 import model.dto.OrderDTO;
 import model.dto.OrderItemDTO;
 import model.dto.ProductDTO;
+import util.HeaderDataHelper;
 
 
 import javax.sql.DataSource;
@@ -83,8 +84,16 @@ public class AdminServlet extends HttpServlet {
     // ... copia e incolla tutto il resto del tuo codice da qui in poi ...
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
+        } catch (SQLException e) {
+            log("Errore durante il caricamento dei dati per l'header del pannello admin", e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile caricare i dati della pagina.");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/jsp/admin_panel.jsp").forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");

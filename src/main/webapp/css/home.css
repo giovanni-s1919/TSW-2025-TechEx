@@ -84,6 +84,7 @@ a {
 .product-card:hover {
     /*transform: translateY(-0.313rem);*/
     scale: 1.02;
+    cursor: pointer;
 }
 
 .product-img {

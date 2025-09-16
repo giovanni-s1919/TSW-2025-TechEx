@@ -19,6 +19,7 @@ import java.util.HashMap;
 import model.dto.UserDTO;
 import model.dto.ProductDTO;
 import model.dao.ProductDAO;
+import util.HeaderDataHelper;
 
 @WebServlet(name = "CatalogServlet", value = {"/catalog"})
 public class CatalogServlet extends HttpServlet {
@@ -52,6 +53,7 @@ public class CatalogServlet extends HttpServlet {
         }
         request.setAttribute("role", role);
         try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             List<ProductDTO> allProducts = productDAO.findAll("Name");
             request.setAttribute("products", allProducts);
             request.setAttribute("categories", ProductDTO.Category.values());
