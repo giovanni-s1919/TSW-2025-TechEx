@@ -869,19 +869,16 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="order-card" data-order-id="${order.id}">
                 <div class="order-summary">
                     <div class="summary-col">
-                        <strong>Ordine #${order.id}</strong>
+                        <strong>ORDINE #${order.id}</strong>
                         <span>Effettuato il: ${order.orderDate}</span>
                     </div>
                     <div class="summary-col">
-                        <strong>Stato</strong>
-                        <span class="order-status-badge ${statusClass}">${order.orderStatus}</span>
-                    </div>
-                    <div class="summary-col">
-                        <strong>Totale</strong>
+                        <strong>TOTALE</strong>
                         <span>${formattedTotal}</span>
                     </div>
-                    <div class="summary-col chevron">
-                        <i class="fas fa-chevron-down"></i>
+                    <div class="summary-col">
+                        <strong>STATO</strong>
+                        <span class="order-status-badge ${statusClass}">${order.orderStatus}</span>
                     </div>
                 </div>
                 <div class="order-details"></div>
@@ -946,28 +943,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const shippingCost = data.order.totalAmount - subtotal;
         const shippingHTML = shippingCost > 0 ? shippingCost.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) : '<span class="free-shipping">GRATIS</span>';
 
-        let shippingAddressHTML = '<h4>Indirizzo di spedizione</h4><p>Indirizzo non disponibile.</p>';
+        let shippingAddressHTML = '<h1>Indirizzo di spedizione</h1><p>Indirizzo non disponibile.</p>';
         if (data.shippingAddress) {
             shippingAddressHTML = `
-            <h4>Indirizzo di spedizione</h4>
+            <h1>Indirizzo di spedizione</h1>
             <div class="order-address-content">
                 <p><strong>${data.shippingAddress.name || ''} ${data.shippingAddress.surname || ''}</strong></p>
                 <p>${data.shippingAddress.street || ''}</p>
                 <p>${data.shippingAddress.city || ''}, ${data.shippingAddress.postalCode || ''}</p>
+                <p>${data.shippingAddress.region|| ''}</p>
                 <p>${data.shippingAddress.country || ''}</p>
             </div>`;
         }
 
         let billingAddressHTML = '';
         if (data.order.shippingAddressId === data.order.billingAddressId) {
-            billingAddressHTML = '<h4>Indirizzo di fatturazione</h4><p class="billing-same-msg">Uguale all\'indirizzo di spedizione.</p>';
+            billingAddressHTML = '<h1>Indirizzo di fatturazione</h1><p class="billing-same-msg">Uguale all\'indirizzo di spedizione.</p>';
         } else if (data.billingAddress) {
             billingAddressHTML = `
-            <h4>Indirizzo di fatturazione</h4>
+            <h1>Indirizzo di fatturazione</h1>
             <div class="order-address-content">
                 <p><strong>${data.billingAddress.name || ''} ${data.billingAddress.surname || ''}</strong></p>
                 <p>${data.billingAddress.street || ''}</p>
                 <p>${data.billingAddress.city || ''}, ${data.billingAddress.postalCode || ''}</p>
+                <p>${data.billingAddress.region|| ''}</p>
                 <p>${data.billingAddress.country || ''}</p>
             </div>`;
         }
@@ -975,7 +974,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return `
         <div class="details-grid">
             <div class="details-col products-col">
-                <h4>Prodotti Ordinati</h4>
+                <h1>Prodotti acquistati</h1>
                 <div class="summary-items">${itemsHTML}</div>
                 <div class="summary-totals">
                     <div class="total-row"><span>Subtotale</span><span>${subtotal.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</span></div>
