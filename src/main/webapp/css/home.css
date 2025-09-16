@@ -135,7 +135,7 @@ a {
     height: 2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-out;
 }
 
 .catalog_button:hover {
@@ -342,7 +342,7 @@ a {
     height: 2rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-out;
 }
 
 .reviews_button:hover {
@@ -492,7 +492,7 @@ a {
     font-weight: bold;
     font-size: 1rem;
     text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-out;
 }
 
 .discover:hover {
@@ -585,7 +585,7 @@ a {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-out;
 }
 
 .newsletter_submit:hover {
@@ -633,7 +633,7 @@ a {
     color: #00A8E8;
     cursor: pointer;
     padding: 0.5rem 0;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease-out;
 }
 
 .faq_question:hover {
