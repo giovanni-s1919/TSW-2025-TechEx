@@ -162,11 +162,6 @@
                 padding: 1rem;
             }
 
-            .faq_question {
-                white-space: normal; /* Permette al testo delle domande di andare a capo */
-                width: 100%;
-                text-align: left;
-            }
         }
     </style>
 </head>

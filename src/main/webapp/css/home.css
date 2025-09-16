@@ -221,7 +221,8 @@ a {
 }
 
 .élite_selection-top {
-    color: #00A8E8;
+    color: white;
+    font-weight: bold;
     margin-bottom: -1rem;
 }
 
@@ -265,7 +266,7 @@ a {
 }
 
 .best_sellers {
-    background: linear-gradient(135deg, #FFF000, #00A8E8, #1e4fa3 ,#003459, #1e4fa3, #00A8E8, #FFF000);
+    background: linear-gradient(45deg, #FF0000, #00A8E8, #1e4fa3 ,#003459, #1e4fa3, #00A8E8, #FF0000);
     padding-top: 0.5rem;
     padding-bottom: 1.5rem;
     text-align: center;
@@ -284,7 +285,8 @@ a {
 }
 
 .best_sellers-favourites {
-    color: #00A8E8;
+    color: white;
+    font-weight: bold;
     padding-bottom: 0.2rem;
 }
 
