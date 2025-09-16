@@ -51,7 +51,19 @@
     </div>
     <div class="top-right">
         <div class="search">
-            <input type="text" id="searchbar" placeholder="Cerca...">
+            <%-- Pulsante visibile solo su Mobile per APRIRE la ricerca --%>
+            <button class="search-toggle-btn">
+                <img src="${pageContext.request.contextPath}/images/bluelens.svg" alt="Apri Ricerca">
+            </button>
+
+            <%-- Wrapper per la barra e il pulsante di chiusura --%>
+            <div class="search-input-wrapper">
+                <input type="text" id="searchbar" placeholder="Cerca...">
+                <%-- Pulsante visibile solo in modalità ricerca attiva per CHIUDERE --%>
+                <button class="search-close-btn">
+                    <img src="${pageContext.request.contextPath}/images/chiudi.svg" alt="Chiudi Ricerca">
+                </button>
+            </div>
         </div>
         <a href="${pageContext.request.contextPath}/wishlist">
             <img class="header_icons" src="${pageContext.request.contextPath}/images/preferiti.svg" alt="PREFERITI">
@@ -132,6 +144,28 @@
     <script>
         document.querySelector('.hamburger').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('active');
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const searchToggleBtn = document.querySelector('.search-toggle-btn');
+            const searchCloseBtn = document.querySelector('.search-close-btn');
+            const searchInput = document.getElementById('searchbar');
+
+            if (searchToggleBtn) {
+                searchToggleBtn.addEventListener('click', function() {
+                    header.classList.add('search-active');
+                    // Appena la barra appare, mettiamo il focus per poter scrivere subito
+                    searchInput.focus();
+                });
+            }
+
+            if (searchCloseBtn) {
+                searchCloseBtn.addEventListener('click', function() {
+                    header.classList.remove('search-active');
+                });
+            }
         });
     </script>
 </header>

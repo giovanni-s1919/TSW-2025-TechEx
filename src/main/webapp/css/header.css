@@ -8,25 +8,28 @@ header {
     font-family: Arial, sans-serif;
     padding: 0.938rem 1rem;
     background-color: #FFFFFF;
+    gap: 1rem;
     left: 0;
     right: 0;
     position: fixed;
     z-index: 1000;
     border-bottom: 1px solid #E1E8ED;
+    /* Aggiunta transizione per un'esperienza più fluida */
+    transition: padding 0.3s ease;
 }
 
 .top-left, .top-right {
     display: flex;
     align-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .top-right {
-    flex-grow: 1; /* Permette a questa sezione di espandersi */
-    justify-content: flex-end; /* Allinea gli elementi a destra */
+    flex-grow: 1;
+    justify-content: flex-end;
     gap: 1.25rem;
 }
 
-/* Protegge le icone dal restringimento */
 .top-right > a, .top-right > .menu {
     flex-shrink: 0;
 }
@@ -35,7 +38,7 @@ header {
     width: 12.5rem;
     height: 4.188rem;
     margin-right: 1.875rem;
-    flex-shrink: 0; /* Il logo non si restringe */
+    flex-shrink: 0;
 }
 
 /* =================================
@@ -43,10 +46,11 @@ header {
    ================================= */
 .search {
     position: relative;
-    flex-grow: 1; /* Permette al contenitore di ricerca di occupare lo spazio */
     display: flex;
-    justify-content: center;
-    margin: 0 1.25rem;
+    align-items: center;
+    justify-content: flex-end; /* Mantiene la tua modifica */
+    flex-grow: 1;
+    transition: all 0.3s ease;
 }
 
 #searchbar {
@@ -56,113 +60,60 @@ header {
     height: 2.5rem;
     border: 2px solid #003459;
     border-radius: 12px;
-    padding-left: 2.5rem;  /* Spazio a sinistra per l'icona */
+    padding-left: 2.5rem;
     padding-right: 1.25rem;
-
-    /* Icona come sfondo per un posizionamento perfetto */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23003459' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
+    background-image: url("/TSW_2025_TechEx_war_exploded/images/bluelens.svg");
     background-repeat: no-repeat;
     background-position: left 0.75rem center;
     background-size: 1rem 1rem;
 }
 
-/* =================================
-   Menu di Navigazione
-   ================================= */
-.menu > ul {
+/* NUOVO: Stili per la ricerca mobile */
+.search-toggle-btn, .search-close-btn {
+    display: none; /* Nascosti su desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 0; /* Rimuove spazi extra */
+}
+
+.search-toggle-btn img, .search-close-btn img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.search-input-wrapper {
     display: flex;
     align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    width: 100%; /* Occupa lo spazio del contenitore .search */
+    max-width: 25rem;
 }
 
-.menu > ul > li {
-    position: relative;
-    margin-right: 1.25rem;
-    padding: 0.625rem 0;
-    font-weight: bold;
-    color: #003459;
-    cursor: pointer;
-}
-
-.menu > ul > li:last-child {
-    margin-right: 0;
-}
-
-.menu > ul > li::after {
-    content: "";
+.search-close-btn {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 0.188rem;
-    width: 100%;
-    background-color: #003459;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    border-radius: 10px;
+    right: 0.5rem;
+    display: none; /* Nascosto di default */
 }
+/* Fine stili ricerca mobile */
 
-.menu > ul > li:hover::after {
-    opacity: 1;
-}
 
-#promo {
-    color: #FF0000;
-}
-
-#promo::after {
-    background-color: #FF0000;
-}
-
-/* Sottomenu a tendina */
-.menu .submenu {
-    display: none;
-    opacity: 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #FFFFFF;
-    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
-    border-radius: 10px;
-    padding: 0.5rem 0;
-    list-style: none;
-    min-width: 9.375rem;
-    z-index: 500;
-    transform: scale(0.97);
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.menu > ul > li:hover > .submenu {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
-}
-
-.menu > ul > li .submenu.flip {
-    transform: translate(-75%, 0) scale(1);
-}
-
-.menu .submenu li {
-    padding: 0.313rem 0.938rem;
-    white-space: nowrap;
-    color: #003459;
-    transition: transform 0.2s;
-    border-radius: 8px;
-}
-
-.menu .submenu li:hover {
-    background-color: rgba(0,0,0,0.1);
-    transform: scale(0.95);
-}
-
-.submenu-link, .submenu-link:link, .submenu-link:visited {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    margin: -0.313rem -0.938rem;
-    padding: 0.313rem 0.938rem;
-}
+/* =================================
+   Menu di Navigazione (invariato)
+   ================================= */
+.menu > ul { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+.menu > ul > li { position: relative; margin-right: 1.25rem; padding: 0.625rem 0; font-weight: bold; color: #003459; cursor: pointer; }
+.menu > ul > li:last-child { margin-right: 0; }
+.menu > ul > li::after { content: ""; position: absolute; bottom: 0; left: 0; height: 0.188rem; width: 100%; background-color: #003459; opacity: 0; transition: opacity 0.2s ease; border-radius: 10px; }
+.menu > ul > li:hover::after { opacity: 1; }
+#promo { color: #FF0000; }
+#promo::after { background-color: #FF0000; }
+.menu .submenu { display: none; opacity: 0; position: absolute; top: 100%; left: 0; background: #FFFFFF; box-shadow: 0 0 5px 1px rgba(0,0,0,0.5); border-radius: 10px; padding: 0.5rem 0; list-style: none; min-width: 9.375rem; z-index: 500; transform: scale(0.97); transition: transform 0.2s ease, opacity 0.2s ease; }
+.menu > ul > li:hover > .submenu { display: block; opacity: 1; transform: scale(1); }
+.menu > ul > li .submenu.flip { transform: translate(-75%, 0) scale(1); }
+.menu .submenu li { padding: 0.313rem 0.938rem; white-space: nowrap; color: #003459; transition: transform 0.2s; border-radius: 8px; }
+.menu .submenu li:hover { background-color: rgba(0,0,0,0.1); transform: scale(0.95); }
+.submenu-link, .submenu-link:link, .submenu-link:visited { display: block; color: inherit; text-decoration: none; margin: -0.313rem -0.938rem; padding: 0.313rem 0.938rem; }
 
 /* =================================
    Icone Header e Hamburger
@@ -180,12 +131,14 @@ header {
     margin-right: 1rem;
 }
 
+/* CORREZIONE: Aggiunto border-radius per uniformare l'aspetto */
 .hamburger .line {
     width: 25px;
     height: 3px;
     background-color: #003459;
     margin: 4px 0;
     transition: 0.4s;
+    border-radius: 1px;
 }
 
 /* =================================
@@ -194,44 +147,25 @@ header {
 
 /* --- Tablet (fino a 1024px) --- */
 @media (max-width: 1024px) {
-    /* Nasconde il menu testuale e mostra l'hamburger */
-    .top-left .menu > ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #FFFFFF;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        padding: 1rem 0;
-    }
-
-    .top-left .menu.active > ul {
-        display: flex;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    #searchbar {
-        min-width: 10rem;
-    }
+    .top-left .menu > ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 1rem 0; }
+    .top-left .menu.active > ul { display: flex; }
+    .hamburger { display: flex; }
+    .search-input-wrapper { min-width: 10rem; }
 }
 
-/* --- Mobile Grande (fino a 768px) --- */
+/* --- Mobile (fino a 768px) --- */
 @media (max-width: 768px) {
+    /* MODIFICA: La barra di ricerca viene sostituita dal pulsante */
+    .search-input-wrapper {
+        display: none;
+    }
+    .search-toggle-btn {
+        display: block;
+    }
     .search {
-        flex-grow: 0.5;
-        margin: 0 1rem;
+        flex-grow: 0; /* Non occupa spazio extra */
+        margin: 0;
     }
-
-    #searchbar {
-        /* Permette alla barra di restringersi completamente */
-        min-width: unset;
-    }
-
     .top-right {
         gap: 0.8rem;
     }
@@ -239,41 +173,63 @@ header {
 
 /* --- Mobile Piccolo (fino a 480px) --- */
 @media (max-width: 480px) {
-    header {
-        flex-wrap: wrap;
-        padding: 0.5rem 1rem;
-    }
-
-    .top-left {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .top-right {
-        width: 100%;
-        justify-content: space-between; /* Spazia gli elementi in modo uniforme */
-        padding-top: 0.5rem;
-    }
-
-    /* Riorganizza gli elementi per visibilità */
+    header { flex-wrap: wrap; padding: 0.5rem 1rem; }
+    .top-left { width: 100%; justify-content: space-between; }
+    .top-right { width: 100%; justify-content: space-around; padding-top: 0.5rem; }
+    .header_icons { width: 1.8rem; height: 1.8rem; }
     .search {
-        order: 1;
+        order: 2; /* Sposta l'icona di ricerca dopo il carrello */
+    }
+    .top-right > a[href*="wishlist"] { order: 1; }
+    .top-right > a[href*="cart"] { order: 2; }
+    .top-right > .menu { order: 4; }
+}
+
+
+/* ============================================
+   NUOVO: Stili per la Modalità Ricerca Attiva
+   ============================================ */
+@media (max-width: 768px) {
+    /* Quando la ricerca è attiva, nascondiamo tutto il resto */
+    header.search-active .top-left,
+    header.search-active .top-right > a,
+    header.search-active .top-right > .menu,
+    header.search-active .search-toggle-btn {
+        opacity: 0;
+        visibility: hidden;
+        display: none; /* Aggiunto per robustezza */
+    }
+
+    /* L'header si comprime per fare spazio */
+    header.search-active {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Il contenitore di ricerca occupa tutto lo spazio */
+    header.search-active .search {
+        width: 100%;
         flex-grow: 1;
-        margin: 0;
+        justify-content: flex-start;
     }
 
-    .top-right > a[href*="wishlist"] {
-        order: 2;
-    }
-    .top-right > a[href*="cart"] {
-        order: 3;
-    }
-    .top-right > .menu { /* Menu Utente */
-        order: 4;
+    /* Il wrapper con input e tasto chiudi diventa visibile */
+    header.search-active .search-input-wrapper {
+        display: flex;
+        flex-grow: 1;
     }
 
-    .header_icons {
-        width: 1.8rem;
-        height: 1.8rem;
+    /* Mostriamo il pulsante di chiusura */
+    header.search-active .search-close-btn {
+        display: block;
+        position: static; /* Rimuoviamo il posizionamento assoluto */
+        flex-shrink: 0;
+    }
+
+    /* La barra di ricerca non ha più lo sfondo della lente */
+    header.search-active #searchbar {
+        background-image: none;
+        padding-left: 1.25rem;
+        min-width: unset;
     }
 }
