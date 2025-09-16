@@ -168,7 +168,6 @@
 <body>
 <%@ include file="fragments/header.jsp" %>
 <div class="main">
-    <!-- ... IL TUO CODICE HTML RIMANE INVARIATO ... -->
     <div id="welcome-img">
         <div class="welcome-text">
             <h1>Dona nuova vita al tuo smartphone con TechEx!</h1>
@@ -200,7 +199,7 @@
             </c:when>
         </c:choose>
         <p class="products" id="catalog_phrase">Trovi questi e tanti altri prodotti all'interno del nostro catalogo!</p>
-        <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button">Catalogo</button></a>
+        <a href="${pageContext.request.contextPath}/catalog" alt="CATALOG"><button class="catalog_button" id="catalog_button_presentation">Catalogo</button></a>
     </div>
     <div class="presentation">
         <p class="presentation_menu">Il futuro della riparazione è qui!</p>
