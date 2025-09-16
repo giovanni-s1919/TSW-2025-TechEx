@@ -6,10 +6,30 @@ import java.time.LocalDate;
 
 public class OrderDTO implements Serializable
 {
+    public enum OrderStatus {
+        Pending,
+        Processing,
+        Shipped,
+        Delivered,
+        Cancelled;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Pending -> "In attesa";
+                case Processing -> "In lavorazione";
+                case Shipped -> "Spedito";
+                case Delivered -> "Consegnato";
+                case Cancelled -> "Annullato";
+                default -> name();
+            };
+        }
+    }
+
     private int id;
     private int userID;
     private Timestamp orderDate;
-    private String orderStatus;
+    private OrderStatus orderStatus;
     private LocalDate deliveryDate;
     private float totalAmount;
     private int shippingAddressId;
@@ -19,7 +39,7 @@ public class OrderDTO implements Serializable
     // Constructors
     public OrderDTO(){}
 
-    public OrderDTO(int id, int userID, Timestamp orderDate, String orderStatus, LocalDate deliveryDate, int billingAddressId, int shippingAddressId, float totalAmount){
+    public OrderDTO(int id, int userID, Timestamp orderDate, OrderStatus orderStatus, LocalDate deliveryDate, int billingAddressId, int shippingAddressId, float totalAmount){
         this.id = id;
         this.userID = userID;
         this.orderDate = orderDate;
@@ -38,8 +58,8 @@ public class OrderDTO implements Serializable
     public void setUserID(int userID) {this.userID = userID;}
     public Timestamp getOrderDate() {return orderDate;}
     public void setOrderDate(Timestamp orderDate) {this.orderDate = orderDate;}
-    public String getOrderStatus() {return orderStatus;}
-    public void setOrderStatus(String orderStatus) {this.orderStatus = orderStatus;}
+    public OrderStatus getOrderStatus() {return orderStatus;}
+    public void setOrderStatus(OrderStatus orderStatus) {this.orderStatus = orderStatus;}
     public LocalDate getDeliveryDate() {return deliveryDate;}
     public void setDeliveryDate(LocalDate deliveryDate) {this.deliveryDate = deliveryDate;}
     public int getBillingAddressId() {return billingAddressId;}
@@ -49,6 +69,9 @@ public class OrderDTO implements Serializable
     public float getTotalAmount() {return totalAmount;}
     public void setTotalAmount(float totalAmount) {this.totalAmount = totalAmount;}
 
+    public String getOrderStatusTranslated() {
+        return this.orderStatus != null ? this.orderStatus.toString() : "";
+    }
 
     @Override
     public boolean equals(Object o) {

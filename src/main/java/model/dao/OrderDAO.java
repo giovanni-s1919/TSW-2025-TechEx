@@ -24,7 +24,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
 
             ps.setInt(1, order.getUserID());
             ps.setTimestamp(2, order.getOrderDate()); // Salva Timestamp
-            ps.setString(3, order.getOrderStatus());
+            ps.setString(3, order.getOrderStatus().name());
             ps.setDate(4, Date.valueOf(order.getDeliveryDate())); // Salva LocalDate come java.sql.Date
             ps.setFloat(5, order.getTotalAmount());
             ps.setInt(6, order.getShippingAddressId());
@@ -46,7 +46,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, order.getUserID());
             ps.setTimestamp(2, order.getOrderDate());
-            ps.setString(3, order.getOrderStatus());
+            ps.setString(3, order.getOrderStatus().name());
             if (order.getDeliveryDate() != null) {
                 ps.setDate(4, Date.valueOf(order.getDeliveryDate()));
             } else {
@@ -77,7 +77,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
 
             ps.setInt(1, order.getUserID());
             ps.setTimestamp(2, order.getOrderDate());
-            ps.setString(3, order.getOrderStatus());
+            ps.setString(3, order.getOrderStatus().name());
             ps.setDate(4, Date.valueOf(order.getDeliveryDate()));
             ps.setFloat(5, order.getTotalAmount());
             ps.setInt(6, order.getShippingAddressId());
@@ -121,6 +121,24 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
             }
         }
         return null;
+    }
+
+    public List<OrderDTO> findByUserId(int userId) throws SQLException {
+        List<OrderDTO> orders = new ArrayList<>();
+        String sql = "SELECT * FROM `Order` WHERE UserID = ? ORDER BY OrderDate DESC";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    orders.add(extract(rs));
+                }
+            }
+        }
+        return orders;
     }
 
     public List<OrderDTO> findWithFilters(LocalDate startDate, LocalDate endDate, Integer customerId) throws SQLException {
@@ -192,7 +210,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         if(order == null ||
         order.getUserID() <= 0 ||
         order.getOrderDate() == null ||
-        order.getOrderStatus() == null || order.getOrderStatus().trim().isEmpty() ||
+        order.getOrderStatus() == null ||
         order.getTotalAmount() < 0 ||
         order.getShippingAddressId() <= 0 || order.getBillingAddressId() <= 0)
             throw new IllegalArgumentException("Some required order fields are null or empty.");
@@ -204,7 +222,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         order.setId(rs.getInt("ID"));
         order.setUserID(rs.getInt("UserID"));
         order.setOrderDate(rs.getTimestamp("OrderDate")); // Recupera Timestamp
-        order.setOrderStatus(rs.getString("OrderStatus"));
+        order.setOrderStatus(OrderDTO.OrderStatus.valueOf(rs.getString("OrderStatus")));
         Date deliveryDateSql = rs.getDate("DeliveryDate");
         order.setDeliveryDate(deliveryDateSql != null ? deliveryDateSql.toLocalDate() : null);
         order.setTotalAmount(rs.getFloat("TotalAmount"));
