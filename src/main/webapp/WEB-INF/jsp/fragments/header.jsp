@@ -60,6 +60,7 @@
             <div class="search-input-wrapper">
                 <input type="text" id="searchbar" placeholder="Cerca..." style="background-image: url('${pageContext.request.contextPath}/images/bluelens.svg')">
                 <%-- Pulsante visibile solo in modalità ricerca attiva per CHIUDERE --%>
+                <%--the game--%>
                 <button class="search-close-btn">
                     <img src="${pageContext.request.contextPath}/images/chiudi.svg" alt="Chiudi Ricerca">
                 </button>

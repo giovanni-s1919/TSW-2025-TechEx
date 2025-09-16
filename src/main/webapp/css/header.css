@@ -66,7 +66,7 @@ header {
     background-position: left 0.75rem center;
     background-size: 1rem 1rem;
 }
-
+/*the game*/
 /* NUOVO: Stili per la ricerca mobile */
 .search-toggle-btn, .search-close-btn {
     display: none; /* Nascosti su desktop */
