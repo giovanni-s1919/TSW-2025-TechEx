@@ -127,8 +127,8 @@ a {
 .catalog_button {
     display: block;
     margin: 0 auto;
-    color: #FFFFFF;
-    background-color: #003459;
+    color: #003459;
+    background-color: #FFFFFF;
     border: none;
     border-radius: 8px;
     padding: 0.5rem 1rem;
@@ -139,7 +139,7 @@ a {
 }
 
 .catalog_button:hover {
-    background-color: #005B8F;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .presentation {
@@ -265,7 +265,7 @@ a {
 }
 
 .best_sellers {
-    background-color: #F2F9FC;
+    background: linear-gradient(135deg, #FFF000, #00A8E8, #1e4fa3 ,#003459, #1e4fa3, #00A8E8, #FFF000);
     padding-top: 0.5rem;
     padding-bottom: 1.5rem;
     text-align: center;
