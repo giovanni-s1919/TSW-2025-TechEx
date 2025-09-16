@@ -91,6 +91,7 @@
                     <div class="content-panel" id="orders">
                         <h1 class="content_intro">Ordini</h1>
                         <p class="content_description">Visualizza lo storico dei tuoi ordini.</p>
+                        <div id="orders-list-container"></div>
                     </div>
                     <div class="content-panel" id="returns">
                         <h1 class="content_intro">Resi e sostituzioni</h1>

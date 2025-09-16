@@ -45,6 +45,7 @@ body#personal_area #forguest {
     align-items: flex-start;
     padding-top: 2.2rem;
     margin-top: var(--header-height);
+    width: 100%;
 }
 
 #account_voices {
@@ -802,6 +803,151 @@ body#personal_area #forguest {
 
 .support-btn:hover {
     background-color: #0084B5;
+}
+
+/* --- MODIFICA: Inizio del nuovo blocco di stili per la SEZIONE ORDINI --- */
+
+/* Contenitore principale per la lista degli ordini */
+#orders-list-container {
+    margin-top: 1.5rem;
+    max-width: 55rem; /* Larghezza maggiore per accomodare più informazioni */
+}
+
+/* Stile per la card di un singolo ordine */
+.order-card {
+    border: 1px solid #dee2e6; /* Bordo più leggero */
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.order-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Riepilogo visibile dell'ordine (la parte sempre visibile) */
+.order-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+}
+
+/* Colonne all'interno del riepilogo (ID, Stato, Totale) */
+.summary-col {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.summary-col:nth-child(1) { flex-basis: 35%; } /* Colonna ID Ordine e Data */
+.summary-col:nth-child(2) { flex-basis: 30%; } /* Colonna Stato */
+.summary-col:nth-child(3) { flex-basis: 25%; text-align: right; } /* Colonna Totale */
+.summary-col:nth-child(4) { flex-basis: 10%; align-items: flex-end; } /* Colonna Freccia */
+
+.summary-col strong {
+    font-size: 0.85rem;
+    color: #6c757d; /* Grigio testo secondario */
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.summary-col span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #003459; /* Blu primario */
+}
+
+/* Icona a freccia (chevron) per l'accordion */
+.summary-col.chevron {
+    font-size: 1.2rem;
+    color: #003459; /* Blu primario */
+    transition: transform 0.3s ease;
+}
+.order-card.expanded .summary-col.chevron {
+    transform: rotate(180deg); /* Ruota la freccia quando la card è espansa */
+}
+
+/* Badge colorato per lo stato dell'ordine */
+.order-status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px; /* Effetto "pillola" */
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    width: fit-content; /* Si adatta al testo */
+}
+.status-in-lavorazione { background-color: #00A8E8; } /* Blu secondario */
+.status-spedito { background-color: #28a745; } /* Verde */
+.status-consegnato { background-color: #6c757d; } /* Grigio */
+.status-annullato { background-color: #DC3545; } /* Rosso */
+.status-in-attesa { background-color: #ffc107; } /* Giallo */
+
+/* Sezione dei dettagli nascosta */
+.order-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out, border-top 0.1s linear 0.4s;
+    background-color: #f8f9fa; /* Grigio molto chiaro per distinguere */
+    padding: 0 1.5rem;
+    border-top: 1px solid transparent; /* Bordo invisibile che apparirà */
+}
+
+.order-card.expanded .order-details {
+    max-height: 1000px; /* Valore alto per permettere all'animazione di completarsi */
+    padding: 1.5rem;
+    border-top: 1px solid #dee2e6; /* Il bordo appare */
+    transition: max-height 0.5s ease-in, padding 0.5s ease-in, border-top 0.1s linear;
+}
+
+/* Griglia interna per prodotti e indirizzi */
+.details-grid {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+.details-col.products-col { flex: 3; } /* Colonna prodotti occupa più spazio (60%) */
+.details-col.addresses-col { flex: 2; } /* Colonna indirizzi occupa meno spazio (40%) */
+
+.details-col h4 {
+    color: #003459; /* Blu primario */
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Riepilogo prodotti e costi (all'interno dei dettagli) */
+.summary-items-container {
+    /* Contenitore per i soli prodotti */
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+.summary-item:last-of-type { border-bottom: none; }
+.summary-item-image { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
+.summary-item-name { flex-grow: 1; font-size: 0.95rem; }
+.summary-item-price { font-weight: bold; font-size: 0.95rem; }
+
+.total-row { display: flex; justify-content: space-between; margin-bottom: 0.8rem; }
+.grand-total { font-weight: bold; color: #003459; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #003459; }
+.free-shipping { color: #28a745; font-weight: bold; }
+.billing-same-msg { font-style: italic; color: #6c757d; margin-top: 1rem; }
+
+.order-address-content p {
+    margin: 0.5rem 0;
+    color: #00171F;
+    line-height: 1.5;
 }
 
 @media (orientation : portrait) {

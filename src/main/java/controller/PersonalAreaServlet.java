@@ -1,18 +1,25 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSerializationContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.view.OrderConfirmationItem;
 import util.HeaderDataHelper;
 import util.Utility;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +36,14 @@ import model.dto.UserAddressDTO;
 import model.dao.UserAddressDAO;
 import model.dto.PaymentMethodDTO;
 import model.dao.PaymentMethodDAO;
+import model.dto.ProductDTO;
 import model.dao.ProductDAO;
+import model.dao.OrderDAO;
+import model.dto.OrderDTO;
+import model.dto.OrderItemDTO;
+import model.dao.OrderItemDAO;
+import model.dto.OrderAddressDTO;
+import model.dao.OrderAddressDAO;
 
 
 @WebServlet(name = "PersonalAreaServlet", value = {"/personal_area"})
@@ -39,6 +53,9 @@ public class PersonalAreaServlet extends HttpServlet {
     private UserAddressDAO userAddressDAO;
     private PaymentMethodDAO paymentMethodDAO;
     private ProductDAO productDAO;
+    private OrderDAO orderDAO;
+    private OrderItemDAO orderItemDAO;
+    private OrderAddressDAO orderAddressDAO;
     private Gson gson = new Gson();
 
     @Override
@@ -54,6 +71,23 @@ public class PersonalAreaServlet extends HttpServlet {
             this.userAddressDAO = new UserAddressDAO(dataSource);
             this.paymentMethodDAO = new PaymentMethodDAO(dataSource);
             this.productDAO = new ProductDAO(dataSource);
+            this.orderDAO = new OrderDAO(dataSource);
+            this.orderItemDAO = new OrderItemDAO(dataSource);
+            this.orderAddressDAO = new OrderAddressDAO(dataSource);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+                @Override
+                public JsonElement serialize(Timestamp src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+                    return src == null ? null : new JsonPrimitive(src.toInstant().toString());
+                }
+            });
+            gsonBuilder.registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
+                @Override
+                public JsonElement serialize(LocalDate src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+                    return src == null ? null : new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE));
+                }
+            });
+            this.gson = gsonBuilder.create();
         } catch (ServletException e) {
             log("Errore durante l'inizializzazione dei DAO", e);
             throw e;
@@ -79,6 +113,14 @@ public class PersonalAreaServlet extends HttpServlet {
         }
         else if ("getPaymentMethodDetails".equals(action)) {
             handleGetPaymentMethodDetails(request, response);
+            return;
+        }
+        else if ("getOrders".equals(action)) {
+            handleGetOrders(request, response);
+            return;
+        }
+        else if ("getOrderDetails".equals(action)) {
+            handleGetOrderDetails(request, response);
             return;
         }
         if (session == null || loggedInUser == null || loggedInUser.getId() == 0) {
@@ -236,6 +278,87 @@ public class PersonalAreaServlet extends HttpServlet {
         } catch (Exception e) {
             sendJsonResponse(response, false, "Richiesta non valida o errore del server.", HttpServletResponse.SC_BAD_REQUEST);
             log("Errore durante il recupero dei dettagli del metodo di pagamento", e);
+        }
+    }
+
+    private void handleGetOrders(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+        if (loggedInUser == null) {
+            sendJsonResponse(response, false, "Utente non autenticato.", HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        try {
+            List<OrderDTO> orders = orderDAO.findByUserId(loggedInUser.getId());
+            List<Map<String, Object>> ordersForJson = new ArrayList<>();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            for (OrderDTO order : orders) {
+                Map<String, Object> orderMap = new HashMap<>();
+                orderMap.put("id", order.getId());
+                orderMap.put("orderDate", order.getOrderDate().toLocalDateTime().format(formatter));
+                orderMap.put("orderStatus", order.getOrderStatus().toString());
+                orderMap.put("totalAmount", order.getTotalAmount());
+                ordersForJson.add(orderMap);
+            }
+            response.getWriter().write(gson.toJson(ordersForJson));
+        } catch (SQLException e) {
+            log("Errore nel recupero degli ordini per l'utente " + loggedInUser.getId(), e);
+            sendJsonResponse(response, false, "Errore del server durante il recupero degli ordini.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private void handleGetOrderDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        UserDTO loggedInUser = (session != null) ? (UserDTO) session.getAttribute("user") : null;
+
+        if (loggedInUser == null) {
+            sendJsonResponse(response, false, "Utente non autenticato.", HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        try {
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            OrderDTO order = orderDAO.findById(orderId);
+
+            if (order == null || order.getUserID() != loggedInUser.getId()) {
+                sendJsonResponse(response, false, "Ordine non trovato o accesso non autorizzato.", HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+
+            // Carica i dati grezzi dal database
+            List<OrderItemDTO> orderItems = orderItemDAO.findByOrderId(orderId);
+            OrderAddressDTO shippingAddress = orderAddressDAO.findById(order.getShippingAddressId());
+            OrderAddressDTO billingAddress = orderAddressDAO.findById(order.getBillingAddressId());
+
+            // --- INIZIO LOGICA DI ARRICCHIMENTO DATI (LA PARTE CRUCIALE) ---
+            // Creiamo una lista di oggetti "arricchiti" per gli articoli
+            List<OrderConfirmationItem> displayItems = new ArrayList<>();
+            for (OrderItemDTO item : orderItems) {
+                // Per ogni articolo, cerchiamo il prodotto corrispondente per ottenere l'ID per l'immagine
+                ProductDTO product = productDAO.findByName(item.getItemName());
+                displayItems.add(new OrderConfirmationItem(item, product));
+            }
+            // --- FINE LOGICA DI ARRICCHIMENTO DATI ---
+
+            // Raggruppa tutti i dati in una mappa per una risposta JSON completa
+            Map<String, Object> orderDetails = new HashMap<>();
+            orderDetails.put("order", order);
+            // Passa la lista "arricchita", non quella grezza
+            orderDetails.put("items", displayItems);
+            orderDetails.put("shippingAddress", shippingAddress);
+            orderDetails.put("billingAddress", billingAddress);
+
+            response.getWriter().write(gson.toJson(orderDetails));
+
+        } catch (NumberFormatException e) {
+            sendJsonResponse(response, false, "ID ordine non valido.", HttpServletResponse.SC_BAD_REQUEST);
+        } catch (SQLException e) {
+            log("Errore SQL durante il recupero dei dettagli dell'ordine.", e);
+            sendJsonResponse(response, false, "Errore del server.", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

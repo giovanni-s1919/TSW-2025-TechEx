@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const contextPath = window.contextPath || '';
+
     const items = document.querySelectorAll("#account_voices li");
     const panels = document.querySelectorAll(".content-panel");
 
@@ -819,5 +821,172 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
         `;
+    }
+
+    const ordersTab = document.querySelector('#account_voices li[data-target="orders"]');
+    const ordersContentPanel = document.getElementById('orders');
+    if (ordersTab && ordersContentPanel) {
+        ordersTab.addEventListener('click', loadOrders);
+        ordersContentPanel.addEventListener('click', handleOrderCardClick);
+        if (window.location.hash === '#orders') {
+            loadOrders();
+        }
+    }
+
+    function loadOrders() {
+        const container = document.getElementById('orders-list-container');
+        if (!container) {
+            console.error('Il contenitore #orders-list-container non è stato trovato nella JSP.');
+            return;
+        }
+        container.innerHTML = '<p class="loading-msg">Caricamento storico ordini...</p>';
+        fetch(`${contextPath}/personal_area?action=getOrders`)
+            .then(response => {
+                if (!response.ok) { throw new Error('Errore di rete o del server.'); }
+                return response.json();
+            })
+            .then(orders => {
+                container.innerHTML = '';
+                if (orders.length === 0) {
+                    container.innerHTML = '<p class="no-items-msg">Non hai ancora effettuato nessun ordine.</p>';
+                } else {
+                    orders.forEach(order => {
+                        const orderCardHTML = createOrderCard(order);
+                        container.insertAdjacentHTML('beforeend', orderCardHTML);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Errore nel caricamento degli ordini:', error);
+                container.innerHTML = '<p class="error-msg">Impossibile caricare lo storico ordini. Riprova più tardi.</p>';
+            });
+    }
+
+    function createOrderCard(order) {
+        const formattedTotal = parseFloat(order.totalAmount).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+        const statusClass = `status-${order.orderStatus.toLowerCase().replace(/\s+/g, '-')}`;
+        return `
+            <div class="order-card" data-order-id="${order.id}">
+                <div class="order-summary">
+                    <div class="summary-col">
+                        <strong>Ordine #${order.id}</strong>
+                        <span>Effettuato il: ${order.orderDate}</span>
+                    </div>
+                    <div class="summary-col">
+                        <strong>Stato</strong>
+                        <span class="order-status-badge ${statusClass}">${order.orderStatus}</span>
+                    </div>
+                    <div class="summary-col">
+                        <strong>Totale</strong>
+                        <span>${formattedTotal}</span>
+                    </div>
+                    <div class="summary-col chevron">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="order-details"></div>
+            </div>
+        `;
+    }
+
+    function handleOrderCardClick(event) {
+        const summary = event.target.closest('.order-summary');
+        if (!summary) return;
+        const card = summary.closest('.order-card');
+        const detailsContainer = card.querySelector('.order-details');
+        const isExpanded = card.classList.contains('expanded');
+        document.querySelectorAll('.order-card.expanded').forEach(expandedCard => {
+            if (expandedCard !== card) {
+                expandedCard.classList.remove('expanded');
+            }
+        });
+        if (isExpanded) {
+            card.classList.remove('expanded');
+        } else {
+            card.classList.add('expanded');
+            if (detailsContainer.innerHTML.trim() === '') {
+                loadOrderDetails(card.dataset.orderId, detailsContainer);
+            }
+        }
+    }
+
+    function loadOrderDetails(orderId, container) {
+        container.innerHTML = '<p class="loading-msg">Caricamento dettagli...</p>';
+        fetch(`${contextPath}/personal_area?action=getOrderDetails&orderId=${orderId}`)
+            .then(response => {
+                if (!response.ok) { throw new Error('Impossibile caricare i dettagli dell\'ordine.'); }
+                return response.json();
+            })
+            .then(data => {
+                const detailsHTML = createOrderDetailsHTML(data);
+                container.innerHTML = detailsHTML;
+            })
+            .catch(error => {
+                console.error(`Errore nel caricamento dei dettagli per l'ordine #${orderId}:`, error);
+                container.innerHTML = '<p class="error-msg">Errore nel caricamento dei dettagli.</p>';
+            });
+    }
+
+    function createOrderDetailsHTML(data) {
+        const itemsHTML = data.items.map(displayItem => {
+            const item = displayItem.orderItem;
+            const product = displayItem.product;
+            const itemTotal = parseFloat(item.itemPrice * item.itemQuantity).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            const productId = product ? product.id : 0;
+            const productName = product ? product.name : item.itemName;
+            return `
+            <div class="summary-item">
+                <img class="summary-item-image" src="${contextPath}/images/products/${productId}.png" alt="${productName}">
+                <span class="summary-item-name">${productName} (x${item.itemQuantity})</span>
+                <span class="summary-item-price">${itemTotal}</span>
+            </div>`;
+        }).join('');
+
+        const subtotal = data.items.reduce((total, displayItem) => total + (displayItem.orderItem.itemPrice * displayItem.orderItem.itemQuantity), 0);
+        const shippingCost = data.order.totalAmount - subtotal;
+        const shippingHTML = shippingCost > 0 ? shippingCost.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) : '<span class="free-shipping">GRATIS</span>';
+
+        let shippingAddressHTML = '<h4>Indirizzo di spedizione</h4><p>Indirizzo non disponibile.</p>';
+        if (data.shippingAddress) {
+            shippingAddressHTML = `
+            <h4>Indirizzo di spedizione</h4>
+            <div class="order-address-content">
+                <p><strong>${data.shippingAddress.name || ''} ${data.shippingAddress.surname || ''}</strong></p>
+                <p>${data.shippingAddress.street || ''}</p>
+                <p>${data.shippingAddress.city || ''}, ${data.shippingAddress.postalCode || ''}</p>
+                <p>${data.shippingAddress.country || ''}</p>
+            </div>`;
+        }
+
+        let billingAddressHTML = '';
+        if (data.order.shippingAddressId === data.order.billingAddressId) {
+            billingAddressHTML = '<h4>Indirizzo di fatturazione</h4><p class="billing-same-msg">Uguale all\'indirizzo di spedizione.</p>';
+        } else if (data.billingAddress) {
+            billingAddressHTML = `
+            <h4>Indirizzo di fatturazione</h4>
+            <div class="order-address-content">
+                <p><strong>${data.billingAddress.name || ''} ${data.billingAddress.surname || ''}</strong></p>
+                <p>${data.billingAddress.street || ''}</p>
+                <p>${data.billingAddress.city || ''}, ${data.billingAddress.postalCode || ''}</p>
+                <p>${data.billingAddress.country || ''}</p>
+            </div>`;
+        }
+
+        return `
+        <div class="details-grid">
+            <div class="details-col products-col">
+                <h4>Prodotti Ordinati</h4>
+                <div class="summary-items">${itemsHTML}</div>
+                <div class="summary-totals">
+                    <div class="total-row"><span>Subtotale</span><span>${subtotal.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</span></div>
+                    <div class="total-row"><span>Costi di spedizione</span><span>${shippingHTML}</span></div>
+                    <div class="total-row grand-total"><span>Totale</span><span>${parseFloat(data.order.totalAmount).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</span></div>
+                </div>
+            </div>
+            <div class="details-col addresses-col">
+                ${shippingAddressHTML}
+                ${billingAddressHTML}
+            </div>
+        </div>`;
     }
 });
