@@ -104,7 +104,7 @@
         }
         /*in base alla distanza di un elemento di classe "submenu" dal bordo destro, viene aggiunta o meno la classe "flip"
         * che in css è fornita di proprietà che capovolge l'aggancio laterale dell'elemento in questione*/
-        document.querySelectorAll('.menu > ul > li').forEach(li => {
+        <%--document.querySelectorAll('.menu > ul > li').forEach(li => {
             const submenu = li.querySelector('.submenu');
             if (!submenu) return;
             li.addEventListener('mouseenter', () => {
@@ -114,7 +114,7 @@
                     submenu.classList.add('flip');
                 }
             });
-        });
+        });--%>
     </script>
     <script>
         document.querySelectorAll('.logout-link').forEach(link => {

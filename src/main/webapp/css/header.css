@@ -147,7 +147,7 @@ header {
     opacity: 0;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 0; /* Allineamento di default per i menu a sinistra */
     background: #FFFFFF;
     box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
     border-radius: 10px;
@@ -159,14 +159,16 @@ header {
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
+/* NUOVA REGOLA PER ALLINEARE IL MENU UTENTE A DESTRA */
+.topright .submenu {
+    left: auto;
+    right: 0;
+}
+
 .menu > ul > li:hover > .submenu {
     display: block;
     opacity: 1;
     transform: scale(1);
-}
-
-.menu > ul > li .submenu.flip {
-    transform: translate(-75%, 0) scale(1);
 }
 
 .menu .submenu li {
@@ -218,8 +220,6 @@ header {
 /* =================================
    Media Queries per Responsività
    ================================= */
-
-/* --- Tablet (fino a 1024px) --- */
 @media (max-width: 1024px) {
     .top-left .menu > ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 1rem 0; }
     .top-left .menu.active > ul { display: flex; }
@@ -227,7 +227,6 @@ header {
     .search-input-wrapper { min-width: 10rem; }
 }
 
-/* --- Mobile (fino a 768px) --- */
 @media (max-width: 768px) {
     .search-input-wrapper { display: none; }
     .search-toggle-btn { display: block; }
@@ -235,30 +234,15 @@ header {
     .top-right { gap: 0.8rem; }
 }
 
-/* --- Mobile Piccolo (fino a 480px) --- */
 @media (max-width: 480px) {
     header { flex-wrap: wrap; padding: 0.5rem 1rem; }
     .top-left { width: 100%; justify-content: space-between; }
     .top-right { width: 100%; justify-content: space-around; padding-top: 0.5rem; }
     .header_icons { width: 1.8rem; height: 1.8rem; }
-
-    /* ==== MODIFICA RICHIESTA: Inversione Posizione Icone ==== */
-    /* L'icona di ricerca ora è la prima */
-    .search {
-        order: 1;
-    }
-    /* L'icona dei preferiti ora è la seconda */
-    .top-right > a[href*="wishlist"] {
-        order: 2;
-    }
-    /* Le altre icone seguono */
-    .top-right > a[href*="cart"] {
-        order: 3;
-    }
-    .top-right > .menu { /* Menu Utente */
-        order: 4;
-    }
-    /* ==== FINE MODIFICA ==== */
+    .search { order: 1; }
+    .top-right > a[href*="wishlist"] { order: 2; }
+    .top-right > a[href*="cart"] { order: 3; }
+    .top-right > .menu { order: 4; }
 }
 
 /* ============================================
@@ -273,33 +257,9 @@ header {
         visibility: hidden;
         display: none;
     }
-
-    header.search-active {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-
-    header.search-active .search {
-        display: flex;
-        width: 100%;
-        flex-grow: 1;
-        justify-content: center;
-    }
-
-    header.search-active .search-input-wrapper {
-        display: flex;
-        flex-grow: 1;
-    }
-
-    header.search-active .search-close-btn {
-        display: block;
-        position: static;
-        flex-shrink: 0;
-    }
-
-    header.search-active #searchbar {
-        margin-right: 1rem;
-        min-width: unset;
-        padding-left: 2rem;
-    }
+    header.search-active { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    header.search-active .search { display: flex; width: 100%; flex-grow: 1; justify-content: center; }
+    header.search-active .search-input-wrapper { display: flex; flex-grow: 1; }
+    header.search-active .search-close-btn { display: block; position: static; flex-shrink: 0; }
+    header.search-active #searchbar { margin-right: 1rem; min-width: unset; padding-left: 2rem; }
 }
