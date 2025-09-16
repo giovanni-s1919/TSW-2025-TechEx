@@ -100,8 +100,8 @@ header {
 /* =================================
    Menu di Navigazione (invariato)
    ================================= */
-.menu > ul { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
-.menu > ul > li { position: relative; margin-right: 1.25rem; padding: 0.625rem 0; font-weight: bold; color: #003459; cursor: pointer; }
+.menu > ul { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; gap:1rem;}
+.menu > ul > li { position: relative; padding: 0.625rem 0; font-weight: bold; color: #003459; cursor: pointer; }
 .menu > ul > li:last-child { margin-right: 0; }
 .menu > ul > li::after { content: ""; position: absolute; bottom: 0; left: 0; height: 0.188rem; width: 100%; background-color: #003459; opacity: 0; transition: opacity 0.2s ease; border-radius: 10px; }
 .menu > ul > li:hover::after { opacity: 1; }
