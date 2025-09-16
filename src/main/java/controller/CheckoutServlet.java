@@ -285,7 +285,7 @@ public class CheckoutServlet extends HttpServlet {
                     newOrder.setUserID(999);
                 }
                 newOrder.setOrderDate(new java.sql.Timestamp(System.currentTimeMillis()));
-                newOrder.setOrderStatus(OrderDTO.OrderStatus.Processing);
+                newOrder.setOrderStatus(OrderDTO.OrderStatus.valueOf("Processing"));
                 newOrder.setTotalAmount(finalTotal);
                 newOrder.setShippingAddressId(shippingOrderAddress.getId());
                 newOrder.setBillingAddressId(billingOrderAddress.getId());
