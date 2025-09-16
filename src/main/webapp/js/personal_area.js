@@ -17,10 +17,23 @@ document.addEventListener("DOMContentLoaded", function () {
         item.addEventListener("click", () => {
             const targetId = item.getAttribute("data-target");
             showPanel(targetId);
+            history.pushState("", document.title, window.location.pathname + window.location.search);
         });
     });
 
-    showPanel("account");
+    const hash = window.location.hash;
+    if (hash) {
+        const targetId = hash.substring(1);
+        const targetTabExists = document.querySelector(`#account_voices li[data-target="${targetId}"]`);
+        if (targetTabExists) {
+            showPanel(targetId);
+        } else {
+            showPanel("account");
+        }
+    } else {
+        showPanel("account");
+    }
+
     const userProfileSection = document.getElementById("account");
     const messagesDiv = document.getElementById("messages");
 
@@ -730,7 +743,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function sendDeletePaymentMethodRequest(methodId, cardElement) {
         const params = new URLSearchParams();
         params.append('action', 'deletePaymentMethod');
-        params.append('methodId', methodId); // Nuovo parametro
+        params.append('methodId', methodId);
         fetch(`${contextPath}/personal_area`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -786,7 +799,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isDefaultBadge = pm.isDefault ? `<span class="default-badge">Predefinito</span>` : '';
         const expirationDate = new Date(pm.expiration);
         const formattedExpiration = `${String(expirationDate.getMonth() + 1).padStart(2, '0')}/${expirationDate.getFullYear()}`;
-        const cardTypeClass = pm.cardType.toLowerCase().replace(' ', '-'); // "American Express" -> "american-express"
+        const cardTypeClass = pm.cardType.toLowerCase().replace(' ', '-');
         const logoHtml = `<div class="card-logo ${cardTypeClass}"></div>`;
         return `
             <div class="payment-method-card" data-method-id="${pm.id}">

@@ -154,7 +154,7 @@ body {
 .address-details p {
     margin: 0.5rem 0;
     line-height: 1.6;
-    color: #333;
+    color: var(--dark-text);
 }
 
 .actions {
