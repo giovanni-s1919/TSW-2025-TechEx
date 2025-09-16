@@ -49,7 +49,7 @@ public class HomeServlet extends HttpServlet {
             List<ProductCardDisplay> products = new  ArrayList<>();
             int elements = 0;
             for (ProductDTO productDTO : productDTOS) {
-                if(elements == 7) break;
+                if(elements == 6) break;
                 ProductCardDisplay product = new ProductCardDisplay(productDTO);
                 products.add(product);
                 elements++;

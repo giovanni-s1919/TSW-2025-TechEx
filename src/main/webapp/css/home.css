@@ -60,6 +60,12 @@ a {
     text-align: center;
 }
 
+.grid-wrapper {
+    display: flex;
+    width: 100%;
+    overflow-y: hidden;
+}
+
 .products-grid {
     display: flex;
     flex-direction: row;
@@ -147,9 +153,14 @@ a {
     color: #00171F;
 }
 
+.presentation_content_wrapper {
+    display: flex;
+}
+
 .presentation_content {
     display: flex;
     flex-direction: column;
+    width: 100%;
     justify-content: flex-start;
 }
 
@@ -181,10 +192,9 @@ a {
 }
 
 .presentation .presentation_img {
-    position: absolute;
     top: -5rem;
     right: 12.5rem;
-    height: 40rem;
+    height: 20rem;
     width: auto;
     object-fit: cover;
 }
@@ -492,6 +502,7 @@ a {
     display: flex;
     border-bottom: 1px solid #E1E8ED;
     color: #00171F;
+    gap: 1rem;
 }
 
 .newsletter_left, .newsletter_right {
