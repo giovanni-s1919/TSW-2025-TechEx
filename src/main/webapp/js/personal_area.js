@@ -848,7 +848,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(orders => {
                 container.innerHTML = '';
                 if (orders.length === 0) {
-                    container.innerHTML = '<p class="no-items-msg">Non hai ancora effettuato nessun ordine.</p>';
+                    container.innerHTML = '<p class="no-items-msg">Non hai ancora effettuato alcun ordine.</p>';
                 } else {
                     orders.forEach(order => {
                         const orderCardHTML = createOrderCard(order);
@@ -863,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createOrderCard(order) {
-        const formattedTotal = parseFloat(order.totalAmount).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+        const formattedTotal = `€${parseFloat(order.totalAmount).toFixed(2).replace('.', ',')}`;
         const statusClass = `status-${order.orderStatus.toLowerCase().replace(/\s+/g, '-')}`;
         return `
             <div class="order-card" data-order-id="${order.id}">
@@ -928,7 +928,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const itemsHTML = data.items.map(displayItem => {
             const item = displayItem.orderItem;
             const product = displayItem.product;
-            const itemTotal = parseFloat(item.itemPrice * item.itemQuantity).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            const itemTotal = `€${parseFloat(item.itemPrice * item.itemQuantity).toFixed(2).replace('.', ',')}`;
             const productId = product ? product.id : 0;
             const productName = product ? product.name : item.itemName;
             return `
@@ -941,7 +941,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const subtotal = data.items.reduce((total, displayItem) => total + (displayItem.orderItem.itemPrice * displayItem.orderItem.itemQuantity), 0);
         const shippingCost = data.order.totalAmount - subtotal;
-        const shippingHTML = shippingCost > 0 ? shippingCost.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) : '<span class="free-shipping">GRATIS</span>';
+        const shippingHTML = shippingCost > 0 ? `€${parseFloat(shippingCost).toFixed(2).replace('.', ',')}` : '<span class="free-shipping">GRATIS</span>';
 
         let shippingAddressHTML = '<h1>Indirizzo di spedizione</h1><p>Indirizzo non disponibile.</p>';
         if (data.shippingAddress) {
@@ -977,9 +977,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h1>Prodotti acquistati</h1>
                 <div class="summary-items">${itemsHTML}</div>
                 <div class="summary-totals">
-                    <div class="total-row"><span>Subtotale</span><span>${subtotal.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</span></div>
-                    <div class="total-row"><span>Costi di spedizione</span><span>${shippingHTML}</span></div>
-                    <div class="total-row grand-total"><span>Totale</span><span>${parseFloat(data.order.totalAmount).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</span></div>
+                    <div class="total-row" id="first_row"><span>Subtotale:</span><span>€${parseFloat(subtotal).toFixed(2).replace('.', ',')}</span></div>
+                    <div class="total-row"><span>Costi di spedizione:</span><span>${shippingHTML}</span></div>
+                    <div class="total-row grand-total"><span>Totale:</span><span>€${parseFloat(data.order.totalAmount).toFixed(2).replace('.', ',')}</span></div>
                 </div>
             </div>
             <div class="details-col addresses-col">
