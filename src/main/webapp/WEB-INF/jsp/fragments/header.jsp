@@ -15,28 +15,28 @@
                     CATEGORIE
                     <ul class="submenu">
                         <c:forEach items="${categoriesForHeader}" var="category">
-                            <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?category=${category.name()}">${category.toString()}</a></li>
+                            <li><a class="submenu-link filter-link" href="#" data-filter-type="category" data-filter-value="${category.name()}">${category.toString()}</a></li>
                         </c:forEach>
                     </ul>
                 </li>
                 <li>
                     BRAND
                     <ul class="submenu">
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Apple">Apple</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Samsung">Samsung</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Xiaomi">Xiaomi</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Huawei">Huawei</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Realme">Realme</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Google">Google</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Oppo">Oppo</a></li>
-                        <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?brand=Oneplus">Oneplus</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Apple">Apple</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Samsung">Samsung</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Xiaomi">Xiaomi</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Huawei">Huawei</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Realme">Realme</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Google">Google</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Oppo">Oppo</a></li>
+                        <li><a class="submenu-link filter-link" href="#" data-filter-type="brand" data-filter-value="Oneplus">Oneplus</a></li>
                     </ul>
                 </li>
                 <li>
                     GRADO
                     <ul class="submenu">
                         <c:forEach items="${gradesForHeader}" var="grade">
-                            <li><a class="submenu-link" href="${pageContext.request.contextPath}/catalog?grade=${grade.name()}">${grade.toString()}</a></li>
+                            <li><a class="submenu-link filter-link" href="#" data-filter-type="grade" data-filter-value="${grade.name()}">${grade.toString()}</a></li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -107,6 +107,21 @@
                 if (userConfirmed) {
                     window.location.href = this.href;
                 }
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.filter-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const filterType = this.dataset.filterType;
+                const filterValue = this.dataset.filterValue;
+                const filter = {
+                    type: filterType,
+                    value: filterValue
+                };
+                sessionStorage.setItem('catalogFilter', JSON.stringify(filter));
+                window.location.href = "${pageContext.request.contextPath}/catalog";
             });
         });
     </script>
