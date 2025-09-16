@@ -19,6 +19,7 @@ import java.util.HashMap;
 import model.dto.UserDTO;
 import model.dto.ProductDTO;
 import model.dao.ProductDAO;
+import util.HeaderDataHelper;
 
 @WebServlet(name = "CatalogServlet", value = {"/catalog"})
 public class CatalogServlet extends HttpServlet {
@@ -52,8 +53,20 @@ public class CatalogServlet extends HttpServlet {
         }
         request.setAttribute("role", role);
         try {
-            List<ProductDTO> allProducts = productDAO.findAll("Name");
-            request.setAttribute("products", allProducts);
+            HeaderDataHelper.loadHeaderData(request, productDAO);
+            String categoryParam = request.getParameter("category");
+            String brandParam = request.getParameter("brand");
+            String gradeParam = request.getParameter("grade");
+            List<ProductDTO> productsToDisplay;
+            if (categoryParam != null || brandParam != null || gradeParam != null) {
+                List<String> categoryList = (categoryParam != null) ? List.of(categoryParam) : null;
+                List<String> brandList = (brandParam != null) ? List.of(brandParam) : null;
+                List<String> gradeList = (gradeParam != null) ? List.of(gradeParam) : null;
+                productsToDisplay = productDAO.findByFilters(categoryList, brandList, gradeList, "any", "default");
+            } else {
+                productsToDisplay = productDAO.findAll("Name");
+            }
+            request.setAttribute("products", productsToDisplay);
             request.setAttribute("categories", ProductDTO.Category.values());
             request.setAttribute("grades", ProductDTO.Grade.values());
             List<String> brands = productDAO.findDistinctBrands();

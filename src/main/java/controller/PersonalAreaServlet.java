@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.HeaderDataHelper;
 import util.Utility;
 
 import javax.sql.DataSource;
@@ -28,6 +29,7 @@ import model.dto.UserAddressDTO;
 import model.dao.UserAddressDAO;
 import model.dto.PaymentMethodDTO;
 import model.dao.PaymentMethodDAO;
+import model.dao.ProductDAO;
 
 
 @WebServlet(name = "PersonalAreaServlet", value = {"/personal_area"})
@@ -36,6 +38,7 @@ public class PersonalAreaServlet extends HttpServlet {
     private AddressDAO addressDAO;
     private UserAddressDAO userAddressDAO;
     private PaymentMethodDAO paymentMethodDAO;
+    private ProductDAO productDAO;
     private Gson gson = new Gson();
 
     @Override
@@ -50,6 +53,7 @@ public class PersonalAreaServlet extends HttpServlet {
             this.addressDAO = new AddressDAO(dataSource);
             this.userAddressDAO = new UserAddressDAO(dataSource);
             this.paymentMethodDAO = new PaymentMethodDAO(dataSource);
+            this.productDAO = new ProductDAO(dataSource);
         } catch (ServletException e) {
             log("Errore durante l'inizializzazione dei DAO", e);
             throw e;
@@ -82,6 +86,7 @@ public class PersonalAreaServlet extends HttpServlet {
             return;
         }
         try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             UserDTO userFromDb = userDAO.findById(loggedInUser.getId());
             if (userFromDb != null) {
                 request.setAttribute("userProfile", userFromDb);

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.dao.*;
 import model.dto.*;
+import util.HeaderDataHelper;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class ProductServlet extends HttpServlet {
         else request.setAttribute("role", user.getRole().toString());
 
         try{
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             ProductDTO product = null;
             if(id > 0){
                 product = productDAO.findById(id);

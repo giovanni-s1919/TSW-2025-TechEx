@@ -35,7 +35,7 @@ public class HomeServlet extends HttpServlet {
         if(session!=null){
             UserDTO  user = (UserDTO)session.getAttribute("user");
             if(user != null){
-                request.setAttribute("role", user.getRole());
+                request.setAttribute("role", user.getRole().name());
             }
             else{
                 request.setAttribute("role", "Guest");
@@ -44,21 +44,25 @@ public class HomeServlet extends HttpServlet {
         else{
             request.setAttribute("role", "Guest");
         }
-        List<ProductCardDisplay> products = new  ArrayList<>();
         try {
             List<ProductDTO> productDTOS = productDAO.findAll("ID");
+            List<ProductCardDisplay> products = new  ArrayList<>();
             int elements = 0;
-
             for (ProductDTO productDTO : productDTOS) {
                 if(elements == 7) break;
                 ProductCardDisplay product = new ProductCardDisplay(productDTO);
                 products.add(product);
                 elements++;
             }
-        }catch (SQLException e){
+            request.setAttribute("products", products);
+            request.setAttribute("categoriesForHeader", ProductDTO.Category.values());
+            request.setAttribute("brandsForHeader", productDAO.findDistinctBrands());
+            request.setAttribute("gradesForHeader", ProductDTO.Grade.values());
+        } catch (SQLException e){
             e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile caricare i dati della pagina.");
+            return;
         }
-        request.setAttribute("products", products);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
         dispatcher.forward(request, response);
     }

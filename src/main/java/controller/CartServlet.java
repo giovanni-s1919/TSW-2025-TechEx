@@ -16,6 +16,7 @@ import model.dto.CartItemDTO;
 import model.dto.ProductDTO;
 import model.dto.UserDTO;
 import model.view.CartDisplayItem;
+import util.HeaderDataHelper;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class CartServlet extends HttpServlet {
         Float cartTotal = 0.0f;
 
         try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             CartDTO cart = cartDAO.findByUserID(user.getId());
             if (cart != null) {
                 List<CartItemDTO> cartItems = cartItemDAO.findByCartID(cart.getId());

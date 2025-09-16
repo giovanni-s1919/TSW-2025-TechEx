@@ -34,6 +34,7 @@ import model.dto.OrderItemDTO;
 import model.dao.OrderItemDAO;
 import model.dto.OrderAddressDTO;
 import model.dao.OrderAddressDAO;
+import util.HeaderDataHelper;
 
 @WebServlet(name = "CheckoutServlet", value = "/checkout")
 public class CheckoutServlet extends HttpServlet {
@@ -79,6 +80,7 @@ public class CheckoutServlet extends HttpServlet {
         List<CartDisplayItem> checkoutItems = new ArrayList<>();
         float checkoutTotal = 0.0f;
         try {
+            HeaderDataHelper.loadHeaderData(request, productDAO);
             if ("cart".equals(from) && user != null) {
                 CartDTO cart = cartDAO.findByUserID(user.getId());
                 if (cart != null) {
