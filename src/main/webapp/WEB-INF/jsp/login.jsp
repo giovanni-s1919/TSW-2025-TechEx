@@ -121,7 +121,6 @@
             <form method="post" action="login" id="signin">
                 <fieldset>
                     <h2 id="ftitle" style="font-size: 100%;">Login</h2>
-
                     <div class="divauth reg" id="divname">
                         <label for="name" class="hiddenlabel" hidden></label>
                         <input type="text" id="name" class="auth" name="name" placeholder="Nome">
@@ -131,8 +130,7 @@
                         <input type="text" id="surname" class="auth" name="surname" placeholder="Cognome">
                     </div>
                     <div class="divauth reg" id="divdate">
-                        <label for="birthD
-                        ate" class="hiddenlabel" hidden></label>
+                        <label for="birthDate" class="hiddenlabel" hidden></label>
                         <input type="date" class="auth" name="birthDate">
                     </div>
                     <div class="divauth reg" id="divusername">

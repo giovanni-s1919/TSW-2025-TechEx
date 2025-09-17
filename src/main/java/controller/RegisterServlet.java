@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 @WebServlet(name = "register", value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -26,9 +27,6 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // TODO
-        // For example, checking if a user is already logged in
         request.setAttribute("islogin", false);
         request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
@@ -37,17 +35,17 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String surname =  request.getParameter("surname");
-        LocalDate  birthDate = LocalDate.parse(request.getParameter("birthDate"));
+        String birthDateStr = request.getParameter("birthDate");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-        String telephone = request.getParameter("telephone");
+        String telephone = request.getParameter("phonenumber");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
         String role = request.getParameter("role");
 
         try {
             if(userDAO.findByEmail(email) != null){
-                request.setAttribute("errorMessage", "Email già registrata");
+                request.setAttribute("errorMessage", "Email già registrata! Riprova.");
                 request.setAttribute("islogin", false);
                 request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
                 return;
@@ -61,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
         }
         try {
             if(userDAO.findByUsername(username) != null){
-                request.setAttribute("errorMessage", "Questo username è già stato scelto");
+                request.setAttribute("errorMessage", "Questo username è già stato scelto! Riprova.");
                 request.setAttribute("islogin", false);
                 request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
                 return;
@@ -74,15 +72,66 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        LocalDate birthDate = null;
+        try {
+            if (birthDateStr == null || birthDateStr.trim().isEmpty()) {
+                request.setAttribute("errorMessage", "La data di nascita è obbligatoria.");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+            birthDate = LocalDate.parse(birthDateStr);
+            LocalDate today = LocalDate.now();
+            LocalDate eighteenYearsAgo = today.minusYears(18);
+            if (birthDate.isAfter(today)) {
+                request.setAttribute("errorMessage", "La data di nascita non può essere una data futura!");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+            if (birthDate.isAfter(eighteenYearsAgo)) {
+                request.setAttribute("errorMessage", "Devi avere almeno 18 anni per registrarti!");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+        } catch (DateTimeParseException e) {
+            request.setAttribute("errorMessage", "Formato data di nascita non valido. Usa GG/MM/AAAA.");
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            return;
+        }
+
+        if (telephone != null && !telephone.trim().isEmpty()) {
+            if (!telephone.matches("^[0-9+\\- ]{1,15}$")) {
+                request.setAttribute("errorMessage", "Formato numero di telefono non valido.");
+                request.setAttribute("islogin", false);
+                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                return;
+            }
+        }
+
+        boolean isLengthValid = password.length() >= 8;
+        boolean hasEnoughUppercases = password.matches(".*[A-Z].*[A-Z].*");
+        boolean hasEnoughLowercases = password.matches(".*[a-z].*[a-z].*");
+        boolean hasSpecialChar = password.matches(".*[^a-zA-Z0-9].*");
+        boolean hasNumber = password.matches(".*[0-9].*");
+        boolean isPasswordValid = isLengthValid && hasEnoughUppercases && hasEnoughLowercases && hasSpecialChar && hasNumber;
+        if (!isPasswordValid) {
+            String policyMessage = "La password non rispetta i criteri di sicurezza (min. 8 caratteri, 2 maiuscole, 2 minuscole, 1 numero, 1 simbolo). Riprova.";
+            request.setAttribute("errorMessage", policyMessage);
+            request.setAttribute("islogin", false);
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            return;
+        }
         if(!password.equals(confirm)){
-            request.setAttribute("errorMessage", "Le password non corrispondono");
+            request.setAttribute("errorMessage", "Le password non corrispondono.");
             request.setAttribute("islogin", false);
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
             return;
         }
 
         String passwordHash = Utility.hashPassword(password);
-
         UserDTO user = new UserDTO(name, surname, birthDate, username, email, passwordHash, telephone, UserDTO.Role.valueOf(role));
         try {
             userDAO.save(user);
@@ -96,7 +145,3 @@ public class RegisterServlet extends HttpServlet {
         response.sendRedirect("login?action=login");
     }
 }
-
-
-
-

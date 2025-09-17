@@ -26,13 +26,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // TODO
-        // For example, checking if a user is already logged in
-
         String action = request.getParameter("action");
-        boolean islogin = (action == null) || action.equalsIgnoreCase("login");
-        request.setAttribute("islogin", islogin);
+        boolean isLogin = !"register".equalsIgnoreCase(action);
+        request.setAttribute("islogin", isLogin);
+        String successParam = request.getParameter("success");
+        if ("true".equals(successParam)) {
+            request.setAttribute("successMessage", "Registrazione avvenuta con successo! Ora puoi accedere.");
+        }
         request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
@@ -46,10 +46,8 @@ public class LoginServlet extends HttpServlet {
             try {
                 UserDTO user = userDAO.findByEmail(email);
                 if (user == null || !Utility.checkPassword(password, user.getPasswordHash())) {
-                    request.setAttribute("errorMessage", "Email o Password non validi");
+                    request.setAttribute("errorMessage", "Email o password non validi, riprova.");
                     request.setAttribute("islogin", true);
-
-                    // FIX HERE: Forward to the JSP page, not the servlet's URL
                     request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
                     return;
                 }
@@ -68,18 +66,17 @@ public class LoginServlet extends HttpServlet {
             try{
                 UserDTO user = userDAO.findByUsername(username);
                 if(user == null || !Utility.checkPassword(password, user.getPasswordHash())){
-                    request.setAttribute("errorMessage", "Username o Password non validi");
+                    request.setAttribute("errorMessage", "Username o password non validi, riprova.");
                     request.setAttribute("islogin", true);
                     request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+                    return;
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-
                 response.sendRedirect(request.getContextPath() + "/home");
             } catch(SQLException e){
                 e.printStackTrace();
                 request.setAttribute("errorMessage", "Errore interno del server");
-
                 String action = request.getParameter("action");
                 request.setAttribute("islogin", true);
                 request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
