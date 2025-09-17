@@ -42,7 +42,7 @@ body {
     border: 1px solid #F2F9FC;
     border-radius: 8px;
     background-color: rgba(128, 128, 128, 0.2);
-    width: 20rem;
+    width: 25%;
     font-size: 1.2rem;
     font-weight: bold;
     flex-shrink: 0;
@@ -229,6 +229,7 @@ tbody tr:last-child td {
     border-bottom: 2px solid #003459;
 }
 .order-details-panel {
+
     background-color: #f0f8ff;
     overflow: hidden;
     max-height: 0;
@@ -242,8 +243,8 @@ tbody tr:last-child td {
     opacity: 1;
     padding: 1.5rem 2rem;
 }
-.order-details-panel h4, .order-details-panel h5 { margin-top: 0; margin-bottom: 1rem; color: #003459; border-bottom: 1px solid #d0e0f0; padding-bottom: 0.5rem; }
-.order-details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; margin-bottom: 1rem; }
+.order-details-panel h4, .order-details-panel h5 { display: flex; margin-top: 0; margin-bottom: 1rem; color: #003459; border-bottom: 1px solid #d0e0f0; padding-bottom: 0.5rem; }
+.order-details-grid { display: flex; flex-direction:column; align-items: flex-start; gap: 0.5rem; margin-bottom: 1rem; }
 .order-item-list { list-style: none; padding-left: 0; margin-top: 0.5rem; }
 .order-item-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #d0e0f0; }
 .order-item-list li:last-child { border-bottom: none; }
@@ -251,7 +252,7 @@ tbody tr:last-child td {
 .order-item-list .item-name { flex-grow: 1; }
 .order-item-list .item-price { font-weight: bold; text-align: right; flex-basis: 20%; }
 
-@media (orientation: portrait) {
+@media (max-width: 1024px) {
     #main {
         display: flex;
         justify-content: center;
