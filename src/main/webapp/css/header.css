@@ -204,21 +204,21 @@ header {
     border-radius: 1px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px),(orientation: portrait) {
     .top-left .menu > ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 1rem 0; }
     .top-left .menu.active > ul { display: flex; }
     .hamburger { display: flex; }
     .search-input-wrapper { min-width: 10rem; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: portrait) {
     .search-input-wrapper { display: none; }
     .search-toggle-btn { display: block; }
     .search { flex-grow: 0; margin: 0; }
     .top-right { gap: 0.8rem; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: portrait){
     header { flex-wrap: wrap; padding: 0.5rem 1rem; }
     .top-left { width: 100%; justify-content: space-between; }
     .top-right { width: 100%; justify-content: space-around; padding-top: 0.5rem; }
@@ -228,7 +228,7 @@ header {
     .top-right > a[href*="cart"] { order: 3; }
     .top-right > .menu { order: 4; }
 }
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: portrait) {
     header.search-active .top-left,
     header.search-active .top-right > a,
     header.search-active .top-right > .menu,

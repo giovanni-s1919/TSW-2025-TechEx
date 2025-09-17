@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        @media (max-width: 1024px) {
+        @media (max-width: 1024px), (orientation: portrait) {
             .products-grid {
                 flex-wrap: wrap;
                 justify-content: space-evenly;

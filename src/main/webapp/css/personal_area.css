@@ -1018,7 +1018,7 @@ body#personal_area #forguest {
     background-color: #0084B5;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px), (orientation: portrait) {
     #main {
         display: flex;
         justify-content: space-between;
@@ -1027,6 +1027,10 @@ body#personal_area #forguest {
         margin-top: var(--header-height);
         margin-bottom: 10rem;
         flex-direction: column;
+    }
+
+    #main-wrapper {
+        margin-top: calc(var(--header-height) + 3rem);
     }
 
     .address-summary {

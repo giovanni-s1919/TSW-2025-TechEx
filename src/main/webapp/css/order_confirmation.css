@@ -191,7 +191,7 @@ body {
     background-color: #0084B5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: portrait) {
     .details-grid {
         grid-template-columns: 1fr;
     }

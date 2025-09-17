@@ -195,7 +195,7 @@ body {
     color: #00171F;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 1024px) ,(orientation: portrait) {
     .catalog-container {
         flex-direction: column;
         align-items: center;
@@ -238,7 +238,7 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: portrait){
     #main {
         margin-top: 7rem;
     }

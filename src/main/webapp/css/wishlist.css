@@ -186,7 +186,7 @@ body {
     color: white;
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1024px), (orientation: portrait) {
     .wishlist-item {
         display: flex;
         flex-direction: column;
