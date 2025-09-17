@@ -56,6 +56,7 @@ body {
     align-items: center;
     cursor: pointer;
 }
+
 #account_voices li:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -68,25 +69,29 @@ body {
 #account_voices li.active-voice i {
     color: #FFFFFF;
 }
+
 #account_content {
     flex: 1;
 }
+
 .content-panel {
     display: none;
     color: #003459;
 }
+
 .content-panel.active {
     display: block;
 }
+
 .content_intro {
-    padding-top: 0.6rem;
+    padding-top: 0.7rem;
     margin-bottom: 0.25rem;
     font-size: 1.8rem;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 1rem;
 }
+
 .content_description {
-    margin-top: 0.5rem;
+    margin-top: -1rem;
     margin-bottom: 2rem;
     font-size: 1rem;
 }
