@@ -931,9 +931,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const itemTotal = `€${parseFloat(item.itemPrice * item.itemQuantity).toFixed(2).replace('.', ',')}`;
             const productId = product ? product.id : 0;
             const productName = product ? product.name : item.itemName;
+            const productUrl = `${contextPath}/product?idProduct=${productId}`;
             return `
             <div class="summary-item">
-                <img class="summary-item-image" src="${contextPath}/images/products/${productId}.png" alt="${productName}">
+                <a href="${productUrl}"><img class="summary-item-image" src="${contextPath}/images/products/${productId}.png" alt="${productName}"></a>
                 <span class="summary-item-name">${productName} (x${item.itemQuantity})</span>
                 <span class="summary-item-price">${itemTotal}</span>
             </div>`;
