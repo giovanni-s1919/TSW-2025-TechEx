@@ -324,10 +324,13 @@ body {
 .grand-total {
     font-size: 1.3rem;
     font-weight: bold;
-    color: var(--primary-blue);
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 2px solid var(--primary-blue);
+}
+
+.grand-total span {
+    color: var(--primary-blue);
 }
 
 #free-shipping {
