@@ -24,7 +24,7 @@ body {
     flex-direction: column;
     justify-self: center;
     align-self: center;
-    width: 50%;
+    width: 60%;
     margin-top: 10rem;
     margin-bottom: 5%;
     padding: 1.5rem;
@@ -96,7 +96,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    width: 4rem;
+    width: 6rem;
     padding-right: 1rem;
     font-weight: bold;
 }
@@ -186,7 +186,7 @@ body {
     color: white;
 }
 
-@media (orientation: portrait){
+@media (max-width: 1024px){
     .wishlist-item {
         display: flex;
         flex-direction: column;

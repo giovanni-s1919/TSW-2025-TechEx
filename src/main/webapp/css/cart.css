@@ -86,12 +86,13 @@ body {
 }
 
 .cart-product-value {
+    width: 6rem;
     font-weight: bold;
 }
 
 .quantity-input {
     border: none;
-    width: 4rem;
+    width: 6rem;
     font-weight: bold;
     font-size: 1.25rem;
     background-color: transparent;
