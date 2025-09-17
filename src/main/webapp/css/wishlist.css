@@ -190,7 +190,7 @@ body {
     .wishlist-item {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 90%;
         padding: 1rem;
         gap: 1rem;
         justify-content: space-evenly;
@@ -204,6 +204,11 @@ body {
         justify-content: space-evenly;
         padding: 1rem;
         gap: 1rem;
+    }
+
+    #wishlist-box {
+        border: none;
+        width: 100%;
     }
 
 }
