@@ -24,7 +24,6 @@ body {
 }
 
 #main {
-    width: 100%;
     max-width: 1200px;
     margin: var(--header-height) auto 0 auto;
     padding: 2.2rem 1.5rem;
@@ -33,7 +32,7 @@ body {
 
 .checkout-container {
     display: flex;
-    gap: 2.5rem;
+    gap: 5rem;
     align-items: flex-start;
 }
 
@@ -486,4 +485,16 @@ body {
     background-color: #F8D7DA;
     color: #721C24;
     border: 1px solid #F5C6CB;
+}
+
+@media (max-width: 1024px) {
+    #main {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .checkout-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
