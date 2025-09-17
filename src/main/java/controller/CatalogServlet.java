@@ -54,8 +54,15 @@ public class CatalogServlet extends HttpServlet {
         request.setAttribute("role", role);
         try {
             HeaderDataHelper.loadHeaderData(request, productDAO);
-            List<ProductDTO> allProducts = productDAO.findAll("Name");
-            request.setAttribute("products", allProducts);
+            String searchParam = request.getParameter("search");
+            if (searchParam != null && !searchParam.trim().isEmpty()) {
+                List<ProductDTO> searchResults = productDAO.findByFilters(null, null, null, "any", "default", searchParam);
+                request.setAttribute("products", searchResults);
+                request.setAttribute("searchTerm", searchParam);
+            } else {
+                List<ProductDTO> allProducts = productDAO.findAll("Name");
+                request.setAttribute("products", allProducts);
+            }
             request.setAttribute("categories", ProductDTO.Category.values());
             request.setAttribute("grades", ProductDTO.Grade.values());
             List<String> brands = productDAO.findDistinctBrands();
@@ -78,10 +85,11 @@ public class CatalogServlet extends HttpServlet {
             String[] grades = request.getParameterValues("grade");
             String priceRange = request.getParameter("price");
             String sortBy = request.getParameter("sort");
+            String searchTerm = request.getParameter("search");
             List<String> categoryList = (categories != null) ? Arrays.asList(categories) : null;
             List<String> brandList = (brands != null) ? Arrays.asList(brands) : null;
             List<String> gradeList = (grades != null) ? Arrays.asList(grades) : null;
-            List<ProductDTO> filteredProducts = productDAO.findByFilters(categoryList, brandList, gradeList, priceRange, sortBy);
+            List<ProductDTO> filteredProducts = productDAO.findByFilters(categoryList, brandList, gradeList, priceRange, sortBy, searchTerm);
             List<Map<String, Object>> productsForJson = new ArrayList<>();
             for (ProductDTO product : filteredProducts) {
                 Map<String, Object> productMap = new HashMap<>();

@@ -23,11 +23,11 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
             ps.setString(1, product.getName());
             ps.setString(2, product.getDescription());
             ps.setString(3, product.getBrand());
-            ps.setFloat(4, product.getPrice()); // DECIMAL(10, 2) in DB, float in Java
+            ps.setFloat(4, product.getPrice());
             ps.setString(5, product.getCategory().name());
             ps.setString(6, product.getGrade().name());
             ps.setInt(7, product.getStockQuantity());
-            ps.setFloat(8, product.getVat()); // DECIMAL(5, 2) in DB, float in Java
+            ps.setFloat(8, product.getVat());
 
             ps.executeUpdate();
 
@@ -66,7 +66,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         if (product.getId() <= 0) {
             throw new IllegalArgumentException("Product ID must be positive for update operations.");
         }
-        String sql = "UPDATE Product SET Name = ?, Description = ?, Brand = ?, Price = ?, Category = ?, Grade = ?, StockQuantity = ?, VAT = ? WHERE ID = ?"; // Usa la connessione passata
+        String sql = "UPDATE Product SET Name = ?, Description = ?, Brand = ?, Price = ?, Category = ?, Grade = ?, StockQuantity = ?, VAT = ? WHERE ID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, product.getName());
             ps.setString(2, product.getDescription());
@@ -155,14 +155,13 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return null;
     }
 
-    // Metodo per trovare prodotti per categoria
     public List<ProductDTO> findByCategory(String category) throws SQLException {
         if (category == null || category.trim().isEmpty()) {
             throw new IllegalArgumentException("Category cannot be null or empty.");
         }
 
         List<ProductDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM Product WHERE Category = ? ORDER BY Name"; // Ordinamento di default per nome
+        String sql = "SELECT * FROM Product WHERE Category = ? ORDER BY Name";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -176,7 +175,6 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return list;
     }
 
-    // Metodo per trovare prodotti per grado
     public List<ProductDTO> findByGrade(ProductDTO.Grade grade) throws SQLException {
         if (grade == null) {
             throw new IllegalArgumentException("Grade cannot be null.");
@@ -198,7 +196,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
     @Override
     public List<ProductDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<ProductDTO> list = new ArrayList<>();
@@ -214,7 +212,7 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return list;
     }
 
-    public List<ProductDTO> findByFilters(List<String> categories, List<String> brands, List<String> grades, String priceRange, String sortBy) throws SQLException {
+    public List<ProductDTO> findByFilters(List<String> categories, List<String> brands, List<String> grades, String priceRange, String sortBy, String searchTerm) throws SQLException {
         StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE 1=1");
         List<Object> params = new ArrayList<>();
         if (categories != null && !categories.isEmpty()) {
@@ -254,6 +252,16 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
                 params.add(Float.parseFloat(priceRange.replace("+", "")));
             }
         }
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            String[] searchWords = searchTerm.trim().split("\\s+");
+            for (String word : searchWords) {
+                if (!word.isEmpty()) {
+                    sql.append(" AND (UPPER(Name) LIKE ? OR UPPER(Description) LIKE ?)");
+                    params.add("%" + word.toUpperCase() + "%");
+                    params.add("%" + word.toUpperCase() + "%");
+                }
+            }
+        }
         if (sortBy != null && !sortBy.equals("default")) {
             if (sortBy.equals("price-asc")) {
                 sql.append(" ORDER BY Price ASC");
@@ -279,7 +287,6 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         return list;
     }
 
-    // Metodo per ottenere la lista di Brand unici dal DB
     public List<String> findDistinctBrands() throws SQLException {
         List<String> brands = new ArrayList<>();
         String sql = "SELECT DISTINCT Brand FROM Product ORDER BY Brand ASC";
@@ -306,11 +313,10 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         if (product.getName() == null || product.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
-        // Description è TEXT e può essere null/vuota nel DB, quindi non la valido come obbligatoria qui
         if (product.getBrand() == null || product.getBrand().trim().isEmpty()) {
             throw new IllegalArgumentException("Brand cannot be null or empty.");
         }
-        if (product.getPrice() < 0) { // Il prezzo non può essere negativo
+        if (product.getPrice() < 0) {
             throw new IllegalArgumentException("Price cannot be negative.");
         }
         if (product.getCategory() == null) {
@@ -319,11 +325,10 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         if (product.getGrade() == null) {
             throw new IllegalArgumentException("Grade cannot be null or empty.");
         }
-        if (product.getStockQuantity() < 0) { // La quantità in stock non può essere negativa (CHECK nel DB)
+        if (product.getStockQuantity() < 0) {
             throw new IllegalArgumentException("StockQuantity cannot be negative.");
         }
-        // VAT ha un DEFAULT nel DB, ma è NOT NULL, quindi deve essere valida
-        if (product.getVat() < 0) { // L'IVA non può essere negativa
+        if (product.getVat() < 0) {
             throw new IllegalArgumentException("VAT cannot be negative.");
         }
     }
@@ -335,11 +340,11 @@ public class ProductDAO extends AbstractDAO<ProductDTO, Integer> {
         product.setName(rs.getString("Name"));
         product.setDescription(rs.getString("Description"));
         product.setBrand(rs.getString("Brand"));
-        product.setPrice(rs.getFloat("Price")); // DECIMAL(10, 2) in DB, float in Java
+        product.setPrice(rs.getFloat("Price"));
         product.setCategory(ProductDTO.Category.valueOf(rs.getString("Category")));
         product.setGrade(ProductDTO.Grade.valueOf(rs.getString("Grade")));
         product.setStockQuantity(rs.getInt("StockQuantity"));
-        product.setVat(rs.getFloat("VAT")); // DECIMAL(5, 2) in DB, float in Java
+        product.setVat(rs.getFloat("VAT"));
         return product;
     }
 }

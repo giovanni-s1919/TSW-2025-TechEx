@@ -51,16 +51,11 @@
     </div>
     <div class="top-right">
         <div class="search">
-            <%-- Pulsante visibile solo su Mobile per APRIRE la ricerca --%>
             <button class="search-toggle-btn">
                 <img src="${pageContext.request.contextPath}/images/bluelens.svg" alt="Apri Ricerca">
             </button>
-
-            <%-- Wrapper per la barra e il pulsante di chiusura --%>
             <div class="search-input-wrapper">
                 <input type="text" id="searchbar" placeholder="Cerca..." style="background-image: url('${pageContext.request.contextPath}/images/bluelens.svg')">
-                <%-- Pulsante visibile solo in modalità ricerca attiva per CHIUDERE --%>
-                <%--the game--%>
                 <button class="search-close-btn">
                     <img src="${pageContext.request.contextPath}/images/close.svg" alt="Chiudi Ricerca">
                 </button>
@@ -102,19 +97,6 @@
         }else if(userole === "Admin"){
             $("#foradmin").addClass("submenu");
         }
-        /*in base alla distanza di un elemento di classe "submenu" dal bordo destro, viene aggiunta o meno la classe "flip"
-        * che in css è fornita di proprietà che capovolge l'aggancio laterale dell'elemento in questione*/
-        <%--document.querySelectorAll('.menu > ul > li').forEach(li => {
-            const submenu = li.querySelector('.submenu');
-            if (!submenu) return;
-            li.addEventListener('mouseenter', () => {
-                submenu.classList.remove('flip');
-                const { right } = submenu.getBoundingClientRect();
-                if (right > window.innerWidth) {
-                    submenu.classList.add('flip');
-                }
-            });
-        });--%>
     </script>
     <script>
         document.querySelectorAll('.logout-link').forEach(link => {
@@ -157,7 +139,6 @@
             if (searchToggleBtn) {
                 searchToggleBtn.addEventListener('click', function() {
                     header.classList.add('search-active');
-                    // Appena la barra appare, mettiamo il focus per poter scrivere subito
                     searchInput.focus();
                 });
             }
@@ -167,6 +148,26 @@
                     header.classList.remove('search-active');
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBar = document.getElementById('searchbar');
+            const searchButton = document.querySelector('.fa-search.lens');
+            const performSearch = () => {
+                const searchTerm = searchBar.value.trim();
+                if (searchTerm) {
+                    window.location.href = "${pageContext.request.contextPath}/catalog?search=" + encodeURIComponent(searchTerm);
+                }
+            };
+            if (searchButton) {
+                searchButton.parentElement.addEventListener('click', performSearch);
+            }
+            searchBar.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
         });
     </script>
 </header>
