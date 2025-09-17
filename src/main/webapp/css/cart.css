@@ -178,10 +178,11 @@ body {
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    position: absolute;
     top: 20%;
     width: 17rem;
     height: 10rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     font-size: 1.25rem;
     font-weight: bold;
     padding: 1.125rem;

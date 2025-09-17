@@ -204,7 +204,7 @@ header {
     border-radius: 1px;
 }
 
-@media (max-width: 1024px),(orientation: portrait) {
+@media (max-width: 1080px),(orientation: portrait) {
     .top-left .menu > ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 1rem 0; }
     .top-left .menu.active > ul { display: flex; }
     .hamburger { display: flex; }

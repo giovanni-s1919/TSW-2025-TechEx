@@ -80,9 +80,6 @@
             </div>
         </c:when>
         <c:otherwise>
-            <script>
-                $("body").addClass("empty");
-            </script>
             <div id="cart-box-empty">
                 <div id="cart-box-empty-warning">Il tuo carrello è vuoto</div>
                 <div class="cart-proceed"><a class="ref" href="${pageContext.request.contextPath}/home">Torna alla Home</a></div>
