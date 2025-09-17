@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 // maps the servlet to the root URL ("/") and "/home"
 @WebServlet(name = "HomeServlet",  value = {"", "/home"})
@@ -55,6 +57,25 @@ public class HomeServlet extends HttpServlet {
                 elements++;
             }
             request.setAttribute("products", products);
+            List<ProductDTO> topPricedProducts = productDTOS.stream()
+                    .filter(p -> p.getGrade() == ProductDTO.Grade.Original)
+                    .sorted(Comparator.comparing(ProductDTO::getPrice).reversed())
+                    .limit(6)
+                    .sorted(Comparator.comparing(ProductDTO::getName))
+                    .collect(Collectors.toList());
+            List<ProductCardDisplay> eliteProducts = new ArrayList<>();
+            for (ProductDTO productDTO : topPricedProducts) {
+                eliteProducts.add(new ProductCardDisplay(productDTO));
+            }
+            request.setAttribute("eliteProducts", eliteProducts);
+            List<ProductCardDisplay> bestSellerProducts = new ArrayList<>();
+            productDTOS.stream()
+                    .filter(p -> p.getId() >= 31 && p.getId() <= 36)
+                    .sorted(Comparator.comparing(ProductDTO::getName))
+                    .forEach(productDTO -> {
+                        bestSellerProducts.add(new ProductCardDisplay(productDTO));
+                    });
+            request.setAttribute("bestSellerProducts", bestSellerProducts);
             request.setAttribute("categoriesForHeader", ProductDTO.Category.values());
             request.setAttribute("brandsForHeader", productDAO.findDistinctBrands());
             request.setAttribute("gradesForHeader", ProductDTO.Grade.values());
