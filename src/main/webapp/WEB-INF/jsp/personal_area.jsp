@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personal_area.css">
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>const contextPath = "${pageContext.request.contextPath}";</script>
+        <script>window.contextPath = "${pageContext.request.contextPath}";</script>
     </head>
     <body id="personal_area">
         <%@ include file="fragments/header.jsp" %>
