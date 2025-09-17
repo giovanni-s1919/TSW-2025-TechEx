@@ -52,8 +52,7 @@ body {
 }
 
 #product-image{
-    height: 30rem;
-    width: 30rem;
+    height:25rem;
     border-radius: 8px;
 }
 
@@ -61,7 +60,7 @@ body {
     display:flex;
     flex-direction: row;
     justify-self: center;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #003459;
     width: 80%;
@@ -203,7 +202,13 @@ body {
     color: white;
 }
 
-@media (orientation: portrait){
+@media (max-width: 1080px){
+
+    #product-box{
+        width: 100%;
+        border: none;
+        padding: 0;
+    }
 
     #product-element{
         display: flex;
