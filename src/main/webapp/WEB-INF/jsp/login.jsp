@@ -4,6 +4,7 @@
 <head>
     <title>TechEx - Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login-register.css">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/headlogo.png">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

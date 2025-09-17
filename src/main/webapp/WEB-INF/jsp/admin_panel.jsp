@@ -4,13 +4,13 @@
 <head>
     <title>TechEx - Pannello Amministrazione</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_panel.css">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/headlogo.png">
     <script>window.contextPath = "${pageContext.request.contextPath}";</script>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
 
 <div id="main">
-    <%-- MENU LATERALE PER ADMIN --%>
     <ul id="account_voices">
         <li data-target="product-management"><i class="fa-solid fa-box-archive"></i>Gestione Prodotti</li>
         <li data-target="order-overview"><i class="fa-solid fa-cart-shopping"></i>Visualizzazione Ordini</li>
