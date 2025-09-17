@@ -349,7 +349,6 @@ body#personal_area #forguest {
     margin-bottom: 1rem;
     padding-top: 1rem;
     border-top: 1px solid #CCCCCC;
-    /*text-align: center;*/
 }
 
 .address-actions {
@@ -571,7 +570,6 @@ body#personal_area #forguest {
     margin-bottom: 1rem;
     padding-top: 1rem;
     border-top: 1px solid #CCCCCC;
-    /*text-align: center;*/
 }
 
 .add-payment-methods-container .save-btn i {

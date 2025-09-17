@@ -1,6 +1,3 @@
-/* =================================
-   Stili Base per Desktop
-   ================================= */
 header {
     display: flex;
     justify-content: space-between;
@@ -40,9 +37,6 @@ header {
     flex-shrink: 0;
 }
 
-/* =================================
-   Barra di Ricerca
-   ================================= */
 .search {
     position: relative;
     display: flex;
@@ -156,7 +150,6 @@ header {
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* NUOVA REGOLA PER ALLINEARE IL MENU UTENTE A DESTRA */
 .topright .submenu {
     left: auto;
     right: 0;

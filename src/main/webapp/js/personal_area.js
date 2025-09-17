@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (fieldName === 'birthDate') {
                 const birthDate = new Date(newValue);
                 const today = new Date();
-                today.setHours(0, 0, 0, 0); // data impostata a mezzanotte per evitare problemi di fuso orario
+                today.setHours(0, 0, 0, 0);
                 const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
                 if (birthDate > today) {
                     displayMessage('La data di nascita non può essere una data futura.', 'error');

@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     if (menuItems.length > 0) menuItems[0].click();
 
-    // --- LOGICA GESTIONE PRODOTTI ---
     const productListContainer = document.querySelector('#product-list-container tbody');
     const addProductBtn = document.getElementById('add-product-btn');
     const productModal = document.getElementById('product-modal');
@@ -138,8 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-    // --- SEZIONE: LOGICA GESTIONE ORDINI ---
     const filterOrdersBtn = document.getElementById('filter-orders-btn');
     const orderListContainer = document.getElementById('order-list-container');
     const startDateInput = document.getElementById('start-date');
@@ -180,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
             orderListContainer.innerHTML = '<p>Nessun ordine trovato con i filtri specificati.</p>';
             return;
         }
-        // --- MODIFICA 1: Rimuoviamo la classe "order-table" per ereditare lo stile principale ---
         let tableHtml = `<table><thead>...</thead><tbody>`;
         orders.forEach(order => {
             const orderDate = new Date(order.orderDate).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' });
@@ -207,7 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </tr>`;
     }
 
-    // --- Logica di apertura/chiusura animata per i dettagli ---
     orderListContainer.addEventListener('click', async function(event) {
         const target = event.target;
         if (!target.classList.contains('view-details-btn')) return;
@@ -216,18 +211,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentRow = target.closest('.order-row');
         const existingDetailsRow = document.getElementById(`details-for-order-${orderId}`);
 
-        // Se il pannello è già aperto, lo chiudiamo
         if (existingDetailsRow) {
             const panel = existingDetailsRow.querySelector('.order-details-panel');
-            panel.classList.remove('expanded'); // Avvia la transizione di chiusura
-            // Aspetta la fine della transizione prima di rimuovere l'elemento
+            panel.classList.remove('expanded');
             panel.addEventListener('transitionend', () => {
                 existingDetailsRow.remove();
             }, { once: true });
             return;
         }
 
-        // Chiudi tutti gli altri pannelli aperti
         document.querySelectorAll('.order-details-row').forEach(row => {
             const panel = row.querySelector('.order-details-panel');
             panel.classList.remove('expanded');
@@ -236,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, { once: true });
         });
 
-        // Crea la nuova riga per i dettagli
         const detailsRow = document.createElement('tr');
         detailsRow.id = `details-for-order-${orderId}`;
         detailsRow.className = 'order-details-row';
@@ -245,7 +236,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const panel = detailsRow.querySelector('.order-details-panel');
 
-        // Forza il browser a calcolare lo stile iniziale prima di aggiungere la classe per l'animazione.
         setTimeout(() => {
             panel.classList.add('expanded');
         }, 10);
@@ -281,7 +271,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // --- FUNZIONE HELPER FETCH ---
     async function fetchWithAction(action, data = {}) {
         const body = new URLSearchParams();
         body.append('action', action);
