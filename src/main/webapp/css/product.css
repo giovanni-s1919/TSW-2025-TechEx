@@ -103,14 +103,14 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    width: 15%;
+    width: 6rem;
     font-weight: bold;
 }
 
 #quantity-input{
     border-style: hidden;
     height: 2rem;
-    width: 15%;
+    width: 6rem;
     font-weight: bold;
     font-size: 1.5rem;
     color: black;
