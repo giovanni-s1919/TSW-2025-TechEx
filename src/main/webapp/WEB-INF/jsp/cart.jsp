@@ -50,13 +50,13 @@
                             <div class="cart-product-fieldvalue">
                                 <div class="cart-product-field">Prezzo unitario:</div>
                                 <div class="cart-product-value">
-                                    <fmt:formatNumber value="${item.product.price}" type="currency" pattern="¤#,##0.00"/>
+                                    <fmt:formatNumber value="${item.product.price}" type="currency" pattern="€0.00"/>
                                 </div>
                             </div>
                             <div class="cart-product-fieldvalue">
                                 <div class="cart-product-field">Subtotale:</div>
                                 <div class="cart-product-value" id="subtotal-${item.product.id}">
-                                    <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" pattern="¤#,##0.00"/>
+                                    <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" pattern="€0.00"/>
                                 </div>
                             </div>
                             <div class="cart-item-actions">
@@ -73,7 +73,7 @@
                 <div class="cart-total">
                     <span id="cart-total-field">Totale: </span>
                     <span id="cart-total-value">
-                        <fmt:formatNumber value="${cartTotal}" type="currency" pattern="¤#,##0.00"/>
+                        <fmt:formatNumber value="${cartTotal}" type="currency" pattern="€0.00"/>
                     </span>
                 </div>
                 <button class="cart-proceed" id="proceed-to-checkout-btn">Procedi con l'acquisto</button>

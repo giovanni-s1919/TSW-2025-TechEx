@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="product-fieldvalue">
                                         <div class="product-field">Prezzo:</div>
-                                        <div class="product-value">€${product.price}</div>
+                                        <div class="product-value"><fmt:formatNumber value="${product.price}" type="currency" pattern="€0.00"/></div>
                                     </div>
                                     <div class="product-fieldvalue">
                                         <div class="product-field">Categoria:</div>

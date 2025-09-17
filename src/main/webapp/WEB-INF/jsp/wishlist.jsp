@@ -46,7 +46,7 @@
                                 <div class="wishlist-product-fieldvalue">
                                     <div class="wishlist-product-field">Prezzo:</div>
                                     <div class="wishlist-product-value">
-                                        <fmt:formatNumber value="${item.product.price}" type="currency" pattern="¤#,##0.00"/>
+                                        <fmt:formatNumber value="${item.product.price}" type="currency" pattern="€0.00"/>
                                     </div>
                                 </div>
                                 <div class="wishlist-interact">
