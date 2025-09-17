@@ -201,7 +201,7 @@ body {
     color: white;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 1024px) {
     #main {
         display: flex;
         flex-direction: column;
@@ -212,12 +212,17 @@ body {
 
      #cart-box {
          width: 100%;
+         border: none;
      }
 
     .cart-element {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .remove-button {
+        width :100%;
     }
 
     #cart-confirm {
