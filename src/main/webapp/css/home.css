@@ -243,9 +243,9 @@ a {
 
 .guides {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: 100%;
-    padding: 3.4rem 3.4rem 3.4rem 0;
+    padding: 3.4rem;
     color: #00171F;
     box-sizing: border-box;
     background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("../images/guides.jpg"); /* #FFFFFF (white) */
