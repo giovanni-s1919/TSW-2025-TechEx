@@ -12,6 +12,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
+        @media (max-width: 1420px), (orientation: portrait) {
+            #faq\?_image, #faq\!_image {
+                display: none;
+            }
+            .faq_decorations {
+                display: none;
+            }
+        }
         @media (max-width: 1024px), (orientation: portrait) {
             .products-grid {
                 flex-wrap: wrap;
@@ -52,14 +60,10 @@
             .faq_decorations {
                 right: 1rem;
             }
-
-            #faq\?_image, #faq\!_image {
-                display: none;
-            }
-            .faq_decorations {
-                display: none;
-            }
             .faq_content {
+                text-align: center;
+            }
+            #faq_phrase {
                 text-align: center;
             }
         }
@@ -439,7 +443,7 @@
                     validi a partire dalla data di consegna del prodotto.
                 </div>
             </div>
-            <p id="faq_phrase">Hai ancora bisogno di aiuto? Visita la sezione "Aiuto e contatti" dell'area personale!</p>
+            <div id="faq_phrase">Hai ancora bisogno di aiuto? Visita la sezione "Aiuto e contatti" dell'area personale!</div>
         </div>
         <div class="faq_decorations">
             <img id="faq_image" src="${pageContext.request.contextPath}/images/faqimage.png">
