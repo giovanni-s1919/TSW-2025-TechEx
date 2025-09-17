@@ -93,9 +93,6 @@ header {
     display: none;
 }
 
-/* =================================
-   Menu di Navigazione
-   ================================= */
 .menu > ul {
     display: flex;
     align-items: center;
@@ -147,7 +144,7 @@ header {
     opacity: 0;
     position: absolute;
     top: 100%;
-    left: 0; /* Allineamento di default per i menu a sinistra */
+    left: 0;
     background: #FFFFFF;
     box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
     border-radius: 10px;
@@ -192,9 +189,6 @@ header {
     padding: 0.313rem 0.938rem;
 }
 
-/* =================================
-   Icone Header e Hamburger
-   ================================= */
 .header_icons {
     width: 2.188rem;
     height: 2.188rem;
@@ -217,9 +211,6 @@ header {
     border-radius: 1px;
 }
 
-/* =================================
-   Media Queries per Responsività
-   ================================= */
 @media (max-width: 1024px) {
     .top-left .menu > ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 1rem 0; }
     .top-left .menu.active > ul { display: flex; }
@@ -244,10 +235,6 @@ header {
     .top-right > a[href*="cart"] { order: 3; }
     .top-right > .menu { order: 4; }
 }
-
-/* ============================================
-   Stili per la Modalità Ricerca Attiva (Mobile)
-   ============================================ */
 @media (max-width: 768px) {
     header.search-active .top-left,
     header.search-active .top-right > a,

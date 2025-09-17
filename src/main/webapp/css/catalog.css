@@ -131,12 +131,10 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     text-align: center;
     padding: 0.313rem;
-    /*transition: transform 0.2s ease;*/
     transition: scale ease-out 0.2s;
 }
 
 .product-card:hover {
-    /*transform: translateY(-0.313rem);*/
     scale: 1.02;
 }
 
@@ -203,19 +201,17 @@ body {
         align-items: center;
     }
     .filters-sidebar {
-        width: 90%; /* Aumenta la larghezza per una migliore leggibilità */
+        width: 90%;
     }
 
     .filter-title {
         cursor: pointer;
-        position: relative; /* Necessario per posizionare l'icona */
-        /* Impedisce la selezione del testo al doppio clic */
+        position: relative;
         -webkit-user-select: none;
         -ms-user-select: none;
         user-select: none;
     }
 
-    /* Aggiunge l'icona '+' a destra di ogni titolo */
     .filter-title::after {
         content: '+';
         font-size: 1.5rem;
@@ -228,18 +224,15 @@ body {
         transition: transform 0.2s ease-in-out;
     }
 
-    /* Cambia l'icona in '-' quando il menu è aperto */
     .filter-title.active::after {
         content: '−';
     }
 
-    /* Nasconde le opzioni dei filtri per default */
     .filter-options {
         display: none;
         padding-top: 1rem;
     }
 
-    /* Mostra le opzioni quando il titolo ha la classe 'active' */
     .filter-title.active + .filter-options {
         display: block;
     }

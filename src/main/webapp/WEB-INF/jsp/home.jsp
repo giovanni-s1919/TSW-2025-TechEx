@@ -11,23 +11,21 @@
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!--  ============== BLOCCO CSS PER LA RESPONSIVITÀ ============== -->
     <style>
-        /* Stili per tablet e dispositivi con schermo medio (fino a 1024px) */
         @media (max-width: 1024px) {
             .products-grid {
-                flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+                flex-wrap: wrap;
                 justify-content: space-evenly;
                 gap: 1.5rem;
             }
 
             .presentation .presentation_img {
-                right: 1rem; /* Avvicina l'immagine al bordo */
+                right: 1rem;
                 top: -2rem;
             }
 
             .reviews_right {
-                justify-content: center; /* Centra le card delle recensioni se vanno a capo */
+                justify-content: center;
                 flex-wrap: wrap;
             }
 
@@ -44,18 +42,18 @@
                 align-items: center;
             }
 
-            #reviews_man {
-                left: 50%; /* Ricalibra la posizione dell'uomo */
-                top: auto;
-                bottom: -2rem; /* Posizionalo in basso */
-            }
+            /*#reviews_man {*/
+            /*    left: 50%; !* Ricalibra la posizione dell'uomo *!*/
+            /*    top: auto;*/
+            /*    bottom: -2rem; !* Posizionalo in basso *!*/
+            /*}*/
 
             .faq_decorations {
-                right: 1rem; /* Sposta le decorazioni a destra */
+                right: 1rem;
             }
 
             #faq\?_image, #faq\!_image {
-                display: none; /* Nasconde le immagini decorative '?' e '!' che disturbano */
+                display: none;
             }
             .faq_decorations {
                 display: none;
@@ -65,7 +63,7 @@
             }
         }
 
-        /* Stili per dispositivi mobili (fino a 768px) */
+
         @media (max-width: 768px) {
             .main {
                 padding-top: 1rem;
@@ -75,13 +73,13 @@
                 font-size: 1.5rem;
             }
 
-            /* Riorganizza le griglie di prodotti in una colonna */
+
             .products-grid {
                 align-items: center;
                 gap: 2rem;
             }
 
-            /* Nasconde l'immagine decorativa che non si adatta a schermi piccoli */
+
             .presentation .presentation_img {
                 display: none;
             }
@@ -101,7 +99,6 @@
                 text-align: center;
             }
 
-            /* Impila le sezioni delle recensioni verticalmente */
             .reviews {
                 flex-direction: column;
                 align-items: center;
@@ -120,17 +117,17 @@
                 font-size: 2rem;
             }
 
-            #reviews_man {
-                display: none; /* Nasconde l'immagine dell'uomo che interferirebbe */
-            }
+            /*#reviews_man {*/
+            /*    display: none; !* Nasconde l'immagine dell'uomo che interferirebbe *!*/
+            /*}*/
 
             .review_card {
-                width: 100%; /* Le card delle recensioni occupano tutta la larghezza */
+                width: 100%;
             }
 
-            /* Impila le colonne di brand e certificazioni */
+
             .collabs {
-                padding-bottom: 5rem; /* Aggiunge spazio per il bottone 'Scopri di più' */
+                padding-bottom: 5rem;
             }
 
             .brand_column, .certifications_column {
@@ -139,7 +136,6 @@
                 margin-bottom: 1rem;
             }
 
-            /* Impila la sezione newsletter e nasconde l'immagine */
             .newsletter {
                 flex-direction: column;
             }
@@ -150,10 +146,9 @@
             }
 
             #newsletter_email, .newsletter_submit {
-                width: 100%; /* Rende gli input a larghezza piena */
+                width: 100%;
             }
 
-            /* Nasconde le immagini decorative delle FAQ */
             .faq_decorations {
                 display: none;
             }
@@ -291,19 +286,19 @@
     </div>
     <div class="reviews">
         <div class="reviews_left">
-            <p class="reviews_p">
+            <div class="reviews_p">
                 <b>Recensioni dei nostri utenti</b><br>
                 TechEx è in testa alle classifiche<br>dei siti di pezzi di ricambio per smartphone in Italia.<br>
                 Solo ricambi di qualità assoluta per riparazioni top!
-            </p>
-            <p class="reviews_value">
+            </div>
+            <div class="reviews_value">
                 TechEx è valutata <b>Eccellente</b><br>
-                <span class="reviews_note">Basata su 4324 recensioni<br>
+                <div class="reviews_note">Basata su 4324 recensioni<br>
                             <img class="reviews_img" src="${pageContext.request.contextPath}/images/reviews.png" alt="REVIEWS"><br>
                             <a href="https://www.youtube.com/watch?v=iYZkBxByo14" alt="ALL_REVIEWS"><button class="reviews_button">Visualizza tutte le recensioni</button></a>
-                            <%--<img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_man.png" alt="REVIEWS MAN">--%>
-                        </span>
-            </p>
+                        </div>
+            </div>
+            <%--<img id="reviews_man" src="${pageContext.request.contextPath}/images/reviews_man.png" alt="REVIEWS MAN">--%>
         </div>
         <div class="reviews_right" id="reviewsContainer"></div>
     </div>

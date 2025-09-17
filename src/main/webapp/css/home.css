@@ -316,9 +316,11 @@ a {
 }
 
 .reviews_left {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin-left: 3rem;
-    padding: 1rem;
+    position: relative;
+    padding: 1rem 1rem 150px;
 }
 
 .reviews_p {
@@ -361,17 +363,15 @@ a {
     background-color: #005B8F;
 }
 
-#reviews_man {
-    position: absolute;
-    max-width: 18.75rem;
-    max-height: 16.25rem;
-    margin: 0;
-    padding: 0;
-    left: 42%;
-    transform: translateX(-50%);
-    top: 16.27rem;
-    z-index: 10;
-}
+/*#reviews_man {
+/*    max-width: 18.75rem;
+/*    padding: 0;
+/*    position: absolute;
+/*    bottom: 0;
+/*    left: 50%;
+/*    transform: translateX(-50%);
+/*    z-index: 10;
+/*}*/
 
 .reviews_right {
     display: flex;

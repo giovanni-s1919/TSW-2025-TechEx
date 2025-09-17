@@ -1,11 +1,9 @@
-/* --- STILI ORIGINALI PER DESKTOP --- */
-/* (Questi stili rimangono invariati per preservare l'aspetto su schermi grandi) */
 html, body{
     height: 100%;
     margin: 0;
     padding: 0;
     cursor: default;
-    overflow-x: hidden; /* Previene lo scroll orizzontale */
+    overflow-x: hidden;
 }
 
 body {
@@ -19,7 +17,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start; /* Allinea gli elementi in cima */
+    align-items: flex-start;
     padding: 0 1rem;
     gap: 5rem;
     margin-top: 10rem;
@@ -48,7 +46,7 @@ body {
 .cart-product-image {
     width: 17rem;
     height: 17rem;
-    min-width: 17rem; /* Impedisce all'immagine di restringersi troppo */
+    min-width: 17rem;
     margin: 1rem;
     border-radius: 10px;
     transition: transform 0.2s ease-out;
@@ -108,14 +106,14 @@ body {
     border: none;
     border-radius: 7px;
     outline: none;
-    width: auto; /* Larghezza automatica basata sul contenuto */
-    padding: 0.8rem 1.5rem; /* Padding per definire la dimensione */
+    width: auto;
+    padding: 0.8rem 1.5rem;
     background: #004F86;
     color: white;
     font-weight: bold;
     transition: 0.2s ease-out;
     cursor: pointer;
-    white-space: nowrap; /* Evita che il testo vada a capo */
+    white-space: nowrap;
 }
 
 .remove-button:hover {
