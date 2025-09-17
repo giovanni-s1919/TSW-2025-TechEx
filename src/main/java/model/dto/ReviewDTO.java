@@ -11,8 +11,6 @@ public class ReviewDTO implements Serializable {
     private String description;
     private int rating;
 
-
-    // Constructors
     public ReviewDTO() {}
 
     public ReviewDTO(int id, int userID, int productID, String title, String description, int rating) {
@@ -24,8 +22,6 @@ public class ReviewDTO implements Serializable {
         this.rating = rating;
     }
 
-
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public int getUserID() {return userID;}

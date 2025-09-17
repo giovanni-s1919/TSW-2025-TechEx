@@ -31,7 +31,7 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
             ps.setString(6, orderAddress.getName());
             ps.setString(7, orderAddress.getSurname());
             ps.setString(8, orderAddress.getPhone());
-            ps.setString(9, orderAddress.getAddressType().name()); // Salva l'enum come String
+            ps.setString(9, orderAddress.getAddressType().name());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -44,7 +44,7 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
     public void save(OrderAddressDTO orderAddress, Connection connection) throws SQLException {
         validate(orderAddress);
         String sql = "INSERT INTO OrderAddress (Street, City, PostalCode, Region, Country, Name, Surname, Phone, AddressType) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Usa la connessione passata, NON ne apre una nuova
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, orderAddress.getStreet());
             ps.setString(2, orderAddress.getCity());
@@ -82,7 +82,7 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
             ps.setString(6, orderAddress.getName());
             ps.setString(7, orderAddress.getSurname());
             ps.setString(8, orderAddress.getPhone());
-            ps.setString(9, orderAddress.getAddressType().name()); // Aggiorna l'enum come String
+            ps.setString(9, orderAddress.getAddressType().name());
             ps.setInt(10, orderAddress.getId());
             ps.executeUpdate();
         }
@@ -126,7 +126,7 @@ public class OrderAddressDAO extends AbstractDAO<OrderAddressDTO, Integer>{
     @Override
     public List<OrderAddressDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<OrderAddressDTO> list = new ArrayList<>();

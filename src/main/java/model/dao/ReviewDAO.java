@@ -24,7 +24,7 @@ public class ReviewDAO extends AbstractDAO<ReviewDTO, Integer> {
             ps.setInt(2, review.getProductID());
             ps.setString(3, review.getTitle());
             ps.setString(4, review.getDescription());
-            ps.setInt(5, review.getRating()); // TINYINT in DB, int in Java
+            ps.setInt(5, review.getRating());
 
             ps.executeUpdate();
 
@@ -93,7 +93,6 @@ public class ReviewDAO extends AbstractDAO<ReviewDTO, Integer> {
         return null;
     }
 
-    // Metodo per trovare tutte le recensioni di un utente specifico
     public List<ReviewDTO> findByUserID(int userID) throws SQLException {
         if (userID <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
@@ -114,7 +113,6 @@ public class ReviewDAO extends AbstractDAO<ReviewDTO, Integer> {
         return list;
     }
 
-    // Metodo per trovare tutte le recensioni di un prodotto specifico
     public List<ReviewDTO> findByProductID(int productID) throws SQLException {
         if (productID <= 0) {
             throw new IllegalArgumentException("ProductID must be a positive integer.");
@@ -138,7 +136,7 @@ public class ReviewDAO extends AbstractDAO<ReviewDTO, Integer> {
     @Override
     public List<ReviewDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<ReviewDTO> list = new ArrayList<>();
@@ -186,7 +184,7 @@ public class ReviewDAO extends AbstractDAO<ReviewDTO, Integer> {
         review.setProductID(rs.getInt("ProductID"));
         review.setTitle(rs.getString("Title"));
         review.setDescription(rs.getString("Description"));
-        review.setRating(rs.getInt("Rating")); // TINYINT in DB, int in Java
+        review.setRating(rs.getInt("Rating"));
         return review;
     }
 }

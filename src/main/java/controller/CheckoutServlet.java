@@ -164,7 +164,7 @@ public class CheckoutServlet extends HttpServlet {
                             cardNumber == null || cardNumber.trim().isEmpty() ||
                             cardExpiration == null || cardExpiration.trim().isEmpty() ||
                             cardCvc == null || cardCvc.trim().isEmpty()) {
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400 Bad Request
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         response.getWriter().write(new Gson().toJson(Map.of("success", false, "message", "Tutti i campi del metodo di pagamento sono obbligatori.")));
                         return;
                     }

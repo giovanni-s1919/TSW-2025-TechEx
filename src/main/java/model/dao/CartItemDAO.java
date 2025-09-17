@@ -70,7 +70,7 @@ public class CartItemDAO implements GenericDAO<CartItemDTO, Integer>{
         if (cartId <= 0) {
             throw new IllegalArgumentException("CartID must be a positive integer.");
         }
-        String sql = "DELETE FROM CartItem WHERE CartID = ?"; // Usa la connessione passata
+        String sql = "DELETE FROM CartItem WHERE CartID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, cartId);
             return ps.executeUpdate() > 0;
@@ -98,7 +98,7 @@ public class CartItemDAO implements GenericDAO<CartItemDTO, Integer>{
 
     public CartItemDTO findByProductIDAndCartID(Integer cartID, Integer productID) throws SQLException {
         if(cartID == null || cartID < 1) throw new IllegalArgumentException("CartItem ID must be a positive integer.");
-        String sql = "SELECT * FROM CartItem WHERE CartID = ? AND ProductID = ?"; // Query corretta per l'ordine
+        String sql = "SELECT * FROM CartItem WHERE CartID = ? AND ProductID = ?";
         System.out.println("--- DEBUG DAO: Eseguo findByProductIDAndCartID ---");
         System.out.println("Cerco CartID: " + cartID + " e ProductID: " + productID);
 
@@ -139,7 +139,7 @@ public class CartItemDAO implements GenericDAO<CartItemDTO, Integer>{
     @Override
     public List<CartItemDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<CartItemDTO> list = new ArrayList<>();

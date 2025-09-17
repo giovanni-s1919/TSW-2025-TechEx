@@ -35,8 +35,6 @@ public class OrderDTO implements Serializable
     private int shippingAddressId;
     private int billingAddressId;
 
-
-    // Constructors
     public OrderDTO(){}
 
     public OrderDTO(int id, int userID, Timestamp orderDate, OrderStatus orderStatus, LocalDate deliveryDate, int billingAddressId, int shippingAddressId, float totalAmount){
@@ -50,8 +48,6 @@ public class OrderDTO implements Serializable
         this.totalAmount = totalAmount;
     }
 
-
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public int getUserID() {return userID;}

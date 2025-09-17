@@ -24,7 +24,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
 
             ps.setInt(1, paymentMethod.getUserID());
             ps.setString(2, paymentMethod.getNumber());
-            ps.setDate(3, Date.valueOf(paymentMethod.getExpiration())); // Salva LocalDate come java.sql.Date
+            ps.setDate(3, Date.valueOf(paymentMethod.getExpiration()));
             ps.setString(4, paymentMethod.getName());
             ps.setBoolean(5, paymentMethod.isDefault());
 
@@ -95,14 +95,13 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
         return null;
     }
 
-    // Metodo per trovare i metodi di pagamento di un utente specifico
     public List<PaymentMethodDTO> findByUserID(int userID) throws SQLException {
         if (userID <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
         }
 
         List<PaymentMethodDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM PaymentMethod WHERE UserID = ? ORDER BY ID"; // Ordinamento di default per ID
+        String sql = "SELECT * FROM PaymentMethod WHERE UserID = ? ORDER BY ID";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -120,7 +119,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
     @Override
     public List<PaymentMethodDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<PaymentMethodDTO> list = new ArrayList<>();
@@ -158,14 +157,12 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
         if (paymentMethod.getExpiration() == null) {
             throw new IllegalArgumentException("Expiration date cannot be null.");
         }
-        // Potresti voler aggiungere una validazione per assicurarti che la data di scadenza sia nel futuro
         if (paymentMethod.getExpiration().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Expiration date cannot be in the past.");
         }
         if (paymentMethod.getName() == null || paymentMethod.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
-        // isDefault è un boolean, non richiede validazione di nullità o vuoto.
     }
 
     @Override
@@ -174,7 +171,6 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodDTO, Integer> {
         paymentMethod.setId(rs.getInt("ID"));
         paymentMethod.setUserID(rs.getInt("UserID"));
         paymentMethod.setNumber(rs.getString("Number"));
-        // Recupera java.sql.Date e lo converte in LocalDate
         Date expirationSql = rs.getDate("Expiration");
         paymentMethod.setExpiration(expirationSql != null ? expirationSql.toLocalDate() : null);
         paymentMethod.setName(rs.getString("Name"));

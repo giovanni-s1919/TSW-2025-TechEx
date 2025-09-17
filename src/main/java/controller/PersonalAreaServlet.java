@@ -271,7 +271,7 @@ public class PersonalAreaServlet extends HttpServlet {
             Map<String, Object> pmMap = new HashMap<>();
             pmMap.put("id", paymentMethod.getId());
             pmMap.put("name", paymentMethod.getName());
-            pmMap.put("number", paymentMethod.getNumber()); // <-- Il campo cruciale
+            pmMap.put("number", paymentMethod.getNumber());
             pmMap.put("expiration", paymentMethod.getExpiration().toString());
             pmMap.put("isDefault", paymentMethod.isDefault());
             response.getWriter().write(gson.toJson(pmMap));
@@ -329,25 +329,17 @@ public class PersonalAreaServlet extends HttpServlet {
                 return;
             }
 
-            // Carica i dati grezzi dal database
             List<OrderItemDTO> orderItems = orderItemDAO.findByOrderId(orderId);
             OrderAddressDTO shippingAddress = orderAddressDAO.findById(order.getShippingAddressId());
             OrderAddressDTO billingAddress = orderAddressDAO.findById(order.getBillingAddressId());
 
-            // --- INIZIO LOGICA DI ARRICCHIMENTO DATI (LA PARTE CRUCIALE) ---
-            // Creiamo una lista di oggetti "arricchiti" per gli articoli
             List<OrderConfirmationItem> displayItems = new ArrayList<>();
             for (OrderItemDTO item : orderItems) {
-                // Per ogni articolo, cerchiamo il prodotto corrispondente per ottenere l'ID per l'immagine
                 ProductDTO product = productDAO.findByName(item.getItemName());
                 displayItems.add(new OrderConfirmationItem(item, product));
             }
-            // --- FINE LOGICA DI ARRICCHIMENTO DATI ---
-
-            // Raggruppa tutti i dati in una mappa per una risposta JSON completa
             Map<String, Object> orderDetails = new HashMap<>();
             orderDetails.put("order", order);
-            // Passa la lista "arricchita", non quella grezza
             orderDetails.put("items", displayItems);
             orderDetails.put("shippingAddress", shippingAddress);
             orderDetails.put("billingAddress", billingAddress);

@@ -8,8 +8,6 @@ public class UserAddressDTO implements Serializable
     private int userId;
     private boolean isDefault;
 
-
-    // Constructors
     public UserAddressDTO(){}
 
     public UserAddressDTO(int addressId, int userId, boolean isDefault)
@@ -20,7 +18,6 @@ public class UserAddressDTO implements Serializable
     }
 
 
-    // Getters and Setters
     public int getAddressId(){return this.addressId;}
     public void setAddressId(int addressId){this.addressId = addressId;}
     public int getUserId(){return this.userId;}

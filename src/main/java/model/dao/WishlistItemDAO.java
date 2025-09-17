@@ -39,9 +39,6 @@ public class WishlistItemDAO extends AbstractDAO<WishlistItemDTO, Integer> {
         if (wishlistItem.getId() <= 0) {
             throw new IllegalArgumentException("WishlistItem ID must be positive for update operations.");
         }
-
-        // Updates for WishlistItem are generally rare, as it's typically just a link.
-        // If ProductID or WishlistID could be changed for an existing item, this logic is valid.
         String sql = "UPDATE WishlistItem SET WishlistID = ?, ProductID = ? WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -89,19 +86,13 @@ public class WishlistItemDAO extends AbstractDAO<WishlistItemDTO, Integer> {
         return null;
     }
 
-    /**
-     * Finds all wishlist items belonging to a specific wishlist.
-     * @param wishlistID The ID of the wishlist.
-     * @return A list of WishlistItemDTOs.
-     * @throws SQLException if a database access error occurs.
-     */
     public List<WishlistItemDTO> findByWishlistID(int wishlistID) throws SQLException {
         if (wishlistID <= 0) {
             throw new IllegalArgumentException("WishlistID must be a positive integer.");
         }
 
         List<WishlistItemDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM WishlistItem WHERE WishlistID = ? ORDER BY ProductID"; // Order by ProductID for consistency
+        String sql = "SELECT * FROM WishlistItem WHERE WishlistID = ? ORDER BY ProductID";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -115,14 +106,6 @@ public class WishlistItemDAO extends AbstractDAO<WishlistItemDTO, Integer> {
         return list;
     }
 
-    /**
-     * Finds a specific wishlist item by its WishlistID and ProductID.
-     * Useful for checking if a product is already in a wishlist or for direct removal.
-     * @param wishlistID The ID of the wishlist.
-     * @param productID The ID of the product.
-     * @return The WishlistItemDTO if found, otherwise null.
-     * @throws SQLException if a database access error occurs.
-     */
     public WishlistItemDTO findByWishlistAndProduct(int wishlistID, int productID) throws SQLException {
         if (wishlistID <= 0 || productID <= 0) {
             throw new IllegalArgumentException("WishlistID and ProductID must be positive integers.");
@@ -146,7 +129,7 @@ public class WishlistItemDAO extends AbstractDAO<WishlistItemDTO, Integer> {
     @Override
     public List<WishlistItemDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<WishlistItemDTO> list = new ArrayList<>();

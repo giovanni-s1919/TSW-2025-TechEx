@@ -1,11 +1,7 @@
 package controller;
 
-// --- AGGIUNGI QUESTI IMPORT ---
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-// --- FINE AGGIUNGI IMPORT ---
 
+import com.google.gson.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,7 +42,6 @@ public class AdminServlet extends HttpServlet {
     private OrderDAO orderDAO;
     private OrderItemDAO orderItemDAO;
 
-    // --- MODIFICA 1: Inizializzazione personalizzata di Gson ---
     private Gson gson;
 
     @Override
@@ -56,32 +51,25 @@ public class AdminServlet extends HttpServlet {
         this.orderDAO = new OrderDAO(ds);
         this.orderItemDAO = new OrderItemDAO(ds);
 
-        // Crea un GsonBuilder per personalizzare la serializzazione
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-        // Insegna a Gson come gestire LocalDate
         gsonBuilder.registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
             @Override
             public JsonElement serialize(LocalDate src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
-                return new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE)); // Formato "YYYY-MM-DD"
+                return new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE));
             }
         });
 
-        // Insegna a Gson come gestire Timestamp
         gsonBuilder.registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
             @Override
             public JsonElement serialize(Timestamp src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
-                return new JsonPrimitive(src.toInstant().toString()); // Formato standard ISO-8601
+                return new JsonPrimitive(src.toInstant().toString());
             }
         });
 
         this.gson = gsonBuilder.create();
     }
 
-    // --- Fine Modifica 1 ---
-
-    // ... tutti gli altri metodi della servlet (doGet, doPost, etc.) rimangono ESATTAMENTE GLI STESSI ...
-    // ... copia e incolla tutto il resto del tuo codice da qui in poi ...
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -254,7 +242,6 @@ public class AdminServlet extends HttpServlet {
                 return;
             }
 
-            // Crea un oggetto Map per contenere sia l'ordine che i suoi articoli
             Map<String, Object> orderDetails = Map.of(
                     "order", order,
                     "items", items

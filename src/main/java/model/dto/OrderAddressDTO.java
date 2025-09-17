@@ -30,8 +30,6 @@ public class OrderAddressDTO implements Serializable
     private String phone;
     private AddressType addressType;
 
-
-    // Constructor
     public OrderAddressDTO(){}
 
     public OrderAddressDTO(int id, String street, String city, String postalCode, String region, String country, String name, String surname, String phone, AddressType addressType) {
@@ -47,8 +45,6 @@ public class OrderAddressDTO implements Serializable
         this.addressType = addressType;
     }
 
-
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getStreet() {return street;}

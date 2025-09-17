@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public abstract class AbstractDAO<T, ID> implements GenericDAO<T, ID> {
 
-    protected final DataSource dataSource; // Made protected to be accessible by subclasses
+    protected final DataSource dataSource;
 
     public AbstractDAO(DataSource ds) {
         if (ds == null) throw new IllegalArgumentException("DataSource cannot be null.");

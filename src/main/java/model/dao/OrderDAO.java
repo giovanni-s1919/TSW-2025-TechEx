@@ -23,9 +23,9 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, order.getUserID());
-            ps.setTimestamp(2, order.getOrderDate()); // Salva Timestamp
+            ps.setTimestamp(2, order.getOrderDate());
             ps.setString(3, order.getOrderStatus().name());
-            ps.setDate(4, Date.valueOf(order.getDeliveryDate())); // Salva LocalDate come java.sql.Date
+            ps.setDate(4, Date.valueOf(order.getDeliveryDate()));
             ps.setFloat(5, order.getTotalAmount());
             ps.setInt(6, order.getShippingAddressId());
             ps.setInt(7, order.getBillingAddressId());
@@ -42,7 +42,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
 
     public void save(OrderDTO order, Connection connection) throws SQLException {
         validate(order);
-        String sql = "INSERT INTO `Order` (UserID, OrderDate, OrderStatus, DeliveryDate, TotalAmount, ShippingAddressId, BillingAddressId) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Usa la connessione passata
+        String sql = "INSERT INTO `Order` (UserID, OrderDate, OrderStatus, DeliveryDate, TotalAmount, ShippingAddressId, BillingAddressId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, order.getUserID());
             ps.setTimestamp(2, order.getOrderDate());
@@ -143,8 +143,6 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
 
     public List<OrderDTO> findWithFilters(LocalDate startDate, LocalDate endDate, Integer customerId) throws SQLException {
         List<OrderDTO> orders = new ArrayList<>();
-
-        // Costruisce la query SQL dinamicamente
         StringBuilder sql = new StringBuilder("SELECT * FROM `Order` WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
@@ -161,12 +159,11 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
             params.add(customerId);
         }
 
-        sql.append(" ORDER BY OrderDate DESC"); // Ordina dal più recente al più vecchio
+        sql.append(" ORDER BY OrderDate DESC");
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql.toString())) {
 
-            // Imposta i parametri nella PreparedStatement
             for (int i = 0; i < params.size(); i++) {
                 ps.setObject(i + 1, params.get(i));
             }
@@ -183,7 +180,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
     @Override
     public List<OrderDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<OrderDTO> list = new ArrayList<>();
@@ -221,7 +218,7 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         OrderDTO order = new OrderDTO();
         order.setId(rs.getInt("ID"));
         order.setUserID(rs.getInt("UserID"));
-        order.setOrderDate(rs.getTimestamp("OrderDate")); // Recupera Timestamp
+        order.setOrderDate(rs.getTimestamp("OrderDate"));
         order.setOrderStatus(OrderDTO.OrderStatus.valueOf(rs.getString("OrderStatus")));
         Date deliveryDateSql = rs.getDate("DeliveryDate");
         order.setDeliveryDate(deliveryDateSql != null ? deliveryDateSql.toLocalDate() : null);

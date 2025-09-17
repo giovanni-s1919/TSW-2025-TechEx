@@ -11,7 +11,6 @@ public class PaymentMethodDTO implements Serializable {
     private String name;
     private boolean isDefault;
 
-    // Constructor
     public PaymentMethodDTO() {}
 
     public PaymentMethodDTO(int id, int userID, String number, LocalDate expiration, String name, boolean isDefault) {
@@ -23,7 +22,6 @@ public class PaymentMethodDTO implements Serializable {
         this.isDefault = isDefault;
     }
 
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public int getUserID() {return userID;}
@@ -39,7 +37,7 @@ public class PaymentMethodDTO implements Serializable {
 
     public String getMaskedNumber() {
         if (this.number == null || this.number.length() < 4) {
-            return "****"; // Valore di fallback in caso di dati anomali
+            return "****";
         }
         String lastFourDigits = this.number.substring(this.number.length() - 4);
         return "**** **** **** " + lastFourDigits;

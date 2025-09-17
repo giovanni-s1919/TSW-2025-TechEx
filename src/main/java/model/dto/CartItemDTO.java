@@ -8,8 +8,6 @@ public class CartItemDTO implements Serializable {
     private int productID;
     private int quantity;
 
-
-    // Constructors
     public CartItemDTO() {}
 
     public CartItemDTO(int id, int cartID, int productID, int quantity) {
@@ -19,8 +17,6 @@ public class CartItemDTO implements Serializable {
         this.quantity = quantity;
     }
 
-
-    // Getters and Setters
     public int  getId() {return id;}
     public void setId(int id) {this.id = id;}
     public int getCartID() {return cartID;}

@@ -45,8 +45,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
 
     @Override
     public boolean delete(Integer id) throws SQLException {
-        // Questo metodo non è supportato direttamente per chiavi primarie composite.
-        // Utilizzare il metodo delete(int addressId, int userId, UserAddressDTO.AddressType addressType)
         throw new UnsupportedOperationException("Deletion by single ID is not supported for UserAddress, use delete(addressId, userId, addressType) instead.");
     }
 
@@ -66,8 +64,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
 
     @Override
     public UserAddressDTO findById(Integer id) throws SQLException {
-        // Questo metodo non è supportato direttamente per chiavi primarie composite.
-        // Utilizzare il metodo findById(int addressId, int userId, UserAddressDTO.AddressType addressType)
         throw new UnsupportedOperationException("Lookup by single ID is not supported for UserAddress, use findById(addressId, userId, addressType) instead.");
     }
 
@@ -90,7 +86,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         return null;
     }
 
-    // Metodo per trovare tutti gli indirizzi associati a un utente specifico
     public List<UserAddressDTO> findByUserID(int userId) throws SQLException {
         if (userId <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
@@ -111,7 +106,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         return list;
     }
 
-    // Metodo per trovare tutti gli utenti associati a un indirizzo specifico
     public List<UserAddressDTO> findByAddressID(int addressId) throws SQLException {
         if (addressId <= 0) {
             throw new IllegalArgumentException("AddressID must be a positive integer.");
@@ -167,7 +161,6 @@ public class UserAddressDAO extends AbstractDAO<UserAddressDTO, Integer> {
         if (userAddress.getUserId() <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
         }
-        // isDefault è un boolean, non richiede validazione di nullità o vuoto.
     }
 
     @Override

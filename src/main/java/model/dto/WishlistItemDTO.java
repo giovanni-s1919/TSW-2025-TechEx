@@ -7,8 +7,6 @@ public class WishlistItemDTO implements Serializable {
     private int wishlistID;
     private int productID;
 
-
-    // Constructors
     public WishlistItemDTO(){}
 
     public WishlistItemDTO(int id, int wishlistID, int productID) {
@@ -17,8 +15,6 @@ public class WishlistItemDTO implements Serializable {
         this.productID = productID;
     }
 
-
-    // Getters and Setters
     public int getId(){return id;}
     public void setId(int id){this.id = id;}
     public int getWishlistID(){return wishlistID;}

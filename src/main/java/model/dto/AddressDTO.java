@@ -21,10 +21,10 @@ public class AddressDTO implements Serializable
 
     private int id;
     private String street;
-    private String additionalInfo; // can be null
+    private String additionalInfo;
     private String city;
     private String postalCode;
-    private String region; // can be null
+    private String region;
     private String country;
     private String name;
     private String surname;
@@ -33,7 +33,6 @@ public class AddressDTO implements Serializable
     private boolean isDefault;
 
 
-    // Constructors
     public AddressDTO() {}
 
     public AddressDTO(int id, String street, String additionalInfo, String city, String postalCode, String region, String country, String name, String surname, String phone, AddressType addressType)
@@ -52,7 +51,6 @@ public class AddressDTO implements Serializable
     }
 
 
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getStreet() {return street;}

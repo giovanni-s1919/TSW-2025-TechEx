@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-// maps the servlet to the root URL ("/") and "/home"
 @WebServlet(name = "HomeServlet",  value = {"", "/home"})
 public class HomeServlet extends HttpServlet {
     ProductDAO productDAO;

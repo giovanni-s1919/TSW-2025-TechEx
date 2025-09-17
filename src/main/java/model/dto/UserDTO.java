@@ -16,7 +16,6 @@ public class UserDTO implements Serializable
     private String phone;
     private Role role;
 
-    // Constructors
     public UserDTO(){}
 
     public UserDTO(String name, String surname, LocalDate birthDate, String username, String email, String passwordHash, String phone, Role role) {
@@ -31,16 +30,7 @@ public class UserDTO implements Serializable
         this.role = role;
         System.out.println(this.toString());
     }
-/*
-    public UserDTO(String username, String email, String passwordHash, Role role){
-        this.id = 0;
-        this.username = username;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
-    }
-*/
-    // Getters and Setters
+
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getUsername() {return username;}

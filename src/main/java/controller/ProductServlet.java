@@ -82,7 +82,7 @@ public class ProductServlet extends HttpServlet {
         UserDTO user = (UserDTO) session.getAttribute("user");
         if ("buyNow".equals(action)) {
             String quantity = request.getParameter("quantity");
-            HttpSession buyNowSession = request.getSession(true); // request.getSession(true) crea una sessione se non esiste (necessario per i guest)
+            HttpSession buyNowSession = request.getSession(true);
             buyNowSession.setAttribute("checkoutSource", "buyNow");
             buyNowSession.setAttribute("buyNowProduct", productID);
             buyNowSession.setAttribute("buyNowQuantity", quantity);

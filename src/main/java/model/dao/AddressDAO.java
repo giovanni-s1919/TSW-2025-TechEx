@@ -110,7 +110,7 @@ public class AddressDAO extends AbstractDAO<AddressDTO, Integer>{
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     AddressDTO address = extract(rs);
-                    address.setDefault(rs.getBoolean("IsDefault")); // Aggiunge il flag
+                    address.setDefault(rs.getBoolean("IsDefault"));
                     addresses.add(address);
                 }
             }

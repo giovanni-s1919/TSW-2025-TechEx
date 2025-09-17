@@ -38,10 +38,6 @@ public class WishlistDAO extends AbstractDAO<WishlistDTO, Integer> {
         if (wishlist.getId() <= 0) {
             throw new IllegalArgumentException("Wishlist ID must be positive for update operations.");
         }
-
-        // L'UPDATE qui si basa sull'ID della wishlist, che è la PK.
-        // Se si volesse aggiornare anche lo UserID (anche se UNICO, quindi poco comune),
-        // si dovrebbe aggiungere al SET. Tuttavia, l'ID è più comune.
         String sql = "UPDATE Wishlist SET UserID = ? WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -67,8 +63,6 @@ public class WishlistDAO extends AbstractDAO<WishlistDTO, Integer> {
             return ps.executeUpdate() > 0;
         }
     }
-
-    // Metodo specifico per trovare una Wishlist tramite UserID (molto comune per le wishlist)
     public WishlistDTO findByUserID(int userID) throws SQLException {
         if (userID <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer for lookup.");
@@ -111,7 +105,7 @@ public class WishlistDAO extends AbstractDAO<WishlistDTO, Integer> {
     @Override
     public List<WishlistDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<WishlistDTO> list = new ArrayList<>();
@@ -140,8 +134,6 @@ public class WishlistDAO extends AbstractDAO<WishlistDTO, Integer> {
         if (wishlist.getUserID() <= 0) {
             throw new IllegalArgumentException("UserID must be a positive integer.");
         }
-        // Nota: la validazione dell'unicità del UserID è gestita dal DB tramite il vincolo UNIQUE.
-        // Qui ci assicuriamo che il valore sia sintatticamente valido.
     }
 
     @Override

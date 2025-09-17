@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS PaymentMethod(
     IsDefault           BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (UserID) REFERENCES User(ID)
 );
--- Aggiunta metodi di pagamento alternativi
 
 CREATE TABLE IF NOT EXISTS OrderAddress(
     ID                  INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,7 +82,7 @@ CREATE TABLE IF NOT EXISTS OrderItem(
     ItemCategory        ENUM('Display', 'Camera', 'Battery', 'Microphone', 'Speaker', 'Case', 'Button', 'Sensor') NOT NULL,
     ItemGrade           ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     ItemQuantity        INT NOT NULL DEFAULT 0 CHECK (ItemQuantity >= 0),
-    ItemVAT             DECIMAL(5, 2) DEFAULT 22.00 NOT NULL,          -- es. 22.00 -> 22%
+    ItemVAT             DECIMAL(5, 2) DEFAULT 22.00 NOT NULL,
     FOREIGN KEY (OrderID) REFERENCES `Order`(ID)
 );
 
@@ -96,7 +95,7 @@ CREATE TABLE IF NOT EXISTS Product(
     Category            ENUM('Display', 'Camera', 'Battery', 'Microphone', 'Speaker', 'Case', 'Button', 'Sensor') NOT NULL,
     Grade               ENUM('Original', 'Excellent', 'Great', 'Good') NOT NULL,
     StockQuantity       INT NOT NULL DEFAULT 0 CHECK (StockQuantity >= 0),
-    VAT                 DECIMAL(5, 2) DEFAULT 22.00 NOT NULL          -- es. 22.00 -> 22%
+    VAT                 DECIMAL(5, 2) DEFAULT 22.00 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Review(

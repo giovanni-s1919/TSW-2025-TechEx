@@ -59,8 +59,6 @@ public class OrderItemDTO implements Serializable {
     private int itemQuantity;
     private float itemVAT;
 
-
-    // Constructors
     public OrderItemDTO(){}
 
     public OrderItemDTO(int id, int orderID, String itemName, String itemDescription, String itemBrand, float itemPrice, Category itemCategory, Grade itemGrade, int itemQuantity, float itemVAT) {
@@ -76,8 +74,6 @@ public class OrderItemDTO implements Serializable {
         this.itemVAT = itemVAT;
     }
 
-
-    // Getters and Setters
     public int getId(){return id;}
     public void setId(int id){this.id = id;}
     public int getOrderID(){return orderID;}

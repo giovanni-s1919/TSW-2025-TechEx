@@ -58,7 +58,6 @@ public class ProductDTO implements Serializable {
     private int stockQuantity;
     private float vat;
 
-    // Constructors
     public ProductDTO(){}
 
     public ProductDTO(int id, String name, String description, String brand, float price, Category category, Grade grade, int stockQuantity, float vat) {
@@ -73,8 +72,6 @@ public class ProductDTO implements Serializable {
         this.vat = vat;
     }
 
-
-    // Getters and Setters
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getName() {return name;}

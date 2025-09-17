@@ -44,7 +44,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
 
     public void save(OrderItemDTO orderItem, Connection connection) throws SQLException {
         validate(orderItem);
-        String sql = "INSERT INTO OrderItem (OrderID, ItemName, ItemDescription, ItemBrand, ItemPrice, ItemCategory, ItemGrade, ItemQuantity, ItemVAT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Usa la connessione passata
+        String sql = "INSERT INTO OrderItem (OrderID, ItemName, ItemDescription, ItemBrand, ItemPrice, ItemCategory, ItemGrade, ItemQuantity, ItemVAT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, orderItem.getOrderID());
             ps.setString(2, orderItem.getItemName());
@@ -148,7 +148,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
     @Override
     public List<OrderItemDTO> findAll(String order) throws SQLException {
         if (!getAllowedOrderColumns().contains(order)) {
-            order = "ID"; // Default
+            order = "ID";
         }
 
         List<OrderItemDTO> list = new ArrayList<>();
@@ -181,9 +181,6 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
         if (orderItem.getItemName() == null || orderItem.getItemName().trim().isEmpty()) {
             throw new IllegalArgumentException("ItemName cannot be null or empty.");
         }
-        // if (orderItem.getItemDescription() == null || orderItem.getItemDescription().trim().isEmpty()) {
-        //     throw new IllegalArgumentException("ItemDescription cannot be null or empty.");
-        // }
          if (orderItem.getItemBrand() == null || orderItem.getItemBrand().trim().isEmpty()) {
              throw new IllegalArgumentException("ItemBrand cannot be null or empty.");
          }
@@ -193,13 +190,13 @@ public class OrderItemDAO extends AbstractDAO<OrderItemDTO, Integer> {
          if (orderItem.getItemGrade() == null) {
              throw new IllegalArgumentException("ItemGrade cannot be null or empty.");
          }
-        if (orderItem.getItemPrice() < 0) { // Il prezzo non può essere negativo
+        if (orderItem.getItemPrice() < 0) {
             throw new IllegalArgumentException("ItemPrice cannot be negative.");
         }
-        if (orderItem.getItemQuantity() <= 0) { // La quantità deve essere almeno 1
+        if (orderItem.getItemQuantity() <= 0) {
             throw new IllegalArgumentException("ItemQuantity must be a positive integer.");
         }
-        if (orderItem.getItemVAT() < 0) { // L'IVA non può essere negativa
+        if (orderItem.getItemVAT() < 0) {
             throw new IllegalArgumentException("ItemVAT cannot be negative.");
         }
     }
