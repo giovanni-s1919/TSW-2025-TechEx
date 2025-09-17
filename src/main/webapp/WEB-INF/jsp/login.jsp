@@ -16,7 +16,6 @@
             $(".logregswitch").on("click", function(e){
                 e.preventDefault();
                 if(islogin === true){
-                    //Si preme registrati
                     islogin = false;
                     $("title").text("TechEx - Sign in");
                     $("form").attr("action", "${pageContext.request.contextPath}/register");
@@ -44,7 +43,6 @@
                     $("#registerpassword").attr("required", true);
                 }
                 else{
-                    //Si preme accedi
                     islogin = true;
                     $("title").text("TechEx - Login");
                     $("form").attr("action", "${pageContext.request.contextPath}/login");
@@ -80,7 +78,7 @@
 
             $("#usermailswitch").on("click", function(e){
                 e.preventDefault();
-               if(usermail){    //Si sceglie di accedere con Username
+               if(usermail){
                    usermail = false;
                    $("#usermailswitch").fadeOut(250).promise().done(function(){
                        $("#usermailswitch").text("Accedi con Email").promise().done(function(){
@@ -97,7 +95,7 @@
                    $("#username").val(usernamevalue);
 
                }
-               else{        //Si sceglie di accedere con Email
+               else{
                    usermail = true;
                    $("#usermailswitch").fadeOut(250).promise().done(function(){
                        $("#usermailswitch").text("Accedi con Username").promise().done(function(){
