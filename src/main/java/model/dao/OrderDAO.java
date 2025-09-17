@@ -5,6 +5,7 @@ import model.dto.OrderDTO;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -226,5 +227,55 @@ public class OrderDAO extends AbstractDAO<OrderDTO, Integer>{
         order.setShippingAddressId(rs.getInt("ShippingAddressId"));
         order.setBillingAddressId(rs.getInt("BillingAddressId"));
         return order;
+    }
+
+    public void updateOrderStatusByAge() throws SQLException {
+        String updatePendingToProcessing = "UPDATE `Order` SET OrderStatus = ? WHERE OrderStatus = ? AND OrderDate <= ?";
+        String updateProcessingToShipped = "UPDATE `Order` SET OrderStatus = ? WHERE OrderStatus = ? AND OrderDate <= ?";
+        String updateShippedToDelivered = "UPDATE `Order` SET OrderStatus = ? WHERE OrderStatus = ? AND OrderDate <= ?";
+
+        // Definiamo le soglie di tempo
+        LocalDateTime pendingThreshold = LocalDateTime.now().minusMinutes(5);
+        LocalDateTime processingThreshold = LocalDateTime.now().minusMinutes(10); // 5 min (pending) + 5 min (processing)
+        LocalDateTime shippedThreshold = LocalDateTime.now().minusMinutes(15); // 10 min (precedenti) + 5 min (shipped)
+
+        try (Connection connection = dataSource.getConnection()) {
+            // Disabilita l'autocommit per eseguire tutte le query in una singola transazione
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement psPending = connection.prepareStatement(updatePendingToProcessing);
+                 PreparedStatement psProcessing = connection.prepareStatement(updateProcessingToShipped);
+                 PreparedStatement psShipped = connection.prepareStatement(updateShippedToDelivered)) {
+
+                // Da Pending -> a Processing dopo 5 minuti
+                psPending.setString(1, OrderDTO.OrderStatus.Processing.name());
+                psPending.setString(2, OrderDTO.OrderStatus.Pending.name());
+                psPending.setTimestamp(3, Timestamp.valueOf(pendingThreshold));
+                psPending.executeUpdate();
+
+                // Da Processing -> a Shipped dopo altri 5 minuti (10 totali)
+                psProcessing.setString(1, OrderDTO.OrderStatus.Shipped.name());
+                psProcessing.setString(2, OrderDTO.OrderStatus.Processing.name());
+                psProcessing.setTimestamp(3, Timestamp.valueOf(processingThreshold));
+                psProcessing.executeUpdate();
+
+                // Da Shipped -> a Delivered dopo altri 5 minuti (15 totali)
+                psShipped.setString(1, OrderDTO.OrderStatus.Delivered.name());
+                psShipped.setString(2, OrderDTO.OrderStatus.Shipped.name());
+                psShipped.setTimestamp(3, Timestamp.valueOf(shippedThreshold));
+                psShipped.executeUpdate();
+
+                // Conferma le modifiche
+                connection.commit();
+
+            } catch (SQLException e) {
+                // In caso di errore, annulla tutte le modifiche
+                connection.rollback();
+                throw e; // Rilancia l'eccezione per il logging
+            } finally {
+                // Riabilita l'autocommit
+                connection.setAutoCommit(true);
+            }
+        }
     }
 }
