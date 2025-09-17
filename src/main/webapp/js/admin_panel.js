@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             orderListContainer.innerHTML = '<p>Nessun ordine trovato con i filtri specificati.</p>';
             return;
         }
-        let tableHtml = `<table><thead>...</thead><tbody>`;
+        let tableHtml = `<table><thead></thead><tbody>`;
         orders.forEach(order => {
             const orderDate = new Date(order.orderDate).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' });
             tableHtml += `
