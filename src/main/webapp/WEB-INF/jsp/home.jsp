@@ -32,6 +32,7 @@
             .newsletter_right {
                 display: none;
             }
+
             .newsletter_left {
                 padding-left: 2rem;
                 width: 100%;
@@ -438,6 +439,7 @@
                     validi a partire dalla data di consegna del prodotto.
                 </div>
             </div>
+            <p id="faq_phrase">Hai ancora bisogno di aiuto? Visita la sezione "Aiuto e contatti" dell'area personale!</p>
         </div>
         <div class="faq_decorations">
             <img id="faq_image" src="${pageContext.request.contextPath}/images/faqimage.png">
