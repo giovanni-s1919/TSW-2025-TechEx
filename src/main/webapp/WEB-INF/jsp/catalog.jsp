@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -127,7 +128,7 @@
                                         <img src="${pageContext.request.contextPath}/images/products/${product.id}.png" alt="${product.name}" class="product-img">
                                         <h1 class="product-name">${product.name}</h1>
                                         <p class="product-grade">${product.grade.toString()}</p>
-                                        <p class="product-price">${String.format("%.2f", product.price)}€</p>
+                                        <p class="product-price"><fmt:formatNumber value="${product.price}" type="currency" pattern="¤#,##0.00"/></p>
                                     </div>
                                 </a>
                             </c:forEach>
